@@ -1,0 +1,813 @@
+.mine .scroll-content .header-box {
+  position: relative;
+  width: 100vw;
+  height: 4.4rem;
+  text-align: center;
+  color: #fff;
+  background: url("../../img/title-bg-blue2.png") no-repeat top;
+  background-size: 100%; }
+  .mine .scroll-content .header-box .header-bg {
+    position: absolute;
+    top: 1.3rem;
+    left: 50%;
+    width: 92vw;
+    height: 2.9rem;
+    transform: translate(-50%); }
+  .mine .scroll-content .header-box .portrait {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%; }
+  .mine .scroll-content .header-box .title {
+    position: absolute;
+    top: 1.5rem;
+    left: 2.9rem;
+    width: 6.5rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: left;
+    font-size: 0.47rem;
+    font-weight: bold;
+    overflow: hidden; }
+  .mine .scroll-content .header-box .sub-title {
+    position: absolute;
+    top: 2.4rem;
+    left: 2.9rem;
+    font-size: 0.35rem; }
+  .mine .scroll-content .header-box .content {
+    position: absolute;
+    top: 3rem;
+    left: 1.2rem;
+    font-size: 0.35rem;
+    color: #fff; }
+.mine .scroll-content .btn-list {
+  margin-top: 0.1rem; }
+  .mine .scroll-content .btn-list .item {
+    margin-bottom: 0.2vh;
+    padding: 0;
+    padding-left: 0.75rem;
+    line-height: 1.35rem;
+    font-size: 0.4rem;
+    border: none;
+    border-bottom: 0.1vh solid #ccc;
+    background: #fff; }
+    .mine .scroll-content .btn-list .item .left_icon {
+      position: relative;
+      top: 0.05rem;
+      margin-right: 0.25rem;
+      width: 0.45rem;
+      height: 0.45rem; }
+    .mine .scroll-content .btn-list .item .title {
+      display: inline-block;
+      width: 6.5rem;
+      color: #666; }
+    .mine .scroll-content .btn-list .item .icon {
+      width: 0.47rem;
+      height: 0.47rem; }
+    .mine .scroll-content .btn-list .item .ion-chevron-right {
+      float: right;
+      margin-right: 0.45rem;
+      font-weight: bold;
+      color: #999; }
+  .mine .scroll-content .btn-list .item:nth-last-child(1) {
+    border-bottom: none; }
+
+.carList .tips {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  font-size: 0.6rem;
+  color: #fff;
+  text-align: center;
+  transform: translateY(-200%); }
+.carList .list .item {
+  margin-bottom: 0.1rem;
+  padding: 0 0.25rem;
+  border: 0;
+  background: #13131a; }
+  .carList .list .item .item-content {
+    padding: 0.4rem;
+    background: #1f2025;
+    border-radius: 0.05rem; }
+    .carList .list .item .item-content .item-left-cover {
+      float: left;
+      width: 1.8rem;
+      height: 1.8rem; }
+    .carList .list .item .item-content .item-left-text {
+      position: absolute;
+      top: 2.2rem;
+      left: 0.8rem;
+      color: #fff; }
+    .carList .list .item .item-content .item-main {
+      float: left;
+      margin-left: 0.25rem;
+      width: 6.65rem; }
+      .carList .list .item .item-content .item-main p {
+        color: #fff;
+        font-size: 0.3rem; }
+      .carList .list .item .item-content .item-main p:nth-child(1) {
+        font-size: 0.4rem; }
+      .carList .list .item .item-content .item-main .btn-list {
+        float: right; }
+        .carList .list .item .item-content .item-main .btn-list .btn-list-item {
+          float: left;
+          margin-left: 0.3rem;
+          width: 1.7rem;
+          height: 0.5rem;
+          line-height: 0.5rem;
+          border-radius: 0.25rem;
+          font-size: 0.3rem;
+          text-align: center; }
+    .carList .list .item .item-content .item-footer {
+      float: right;
+      margin-top: 0.3rem;
+      width: 6rem; }
+      .carList .list .item .item-content .item-footer p {
+        font-size: 0.3rem;
+        color: #858585;
+        text-align: right; }
+    .carList .list .item .item-content .right-tab {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.1rem;
+      width: 1.65rem;
+      height: 0.7rem;
+      line-height: 0.65rem;
+      text-align: center;
+      background-size: 120%;
+      background-position: center; }
+      .carList .list .item .item-content .right-tab p {
+        color: #fff;
+        font-size: 0.3rem; }
+
+.carList2 .tips {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 94vh;
+  font-size: 0.6rem;
+  color: #fff;
+  text-align: center;
+  transform: translateY(-200%); }
+.carList2 .list .item {
+  margin-bottom: 0.25rem;
+  padding: 0 0.25rem;
+  background: #f3f3f3;
+  border: 0; }
+  .carList2 .list .item .item-content {
+    background: #fff;
+    border-radius: 0.05rem; }
+    .carList2 .list .item .item-content .item-left-cover {
+      float: left;
+      width: 2.3rem;
+      height: 2.95rem;
+      text-align: center; }
+      .carList2 .list .item .item-content .item-left-cover img {
+        margin-top: 0.35rem;
+        margin-bottom: 0.15rem;
+        width: 1.4rem;
+        height: 1.4rem; }
+      .carList2 .list .item .item-content .item-left-cover p {
+        margin: 0 auto;
+        width: 1.45rem;
+        color: #000;
+        background: #d8d8d8;
+        padding: 0.1rem;
+        font-size: 0.3rem;
+        border-radius: 0.1rem; }
+    .carList2 .list .item .item-content .item-main {
+      float: left;
+      margin-left: 0.25rem;
+      width: 6.65rem; }
+      .carList2 .list .item .item-content .item-main p {
+        font-size: 0.3rem;
+        color: #666; }
+      .carList2 .list .item .item-content .item-main p:nth-child(1) {
+        margin-top: 0.25rem;
+        height: 1rem;
+        font-size: 0.37rem;
+        color: #333;
+        overflow: unset;
+        text-overflow: unset;
+        white-space: pre-line; }
+      .carList2 .list .item .item-content .item-main .btn-list {
+        position: absolute;
+        top: 1.3rem;
+        right: 0.4rem; }
+        .carList2 .list .item .item-content .item-main .btn-list .btn-list-item {
+          float: left;
+          margin-left: 0.3rem;
+          width: 1.7rem;
+          height: 0.5rem;
+          line-height: 0.5rem;
+          border-radius: 0.25rem;
+          font-size: 0.3rem;
+          text-align: center; }
+    .carList2 .list .item .item-content .item-footer {
+      float: right;
+      margin-top: 0.3rem;
+      width: 6rem; }
+      .carList2 .list .item .item-content .item-footer p {
+        font-size: 0.3rem;
+        color: #858585;
+        text-align: right; }
+    .carList2 .list .item .item-content .right-tab {
+      position: absolute;
+      right: 0.2rem;
+      width: 1.4rem;
+      height: 0.9rem; }
+
+.carAdd .input-title {
+  margin-left: 0.4rem;
+  /*line-height: 1.4rem;*/
+  line-height: 8vh;
+  font-size: 0.47rem;
+  font-weight: bold;
+  color: #333; }
+.carAdd .list {
+  padding: 0 0.25rem;
+  border-radius: 0.05rem; }
+  .carAdd .list .item {
+    background: #fff;
+    border: 0; }
+    .carAdd .list .item .title {
+      /*width: 1.4rem;*/
+      width: 1.9rem;
+      font-size: 0.37rem;
+      color: #333; }
+    .carAdd .list .item .title2 {
+      width: 2rem;
+      font-size: 0.37rem;
+      color: #666; }
+    .carAdd .list .item input {
+      margin-right: 0.5rem;
+      color: #666;
+      border-bottom: 0.01rem solid #eee; }
+    .carAdd .list .item input:disabled {
+      color: #333; }
+    .carAdd .list .item .disabled-edit:disabled {
+      color: #333; }
+    .carAdd .list .item i {
+      position: absolute;
+      right: 0;
+      margin-right: 0.5rem;
+      font-size: 0.37rem;
+      color: #999; }
+  .carAdd .list .item-input textarea {
+    height: 3.8rem; }
+  .carAdd .list .item-checkbox .toggle {
+    position: absolute;
+    right: 5vw;
+    top: 50%;
+    transform: translateY(-35%); }
+  .carAdd .list .btn-box {
+    margin-top: 0.45rem;
+    text-align: center; }
+    .carAdd .list .btn-box button {
+      margin: 0 0.25rem;
+      height: 0.9rem;
+      line-height: 0.9rem; }
+.carAdd .tips {
+  padding-top: 0.25rem;
+  padding-left: 0.4rem;
+  height: 1rem;
+  color: #f00;
+  text-align: left; }
+.carAdd .modal-all-page {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #f3f3f3; }
+  .carAdd .modal-all-page .list {
+    float: left;
+    padding: 0; }
+    .carAdd .modal-all-page .list .item {
+      padding: 0; }
+  .carAdd .modal-all-page .list-inset {
+    /*margin: 0 0.3rem;
+    width: 9.4rem;*/
+    margin: 0 3vw;
+    width: 94vw;
+    background: #eaeaea; }
+    .carAdd .modal-all-page .list-inset .item-input {
+      width: 100%; }
+      .carAdd .modal-all-page .list-inset .item-input .icon {
+        color: #999; }
+      .carAdd .modal-all-page .list-inset .item-input input {
+        margin-right: 0;
+        padding: 0 0.8rem 0 0.3rem; }
+      .carAdd .modal-all-page .list-inset .item-input input::placeholder {
+        color: #999;
+        text-align: center; }
+  .carAdd .modal-all-page .list-left {
+    margin-left: 0.3rem;
+    /*width: 2.75rem;*/
+    width: 27.5vw;
+    height: 87vh;
+    overflow-x: hidden;
+    overflow-y: scroll; }
+    .carAdd .modal-all-page .list-left .item {
+      margin-bottom: 1px;
+      line-height: 1.1rem;
+      font-size: 0.4rem;
+      color: #fff;
+      background: #dcdcdc;
+      border-bottom: 1px solid #f3f3f3; }
+      .carAdd .modal-all-page .list-left .item img {
+        float: left;
+        margin: 0.15rem;
+        margin-right: 0;
+        width: 0.77rem;
+        height: 0.77rem;
+        background: #fff; }
+      .carAdd .modal-all-page .list-left .item p {
+        float: left;
+        margin-left: 0.15rem;
+        color: #666; }
+    .carAdd .modal-all-page .list-left .selected {
+      background: #fff; }
+      .carAdd .modal-all-page .list-left .selected p {
+        color: #2348d7; }
+    .carAdd .modal-all-page .list-left .item-divider {
+      padding: 0;
+      min-height: 0;
+      line-height: 0.4rem;
+      font-size: 0.3rem;
+      color: #666;
+      background: #e7e7e7;
+      border-bottom: 0; }
+  .carAdd .modal-all-page .list-right {
+    margin-top: 0.4rem;
+    /*width: 6.65rem;*/
+    width: 66.5vw;
+    height: 84.7vh;
+    overflow-x: hidden;
+    overflow-y: scroll; }
+    .carAdd .modal-all-page .list-right .item {
+      margin-bottom: 1px;
+      padding: 0 0.35rem;
+      line-height: 1.1rem;
+      color: #666;
+      border-bottom: 1px solid #e7e7e8; }
+  .carAdd .modal-all-page .tip {
+    position: absolute;
+    top: 50%;
+    width: 10rem;
+    color: #000;
+    font-size: 3vh;
+    text-align: center;
+    transform: translateY(-50%); }
+
+.informationSetting .setting-header {
+  position: relative;
+  height: 6.5rem;
+  background: url("../../img/title-bg-blue2.png") no-repeat top;
+  background-size: 100%; }
+  .informationSetting .setting-header .portrait {
+    position: absolute;
+    left: 4rem;
+    top: 2.3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%; }
+  .informationSetting .setting-header p {
+    position: absolute;
+    width: 10rem;
+    font-size: 0.4rem;
+    text-align: center; }
+    .informationSetting .setting-header p span {
+      margin-left: 0.3rem;
+      color: #f7b52b; }
+  .informationSetting .setting-header p:nth-child(2) {
+    top: 4.5rem;
+    color: #333; }
+  .informationSetting .setting-header p:nth-child(3) {
+    top: 5.2rem;
+    color: #666; }
+    .informationSetting .setting-header p:nth-child(3) span {
+      color: #2348d7; }
+.informationSetting .list {
+  padding: 0 0.25rem;
+  border-radius: 0.05rem; }
+  .informationSetting .list .item {
+    background: #fff;
+    border: 0; }
+    .informationSetting .list .item .title {
+      width: 2rem;
+      font-size: 0.37rem;
+      color: #666; }
+    .informationSetting .list .item input {
+      margin-right: 0.5rem;
+      color: #000;
+      border-bottom: 0.01rem solid #ddd; }
+    .informationSetting .list .item i {
+      position: absolute;
+      right: 0;
+      margin-right: 0.5rem;
+      font-size: 0.37rem;
+      color: #999; }
+    .informationSetting .list .item .icon-text {
+      color: #2348d7; }
+.informationSetting .btn-box {
+  margin-top: 0.65rem;
+  text-align: center; }
+  .informationSetting .btn-box button {
+    margin: 0 0.25rem;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    cursor: pointer; }
+
+.collectionList .input-title {
+  margin-left: 0.4rem;
+  line-height: 8vh;
+  font-size: 0.47rem;
+  font-weight: bold;
+  color: #333; }
+.collectionList .scroll-view {
+  height: 92vh; }
+  .collectionList .scroll-view .list {
+    /*.item {
+      margin-bottom: 0.1rem;
+      padding: 0 0.25rem;
+      border: 0;
+      background: #13131a;
+      .item-content {
+        padding: 0.4rem;
+        background: #1f2025;
+        border-radius: 0.05rem;
+        .item-left-cover {
+          float: left;
+          width: 3.6rem;
+          height: 2.4rem;
+        }
+        .item-main {
+          float: left;
+          margin-left: 0.25rem;
+          width: 4.5rem;
+          p {
+            color: #fff;
+            font-size: 0.32rem;
+          }
+          .name {
+            font-size: 0.4rem;
+            img {
+              float: right;
+              width: 0.4rem;
+              height: 0.4rem;
+            }
+          }
+          .business-scope {
+            margin-bottom: 0.3rem;
+          }
+          .address {
+            color: #858585;
+          }
+          .score {
+            ul {
+              li {
+                float: left;
+                img {
+                  width: 0.3rem;
+                  height: 0.3rem;
+                }
+              }
+            }
+            span {
+              margin-left: 0.1rem;
+              font-size: 0.3rem;
+              color: #fff;
+            }
+          }
+        }
+        .item-footer {
+          float: right;
+          margin-top: 0.3rem;
+          width: 6rem;
+          .tag-list {
+            position: absolute;
+            left: 0.6rem;
+            margin-top: 0.25rem;
+            width: 5.7rem;
+            .tag-list-item {
+              float: left;
+              margin-right: 0.2rem;
+              padding: 0 0.25rem;
+              height: 0.5rem;
+              line-height: 0.5rem;
+              color: #fff;
+              font-size: 0.3rem;
+              border-radius: 0.25rem;
+              background: #393c45;
+            }
+          }
+          .btn-list {
+            float: right;
+            .btn-list-item {
+              float: left;
+              padding: 0 0.8rem;
+              height: 0.9rem;
+              line-height: 0.9rem;
+              border-radius: 0.45rem;
+              font-size: 0.3rem;
+              text-align: center;
+            }
+          }
+          p {
+            font-size: 0.3rem;
+            color: #858585;
+            text-align: left;
+          }
+        }
+        .right-tab {
+          position: absolute;
+          top: 0.4rem;
+          right: 0.1rem;
+          width: 1.65rem;
+          height: 0.7rem;
+          line-height: 0.65rem;
+          text-align: center;
+          background-size: 120%;
+          background-position: center;
+          p {
+            color: #fff;
+            font-size: 0.3rem;
+          }
+        }
+      }
+    }*/ }
+    .collectionList .scroll-view .list .item {
+      margin-bottom: 0.1rem;
+      padding: 0 0.25rem;
+      border: 0;
+      background: #f1f1f1; }
+      .collectionList .scroll-view .list .item .item-content {
+        padding: 0.4rem;
+        padding-right: 0;
+        background: #fff;
+        border-radius: 0.05rem; }
+        .collectionList .scroll-view .list .item .item-content .item-left-cover {
+          float: left;
+          width: 3.35rem;
+          height: 3.7rem; }
+        .collectionList .scroll-view .list .item .item-content .item-main {
+          float: left;
+          margin-left: 0.25rem;
+          width: 5.5rem; }
+          .collectionList .scroll-view .list .item .item-content .item-main p {
+            line-height: 0.5rem;
+            color: #666;
+            font-size: 0.32rem; }
+          .collectionList .scroll-view .list .item .item-content .item-main .name {
+            height: 1rem;
+            font-size: 0.4rem;
+            font-weight: bold;
+            color: #333; }
+          .collectionList .scroll-view .list .item .item-content .item-main .collection {
+            position: absolute;
+            top: 1.25em;
+            right: 0.5rem; }
+            .collectionList .scroll-view .list .item .item-content .item-main .collection img {
+              width: 0.4rem;
+              height: 0.4rem; }
+          .collectionList .scroll-view .list .item .item-content .item-main .location img {
+            width: 0.35rem;
+            height: 0.35rem;
+            transform: translateY(15%); }
+          .collectionList .scroll-view .list .item .item-content .item-main .location span {
+            font-size: 0.3rem;
+            color: #2348d7; }
+          .collectionList .scroll-view .list .item .item-content .item-main .score ul li {
+            float: left; }
+            .collectionList .scroll-view .list .item .item-content .item-main .score ul li img {
+              width: 0.3rem;
+              height: 0.3rem; }
+          .collectionList .scroll-view .list .item .item-content .item-main .score span {
+            margin-left: 0.1rem;
+            font-size: 0.3rem;
+            color: #999; }
+          .collectionList .scroll-view .list .item .item-content .item-main .comment {
+            color: #858585; }
+        .collectionList .scroll-view .list .item .item-content .item-footer {
+          float: right;
+          margin: 0.3rem;
+          padding-top: 0.33rem;
+          width: 97%;
+          border-top: 0.01rem solid #000; }
+          .collectionList .scroll-view .list .item .item-content .item-footer .tag-list {
+            position: absolute;
+            left: 0.6rem;
+            margin-top: 0.25rem;
+            width: 5.7rem; }
+            .collectionList .scroll-view .list .item .item-content .item-footer .tag-list .tag-list-item {
+              float: left;
+              margin-right: 0.2rem;
+              padding: 0 0.25rem;
+              height: 0.5rem;
+              line-height: 0.5rem;
+              color: #fff;
+              font-size: 0.3rem;
+              border-radius: 0.25rem;
+              border: 1px solid #606060; }
+          .collectionList .scroll-view .list .item .item-content .item-footer .btn-list {
+            float: right; }
+            .collectionList .scroll-view .list .item .item-content .item-footer .btn-list .btn-list-item {
+              float: left;
+              padding: 0 0.8rem;
+              height: 0.9rem;
+              line-height: 0.9rem;
+              border-radius: 0.45rem;
+              font-size: 0.3rem;
+              text-align: center; }
+          .collectionList .scroll-view .list .item .item-content .item-footer p {
+            font-size: 0.3rem;
+            color: #858585;
+            text-align: left; }
+        .collectionList .scroll-view .list .item .item-content .right-tab {
+          position: absolute;
+          top: 0.4rem;
+          right: 0.1rem;
+          width: 1.65rem;
+          height: 0.7rem;
+          line-height: 0.65rem;
+          text-align: center;
+          background-size: 120%;
+          background-position: center; }
+          .collectionList .scroll-view .list .item .item-content .right-tab p {
+            color: #fff;
+            font-size: 0.3rem; }
+
+.bindingCard .input-title {
+  margin-left: 0.4rem;
+  line-height: 8vh;
+  font-size: 0.47rem;
+  font-weight: bold;
+  color: #fff; }
+.bindingCard .setting-header {
+  z-index: -1;
+  position: relative;
+  height: 5.5rem;
+  background: url("../../img/title-bg-blue2.png") no-repeat top;
+  background-size: 100%;
+  transform: translateY(-8vh); }
+  .bindingCard .setting-header .card-demo {
+    position: absolute;
+    left: 0.5rem;
+    top: 1.7rem;
+    width: 9rem;
+    height: 4rem;
+    border-radius: 0.2rem; }
+  .bindingCard .setting-header .btn-buy {
+    position: absolute;
+    top: 5.2rem;
+    left: 2.85rem;
+    width: 4.3rem;
+    line-height: 1rem;
+    background: #172661;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: #efd98d; }
+.bindingCard .list {
+  padding: 0 0.25rem; }
+  .bindingCard .list .item {
+    background: #fff;
+    border: 0; }
+    .bindingCard .list .item .title {
+      width: 1.5rem;
+      font-size: 0.37rem;
+      color: #666; }
+    .bindingCard .list .item input {
+      margin-right: 0.5rem;
+      color: #333;
+      border-bottom: 0.01rem solid #e3e3e3; }
+    .bindingCard .list .item i {
+      position: absolute;
+      right: 0;
+      margin-right: 0.5rem;
+      font-size: 0.4rem;
+      color: #f7b52b; }
+  .bindingCard .list .no-border {
+    border-radius: 0 0 0.25rem 0.25rem; }
+    .bindingCard .list .no-border input {
+      /*border: none;*/ }
+  .bindingCard .list .item-input textarea {
+    height: 3.8rem; }
+  .bindingCard .list .checkbox-box li {
+    display: inline-block; }
+    .bindingCard .list .checkbox-box li .checkbox-rect {
+      padding: 0 0.25rem; }
+  .bindingCard .list .btn-box {
+    margin-top: 0.45rem;
+    text-align: center; }
+    .bindingCard .list .btn-box button {
+      margin: 0 0.25rem;
+      height: 0.9rem;
+      line-height: 0.9rem; }
+    .bindingCard .list .btn-box p {
+      font-size: 0.3rem;
+      color: #333; }
+  .bindingCard .list .car-item {
+    position: relative;
+    height: 1.85rem;
+    background: #333;
+    border-bottom: 0.01rem solid #e3e3e3;
+    border-radius: 0.1rem 0.1rem 0 0; }
+    .bindingCard .list .car-item img {
+      position: absolute;
+      top: 0.45rem;
+      margin: 0 16px;
+      width: 1.2rem;
+      height: 1.2rem;
+      vertical-align: middle; }
+    .bindingCard .list .car-item ul {
+      position: absolute;
+      top: 0.45rem;
+      left: 2rem; }
+      .bindingCard .list .car-item ul li {
+        color: #fff; }
+      .bindingCard .list .car-item ul li:nth-child(1) {
+        font-size: 0.4rem; }
+      .bindingCard .list .car-item ul li:nth-child(2) {
+        font-size: 0.3rem; }
+    .bindingCard .list .car-item p {
+      position: absolute;
+      top: 0.45rem;
+      right: 0.5rem;
+      display: inline-block;
+      color: #ff0101;
+      font-size: 0.3rem; }
+.bindingCard .modal-all-page {
+  z-index: 9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #13131a; }
+  .bindingCard .modal-all-page .list {
+    float: left;
+    padding: 0; }
+    .bindingCard .modal-all-page .list .item {
+      padding: 0; }
+  .bindingCard .modal-all-page .list-inset {
+    margin: 0 0.3rem;
+    width: 9.4rem;
+    background: none; }
+    .bindingCard .modal-all-page .list-inset .item-input .icon {
+      color: #fff; }
+    .bindingCard .modal-all-page .list-inset .item-input input {
+      margin-right: 0;
+      padding: 0 0.8rem 0 0.3rem; }
+    .bindingCard .modal-all-page .list-inset .item-input input::placeholder {
+      color: #fff;
+      text-align: center; }
+  .bindingCard .modal-all-page .list-left {
+    margin-left: 0.3rem;
+    width: 2.75rem;
+    height: 87vh;
+    overflow-x: hidden;
+    overflow-y: scroll; }
+    .bindingCard .modal-all-page .list-left .item {
+      margin-bottom: 1px;
+      line-height: 1.1rem;
+      font-size: 0.4rem;
+      color: #fff;
+      background: #1f2025;
+      border-bottom: 1px solid #000; }
+      .bindingCard .modal-all-page .list-left .item img {
+        float: left;
+        margin: 0.15rem;
+        width: 0.77rem;
+        height: 0.77rem; }
+      .bindingCard .modal-all-page .list-left .item p {
+        float: left;
+        color: #fff; }
+      .bindingCard .modal-all-page .list-left .item .selected {
+        color: #f7b52b; }
+    .bindingCard .modal-all-page .list-left .item-divider {
+      padding: 0;
+      min-height: 0;
+      line-height: 0.4rem;
+      font-size: 0.3rem;
+      background: #13131a;
+      border-bottom: 0; }
+  .bindingCard .modal-all-page .list-right {
+    margin-top: 0.4rem;
+    margin-left: 0.1rem;
+    width: 6.6rem;
+    height: 84.7vh;
+    overflow-x: hidden;
+    overflow-y: scroll; }
+    .bindingCard .modal-all-page .list-right .item {
+      margin-bottom: 1px;
+      padding: 0 0.35rem;
+      line-height: 1.1rem;
+      color: #fff;
+      border-bottom: 1px solid #000; }
+
+/*# sourceMappingURL=mine2.css.map */

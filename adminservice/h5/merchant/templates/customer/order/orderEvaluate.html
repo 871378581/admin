@@ -1,0 +1,56 @@
+<ion-view class="orderEvaluate" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.order')">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true">
+    <p class="input-title">发表评价</p>
+    <div class="detail-box bg-white">
+      <div class="item-content">
+        <p class="name">{{detail.shop_name}}
+          <span ng-class="detail.order_status=='E' ? 'color-green' : ''">{{detail.order_tips}}</span>
+        </p>
+        <div class="cover-box">
+          <img class="item-left-cover" ng-src="{{detail.car_type_img_url}}"/>
+        </div>
+        <div class="item-main">
+          <p>车辆：{{detail.car_type_name + ' ' + detail.car_plate}}</p>
+          <p ng-show="detail.service_item">项目：{{detail.service_item}}</p>
+          <p ng-show="detail.oil_brand">机油：{{detail.oil_brand}}</p>
+          <p class="comment" ng-show="detail.gmt_service_date">
+            预约时间：{{detail.gmt_service_date + ' ' + detail.gmt_service_begin_time}}</p>
+          <p class="comment" ng-show="detail.gmt_actual_service">
+            维修时间：{{detail.gmt_actual_service}}</p>
+        </div>
+        <div class="rating-stars">
+          <span class="rating-title-item">评分</span>
+          <div class="rating-stars-container">
+            <div class="rating-star">
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="rating-star">
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="rating-star">
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="rating-star">
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="rating-star">
+              <i class="fa fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <ul class="tags">
+          <li ng-repeat="tagInfo in tagInfoList track by $index"
+              ng-class="tagInfo.selected ? 'selected' : ''"
+              ng-click="selectTag(tagInfo)">{{tagInfo.tag}}</li>
+        </ul>
+        <textarea placeholder="说出本次服务的体验" ng-model="formData.evaluate_content"></textarea>
+      </div>
+    </div>
+    <button class="button button-block btn-mine btn-linear" ng-click="saveData()">
+      提交评价
+    </button>
+  </ion-content>
+</ion-view>

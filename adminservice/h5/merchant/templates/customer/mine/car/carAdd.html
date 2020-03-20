@@ -1,0 +1,94 @@
+<ion-view class="carAdd" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('carList')">
+        <img src="img/return.svg"/>
+    </div>
+    <ion-content scroll="true">
+        <p class="input-title">{{formData.id ? '编辑车辆' : '新建车辆'}}</p>
+        <div class="list">
+            <div class="item item-input">
+                <p class="title">车牌</p>
+                <input type="text" ng-model="formData.plate" placeholder="请输入车牌"
+                       ng-class="{'disabled-edit':car_status!=null && car_status!=0 && car_status!=3}"
+                       ng-disabled="car_status!=null && car_status!=0 && car_status!=3"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title">颜色</p>
+                <input type="text" ng-model="formData.color" placeholder="请输入颜色"
+                       ng-class="{'disabled-edit':car_status!=null && car_status!=0 && car_status!=3}"
+                       ng-disabled="car_status!=null && car_status!=0 && car_status!=3"/>
+                <i class="icon"></i>
+            </div>
+            <!--<div class="item item-input">
+             <p class="title">车架号</p>
+             <input type="text" ng-model="formData.vin" />
+             <i class="icon"></i>
+           </div>-->
+            <div class="item item-input" ng-click="toShowModal()" style="cursor: pointer;">
+                <p class="title">型号</p>
+                <input type="text" ng-model="formData.type" placeholder="请选择型号" disabled="disabled"
+                       ng-class="{'disabled-edit':car_status!=null && car_status!=0 && car_status!=3}"/>
+                <i class="icon">选择</i>
+            </div>
+            <div class="item item-checkbox">
+                <p class="title" style="width: 4rem;">是否设置为默认车</p>
+                <!--<label class="checkbox">
+                  <input type="checkbox" ng-model="formData.is_default" ng-checked="formData.is_default" />
+                </label>-->
+                <label class="toggle toggle-balanced">
+                    <input type="checkbox" ng-model="formData.is_default" ng-checked="formData.is_default">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+                <i class="icon"></i>
+            </div>
+            <p class="tips" ng-show="car_status!=null && car_status!=0 && car_status!=3">会员卡激活后暂不可修改车牌</p>
+            <!--<div class="checkbox-rect">
+              <input type="checkbox" ng-model="checked" ng-change="changeChecked()" />
+              <p ng-click="changeModalShow()">车辆信息授权使用条例</p>
+            </div>-->
+            <div class="btn-box">
+                <button class="button btn-mine btn-linear" ng-click="saveData()">
+                    保存
+                </button>
+                <button class="button btn-mine btn-black" ng-click="back()">
+                    取消
+                </button>
+            </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer" style="color: #fff;" ng-show="formData.id">
+        <button class="button button-block btn-mine btn-red" ng-click="toDelCar()">
+            删除
+        </button>
+        <!--<div class="transparent-button" ng-click="toDelCar()">删除</div>-->
+    </div>
+
+    <div class="modal-all-page" ng-show="showModal">
+        <p class="input-title">请选择车型</p>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon" ng-click="getData()" ng-show="!keyword"></i>
+                <input type="text" placeholder="请输入爱车品牌" ng-model="keyword">
+            </label>
+        </div>
+        <div class="list list-left">
+            <div ng-repeat="brands in brandList track by $index" ng-init="outerIndex=$index">
+                <p class="item item-divider">{{brands.brand_first_letter}}</p>
+                <div class="item" ng-repeat="brand in brands.children track by $index" ng-init="innerIndex=$index"
+                     ng-click="selBrand(outerIndex, innerIndex, brand)"
+                     ng-class="selOuterIndex == outerIndex && selInnerIndex == innerIndex ?'selected':''">
+                    <img class="brand-img" ng-src="{{brand.brandImg}}">
+                    <p>{{brand.name}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="list list-right">
+            <div class="item" ng-repeat="model in selctedBrand.children track by $index" ng-click="selModel(model)">
+                {{model}}
+            </div>
+        </div>
+        <p class="tip" ng-show="brandList==0">暂无相关车型</p>
+    </div>
+</ion-view>

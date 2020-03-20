@@ -1,0 +1,47 @@
+{
+	"success": true,
+  	"errorCode": null,
+  	"message": "",
+  	"data": {
+  		"page": {
+			"currentPage": 1,
+			"totalPage": 1
+		},
+		"list":[
+			{	
+				"cover": "img/title-tab.png",
+				"model": "宝马X5",
+				"lastMaintenanceTime": "2019-08-17",
+				"licensePlate": "A208W1",
+				"membershipValidityDate": "2019-01-01~2020-01-01",
+				"status": "0"
+			},
+			{
+				"cover": "img/title-tab.png",
+				"model": "宝马X5",
+				"lastMaintenanceTime": "2019-08-17",
+				"licensePlate": "A208W1",
+                "membershipEffectiveDate": "2019-03-01前",
+				"membershipValidityDate": "2019-01-01~2020-01-01",
+				"status": "1"
+			},
+			{
+				"cover": "img/title-tab.png",
+				"model": "宝马X5",
+				"lastMaintenanceTime": "2019-08-17",
+				"licensePlate": "A208W1",
+				"membershipExpiresDate": "2019-01-01",
+				"status": "2"
+			},
+			{
+				"cover": "img/title-tab.png",
+				"model": "宝马X5",
+				"lastMaintenanceTime": "2019-08-17",
+				"licensePlate": "A208W1",
+				"membershipValidityPeriod": "2019-01-01~2020-01-01",
+                "membershipExpiresDate": "2019-01-01",
+				"status": "3"
+			}
+		]
+  	}
+}

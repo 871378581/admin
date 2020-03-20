@@ -1,0 +1,54 @@
+<ion-view class="informationSetting" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.mine')">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true">
+    <p class="input-title">个人信息</p>
+    <div class="list">
+      <div class="item item-input">
+        <p class="title">姓名</p>
+        <input type="text" ng-model="formData.user_name" placeholder="请输入姓名" />
+        <i class="icon"></i>
+      </div>
+      <div class="item item-input">
+        <p class="title">性别</p>
+        <div id="sex" class="main">
+          <input type="text" ng-model="formData.sex"  placeholder="请选择性别" disabled="disabled" />
+        </div>
+        <i class="icon ion-chevron-right"></i>
+      </div>
+      <!--<div class="item item-input">
+        <p class="title">年龄</p>
+        <input type="text" ng-model="formData.age" />
+        <i class="icon"></i>
+      </div>-->
+      <div class="item item-input">
+        <p class="title">居住城市</p>
+        <div id="dsy" class="main">
+          <input type="text" ng-model="formData.place_city" placeholder="请选择居住城市" disabled="disabled" />
+        </div>
+        <i class="icon ion-chevron-right"></i>
+      </div>
+      <div class="item item-input">
+        <p class="title">岗位</p>
+        <input type="text" ng-model="formData.job" placeholder="请输入岗位" />
+        <i class="icon"></i>
+      </div>
+      <div class="item item-input">
+        <p class="title">生日</p>
+        <div id="birth" class="main">
+          <input type="text" ng-model="formData.birth" placeholder="请选择生日" disabled="disabled" />
+        </div>
+        <i class="icon ion-chevron-right"></i>
+      </div>
+      <div class="btn-box">
+        <button class="button btn-mine btn-linear" ng-click="saveData()">
+          保存
+        </button>
+        <button class="button btn-mine btn-black" ng-click="back()">
+          取消
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

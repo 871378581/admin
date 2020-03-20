@@ -1,0 +1,123 @@
+<ion-view class="storeAppointment" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.store')" ng-show="!showCarList">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true" ng-show="!showCarList">
+    <p class="input-title">预约门店服务</p>
+    <div class="store-detail-box bg-white">
+      <p class="store-title">{{detail.enterprise_name}}</p>
+      <p class="store-title">{{detail.service}}</p>
+      <ul class="tags">
+        <li ng-repeat="tagInfo in detail.tagInfoList track by $index">{{tagInfo.tag}}</li>
+        <li ng-if="!detail.tagInfoList || detail.tagInfoList.length==0">暂无评论</li>
+      </ul>
+      <img class="right-img" ng-src="{{detail.small_img_url}}" />
+    </div>
+    <p class="input-title">预约车辆<span ng-click="changeShow()">查看更多车辆></span></p>
+    <div class="car-box">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" ng-repeat="car in carList track by $index" ng-click="selectCar(car, $index)"
+               ng-class="{'selected' : car.selected}">
+            <div class="car-item">
+              <p class="title">{{car.car_type_name}}</p>
+              <img class="logo" src="img/store/car.png"/>
+              <div class="car-detail-box">
+                <div class="detail-item">
+                  <p>车主</p>
+                  <p>{{car.user_name}}</p>
+                </div>
+                <div class="detail-item">
+                  <p>上次保养时间</p>
+                  <p>{{car.gmt_last_maintenance}}</p>
+                </div>
+                <div class="detail-item">
+                  <p>下次保养公里数</p>
+                  <p>{{car.next_maintenance_miles}}</p>
+                </div>
+              </div>
+            </div>
+            <img class="right-img" src="img/store/car-selected.png" ng-show="car.selected"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="input-title">机油选择</p>
+    <div class="oil-box bg-white">
+      <ul ng-show="oilList.length>0">
+        <li ng-repeat="oil in oilList track by $index" ng-click="selectOil(oil)">
+          <img class="logo" ng-src="{{oil.photo_url}}"/>
+          <div class="text-box">
+            <p class="title">{{oil.brand_name}}
+              <span> 会员免费</span>
+            </p>
+            <p class="title">
+              <span style="font-size: 0.26rem;">市场价{{oil.market_price_min + '～' + oil.market_price_max}}/次</span>
+            </p>
+          </div>
+          <div class="oil-select">
+            <img src="img/store/selected.png" ng-show="oil.selected"/>
+          </div>
+        </li>
+      </ul>
+      <p class="oil-none" ng-show="oilList.length==0">本店暂无可预约机油类型</p>
+    </div>
+    <p class="input-title">选择预约时间</p>
+    <div class="time-choose bg-white">
+      <div class="list">
+        <div class="item item-input">
+          <div class="input-item" id="startDate">
+            <input type="text" ng-model="formData.startDate" disabled="disabled" placeholder="预约日期"/>
+          </div>
+          <i class="icon ion-arrow-down-b"></i>
+        </div>
+        <div class="item item-input">
+          <div class="input-item" id="startTime">
+            <input type="text" ng-model="formData.startTime" disabled="disabled" placeholder="预约时间"/>
+          </div>
+          <i class="icon ion-arrow-down-b"></i>
+        </div>
+        <!--<div class="item item-input">
+          <div class="input-item" id="endTime">
+            <input type="text" ng-model="formData.endTime" disabled="disabled" placeholder="预约结束时间"/>
+          </div>
+          <i class="icon ion-arrow-down-b"></i>
+        </div>-->
+      </div>
+      <p class="tips">温馨提示</p>
+      <pre>
+过度保养会有害车辆健康
+如果您的车辆半年内还没有进行保养，建议尽快保养</pre>
+    </div>
+    <button class="button button-block btn-mine btn-linear" ng-click="saveData()">
+      立即预约
+    </button>
+  </ion-content>
+
+  <!--车型选择-->
+  <ion-content scroll="true" ng-show="showCarList">
+    <ion-scroll>
+      <ul class="list">
+        <li class="item" ng-repeat="item in carList track by $index" ng-click="selectCar(item, $index)">
+          <div class="item-content">
+            <div class="item-left-cover">
+              <img ng-src="{{item.car_logo_url}}">
+              <p>{{item.card_level_name}}</p>
+            </div>
+            <div class="item-main">
+              <p>{{item.car_type_name}}</p>
+              <p>车牌：{{item.plate}}</p>
+              <p ng-show="item.gmt_last_maintenance">上次保养时间：{{item.gmt_last_maintenance}}</p>
+              <p ng-show="item.gmt_take_effect && item.gmt_lose_effect">
+                会员有效期：{{item.gmt_take_effect + '~' + item.gmt_lose_effect}}</p>
+            </div>
+            <img class="right-tab" ng-src="{{'img/mine/tab-o-'+ item.car_status +'.png'}}">
+            <div class="right-select">
+              <img class="right-img" src="img/store/selected.png" ng-show="item.selected"/>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

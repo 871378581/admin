@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>系统配置项管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+    <style>
+      textarea,input{width: 250px !important;}
+    </style>
+</head>
+<body class="body">
+
+  <form class="layui-form" action="" lay-filter="example">
+    <input type="hidden" name="id" lay-verify="title" id="id" class="layui-input">
+    <div class="layui-form-item">
+      <label class="layui-form-label">键</label>
+      <div class="layui-input-block">
+        <input type="text" disabled name="key" maxlength="100" required lay-verify="required" lay-verify="title" id="key" autocomplete="off" placeholder="请输入键" class="layui-input">
+      </div>
+    </div>
+
+  <div class="layui-inline" id="upload">
+      <label class="layui-form-label">二维码:</label>
+      <div class="layui-input-block">
+          <div class="layui-upload">
+              <div class="layui-upload-list">
+                  <img class="layui-upload-img" style="background: url(../../frame/static/image/add-photo.png) no-repeat bottom;left:0px;top:0px;width:100px;height:100px" id="license_img">
+                  <p id="license_img_text"><div style="left: 10px;top: -3px;position: relative;color:red;font-size:10px !important;">注：图片格式 *.jpg、*.png</div></p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <div class="layui-form-item" id="valueDisplay">
+      <label class="layui-form-label">值</label>
+      <div class="layui-input-block">
+        <input type="text" name="value" required lay-verify="required" lay-verify="title" id="value" autocomplete="off" placeholder="请输入值" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">描述</label>
+      <div class="layui-input-block">
+        <textarea name="description" required lay-verify="required" id="description" placeholder="请输入描述" class="layui-textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item" align="center">
+      <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
+      <button class="layui-btn" lay-submit="" lay-filter="refesh">重置</button>
+    </div>
+  </form>
+
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['form', 'layer','upload'], function () {
+
+        // 操作对象
+        var form = layui.form
+                , layer = layui.layer
+                , upload = layui.upload
+                , $ = layui.jquery;
+        //your code
+        //监听关闭
+        form.on('submit(close)', function(data){
+          var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+          parent.layer.close(index);
+        });
+
+        //普通图片上传 营业执照
+        var licenseUp = upload.render({
+            elem: '#license_img'
+            ,url: wholeUrl+'/admin/common/upload'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#license_img').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                console.log(res);
+                var url = res.data;
+                if(url!=null){
+                    $("#value").val(url);
+                }
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var text = $('#license_img_text');
+                text.html('<span style="color: #FF5722;">上传失败</span><a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                text.find('.demo-reload').on('click', function(){
+                    licenseUp.upload();
+                });
+            }
+        });
+
+        form.on('submit(save)', function(data){
+          var field = data.field;
+          $.ajax({
+            url:wholeUrl+"/admin/admin_system_config/edit?token="+localStorage.getItem("token"),
+            method:"post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType:"json",
+            async:false,
+            data:{
+              id:field.id,
+              key:field.key,
+              value:field.value,
+              description:field.description,
+              account:localStorage.getItem("account")
+            },
+            success:function(result){
+              console.log(result);
+              if(result.success){
+                layer.msg('编辑成功',{time:700}, function(index){
+                   //do something
+                   parent.reloadParent();
+                   var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                   parent.layer.close(index); //再执行关闭
+                 });
+              }else{
+                layer.msg(result.errorMsg);
+              }
+            }
+          });
+
+
+          return false;
+        });
+
+        //监听关闭
+        form.on('submit(refresh)', function(data){
+          var index = parent.tableIns.reload(); //先得到当前iframe层的索引
+          //parent.layer.close(index); //再执行关闭
+        });
+        $(()=>{
+          var url = location.href;
+          var id = new URL(url).searchParams.get("id");
+          var key = new URL(url).searchParams.get("key");
+          console.log("id:"+id);
+          if(key=="customer_service_wechat_qr_code"){
+              $("#upload").show();
+              $("#valueDisplay").hide();
+          }else{
+              $("#upload").hide();
+          }
+          if(id==null||id==undefined){
+            layer.msg("id为空！不允许编辑");
+          }else{
+            $("#id").val(id);
+            $.ajax({
+              url:wholeUrl+"/admin/admin_system_config/get?token="+localStorage.getItem("token"),
+              method:"post",
+              contentType: "application/x-www-form-urlencoded",
+              dataType:"json",
+              data:{id:id},
+              success:function(result){
+                console.log(result);
+                if(result.success){
+                    if(result.data!=null){
+                      $("#key").val(result.data.key);
+                      $("#value").val(result.data.value);
+                      $("#description").val(result.data.description);
+                      if(result.data.key=="customer_service_wechat_qr_code"){
+                          $("#license_img").attr("src",result.data.value);
+                      }
+                    }
+                }else{
+                  layer.msg("系统配置数据加载异常！");
+                }
+
+              }
+            });
+          }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

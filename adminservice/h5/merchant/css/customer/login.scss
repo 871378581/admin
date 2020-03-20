@@ -1,0 +1,211 @@
+@charset "utf-8";
+
+/*登录*/
+.login_index{
+  .header{
+    padding-top: 1.23rem;
+    height: 2.45rem;
+    background-color: #f6f6f6;
+    p{
+      padding-left: 0.48rem;
+      font-size: 0.61rem;
+    }
+  }
+  .scroll-content{
+    background-color: #fff;
+    .head_img{
+      margin-top: 0.25rem;
+      height: 2.9rem;
+      text-align: center;
+      background-color: #fff;
+      .portrait{
+        margin: 0 auto;
+        margin-top: 0.75rem;
+        width: 1.65rem;
+        height: 1.65rem;
+        border-radius: 50%;
+        background-color: #f5f5f5;
+        img{
+          margin-top: -10%;
+          margin-left: -10%;
+          width: 125%;
+          height: 125%;
+        }
+      }
+    }
+    .list{
+      margin-top: 0.25rem;
+      .item{
+        border-bottom: none;
+      }
+    }
+  }
+  .footer{
+    font-size: 0.36rem;
+    color: #999;
+    .left_text{
+      float: left;
+      margin-left: 0.6rem;
+    }
+    .right_text{
+      float: right;
+      margin-right: 0.84rem;
+    }
+  }
+  .bar-footer{
+    p{
+      padding: 0 4%;
+      width: 100%;
+      font-size: 0.35rem;
+      color: #999;
+      text-align: right;
+    }
+  }
+}
+
+/*重置登录密码*/
+.forget_password{
+  background-color: #f6f6f6;
+  .scroll-content{
+    .prompt{
+      padding-left: 0.4rem;
+      line-height: 1rem;
+      font-size: 0.32rem;
+      color: #999;
+    }
+    .list{
+      .item{
+        .input-label{
+          width: 10%;
+        }
+      }
+    }
+    .btn_box{
+      margin: 0 auto;
+      width: 8rem;
+    }
+  }
+}
+
+/*选择查看店铺*/
+.store_list{
+  background-color: #f6f6f6;
+  .scroll-content{
+    .list{
+      margin-top: 0.25rem;
+      .item{
+        margin-bottom: 0.15rem;
+        .item_title{
+          padding: 0 0.35rem;
+          line-height: 1.16rem;
+          font-size: 0.45rem;
+          font-weight: bold;
+          border-bottom: 1px solid #f1f1f1;
+          color: #333;
+        }
+        .item_content{
+          padding: 0.25rem 0;
+          height: 2.9rem;
+          p{
+            padding: 0 0.35rem;
+            line-height: 0.8rem;
+            font-size: 0.35rem;
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+  .bar-footer{
+    .title{
+      font-size: 0.35rem;
+      color: #999;
+    }
+  }
+}
+
+/*更新登录密码*/
+.update_password{
+  background-color: #f6f6f6;
+  .scroll-content{
+    .prompt{
+      padding-left: 0.4rem;
+      line-height: 1rem;
+      font-size: 0.32rem;
+      color: #999;
+    }
+    .list{
+      margin-top: 0;
+      .item{
+        .input-label{
+          width: 10%;
+        }
+      }
+    }
+    .btn_box{
+      margin: 0 auto;
+      width: 8rem;
+    }
+    /*.content_mine{
+      padding: 0 0.4rem;
+      background-color: #fff;
+      .list{
+        margin-top: 0;
+        .item{
+          .input-label{
+            width: 10%;
+          }
+        }
+        .item-input{
+          input{
+            text-align: right;
+          }
+        }
+      }
+    }*/
+  }
+}
+
+/*更新头像*/
+.update_head_portrait{
+  background-color: #f5f5f5;
+  .scroll-content{
+    margin-top: 0.2rem;
+    background-color: #fff;
+    .prompt{
+      margin-top: 1.3rem;
+      font-size: 0.45rem;
+      font-weight: bold;
+      color: #000033;
+      text-align: center;
+    }
+    .head_img{
+      margin-top: 0.7rem;
+      height: 2.9rem;
+      text-align: center;
+      background-color: #fff;
+      .portrait{
+        margin: 0 auto;
+        margin-top: 0.75rem;
+        width: 1.65rem;
+        height: 1.65rem;
+        border-radius: 50%;
+        background-color: #f5f5f5;
+        img{
+          margin-top: -10%;
+          margin-left: -10%;
+          width: 125%;
+          height: 125%;
+        }
+      }
+      p{
+        margin-top: 0.25rem;
+        font-size: 0.35rem;
+        color: #999;
+      }
+      input{
+        display: none;
+      }
+    }
+  }
+}

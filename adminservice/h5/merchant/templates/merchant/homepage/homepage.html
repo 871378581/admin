@@ -1,0 +1,27 @@
+<ion-view class="homepage" hide-tabs="toHideTabs">
+  <ion-content scroll="false">
+    <img src="img2/homepage/cover.png" class="cover "/>
+    <p class="homepage-title">你好，<span> {{detail.user_name}} </span>所属门店：{{detail.shop_name}}</p>
+    <ul class="statistic-box">
+      <li ng-click="changeState('1', 'tab.order')">
+        <!--<p class="name">服务中</p>-->
+        <p class="name">保养中</p>
+        <p class="num">{{detail.servicing_orders ? detail.servicing_orders : 0}}</p>
+      </li>
+      <li ng-click="changeState('2', 'tab.order')">
+        <!--<p class="name">等待服务</p>-->
+        <p class="name">检测异常</p>
+        <p class="num">{{detail.have_exception_orders ? detail.have_exception_orders : 0}}</p>
+      </li>
+      <li ng-click="changeState('3', 'tab.order')">
+        <!--<p class="name">检测有异常</p>-->
+        <p class="name">附加服务中</p>
+        <p class="num">{{detail.added_service_orders ? detail.added_service_orders : 0}}</p>
+      </li>
+      <li ng-click="changeState('4', 'tab.order')">
+        <p class="name">已完成</p>
+        <p class="num">{{detail.have_finished_orders ? detail.have_finished_orders : 0}}</p>
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

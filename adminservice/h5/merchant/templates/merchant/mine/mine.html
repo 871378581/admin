@@ -1,0 +1,29 @@
+<ion-view class="mine" hide-tabs="toHideTabs">
+  <ion-content scroll="false">
+    <div class="header-box">
+      <img class="header-bg" src="img/title-tab-blue.png"/>
+      <img class="portrait" src="img2/mine/portrait.png"/>
+      <p class="title" ng-style="{'font-size': scopeUserInfo.user_name.length>8 ? '0.35rem' : '0.5rem'}">
+        {{scopeUserInfo.user_name}}
+      </p>
+      <p class="sub-title" ng-if="scopeUserInfo.phone">{{scopeUserInfo.phone}}</p>
+    </div>
+    <ul class="btn-list">
+      <li class="item" ng-click="goState('informationSetting')">
+        <img class="left_icon" src="img/mine/list_mine-blue.png"/>
+        <span class="title">基础信息</span>
+        <i class="icon ion-chevron-right"></i>
+      </li>
+      <li class="item" ng-click="goState('passwordSetting')">
+        <img class="left_icon" src="img/mine/list_card-blue.png"/>
+        <span class="title">密码修改</span>
+        <i class="icon ion-chevron-right"></i>
+      </li>
+      <li class="item" ng-click="logout()">
+        <img class="left_icon" src="img/mine/list_member-blue.png"/>
+        <span class="title">退出登录</span>
+        <i class="icon ion-chevron-right"></i>
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,40 @@
+<ion-view class="orderPayment" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('tab.order')">
+        <img src="img/return.svg"/>
+    </div>
+    <ion-content scroll="true">
+        <p class="input-title">确认订单</p>
+        <div class="bg-white order-detail-box">
+            <p>{{userInfo.user_name ? userInfo.user_name : userInfo.nick_name}}<span> {{userInfo.phone}}</span></p>
+            <p>订单号：<span>{{detail.order_string_id}}</span></p>
+        </div>
+        <div class="bg-white coupon-box">
+            <p>优惠券<span>无可用优惠券</span></p>
+        </div>
+        <div class="bg-white bill-box">
+            <p>实际支付<span>¥{{detail.final_fee}}元</span></p>
+        </div>
+        <p class="input-title">选择支付方式</p>
+        <div class="bg-white pay-box">
+            <ul>
+                <!--<li ng-click="changePayMode(1)">
+                    <img src="img/order/weChatPayment.png" class="left-img" />
+                    <span>微信支付</span>
+                    <div class="right-select">
+                        <img class="right-img" src="img/store/selected.png" ng-show="formData.pay_mode==1"/>
+                    </div>
+                </li>-->
+                <li ng-click="changePayMode(2)">
+                    <img src="img/order/otherPayment.png" class="left-img" />
+                    <span>线下支付</span>
+                    <div class="right-select">
+                        <img class="right-img" src="img/store/selected.png" ng-show="formData.pay_mode==2"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <button class="button button-block btn-mine btn-linear" ng-click="confirmPay()">
+            确认
+        </button>
+    </ion-content>
+</ion-view>

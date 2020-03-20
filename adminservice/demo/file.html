@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>file upload</title>
+    <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+
+</head>
+<body>
+
+
+<div>
+    <!--<form method="POST" enctype="multipart/form-data" action="/ege/api/file/upload">-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<td>File to upload:</td>-->
+    <!--<td><input type="file" name="file" id="FileUpload"/></td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</form>-->
+    <input type="file" name="file" id="FileUpload"/>
+    <input type="submit" value="Upload" id="btn_uploadimg"/>
+
+    <img src="" id="imgplaceholder"/>
+</div>
+
+<script type="text/javascript">
+    $("#btn_uploadimg").click(function () {
+        var formFile = new FormData();
+        formFile.append('file', document.getElementById("FileUpload").files[0]);
+        formFile.append("action", "/ege/api/file/upload");
+
+        $.ajax({
+            url: "/ege/api/file/upload",
+            data: formFile,
+            type: "Post",
+            dataType: "json",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                console.log(result);
+                $("#imgplaceholder").attr("src", result.url);
+            }
+        })
+    });
+</script>
+
+</body>
+</html>

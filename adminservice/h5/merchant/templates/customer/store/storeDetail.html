@@ -1,0 +1,123 @@
+<ion-view class="storeDetail" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.store')">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true" class="has-footer">
+    <!--<img class="cover" ng-src="{{detail.door_img_url}}" />-->
+    <div class="banner">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" ng-repeat="banner in detail.door_imgs track by $index">
+            <img ng-src="{{banner}}"/>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+    <div class="detail-text-box">
+      <div class="text-title">{{detail.enterprise_name}}</div>
+      <div class="btn-title">
+        <!--<img src="img/store/share-blue.png" ng-click="shareStore()" />-->
+        <img src="img/store/star-blue.png" ng-if="detail.is_collected" ng-click="changeCollected(false)"/>
+        <img src="img/store/star-opacity-blue.png" ng-if="!detail.is_collected"
+             ng-click="changeCollected(true)"/>
+      </div>
+      <img class="share-arrow" src="img/store/arrow.svg"/>
+      <div class="text-main" style="height: 1px">
+        <p class="title"></p>
+        <p class="content"></p>
+      </div>
+      <div class="text-main">
+        <p class="title">提供服务</p>
+        <p class="content">{{detail.service}}</p>
+      </div>
+      <div class="text-main">
+        <p class="title" ng-show="detail.business_hour_start && detail.business_hour_end">营业时间</p>
+        <p class="content">{{detail.business_hour_start + '~' + detail.business_hour_end}}</p>
+      </div>
+      <div class="text-main" ng-click="openLocation(detail.address)">
+        <p class="title">地址</p>
+        <p class="content">{{detail.address}}<img class="img-btn" src="img/store/location-blue.png"></p>
+      </div>
+      <a ng-href="{{'tel:' + detail.phone}}" style="color: #858585;">
+        <div class="text-main" ng-show="detail.phone">
+          <p class="title">电话</p>
+          <p class="content">{{detail.phone}}<img class="img-btn" src="img/mine/list_contact-blue.png"></p>
+        </div>
+      </a>
+      <div class="text-main">
+        <p class="title">评分</p>
+        <ul class="score">
+          <li ng-repeat="star in (stars | limitTo:detail.starNum) track by $index">
+            <img src="img/icon/star-yellow.png"/>
+          </li>
+          <li ng-repeat="star in (stars | limitTo:5-detail.starNum) track by $index">
+            <img src="img/icon/star-gray.png"/>
+          </li>
+        </ul>
+        {{detail.score}}分
+      </div>
+      <ul class="tags">
+        <li ng-repeat="tagInfo in detail.tagInfoList track by $index">{{tagInfo.tag}}</li>
+        <li ng-if="!detail.tagInfoList || detail.tagInfoList.length==0">暂无评论</li>
+      </ul>
+    </div>
+    <ul class="engine-oil">
+      <li ng-repeat="oil in detail.oils track by $index">
+        <img class="cover" ng-src="{{oil.photo_url}}"/>
+        <div class="text-box">
+          <p class="title">{{oil.brand_name}}</p>
+          <p class="main" ng-show="oil.market_price_min==oil.market_price_max">
+            <s>市场价{{oil.market_price_min}}</s>
+          </p>
+          <p class="main" ng-show="oil.market_price_min!=oil.market_price_max">
+            <s>市场价{{oil.market_price_min + '~' + oil.market_price_max}}</s>
+          </p>
+          <p class="main" style="top: 1.5rem;">门店价{{oil.member_price}}</p>
+        </div>
+      </li>
+    </ul>
+    <div class="detail-text-box">
+      <p class="introduce-title">门店介绍</p>
+      <pre class="introduce-main">{{detail.introduce}}</pre>
+    </div>
+    <div class="detail-text-box">
+      <p class="introduce-title">评价（{{detail.evaluate_count}}）</p>
+      <ul class="list">
+        <li class="item" ng-repeat="item in list track by $index">
+          <img class="cover" ng-src="{{item.user_head}}"/>
+          <p class="title">{{item.nick_name + " " + item.car_type}}</p>
+          <p class="time">{{item.gmt_evaluate_commit}}</p>
+          <p class="main">{{item.evaluate_content}}</p>
+        </li>
+        <li class="btn-more" ng-click="loadMore()">{{moreText}}</li>
+      </ul>
+      <p style="margin: 1rem;font-size: 0.4rem;text-align: center;" ng-if="list.length==0">期待您的评价呦~</p>
+    </div>
+    <!--<div class="detail-text-box">
+      <p class="introduce-title">评价（{{detail.evaluate_count}}）</p>
+      <ion-scroll>
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+        <ul class="list">
+          <li class="item" ng-repeat="item in list track by $index">
+            <img class="cover" ng-src="{{item.user_head}}"/>
+            <p class="title">{{item.nick_name + " " + item.car_type}}</p>
+            <p class="time">{{item.gmt_evaluate_commit}}</p>
+            <p class="main">{{item.evaluate_content}}</p>
+          </li>
+        </ul>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                             ng-if="undefined==newListData || newListData.length>0">
+        </ion-infinite-scroll>
+      </ion-scroll>
+      <p style="margin: 1rem;font-size: 0.4rem;text-align: center;" ng-if="list.length==0">期待您的评价呦~</p>
+    </div>-->
+  </ion-content>
+  <div class="bar bar-footer">
+    <p class="btn-mine btn-linear" ng-click="appointment($event, detail)">立即预约</p>
+  </div>
+</ion-view>

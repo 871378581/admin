@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>会员管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+</head>
+<body class="body">
+<style>
+    .layui-input-inline{width: 250px !important;}
+    .layui-input{width:250px !important;}
+    .layui-form-label{width:120px !important;}
+</style>
+  <form class="layui-form" action="" lay-filter="example">
+    <input type="hidden" name="id" lay-verify="title" id="id" class="layui-input">
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">头像</label>
+              <div class="layui-input-inline">
+                  <div class="layui-upload">
+                      <div class="layui-upload-list">
+                          <img class="layui-upload-img" style="width:100px;height:100px;box-shadow: 0 0 1px #999;" id="user_head">
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="layui-inline">
+              <div class="layui-form-item">
+                  <label class="layui-form-label">账号</label>
+                  <div class="layui-input-inline">
+                      <input type="text" placeholder="请输账号" name="account" id="account" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">用户ID</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输用户ID" name="user_id" id="user_id" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+
+          <div class="layui-inline">
+              <label class="layui-form-label">昵称</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输昵称" name="nick_name" id="nick_name" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+      </div>
+
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">用户名</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输用户名" name="user_name" id="user_name" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+
+          <div class="layui-inline">
+              <div class="layui-form-item">
+                  <label class="layui-form-label">生日</label>
+                  <div class="layui-input-inline">
+                      <input type="text" placeholder="请输生日" name="birth" id="birth" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">性别</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输性别" name="sex" id="sex" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">会员身份证号</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输会员身份证号" name="id_card" id="id_card" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+      </div>
+
+
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">是否绑定手机:</label>
+              <div class="layui-input-inline">
+                  <select name="has_bind_phone" disabled="true" lay-filter="is_disable" id="has_bind_phone" required lay-verify="required">
+                      <option value="true">是</option>
+                      <option value="false">否</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">手机号码</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输手机号码" name="phone" id="phone" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+      </div>
+
+
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">所在城市</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输所在城市" name="place_city" id="place_city" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+            </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">最后登录经度</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输最后登录经度" name="last_longitude" id="last_longitude" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">最后登录纬度</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输最后登录纬度" name="last_latitude" id="last_latitude" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">会员等级</label>
+              <div class="layui-input-inline">
+                  <input type="number" placeholder="请输会员等级" name="membership_level" id="membership_level" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+      </div>
+
+
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">工作</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输工作" name="job" id="job" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">默认车辆车牌</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输车牌" name="default_plate" id="default_plate" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+      </div>
+
+
+
+      <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">默认车辆车型</label>
+              <div class="layui-input-inline">
+                  <input type="text" placeholder="请输车型" name="default_car_tye" id="default_car_tye" disabled="disabled" maxlength="30" required lay-verify="required" lay-verify="title"  autocomplete="off"  class="layui-input">
+              </div>
+          </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">是否设置默认车辆</label>
+              <div class="layui-input-inline">
+                  <select name="has_default_car"  disabled="true" id="has_default_car" required lay-verify="required">
+                      <option value="">请选择</option>
+                      <option value="false">否</option>
+                      <option value="true">是</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+
+  </form>
+
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['form', 'layer',"upload"], function () {
+
+        // 操作对象
+        var form = layui.form
+                , layer = layui.layer
+                , upload = layui.upload
+                , $ = layui.jquery;
+        //your code
+        //监听关闭
+        form.on('submit(close)', function(data){
+          var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+          parent.layer.close(index);
+        });
+
+
+          var url = location.href;
+          var id = new URL(url).searchParams.get("id");
+          console.log("id:"+id);
+          if(id==null||id==undefined){
+            layer.msg("id为空！不允许编辑");
+          }else{
+            $("#id").val(id);
+            $.ajax({
+              url:wholeUrl+"/admin/wx_user/get?token="+localStorage.getItem("token"),
+              method:"post",
+              contentType: "application/x-www-form-urlencoded",
+              dataType:"json",
+              data:{id:id},
+              async:false,
+              success:function(result){
+                console.log(result);
+                if(result.success){
+                    if(result.data!=null){
+                        $("#user_head").attr("src",result.data.user_head);
+                        $("#account").val(result.data.account);
+                        $("#user_id").val(result.data.user_id);
+                        $("#nick_name").val(result.data.nick_name);
+                        $("#user_name").val(result.data.user_name);
+                        $("#birth").val(result.data.birth);
+                        $("#sex").val(result.data.sex);
+                        $("#id_card").val(result.data.id_card);
+                        $("#has_bind_phone").val(result.data.has_bind_phone+"");
+                        $("#phone").val(result.data.phone);
+                        $("#place_city").val(result.data.place_city);
+                        $("#last_longitude").val(result.data.last_longitude);
+                        $("#last_latitude").val(result.data.last_latitude);
+                        $("#membership_level").val(result.data.membership_level);
+                        $("#job").val(result.data.job);
+                        $("#default_plate").val(result.data.default_plate);
+                        $("#default_car_tye").val(result.data.default_car_tye);
+                        $("#has_default_car").val(result.data.has_default_car+"");
+
+                        form.render();
+                    }
+                }else{
+                  layer.msg("数据加载异常！");
+                }
+
+              }
+            });
+          }
+        });
+
+</script>
+
+</body>
+</html>

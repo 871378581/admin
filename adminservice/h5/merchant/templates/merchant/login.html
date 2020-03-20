@@ -1,0 +1,26 @@
+<ion-view class="login" hide-tabs="toHideTabs">
+  <ion-content scroll="false">
+    <!--<p class="input-title">登录</p>-->
+    <div class="setting-header"></div>
+    <div class="list">
+      <div class="item item-input">
+        <!--<p class="title">用户账号</p>-->
+        <img class="title" src="img/mine/list_mine-blue.png" />
+        <input type="text" ng-model="formData.account" placeholder="用户名"/>
+        <i class="icon"></i>
+      </div>
+      <div class="item item-input">
+        <!--<p class="title">用户密码</p>-->
+        <img class="title" src="img2/login/password.png" style="width: 0.5rem; height: 0.5rem;" />
+        <input type="password" ng-model="formData.password" placeholder="密码"/>
+        <i class="icon"></i>
+      </div>
+    </div>
+    <div class="btn-box">
+      <button class="button btn-mine btn-linear" style="width: 7rem!important;" ng-click="doLogin()">
+        登录
+      </button>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>

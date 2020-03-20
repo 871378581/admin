@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>redirecting...</title>
+  <script type="text/javascript" src="lib/plugins/jquery-v3.1.0/js/jquery-3.1.0.js"></script>
+  <script type="text/javascript" src="lib/js/common/common.js?dt=123"></script>
+  <script>
+    function exec() {
+      COOKIE_NAME = "_999_user_token";
+      $.setCookie(COOKIE_NAME, null, -1);
+      $.setCookie(COOKIE_NAME_USERNAME, null, -1);
+      $.setCookie(COOKIE_NAME_PASSWORD, null, -1);
+      $.setCookie('LOGINED', null, -1);
+      alert("清理成功：\n" + COOKIE_NAME + "=" + $.getCookie(COOKIE_NAME));
+    }
+    exec();
+  </script>
+</head>
+<body>
+
+</body>
+</html>

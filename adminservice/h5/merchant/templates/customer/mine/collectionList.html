@@ -1,0 +1,87 @@
+<ion-view class="collectionList" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('tab.mine')">
+        <img src="img/return.svg"/>
+    </div>
+    <ion-content scroll="true">
+        <p class="input-title">店铺收藏</p>
+        <ion-scroll>
+            <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+            <ul class="list">
+                <li class="item" ng-repeat="item in list" ng-click="showDetail(item)">
+                    <div class="item-content">
+                        <img class="item-left-cover" ng-src="{{item.small_imgs[0]}}"/>
+                        <div class="item-main">
+                            <p class="name" style="overflow: unset;text-overflow: unset;white-space: pre-line;">
+                                {{item.enterprise_name}}</p>
+                            <!--<p class="location">
+                                <img src="img/store/location-yellow.png">
+                                <span ng-show="item.distance">{{(item.distance/1000).toFixed(1)}}千米</span>
+                            </p>-->
+                            <!--<div class="collection">
+                                <img src="img/store/star-yellow.png" ng-if="item.status" ng-click="changeCollected(item, false)" />
+                                <img src="img/store/star-opacity-blue.png" ng-if="!item.status" ng-click="changeCollected(item, true)"  />
+                            </div>-->
+                            <p>{{item.address}}</p>
+                            <p>{{item.service}}</p>
+                            <p class="comment" ng-show="item.gmt_collect">
+                                收藏时间：{{item.gmt_collect}}</p>
+                            <div class="score">
+                                <ul>
+                                    <li ng-repeat="star in (stars | limitTo:item.starNum) track by $index">
+                                        <img src="img/icon/star-yellow.png"/>
+                                    </li>
+                                    <li ng-repeat="star in (stars | limitTo:5-item.starNum) track by $index">
+                                        <img src="img/icon/star-gray.png"/>
+                                    </li>
+                                </ul>
+                                <span>{{item.score}}分</span>
+                            </div>
+                        </div>
+                        <!--<div class="item-footer">
+                            <ul class="tag-list">
+                                <li class="tag-list-item" ng-repeat="tagInfo in (item.tagInfoList | limitTo:3) track by $index">
+                                    {{tagInfo.tag}}
+                                </li>
+                                <li class="tag-list-item" ng-if="item.tagInfoList.length==0">暂无评论</li>
+                            </ul>
+                            <ul class="btn-list">
+                                <li class="btn-list-item btn-linear" ng-click="appointment($event, item)">预约</li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </li>
+                <!--<li class="item-load-all" ng-if="newListData && newListData.length==0">门店持续更新中</li>-->
+            </ul>
+
+            <!--<ul class="list">
+                <li class="item" ng-repeat="item in list" ng-click="showDetail(item)">
+                    <div class="item-content">
+                        <img class="item-left-cover" ng-src="{{item.door_img_url}}" />
+                        <div class="item-main">
+                            <p class="name">{{item.enterprise_name}}
+                                <img src="img/store/star-yellow.png" ng-if="item.status" ng-click="changeCollected(item, false)" />
+                                <img src="img/store/star-opacity.png" ng-if="!item.status" ng-click="changeCollected(item, true)"  />
+                            </p>
+                            <p class="business-scope">{{item.service}}</p>
+                            <p class="address">地址：{{item.address}}</p>
+                            <div class="score">
+                                <ul>
+                                    <li ng-repeat="star in (stars | limitTo:item.starNum) track by $index">
+                                        <img src="img/icon/star-yellow.png" />
+                                    </li>
+                                    <li ng-repeat="star in (stars | limitTo:5-item.starNum) track by $index">
+                                        <img src="img/icon/star-gray.png" />
+                                    </li>
+                                </ul>
+                                <span>{{item.score}}分</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>-->
+            <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                                 ng-if="undefined==newListData || newListData.length>0">
+            </ion-infinite-scroll>
+        </ion-scroll>
+    </ion-content>
+</ion-view>

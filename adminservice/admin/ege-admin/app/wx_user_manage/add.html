@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>会员管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+</head>
+<body class="body">
+<style>
+    .layui-input-block{width: 250px !important;}
+    .layui-input{width:250px !important;}
+</style>
+  <form class="layui-form" action="" lay-filter="example">
+      <div class="layui-inline">
+          <label class="layui-form-label">图片:</label>
+          <div class="layui-input-block">
+              <div class="layui-upload">
+                  <div class="layui-upload-list">
+                      <img class="layui-upload-img" src="../../frame/static/image/add-photo.png" style="width:200px;height:100px;box-shadow: 0 0 1px #999;" id="photo_img">
+                      <p id="door_img_text"><div style="color:red;font-size:10px !important;">注：图片格式 *.jpg、*.png</div></p>
+                  </div>
+                  <input type="hidden" name="photo_url" id="photo_url" required lay-verify="required" lay-verify="title"/>
+              </div>
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">链接</label>
+          <div class="layui-input-block">
+              <input type="text" name="url" maxlength="30" required lay-verify="required" lay-verify="title" id="url" autocomplete="off" placeholder="请输URL" class="layui-input">
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">排序</label>
+          <div class="layui-input-block">
+              <input type="number" name="sort" maxlength="30" required lay-verify="required" lay-verify="title" id="sort" autocomplete="off" placeholder="请输顺序" class="layui-input">
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">是否生效</label>
+          <div class="layui-input-block">
+              <select name="is_disable" lay-filter="effective" id="is_disable" required lay-verify="required">
+                  <option value="">请选择</option>
+                  <option value="false">否</option>
+                  <option value="true">是</option>
+              </select>
+          </div>
+      </div>
+
+    <div class="layui-form-item" align="center">
+      <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
+      <button class="layui-btn" lay-submit="" lay-filter="refesh">重置</button>
+    </div>
+  </form>
+
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['form', 'layer','upload'], function () {
+
+        // 操作对象
+        var form = layui.form
+                , layer = layui.layer
+                , upload = layui.upload
+                , $ = layui.jquery;
+        //your code
+        //监听关闭
+        form.on('submit(close)', function(data){
+          var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+          parent.layer.close(index);
+        });
+
+        form.on('submit(save)', function(data){
+          var field = data.field;
+          $.ajax({
+            url:wholeUrl+"/admin/wx_user/add?token="+localStorage.getItem("token"),
+            method:"post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType:"json",
+            async:false,
+            data:{
+              ...field,
+              account:localStorage.getItem("account")
+            },
+            success:function(result){
+              console.log(result);
+              if(result.success){
+                layer.msg('添加成功',{time:700}, function(index){
+                   //do something
+                   parent.reloadParent();
+                   var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                   parent.layer.close(index); //再执行关闭
+                 });
+              }else{
+                layer.msg(result.errorMsg);
+              }
+            }
+          });
+          return false;
+        });
+
+        //监听关闭
+        form.on('submit(refresh)', function(data){
+          var index = parent.tableIns.reload(); //先得到当前iframe层的索引
+          //parent.layer.close(index); //再执行关闭
+        });
+
+        var logoUp = upload.render({
+            elem: '#photo_img'
+            ,url: wholeUrl+'/admin/common/upload'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#photo_img').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                console.log(res);
+                var url = res.data;
+                if(url!=null){
+                    $("#photo_url").val(url);
+                }
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var text = $('#door_img_text');
+                text.html('<span style="color: #FF5722;">上传失败</span><a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                text.find('.demo-reload').on('click', function(){
+                    logoUp.upload();
+                });
+            }
+        });
+
+    });
+
+
+</script>
+
+</body>
+</html>

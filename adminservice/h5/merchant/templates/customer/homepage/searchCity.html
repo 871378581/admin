@@ -1,0 +1,48 @@
+<ion-view class="searchCity" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.store')">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="false">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="请输入地区名称" ng-model="formData.keyword"/>
+      </label>
+    </div>
+    <div class="search-box">
+      <img src="img/homepage/location-gray.png"/>
+      <p class="location">
+        当前位置
+        <span id="position">{{showAreaName}}</span>
+      </p>
+      <p class="re-location" ng-click="getLocation()">重新定位</p>
+    </div>
+    <div class="location-box">
+      <!--<div class="header"><span>×</span></div>-->
+      <ul class="selected-location">
+        <li ng-click="changeShow(1)" ng-show="selectedProvince.province">{{selectedProvince.province}}
+          <span class="tab-active-bottom" ng-show="!selectedCity.city"></span></li>
+        <li ng-click="changeShow(2)" ng-show="selectedCity.city">{{selectedCity.city}}
+          <span class="tab-active-bottom" ng-show="!selectedDistrict"></span></li>
+        <li ng-show="selectedDistrict">{{selectedDistrict}}
+          <span class="tab-active-bottom"></span></li>
+        <li class="confirm-btn" ng-show="showConfirmBtn" ng-click="confirmArea()">确定</li>
+      </ul>
+      <ul class="location-list" ng-show="showProvinceList">
+        <li ng-repeat="item in areaList track by $index" ng-click="selectProvince($index, item)"
+            ng-style="$index == selectedProvinceIndex ? {'font-weight':'bold'} : ''">{{item.province}}
+        </li>
+      </ul>
+      <ul class="location-list" ng-show="showCityList">
+        <li ng-repeat="item in selectedProvince.cities track by $index" ng-click="selectCity($index, item)"
+            ng-style="$index == selectedCityIndex ? {'font-weight':'bold'} : ''">{{item.city}}
+        </li>
+      </ul>
+      <ul class="location-list" ng-show="showDistrictList">
+        <li ng-repeat="item in selectedCity.regions track by $index" ng-click="selectDistrict($index, item)">
+          {{item}}
+        </li>
+      </ul>
+    </div>
+  </ion-content>
+</ion-view>

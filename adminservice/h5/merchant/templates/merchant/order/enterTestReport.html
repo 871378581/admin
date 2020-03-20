@@ -1,0 +1,677 @@
+<ion-view class="enterTestReport" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.order')" ng-show="!showInputPage">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true" class="main-page has-footer">
+    <div class="header-box" ng-show="!showInputPage">
+      <p class="title">完成度{{(process * 100 / 16).toFixed(2)}}%</p>
+      <p class="progress"><span class="speed" ng-style="{width:(process * 100/ 16) + '%'}"></span></p>
+    </div>
+    <div class="btn-box" ng-show="!showInputPage">
+      <ul class="btn-list">
+        <li ng-repeat="btn in btnList track by $index" ng-click="changeInputPage($index)">
+          <img ng-src="{{btn.img}}"/>
+          <span>{{btn.name}}</span>
+          <img ng-src="{{formData[$index].result ? 'img2/order/enterTestReport/normal.png' : 'img2/order/enterTestReport/abnormal.png'}}"
+              ng-show="formData[$index].result!==null && formData[$index].result!==undefined"/>
+        </li>
+      </ul>
+      <!--<ul class="checkbox-box">
+        <li>
+          <div class="checkbox-rect">
+            <input type="checkbox" ng-model="checked1" ng-click="changeChecked(1)" class="ng-pristine ng-untouched ng-valid ng-empty" style="">
+            <p ng-click="changeModalShow()">检查有异常建议进入深度保养</p>
+          </div>
+        </li>
+      </ul>-->
+    </div>
+  </ion-content>
+  <div class="bar bar-footer" ng-show="!showInputPage">
+    <button class="button button-block btn-mine btn-linear btn-la" ng-click="saveData('ALL')"
+            ng-show="orderStatus!='D' && orderStatus!='E' && orderStatus!='U' && orderStatus!='I' && childStatus!='M'">
+      提交
+    </button>
+  </div>
+
+  <div class="input-page" ng-show="btnList[0].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">灯光</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[0])">
+          <p class="title">行车灯</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[0].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[0].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[1])">
+          <p class="title">近光灯</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[1].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[1].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[2])">
+          <p class="title">远光灯</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[2].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[2].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[3])">
+          <p class="title">变光</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[3].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[3].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[4])">
+          <p class="title">左右转向灯</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[4].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[4].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[5])">
+          <p class="title">闪烁报警指示灯</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[5].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[5].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[6])">
+          <p class="title">前雾灯</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[6].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[6].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[7])">
+          <p class="title">前驻车雷达</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[7].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[7].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[8])">
+          <p class="title">雨刮</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[8].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[8].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[0].subCategoryList[9])">
+          <p class="title">大灯清洗装置</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[0].subCategoryList[9].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[0].subCategoryList[9].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[1].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">机油</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[1])">
+          <p class="title">是否正常</p>
+          <p style="display: none;">{{formData[1].result}}</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="!formData[1].result ? 'abnormal' : 'normal'"
+                 ng-model="formData[1].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">放油量<span>(L)</span></p>
+          <input type="text" ng-model="formData[1].subCategoryList[0].entryValue" placeholder="请输入放油量"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">加机油<span>(L)</span></p>
+          <input type="text" ng-model="formData[1].subCategoryList[1].entryValue" placeholder="请输入加机油量"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[2].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">机滤</p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">旧件品牌</p>
+          <input type="text" ng-model="formData[2].subCategoryList[0].entryValue" placeholder="请输入旧件品牌"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">新件品牌</p>
+          <input type="text" ng-model="formData[2].subCategoryList[1].entryValue" placeholder="请输入新件品牌"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[3].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">火花塞</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[3].subCategoryList[0])">
+          <p class="title">目视检测</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[3].subCategoryList[0].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[3].subCategoryList[0].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input" ng-click="toSelectResult(formData[3].subCategoryList[1])">
+          <p class="title">点火线圈</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[3].subCategoryList[1].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[3].subCategoryList[1].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[4].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">防冻液</p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">PH值</p>
+          <input type="text" ng-model="formData[4].subCategoryList[0].entryValue" placeholder="参考值7-9.5"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">冰点<span>(℃)</span></p>
+          <input type="text" ng-model="formData[4].subCategoryList[1].entryValue" placeholder="参考值-68~-15摄氏度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">沸点<span>(℃)</span></p>
+          <input type="text" ng-model="formData[4].subCategoryList[2].entryValue" placeholder="参考值>105摄氏度"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[5].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">节气门</p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">开度检查</p>
+          <input type="text" ng-model="formData[5].subCategoryList[0].entryValue" placeholder="参考范围1.6—5.0"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[6].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">变速箱油</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[6])">
+          <p class="title">是否正常</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="!formData[6].result ? 'abnormal' : 'normal'"
+                 ng-model="formData[6].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">冷态</p>
+          <input type="text" ng-model="formData[6].subCategoryList[0].entryValue" placeholder="请输入油尺刻度位置"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">热态</p>
+          <input type="text" ng-model="formData[6].subCategoryList[1].entryValue" placeholder="请输入油尺刻度位置"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[7].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">刹车油</p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">水含量(%)</p>
+          <input type="text" ng-model="formData[7].subCategoryList[0].entryValue" placeholder="参考值0.5%—2.5%"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">干沸点<span>(℃)</span></p>
+          <input type="text" ng-model="formData[7].subCategoryList[1].entryValue" placeholder="参考值205-207摄氏度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">湿沸点<span>(℃)</span></p>
+          <input type="text" ng-model="formData[7].subCategoryList[2].entryValue" placeholder="参考值170-190摄氏度"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[8].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">皮带</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[8].subCategoryList[0])">
+          <p class="title">张紧度</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[8].subCategoryList[0].result ? 'normal' : 'abnormal'"
+                 ng-model="formData[8].subCategoryList[0].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[9].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">刹车盘(mm)<span>磨损深度（0-3毫米）（>=3毫米为强制更换）</span></p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">左前轮</p>
+          <input type="text" ng-model="formData[9].subCategoryList[0].entryValue" placeholder="请输入磨损深度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">左后轮</p>
+          <input type="text" ng-model="formData[9].subCategoryList[1].entryValue" placeholder="请输入磨损深度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右前轮</p>
+          <input type="text" ng-model="formData[9].subCategoryList[2].entryValue" placeholder="请输入磨损深度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右后轮</p>
+          <input type="text" ng-model="formData[9].subCategoryList[3].entryValue" placeholder="请输入磨损深度"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[10].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">轮胎胎纹深度(mm)<span>（<=1.6毫米为强制更换）</span></p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">左前轮内侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[0].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">左前轮外侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[1].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">左后轮内侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[2].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">左后轮外侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[3].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右前轮内侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[4].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右前轮外侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[5].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右后轮内侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[6].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右后轮外侧</p>
+          <input type="text" ng-model="formData[10].subCategoryList[7].entryValue" placeholder="请输入三个测点,逗号分割"/>
+          <i class="icon"></i>
+        </div>
+      </div>
+      <p class="input-title">轮胎胎压(bar)<span>（参考值：2.3-2.5之间）</span></p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">左前轮</p>
+          <input type="text" ng-model="formData[10].subCategoryList[8].entryValue" placeholder="请输入轮胎胎压"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">左后轮</p>
+          <input type="text" ng-model="formData[10].subCategoryList[9].entryValue" placeholder="请输入轮胎胎压"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右前轮</p>
+          <input type="text" ng-model="formData[10].subCategoryList[10].entryValue" placeholder="请输入轮胎胎压"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右后轮</p>
+          <input type="text" ng-model="formData[10].subCategoryList[11].entryValue" placeholder="请输入轮胎胎压"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[11].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">刹车片(mm)<span>参考值（>1.6毫米）（<=1.6毫米为强制更换）</span></p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">左前轮</p>
+          <input type="text" ng-model="formData[11].subCategoryList[0].entryValue" placeholder="请输入刹车片厚度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">左后轮</p>
+          <input type="text" ng-model="formData[11].subCategoryList[1].entryValue" placeholder="请输入刹车片厚度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右前轮</p>
+          <input type="text" ng-model="formData[11].subCategoryList[2].entryValue" placeholder="请输入刹车片厚度"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">右后轮</p>
+          <input type="text" ng-model="formData[11].subCategoryList[3].entryValue" placeholder="请输入刹车片厚度"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[12].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">电瓶</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[12])">
+          <p class="title">是否正常</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="formData[12].result==false ? 'abnormal' : 'normal'"
+                 ng-model="formData[12].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">电压<span>(V)</span></p>
+          <input type="text" ng-model="formData[12].subCategoryList[0].entryValue" placeholder="请输入电瓶电压"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[13].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">空调(kpa)</p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title">高压</p>
+          <input type="text" ng-model="formData[13].subCategoryList[0].entryValue" placeholder="参考值1400-1600kpa"/>
+          <i class="icon"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">低压</p>
+          <input type="text" ng-model="formData[13].subCategoryList[1].entryValue" placeholder="参考值150-250kpa"/>
+          <i class="icon"></i>
+        </div>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[14].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">底盘</p>
+      <div class="list">
+        <div class="item item-input" ng-click="toSelectResult(formData[14])">
+          <p class="title">是否正常</p>
+          <input type="text" ng-disabled="showSelectResult"
+                 ng-class="!formData[14].result ? 'abnormal' : 'normal'"
+                 ng-model="formData[14].entryValue"/>
+          <i class="icon ion-chevron-right"></i>
+        </div>
+        <div class="item item-input">
+          <p class="title">描述</p>
+          <!--<input type="text" ng-model="formData[14].subCategoryList[0].entryValue" placeholder="请输入描述内容"/>-->
+          <i class="icon"></i>
+        </div>
+        <textarea ng-model="formData[14].subCategoryList[0].entryValue" placeholder="请输入描述内容"
+                  style="margin-top: 0;"></textarea>
+        <p class="list-item-title">实况图采集</p>
+        <ul class="img-add-box">
+          <li class="img-box" ng-repeat="photo in fileList track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+            <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile($index)" />
+          </li>
+          <li class="add-box" ng-click="addFile()"></li>
+        </ul>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <div class="input-page" ng-show="btnList[15].show">
+    <ion-content scroll="true" class="has-footer">
+      <p class="input-title">保养建议</p>
+      <div class="list">
+        <div class="item item-input">
+          <p class="title" style="width: 6rem;">建议下次保养公里数</p>
+          <input type="text" ng-model="formData[15].subCategoryList[0].entryValue" placeholder="请输入公里数"/>
+          <i class="icon"></i>
+        </div>
+        <textarea placeholder="其它可能需要保养的情况建议" ng-model="formData[15].subCategoryList[0].standardRefer"></textarea>
+      </div>
+    </ion-content>
+    <div class="bar bar-footer">
+      <button class="button button-block btn-black btn-mine btn-la" ng-click="changeInputPage(null)">
+        保存
+      </button>
+    </div>
+  </div>
+  <input type="file" accept="image/*" capture="camera" style="display:none;" id="pictureFile"
+         ng-model="pictureFile" onchange="angular.element(this).scope().uploadFile()">
+
+  <div class="select-page" ng-show="showSelectResult">
+    <div class="select-box">
+      <p class="select-item" ng-click="selectResult(true)" ng-class="result==true ? 'selected-normal' : ''">正常</p>
+      <p class="select-item" ng-click="selectResult(false)" ng-class="result==false ? 'selected-abnormal' : ''">不正常</p>
+      <p class="select-btn-box">
+        <span ng-click="confirmResult(false)">取消</span>
+        <span ng-click="confirmResult(true)">确认</span>
+      </p>
+    </div>
+  </div>
+</ion-view>

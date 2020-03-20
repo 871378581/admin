@@ -1,0 +1,142 @@
+.mine .scroll-content .header-box {
+  position: relative;
+  width: 10rem;
+  height: 4.4rem;
+  text-align: center;
+  color: #fff;
+  background: url("../../img/title-bg-blue.png") no-repeat top;
+  background-size: 100%; }
+  .mine .scroll-content .header-box .header-bg {
+    position: absolute;
+    top: 1.3rem;
+    left: 0.42rem;
+    width: 9.16rem;
+    height: 2.9rem; }
+  .mine .scroll-content .header-box .portrait {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%; }
+  .mine .scroll-content .header-box .title {
+    position: absolute;
+    top: 1.5rem;
+    left: 2.9rem;
+    width: 6.5rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: left;
+    font-size: 0.47rem;
+    font-weight: bold;
+    overflow: hidden; }
+  .mine .scroll-content .header-box .sub-title {
+    position: absolute;
+    top: 2.4rem;
+    left: 2.9rem;
+    font-size: 0.35rem; }
+  .mine .scroll-content .header-box .content {
+    position: absolute;
+    top: 3.2rem;
+    left: 1.2rem;
+    font-size: 0.35rem;
+    color: #fff; }
+.mine .scroll-content .btn-list {
+  margin-top: 0.1rem; }
+  .mine .scroll-content .btn-list .item {
+    margin-bottom: 0.2vh;
+    padding: 0;
+    padding-left: 0.75rem;
+    line-height: 1.35rem;
+    font-size: 0.4rem;
+    border: none;
+    border-bottom: 0.1vh solid #ccc;
+    background: #fff; }
+    .mine .scroll-content .btn-list .item .left_icon {
+      position: relative;
+      top: 0.05rem;
+      margin-right: 0.25rem;
+      width: 0.45rem;
+      height: 0.45rem; }
+    .mine .scroll-content .btn-list .item .title {
+      display: inline-block;
+      width: 6.5rem;
+      color: #666; }
+    .mine .scroll-content .btn-list .item .icon {
+      width: 0.47rem;
+      height: 0.47rem; }
+    .mine .scroll-content .btn-list .item .ion-chevron-right {
+      float: right;
+      margin-right: 0.45rem;
+      font-weight: bold;
+      color: #999; }
+  .mine .scroll-content .btn-list .item:nth-last-child(1) {
+    border-bottom: none; }
+
+.informationSetting .setting-header {
+  position: relative;
+  height: 6.5rem;
+  background: url("../img/title-bg-blue2.png") no-repeat top;
+  background-size: 100%; }
+  .informationSetting .setting-header .portrait {
+    position: absolute;
+    left: 4rem;
+    top: 2.3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%; }
+  .informationSetting .setting-header p {
+    position: absolute;
+    width: 10rem;
+    font-size: 0.4rem;
+    text-align: center; }
+    .informationSetting .setting-header p span {
+      margin-left: 0.3rem;
+      color: #f7b52b; }
+  .informationSetting .setting-header p:nth-child(2) {
+    top: 4.5rem;
+    color: #333; }
+  .informationSetting .setting-header p:nth-child(3) {
+    top: 5.2rem;
+    color: #666; }
+    .informationSetting .setting-header p:nth-child(3) span {
+      color: #2348d7; }
+.informationSetting .input-title {
+  margin-left: 0.4rem;
+  /*line-height: 1.4rem;*/
+  line-height: 8vh;
+  font-size: 0.47rem;
+  font-weight: bold;
+  color: #000; }
+.informationSetting .list {
+  padding: 0 0.25rem;
+  border-radius: 0.05rem; }
+  .informationSetting .list .item {
+    background: #fff;
+    border: 0; }
+    .informationSetting .list .item .title {
+      width: 2rem;
+      font-size: 0.37rem;
+      color: #666; }
+    .informationSetting .list .item input {
+      margin-right: 0.5rem;
+      color: #000;
+      border-bottom: 0.01rem solid #ddd; }
+    .informationSetting .list .item i {
+      position: absolute;
+      right: 0;
+      margin-right: 0.5rem;
+      font-size: 0.37rem;
+      color: #999; }
+    .informationSetting .list .item .icon-text {
+      color: #2348d7; }
+.informationSetting .btn-box {
+  margin-top: 0.65rem;
+  text-align: center; }
+  .informationSetting .btn-box button {
+    margin: 0 0.25rem;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    cursor: pointer; }
+
+/*# sourceMappingURL=mine2.css.map */

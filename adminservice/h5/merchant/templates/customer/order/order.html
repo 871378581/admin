@@ -1,0 +1,104 @@
+<ion-view class="orderList" hide-tabs="toHideTabs">
+  <ion-content scroll="true">
+    <div class="list list-inset">
+      <div class="position-box" ng-click="goState('searchCity')">
+        <img src="img/homepage/location-gray.png"/>
+        <p>
+          <span id="position">{{showAreaName}}</span>
+          <span class="arrow-box">
+            <i class="icon ion-arrow-down-b" style="transform: translateY(0);"></i>
+          </span>
+        </p>
+      </div>
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="请输入门店名" ng-model="formData.keyword">
+      </label>
+    </div>
+    <ul class="order-tabs">
+      <li ng-click="changeOrder('ALL')">全部
+        <span ng-class="formData.order_status=='ALL' ? 'tab-active-bottom' : ''"></span>
+      </li>
+      <li ng-click="changeOrder('1')">预约中
+        <span ng-class="formData.order_status=='1' ? 'tab-active-bottom' : ''"></span>
+      </li>
+      <li ng-click="changeOrder('2')">服务中
+        <span ng-class="formData.order_status=='2' ? 'tab-active-bottom' : ''"></span>
+      </li>
+      <li ng-click="changeOrder('3')">待付款
+        <span ng-class="formData.order_status=='3' ? 'tab-active-bottom' : ''"></span>
+      </li>
+      <li ng-click="changeOrder('4')">待评价
+        <span ng-class="formData.order_status=='4' ? 'tab-active-bottom' : ''"></span>
+      </li>
+      <li ng-click="changeOrder('5')">已完成
+        <span ng-class="formData.order_status=='5' ? 'tab-active-bottom' : ''"></span>
+      </li>
+    </ul>
+    <ion-scroll>
+      <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+      <ul class="list">
+        <li class="item" ng-repeat="item in list">
+          <div class="item-content">
+            <p class="name">{{item.shop_name}}
+              <span ng-class="item.order_status=='E' ? 'color-green' : ''">{{item.order_tips}}</span>
+            </p>
+            <div class="cover-box">
+              <img class="item-left-cover" ng-src="{{item.car_type_img_url}}"/>
+            </div>
+            <div class="item-main">
+              <p>车辆：{{item.car_type_name + ' ' + item.car_plate}}</p>
+              <p ng-show="item.service_item">项目：{{item.service_item}}</p>
+              <p ng-show="item.oil_brand">机油：{{item.oil_brand}}</p>
+              <p class="comment" ng-show="item.gmt_service_date">
+                预约时间：{{item.gmt_service_date + ' ' + item.gmt_service_begin_time}}</p>
+            </div>
+            <div class="item-footer">
+              <ul class="btn-list">
+                <li class="btn-list-item btn-linear" ng-show="item.order_status=='A'">
+                  <a ng-href="{{'tel:' + item.shop_phone}}" style="color: #fff;">联系门店</a>
+                </li>
+                <li class="btn-list-item btn-black"
+                    ng-show="item.order_status=='A' && item.child_status!='V'"
+                    ng-click="cancelOrder(item)">取消
+                </li>
+                <!--保养预约时间被修改待确认-->
+                <li class="btn-list-item btn-linear"
+                    ng-show="item.order_status=='A' && item.child_status=='H'"
+                    ng-click="confirmTime(item)">确认时间
+                </li>
+                <li class="btn-list-item btn-linear"
+                    ng-show="item.order_status=='B'"
+                    ng-click="openLocation(item)">导航
+                </li>
+                <!--检测项已被输入-->
+                <li class="btn-list-item btn-black"
+                    ng-show="item.order_status!='A' && item.order_status!='I' && item.child_status!='J' && item.child_status!='K'"
+                    ng-click="changeState(item, 'testResult')">报告
+                </li>
+                <!--检测正常、检测异常被忽略同时无支付费用-->
+                <li class="btn-list-item btn-linear"
+                    ng-show="(item.child_status=='M') || (item.order_status=='U') || (item.child_status=='S' && !item.final_fee)"
+                    ng-click="changeState(item, 'orderEvaluate')">评价
+                </li><!--无异常、有异常完成支付、有异常被忽略-->
+                <!--存在需要支付的费用-->
+                <li class="btn-list-item btn-linear"
+                    ng-show="item.final_fee && item.order_status!='E' && item.order_status!='W' && item.order_status!='U'"
+                    ng-click="changeState(item, 'orderPayment')">付钱
+                </li>
+                <li class="btn-list-item btn-black"
+                    ng-click="changeState(item, 'orderDetail')">详情
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="item-load-all" ng-if="newListData && newListData.length==0 && list.length>0">暂无更多订单</li>
+      </ul>
+      <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                           ng-if="undefined==newListData || newListData.length>0">
+      </ion-infinite-scroll>
+    </ion-scroll>
+    <p class="tips" ng-show="!firstLoad && list.length==0">您还没有订单</p>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,281 @@
+.storeList .store-tabs {
+  display: flex;
+  margin: 0 0.25rem;
+  margin-bottom: 0.2rem;
+  width: 95%;
+  height: 1.05rem;
+  background-color: #13131a; }
+  .storeList .store-tabs li {
+    flex: 1;
+    float: left;
+    width: 33.332%;
+    line-height: 1.05rem;
+    font-size: 0.35rem;
+    color: #fff;
+    text-align: center; }
+    .storeList .store-tabs li span {
+      position: relative; }
+      .storeList .store-tabs li span .icon {
+        display: inline-block;
+        position: absolute;
+        left: 0.2rem;
+        font-size: 0.3rem;
+        color: #ccc; }
+      .storeList .store-tabs li span .ion-arrow-up-b {
+        transform: translateY(-8%); }
+      .storeList .store-tabs li span .ion-arrow-down-b {
+        transform: translateY(8%); }
+      .storeList .store-tabs li span .icon-selected {
+        color: #f02e57; }
+  .storeList .store-tabs li:nth-last-child(1) {
+    border-right: none; }
+  .storeList .store-tabs .tab-active-bottom {
+    display: block;
+    content: '';
+    margin: 0 auto;
+    height: 0.5vh;
+    width: 0.5rem;
+    background: #fff;
+    transform: translateY(-0.15rem); }
+.storeList .scroll-view {
+  height: 77.5vh; }
+  .storeList .scroll-view .list .item {
+    margin-bottom: 0.1rem;
+    padding: 0 0.25rem;
+    border: 0;
+    background: #13131a; }
+    .storeList .scroll-view .list .item .item-content {
+      padding: 0.4rem;
+      padding-right: 0;
+      padding-bottom: 0;
+      background: #1f2025;
+      border-radius: 0.05rem; }
+      .storeList .scroll-view .list .item .item-content .item-left-cover {
+        float: left;
+        width: 3.35rem;
+        height: 3.7rem; }
+      .storeList .scroll-view .list .item .item-content .item-main {
+        float: left;
+        margin-left: 0.25rem;
+        width: 5.5rem; }
+        .storeList .scroll-view .list .item .item-content .item-main p {
+          line-height: 0.5rem;
+          color: #999;
+          font-size: 0.32rem; }
+        .storeList .scroll-view .list .item .item-content .item-main .name {
+          height: 1rem;
+          font-size: 0.4rem;
+          color: #fff; }
+        .storeList .scroll-view .list .item .item-content .item-main .location img {
+          width: 0.35rem;
+          height: 0.35rem;
+          transform: translateY(15%); }
+        .storeList .scroll-view .list .item .item-content .item-main .location span {
+          font-size: 0.3rem;
+          color: #f7b52b; }
+        .storeList .scroll-view .list .item .item-content .item-main .score ul li {
+          float: left; }
+          .storeList .scroll-view .list .item .item-content .item-main .score ul li img {
+            width: 0.3rem;
+            height: 0.3rem; }
+        .storeList .scroll-view .list .item .item-content .item-main .score span {
+          margin-left: 0.1rem;
+          font-size: 0.3rem;
+          color: #999; }
+        .storeList .scroll-view .list .item .item-content .item-main .comment {
+          color: #858585; }
+      .storeList .scroll-view .list .item .item-content .item-footer {
+        float: right;
+        margin: 0.3rem;
+        padding-top: 0.33rem;
+        width: 97%;
+        border-top: 0.01rem solid #000; }
+        .storeList .scroll-view .list .item .item-content .item-footer .tag-list {
+          position: absolute;
+          left: 0.6rem;
+          margin-top: 0.25rem;
+          width: 5.7rem; }
+          .storeList .scroll-view .list .item .item-content .item-footer .tag-list .tag-list-item {
+            float: left;
+            margin-right: 0.2rem;
+            padding: 0 0.25rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            color: #fff;
+            font-size: 0.3rem;
+            border-radius: 0.25rem;
+            border: 1px solid #606060; }
+        .storeList .scroll-view .list .item .item-content .item-footer .btn-list {
+          float: right; }
+          .storeList .scroll-view .list .item .item-content .item-footer .btn-list .btn-list-item {
+            float: left;
+            padding: 0 0.8rem;
+            height: 0.9rem;
+            line-height: 0.9rem;
+            border-radius: 0.45rem;
+            font-size: 0.3rem;
+            text-align: center; }
+        .storeList .scroll-view .list .item .item-content .item-footer p {
+          font-size: 0.3rem;
+          color: #858585;
+          text-align: left; }
+      .storeList .scroll-view .list .item .item-content .right-tab {
+        position: absolute;
+        top: 0.4rem;
+        right: 0.1rem;
+        width: 1.65rem;
+        height: 0.7rem;
+        line-height: 0.65rem;
+        text-align: center;
+        background-size: 120%;
+        background-position: center; }
+        .storeList .scroll-view .list .item .item-content .right-tab p {
+          color: #fff;
+          font-size: 0.3rem; }
+  .storeList .scroll-view .list .item-load-all {
+    margin: 0.5rem;
+    color: #fff;
+    text-align: center; }
+
+.storeDetail .cover {
+  width: 10rem;
+  height: 10rem;
+  background: #fff; }
+.storeDetail .banner {
+  width: 100%;
+  height: 7.13rem; }
+  .storeDetail .banner .slider {
+    height: 100%; }
+    .storeDetail .banner .slider img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10rem;
+      height: 7.13rem; }
+.storeDetail .detail-text-box {
+  margin: 0.1rem;
+  padding: 0.25rem;
+  color: #858585;
+  background: #1f2025;
+  border-radius: 0.1rem; }
+  .storeDetail .detail-text-box .text-title {
+    display: inline-block;
+    width: 7.3rem;
+    line-height: 1.6rem;
+    font-size: 0.55rem;
+    color: #fff; }
+  .storeDetail .detail-text-box .btn-title {
+    display: contents; }
+    .storeDetail .detail-text-box .btn-title img {
+      float: right;
+      margin: 0.5rem 0.2rem;
+      width: 0.6rem;
+      height: 0.6rem; }
+  .storeDetail .detail-text-box .share-arrow {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.5rem; }
+  .storeDetail .detail-text-box .text-main {
+    line-height: 0.8rem; }
+    .storeDetail .detail-text-box .text-main .img-btn {
+      width: 0.4rem;
+      height: 0.4rem;
+      transform: translate(50%, 15%); }
+    .storeDetail .detail-text-box .text-main .title {
+      display: inline-block;
+      margin-right: 0.4rem;
+      width: 1.6rem;
+      text-align: justify;
+      text-align-last: justify; }
+    .storeDetail .detail-text-box .text-main .content {
+      display: inline-block;
+      width: 7rem;
+      vertical-align: top; }
+    .storeDetail .detail-text-box .text-main .score {
+      display: inline-block; }
+      .storeDetail .detail-text-box .text-main .score li {
+        display: inline-block; }
+        .storeDetail .detail-text-box .text-main .score li img {
+          width: 0.35rem;
+          height: 0.35rem; }
+  .storeDetail .detail-text-box .introduce-title {
+    line-height: 1.2rem;
+    font-size: 0.4rem;
+    color: #fff;
+    border-bottom: 1px solid #36373d; }
+  .storeDetail .detail-text-box .introduce-main {
+    padding: 0.3rem;
+    line-height: 0.6rem;
+    font-size: 0.35rem;
+    color: #858585; }
+  .storeDetail .detail-text-box .tags {
+    margin-top: 0.3rem;
+    padding: 0.35rem 0;
+    border-top: 1px solid #393c45; }
+    .storeDetail .detail-text-box .tags li {
+      display: inline-block;
+      margin-right: 0.25rem;
+      padding: 0 0.25rem;
+      line-height: 0.5rem;
+      color: #fff;
+      font-size: 0.3rem;
+      background: #393c45;
+      border-radius: 0.25rem; }
+  .storeDetail .detail-text-box .scroll-view {
+    height: 30vh; }
+    .storeDetail .detail-text-box .scroll-view .list .item {
+      padding: 0.4rem 0.5rem;
+      height: 2.3rem;
+      background: #1f2025;
+      border-color: #1f2025; }
+      .storeDetail .detail-text-box .scroll-view .list .item .cover {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%; }
+      .storeDetail .detail-text-box .scroll-view .list .item p {
+        position: absolute;
+        display: inline-block;
+        margin-left: 0.25rem;
+        width: 7.5rem;
+        color: #f7f7f7;
+        font-size: 0.3rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; }
+      .storeDetail .detail-text-box .scroll-view .list .item .time {
+        top: 1rem; }
+      .storeDetail .detail-text-box .scroll-view .list .item .main {
+        top: 1.5rem; }
+.storeDetail .engine-oil {
+  margin: 0 0.1rem;
+  color: #858585;
+  background: #1f2025;
+  border-radius: 0.1rem; }
+  .storeDetail .engine-oil li {
+    display: inline-block;
+    position: relative;
+    width: 4.7rem;
+    height: 2.4rem; }
+    .storeDetail .engine-oil li .cover {
+      margin: 0.4rem 0.2rem;
+      width: 1.6rem;
+      height: 1.6rem; }
+    .storeDetail .engine-oil li p {
+      position: absolute;
+      display: inline-block;
+      color: #f7f7f7;
+      font-size: 0.3rem; }
+    .storeDetail .engine-oil li .title {
+      top: 0.35rem; }
+    .storeDetail .engine-oil li .main {
+      top: 1rem; }
+.storeDetail .evaluate-box {
+  margin: 0.1rem;
+  padding: 0.25rem;
+  background: #1f2025;
+  border-radius: 0.1rem; }
+
+/*# sourceMappingURL=store.css.map */

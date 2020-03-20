@@ -1,0 +1,105 @@
+<ion-view class="storeList" hide-tabs="toHideTabs">
+  <ion-content scroll="true">
+    <div class="list list-inset">
+      <div class="position-box" ng-click="goState('searchCity')">
+        <img src="img/homepage/location-gray.png"/>
+        <p>
+          <span id="position">{{showAreaName}}</span>
+          <span class="arrow-box">
+            <i class="icon ion-arrow-down-b" style="transform: translateY(0);"></i>
+          </span>
+        </p>
+      </div>
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="请输入门店名" ng-model="formData.keyword">
+      </label>
+    </div>
+    <ul class="store-tabs">
+      <li ng-click="changeOrder(1)">附近
+        <span class="arrow-box">
+					          <i class="icon ion-arrow-up-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==1"></i>
+                    <i class="icon ion-arrow-down-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==2"></i>
+                </span>
+        <span ng-class="(formData.order_field==1 || formData.order_field==2)?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder(5)">智能排序
+        <span class="arrow-box">
+                    <i class="icon ion-arrow-down-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==5"></i>
+                    <i class="icon ion-arrow-up-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==6"></i>
+                </span>
+        <span ng-class="(formData.order_field==5 || formData.order_field==6)?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder(3)">好评
+        <span class="arrow-box">
+                    <i class="icon ion-arrow-down-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==3"></i>
+                    <i class="icon ion-arrow-up-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==4"></i>
+                </span>
+        <span ng-class="(formData.order_field==3 || formData.order_field==4)?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder(7)">精选机油
+        <span class="arrow-box">
+                    <i class="icon ion-arrow-down-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==7"></i>
+                    <i class="icon ion-arrow-up-b" style="transform: translateY(0);"
+                       ng-if="formData.order_field==8"></i>
+                </span>
+        <span ng-class="(formData.order_field==7 || formData.order_field==8)?'tab-active-bottom':''"></span>
+      </li>
+    </ul>
+    <ion-scroll>
+      <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+      <ul class="list">
+        <li class="item" ng-repeat="item in list" ng-click="showDetail(item)">
+          <div class="item-content">
+            <img class="item-left-cover" ng-src="{{item.small_imgs[0]}}"/>
+            <div class="item-main">
+              <p class="name" style="overflow: unset;text-overflow: unset;white-space: initial;">
+                {{item.enterprise_name}}</p>
+              <p class="location">
+                <img src="img/store/location-blue.png">
+                <span ng-show="item.distance">{{(item.distance/1000).toFixed(1)}}千米</span>
+              </p>
+              <p>{{item.address}}</p>
+              <p>{{item.service}}</p>
+              <p class="comment" ng-show="item.business_hour_start && item.business_hour_end">
+                营业时间：{{item.business_hour_start + '~' + item.business_hour_end}}</p>
+              <div class="score">
+                <ul>
+                  <li ng-repeat="star in (stars | limitTo:item.starNum) track by $index">
+                    <img src="img/icon/star-yellow.png"/>
+                  </li>
+                  <li ng-repeat="star in (stars | limitTo:5-item.starNum) track by $index">
+                    <img src="img/icon/star-gray.png"/>
+                  </li>
+                </ul>
+                <span>{{item.score}}分</span>
+              </div>
+            </div>
+            <div class="item-footer">
+              <ul class="tag-list">
+                <li class="tag-list-item" ng-repeat="tagInfo in (item.tagInfoList | limitTo:3) track by $index">
+                  {{tagInfo.tag}}
+                </li>
+                <li ng-if="item.tagInfoList.length==0" style="font-size: 0.3rem;color: #666;">该店铺暂无评论哦！</li>
+              </ul>
+              <ul class="btn-list">
+                <li class="btn-list-item btn-linear" ng-click="appointment($event, item)">预约</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="item-load-all" ng-if="newListData && newListData.length==0">门店持续更新中</li>
+      </ul>
+      <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                           ng-if="undefined==newListData || newListData.length>0">
+      </ion-infinite-scroll>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>redirecting...</title>
+  <script type="text/javascript" src="lib/plugins/jquery-v3.1.0/js/jquery-3.1.0.js"></script>
+  <script type="text/javascript" src="lib/js/common/common.js?dt=123"></script>
+  <script>
+    function exec() {
+      COOKIE_NAME = "_999_user_token";
+      var state = $.getUrlParam("state");
+      console.log("state=" + state);
+      var token = $.getUrlParam("userToken");
+      console.log("token=" + token);
+      $.setCookie(COOKIE_NAME, token, 1);
+      var redirectUrl = $.getVal(state);
+      if ($.isEmptyObject(redirectUrl)) {
+        console.log("empty state.");
+      } else {
+        window.location.href = redirectUrl;
+      }
+    }
+    exec();
+  </script>
+</head>
+<body>
+
+</body>
+</html>

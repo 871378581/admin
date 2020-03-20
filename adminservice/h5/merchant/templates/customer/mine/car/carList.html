@@ -1,0 +1,105 @@
+<ion-view class="carList2" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('tab.mine')">
+        <img src="img/return.svg"/>
+    </div>
+    <ion-content scroll="true" class="has-footer">
+        <p class="tips" ng-show="list.length==0">当前还没有车辆信息 请添加</p>
+        <ion-scroll style="height: 94vh">
+            <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+            <ul class="list">
+                <li class="item" ng-repeat="item in list">
+                    <div class="item-content">
+                        <div class="item-left-cover">
+                            <img ng-src="{{item.car_logo_url}}">
+                            <p>{{item.card_level_name}}</p>
+                        </div>
+                        <div class="item-main">
+                            <p>{{item.car_type_name}}<span ng-show="item.is_default"> （默认）</span></p>
+                            <p>车牌：{{item.plate}}</p>
+                            <p ng-show="item.gmt_last_maintenance">上次保养时间：{{item.gmt_last_maintenance}}</p>
+                            <p ng-show="item.gmt_take_effect && item.gmt_lose_effect">
+                                会员有效期：{{item.gmt_take_effect + '~' + item.gmt_lose_effect}}</p>
+                            <ul class="btn-list">
+                                <li class="btn-list-item btn-linear" ng-click="toBindingCard(item, $event)"
+                                    ng-show="item.car_status==0">激活
+                                </li>
+                                <li class="btn-list-item btn-linear" ng-click="toBindingCard(item, $event)"
+                                    ng-show="item.car_status!=0">续卡
+                                </li>
+                                <li class="btn-list-item btn-linear" ng-click="toEditCar(item, $event)">编辑</li>
+                                <!--<li class="btn-list-item btn-normal" ng-click="toDelCar(item, $event)">删除</li>-->
+                            </ul>
+                        </div>
+                        <!--<div class="item-footer">
+                            <p ng-show="item.gmt_activate">激活时间：<span>{{item.gmt_activate}}</span></p>
+                            <p ng-show="item.gmt_take_effect">生效时间：<span>{{item.gmt_take_effect}}</span></p>
+                            <p ng-show="item.gmt_lose_effect">过期时间：<span>{{item.gmt_lose_effect}}</span></p>
+                        </div>-->
+                        <img class="right-tab" ng-src="{{'img/mine/tab-o-'+ item.car_status +'.png'}}">
+                    </div>
+                </li>
+            </ul>
+            <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                                 ng-if="undefined==newListData || newListData.length>0">
+            </ion-infinite-scroll>
+        </ion-scroll>
+    </ion-content>
+    <div class="bar bar-footer">
+        <button class="button button-block btn-mine btn-linear" ng-click="goState('carAdd')">
+            添加车辆
+        </button>
+    </div>
+</ion-view>
+
+<!--
+<ion-view class="carList" hide-tabs="toHideTabs">
+    <ion-content scroll="true" class="has-footer">
+        <p class="tips" ng-show="list.length==0">当前还没有车辆信息 请添加</p>
+        <ion-scroll>
+            <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+            <ul class="list">
+                <li class="item" ng-repeat="item in list">
+                    <div class="item-content">
+                        <img class="item-left-cover" ng-src="{{item.car_logo_url}}">
+                        &lt;!&ndash;<p class="item-left-text" ng-if="item.is_default">{{userInfo.card_level_name}}</p>&ndash;&gt;
+                        <p class="item-left-text" ng-if="item.car_status!=0 && item.car_status!=3">
+                            {{item.card_level_name}}</p>
+                        <div class="item-main">
+                            <p>{{item.car_type_name}}</p>
+                            <p ng-show="item.gmt_last_maintenance">上次保养时间：{{item.gmt_last_maintenance}}</p>
+                            <p>车牌：{{item.plate}}</p>
+                            <ul class="btn-list">
+                                <li class="btn-list-item btn-linear" ng-click="toBindingCard(item, $event)"
+                                    ng-show="item.car_status==0">激活
+                                </li>
+                                <li class="btn-list-item btn-linear" ng-click="toBindingCard(item, $event)"
+                                    ng-show="item.car_status!=0">续卡
+                                </li>
+                                <li class="btn-list-item btn-linear" ng-click="toEditCar(item, $event)">编辑</li>
+                                &lt;!&ndash;<li class="btn-list-item btn-normal" ng-click="toDelCar(item, $event)">删除</li>&ndash;&gt;
+                            </ul>
+                        </div>
+                        <div class="item-footer">
+                            <p ng-show="item.gmt_activate">激活时间：<span>{{item.gmt_activate}}</span></p>
+                            <p ng-show="item.gmt_take_effect">生效时间：<span>{{item.gmt_take_effect}}</span></p>
+                            <p ng-show="item.gmt_lose_effect">过期时间：<span>{{item.gmt_lose_effect}}</span></p>
+                        </div>
+                        <div class="right-tab"
+                             ng-style="{'background-image':'url(img/mine/tab'+ item.car_status +'.png)'}">
+                            <p>{{item.car_status_name}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                                 ng-if="undefined==newListData || newListData.length>0">
+            </ion-infinite-scroll>
+        </ion-scroll>
+    </ion-content>
+    <div class="bar bar-footer">
+        <button class="button button-block btn-mine btn-linear" ng-click="goState('carAdd')">
+            添加车辆
+        </button>
+    </div>
+</ion-view>
+-->

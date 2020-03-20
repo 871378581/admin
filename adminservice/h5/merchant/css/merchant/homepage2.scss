@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+.homepage {
+  .cover {
+    width: 100vw;
+    height: 5.15rem;
+  }
+  .homepage-title {
+    padding: 0 0.35rem;
+    min-height: 1rem;
+    line-height: 1rem;
+    font-size: 0.35rem;
+    color: #666;
+    border: 0.01rem solid #dcdcdc;
+    span {
+      color: #2348d7;
+    }
+  }
+  .statistic-box{
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    width: 8.9rem;
+    li{
+      float: left;
+      margin: 0.15rem;
+      width: 4.15rem;
+      height: 2.95rem;
+      text-align: center;
+      border-radius: 0.2rem;
+      background-color: #fff;
+      .name{
+        margin-top: 0.55rem;
+        font-size: 0.35rem;
+        color: #999;
+      }
+      .num{
+        margin-top: 0.4rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: #666;
+      }
+    }
+    li:nth-child(2){
+      .num{
+        color: #2348d7;
+      }
+    }
+  }
+}

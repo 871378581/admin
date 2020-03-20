@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "errorCode": null,
+  "message": "",
+  "data": {
+    "order_status": 1,
+    "cover": "img/title-tab.png",
+    "shop_name": "余杭VOLVO4S店",
+    "project": "6万公里维修保养",
+    "oil": "壳牌机油",
+    "model": "宝马X5",
+    "licensePlate": "A208W1",
+    "appointmentDate": "2019-01-01",
+    "appointmentStartTime": "08:00",
+    "appointmentEndTime": "09:00",
+    "price": "456",
+    "longitude": 120.220552,
+    "latitude": 30.25948
+  }
+}

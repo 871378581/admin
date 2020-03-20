@@ -1,0 +1,139 @@
+<ion-view class="startService" hide-tabs="true">
+  <ion-content scroll="true" class="has-footer">
+    <div class="scan-item">
+      <div class="item-title">
+        车辆信息
+        <img src="img2/scan/normal.png"/>
+      </div>
+      <ul class="item-content">
+        <li>
+          <p class="name">车主姓名：</p>
+          <p class="value">{{detail.user_name}}</p>
+        </li>
+        <li>
+          <p class="name">车主电话：</p>
+          <p class="value">{{detail.phone}}</p>
+        </li>
+        <li>
+          <p class="name">会员卡等级：</p>
+          <p class="value">{{detail.card_level_name}}</p>
+        </li>
+        <li>
+          <p class="name">上次保养公里数：</p>
+          <p class="value">{{detail.last_maintenance_miles ? detail.last_maintenance_miles : '暂无信息'}}</p>
+        </li>
+        <li>
+          <p class="name">建议保养公里数：</p>
+          <p class="value">{{detail.next_maintenance_miles}}</p>
+        </li>
+        <li>
+          <p class="name">上次保养时间：</p>
+          <p class="value">{{detail.gmt_last_maintenance ? detail.gmt_last_maintenance : '暂无信息'}}</p>
+        </li>
+        <li>
+          <p class="name">预约时间：</p>
+          <p class="value">{{detail.gmt_service_date}}</p>
+        </li>
+        <li>
+          <p class="name">车牌：</p>
+          <p class="value">{{detail.car_plate}}</p>
+        </li>
+        <li>
+          <p class="name">车型：</p>
+          <p class="value">{{detail.car_type_name}}</p>
+        </li>
+        <!--<li>
+          <p class="name">选择机油：</p>
+          <p class="value" style="height: 1.2rem;"><img ng-src="{{detail.oil_img_url}}"/>{{detail.oil_brand}}</p>
+        </li>-->
+        <li ng-show="detail.oils.length>0">
+          <p class="name">选择机油：</p>
+          <div class="oil-box bg-white">
+            <ul>
+              <li ng-repeat="oil in oilList track by $index" ng-click="selectOil(oil)">
+                <img class="logo" ng-src="{{oil.photo_url}}"/>
+                <div class="text-box">
+                  <p class="title">{{oil.brand_name}}
+                    <span> 会员免费</span>
+                  </p>
+                  <p class="title">
+                    <span style="font-size: 0.26rem;">市场价{{oil.market_price_min + '～' + oil.market_price_max}}/次</span>
+                  </p>
+                </div>
+                <div class="oil-select">
+                  <img src="img/store/selected.png" ng-show="oil.selected"/>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="scan-item">
+      <div class="item-title">
+        风控检测
+        <img ng-src="{{detail.have_risk ? 'img2/scan/abnormal.png' : 'img2/scan/normal.png'}}">
+      </div>
+      <ul class="item-content">
+        <li>
+          <p class="name">结果：</p>
+          <p class="value" ng-show="detail.have_risk">不通过</p>
+          <p class="value" ng-show="!detail.have_risk">通过</p>
+        </li>
+        <li>
+          <p class="name">提示：</p>
+          <p class="value">{{detail.risk_description}}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="scan-item">
+      <div class="item-title">
+        车辆图像采集
+        <img src="img2/scan/normal.png" ng-show="fileList[0] && fileList[1]"/>
+      </div>
+      <ul class="photo-select-box">
+        <li class="photo-item">
+          <div class="img-add-box">
+            <div class="img-box" ng-show="fileList[0]!=null && fileList[0]!=''">
+              <img class="img-pre" ng-src="{{fileList[0]}}"/>
+              <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile(0)"/>
+            </div>
+            <div class="add-box" ng-click="addFile(0)" ng-show="fileList[0]==null || fileList[0]==''"></div>
+            <p>车辆正面照</p>
+            <p>(请保证车牌清晰)</p>
+            <input type="file" accept="image/*" capture="camera" style="display:none;" id="pictureFile0"
+                   ng-model="pictureFile" onchange="angular.element(this).scope().uploadFile(0)">
+          </div>
+        </li>
+        <li class="photo-item">
+          <div class="img-add-box">
+            <div class="img-box" ng-show="fileList[1]!=null && fileList[1]!=''">
+              <img class="img-pre" ng-src="{{fileList[1]}}"/>
+              <img class="btn-delete" src="img2/order/enterTestReport/delete.png" ng-click="removeFile(1)"/>
+            </div>
+            <div class="add-box" ng-click="addFile(1)" ng-show="fileList[1]==null || fileList[1]==''"></div>
+            <p>仪表盘</p>
+            <p>(请保证公里数清晰)</p>
+            <input type="file" accept="image/*" capture="camera" style="display:none;" id="pictureFile1"
+                   ng-model="pictureFile" onchange="angular.element(this).scope().uploadFile(1)">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="scan-item">
+      <div class="item-title">
+        当前公里数
+        <img src="img2/scan/normal.png" ng-show="fileList.curr_miles==2"/>
+      </div>
+      <input type="text" ng-model="formData.curr_miles"/>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer">
+    <button class="button btn-mine btn-linear" ng-click="saveData()">
+      开始服务
+    </button>
+    <button class="button btn-mine btn-black" ng-click="goState('tab.homepage')">
+      取消
+    </button>
+  </div>
+</ion-view>

@@ -1,0 +1,34 @@
+<ion-view class="informationSetting" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.mine')">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true">
+    <div class="setting-header">
+      <img class="portrait" ng-src="{{userInfo.user_head ? userInfo.user_head : 'user_head img/mine/portrait.png'}}" />
+      <p>{{userInfo.nick_name}}</p>
+      <p>尊敬的车主<span style="margin-left: 0;">{{userInfo.user_name}}</span>您好，绑定手机享受更多权益</p>
+    </div>
+    <div class="list">
+      <div class="item item-input">
+        <p class="title">手机号码</p>
+        <input type="text" ng-model="formData.phone" placeholder="请输入手机号码" />
+        <i class="icon"></i>
+      </div>
+      <div class="item item-input">
+        <p class="title">验证码</p>
+        <input type="text" ng-model="formData.code" placeholder="请输入验证码" />
+        <i class="icon icon-text" ng-click="getVerifyCode()" ng-show="showCodeGet">获取验证码</i>
+        <i class="icon icon-text" ng-show="!showCodeGet"><span id="sec">60</span>秒后可重新获取</i>
+      </div>
+      <!--<div class="checkbox-rect">
+        <input type="checkbox" ng-model="checked" ng-change="changeChecked()" />
+        <p ng-click="changeModalShow()">个人信息授权使用协议</p>
+      </div>-->
+      <div class="btn-box">
+        <button class="button btn-mine btn-linear" ng-click="saveData()">
+          提交绑定
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

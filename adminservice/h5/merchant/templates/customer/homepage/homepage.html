@@ -1,0 +1,134 @@
+<ion-view class="homepage" hide-tabs="toHideTabs">
+  <ion-content scroll="false">
+    <!--<div class="list list-inset" ng-click="goState('searchPage')">
+      <div class="position-box">
+        <img src="img/homepage/location-gray.png"/>
+        <p>
+          <span id="position">{{city}}</span>
+          <span class="arrow-box">
+            <i class="icon ion-arrow-down-b" style="transform: translateY(0);"></i>
+          </span>
+        </p>
+      </div>
+      <div class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="输入你想搜索的" disabled="disabled" ng-click="goState('searchPage')">
+      </div>
+    </div>-->
+    <i class="icon ion-search placeholder-icon" ng-click="goState('searchPage')"
+       style="position: absolute;top: 0.3rem;left: 0.3rem;font-size: 0.6rem;color: #fff;z-index: 2;"></i>
+    <div class="banner">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" ng-repeat="banner in bannerList track by $index">
+            <img ng-src="{{banner.photo_url}}" ng-click="changePage(banner)"/>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+    <!--<p class="input-title">热门推荐</p>
+    <div class="recommend-box">
+      <div class="box-item left" ng-style="{'background-image':'url(' + hotRecommendInfos[0].photo_url + ')'}">
+        <p><span></span>{{hotRecommendInfos[0].description}}</p>
+      </div>
+      <div class="box-item right-top" ng-style="{'background-image':'url(' + hotRecommendInfos[1].photo_url + ')'}">
+        <p><span></span>{{hotRecommendInfos[1].description}}</p>
+      </div>
+      <div class="box-item right-bottom" ng-style="{'background-image':'url(' + hotRecommendInfos[2].photo_url + ')'}">
+        <p><span></span>{{hotRecommendInfos[2].description}}</p>
+      </div>
+    </div>-->
+    <p class="input-title">推荐门店<span ng-click="goState('tab.store')">更多 ></span></p>
+    <ion-scroll style="height: 53vh;">
+      <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+      <ul class="list">
+        <li class="item" ng-repeat="item in list" ng-click="showDetail(item)">
+          <div class="item-content">
+            <img class="item-left-cover" ng-src="{{item.small_imgs[0]}}"/>
+            <div class="item-main">
+              <p class="name" style="overflow: unset;text-overflow: unset;white-space: pre-line;">{{item.enterprise_name}}</p>
+              <p class="location">
+                <img src="img/homepage/location-blue.png">
+                <span ng-show="item.distance">{{(item.distance/1000).toFixed(1)}}千米</span>
+              </p>
+              <p>{{item.address}}</p>
+              <p>{{item.service}}</p>
+              <p class="comment" ng-show="item.business_hour_start && item.business_hour_end">
+                营业时间：{{item.business_hour_start + '~' + item.business_hour_end}}</p>
+              <div class="score">
+                <ul>
+                  <li ng-repeat="star in (stars | limitTo:item.starNum) track by $index">
+                    <img src="img/icon/star-yellow.png"/>
+                  </li>
+                  <li ng-repeat="star in (stars | limitTo:5-item.starNum) track by $index">
+                    <img src="img/icon/star-gray.png"/>
+                  </li>
+                </ul>
+                <span>{{item.score}}分</span>
+              </div>
+            </div>
+            <div class="item-footer">
+              <ul class="tag-list">
+                <li class="tag-list-item" ng-repeat="tagInfo in (item.tagInfoList | limitTo:3) track by $index">
+                  {{tagInfo.tag}}
+                </li>
+                <li ng-if="item.tagInfoList.length==0" style="font-size: 0.3rem;color: #666;">该店铺暂无评论哦！</li>
+              </ul>
+              <ul class="btn-list">
+                <li class="btn-list-item btn-linear" ng-click="appointment($event, item)">预约</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                           ng-if="undefined==newListData || newListData.length>0">
+      </ion-infinite-scroll>
+    </ion-scroll>
+    <!--<ion-scroll>
+      <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+      <ul class="list">
+        <li class="item" ng-repeat="item in list" ng-click="showDetail(item)">
+          <div class="item-content">
+            <img class="item-left-cover" ng-src="{{item.door_img_url}}"/>
+            <div class="item-main">
+              <p class="name">{{item.enterprise_name}}
+                <span ng-show="item.distance">距离{{(item.distance/1000).toFixed(1)}}千米</span></p>
+              <p class="business-scope">{{item.service}}</p>
+              <div class="score">
+                <ul>
+                  <li ng-repeat="star in (stars | limitTo:item.starNum) track by $index">
+                    <img src="img/icon/star-yellow.png"/>
+                  </li>
+                  <li ng-repeat="star in (stars | limitTo:5-item.starNum) track by $index">
+                    <img src="img/icon/star-gray.png"/>
+                  </li>
+                </ul>
+                <span>{{item.score}}分</span>
+              </div>
+              <p class="comment">地址：{{item.address}}</p>
+            </div>
+            <div class="item-footer">
+              <ul class="tag-list">
+                <li class="tag-list-item" ng-repeat="tagInfo in (item.tagInfoList | limitTo:3) track by $index">
+                  {{tagInfo.tag}}
+                </li>
+              </ul>
+              <ul class="btn-list">
+                <li class="btn-list-item btn-linear" style="background: #585858;">马上预约</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                           ng-if="undefined==newListData || newListData.length>0">
+      </ion-infinite-scroll>
+    </ion-scroll>-->
+  </ion-content>
+</ion-view>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wechat sample</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/0.4.3/style/weui.css"/>
+</head>
+<body>
+
+
+<div>
+    <a href="javascript:;" class="weui-btn weui-btn_primary" id="btn_uploadimg">打开地图</a>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/configure.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/wechatshare.js?dt=1002"></script>
+<script type="text/javascript">
+    var shareData = {
+        wxData: {
+            imgUrl: "", //活动详情的活动介绍图片
+            link: window.location.href,
+            desc: "test", //分享到朋友圈显示的话，这里就是活动的标题
+            title: 'test' //分享给朋友显示的标题
+        }
+    };
+    window.wxShareSetup(shareData);
+
+    $("#btn_uploadimg").click(function () {
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                var speed = res.speed; // 速度，以米/每秒计
+                var accuracy = res.accuracy; // 位置精度
+
+                console.log("latitude=" + latitude + ",longitude=" + longitude);
+
+                wx.openLocation({
+                    latitude: latitude, // 纬度，浮点数，范围为90 ~ -90
+                    longitude: latitude, // 经度，浮点数，范围为180 ~ -180。
+                    name: '', // 位置名
+                    address: '', // 地址详情说明
+                    scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                    infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
+                });
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>

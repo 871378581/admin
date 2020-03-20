@@ -1,0 +1,587 @@
+[
+  {
+    "mainCategoryName": "dengguang",
+    "mainCategoryDisplayName": "灯光",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "xingchedeng",
+        "entryDisplayName": "行车灯",
+        "entryValue": "正常",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "jinguangdeng",
+        "entryDisplayName": "近光灯",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "yuanguangdeng",
+        "entryDisplayName": "远光灯",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "bianguang",
+        "entryDisplayName": "变光",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "zuoyouzhuanxiangdeng",
+        "entryDisplayName": "左右转向灯",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "shanshuobaojingzhishideng",
+        "entryDisplayName": "闪烁报警指示灯",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "qianwudeng",
+        "entryDisplayName": "前雾灯",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "qianzhucheleida",
+        "entryDisplayName": "前驻车雷达",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "yugua",
+        "entryDisplayName": "雨刮",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "dadengqingxizhuagnzhi",
+        "entryDisplayName": "大灯清洗装置",
+        "title": "",
+        "entryValue": "正常",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "jiyou",
+    "mainCategoryDisplayName": "机油",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "fangyoulaing",
+        "entryDisplayName": "放油量",
+        "entryValue": "4.2升",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "jiajiyou",
+        "entryDisplayName": "加机油",
+        "entryValue": "爱德龙4.25升",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "jilv",
+    "mainCategoryDisplayName": "机滤",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "jiujianpinpai",
+        "entryDisplayName": "旧件品牌",
+        "entryValue": "美孚1号",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "xinjianpinpai",
+        "entryDisplayName": "新件品牌",
+        "entryValue": "美孚1号",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "fangdongye",
+    "mainCategoryDisplayName": "防冻液",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "phzhi",
+        "entryDisplayName": "PH值",
+        "entryValue": "8",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值7-9.5"
+      },
+      {
+        "entryName": "bingdian",
+        "entryDisplayName": "冰点",
+        "entryValue": -20,
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值-68摄氏度— -15摄氏度"
+      },
+      {
+        "entryName": "bingdian",
+        "entryDisplayName": "沸点",
+        "entryValue": 120,
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值>105摄氏度"
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "huohuasai",
+    "mainCategoryDisplayName": "火花塞",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "mushijiance",
+        "entryDisplayName": "目视检测",
+        "entryValue": "",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "dianhuoxianquan",
+        "entryDisplayName": "点火线圈",
+        "entryValue": "",
+        "title": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "jieqimen",
+    "mainCategoryDisplayName": "节气门",
+    "result": false,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "kaidujiancha",
+        "entryDisplayName": "开度检查",
+        "title": "",
+        "entryValue": "1.5",
+        "result": false,
+        "range": "low",
+        "standardRefer": "参考范围1.6—5.0"
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "shacheyou",
+    "mainCategoryDisplayName": "刹车油",
+    "result": false,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "shuihanliang",
+        "entryDisplayName": "水含量",
+        "title": "",
+        "entryValue": "2.6%",
+        "result": false,
+        "range": "low",
+        "standardRefer": "参考值0.5%—2.5%"
+      },
+      {
+        "entryName": "ganfeidian",
+        "entryDisplayName": "干沸点",
+        "title": "",
+        "entryValue": 206,
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值205-207摄氏度"
+      },
+      {
+        "entryName": "shifeidian",
+        "entryDisplayName": "湿沸点",
+        "title": "",
+        "entryValue": 175,
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值170-190摄氏度"
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "shachepan",
+    "mainCategoryDisplayName": "刹车盘",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "zuoqianlun",
+        "entryDisplayName": "左前轮",
+        "title": "",
+        "entryValue": "0.5",
+        "result": true,
+        "range": "",
+        "standardRefer": ">=3毫米为强制更换"
+      },
+      {
+        "entryName": "zuohoulun",
+        "entryDisplayName": "左后轮",
+        "title": "",
+        "entryValue": "0.6",
+        "result": true,
+        "range": "",
+        "standardRefer": ">=3毫米为强制更换"
+      },
+      {
+        "entryName": "youqianlun",
+        "entryDisplayName": "右前轮",
+        "title": "",
+        "entryValue": "0.5",
+        "result": true,
+        "range": "",
+        "standardRefer": ">=3毫米为强制更换"
+      },
+      {
+        "entryName": "youhoulun",
+        "entryDisplayName": "右后轮",
+        "title": "",
+        "entryValue": "0.6",
+        "result": true,
+        "range": "",
+        "standardRefer": ">=3毫米为强制更换"
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "shachepian",
+    "mainCategoryDisplayName": "刹车片",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "zuoqianlun2",
+        "entryDisplayName": "左前轮",
+        "title": "",
+        "entryValue": "2.0",
+        "result": true,
+        "range": "",
+        "standardRefer": "<=1.6毫米为强制更换"
+      },
+      {
+        "entryName": "zuohoulun2",
+        "entryDisplayName": "左后轮",
+        "title": "",
+        "entryValue": "2.1",
+        "result": true,
+        "range": "",
+        "standardRefer": "<=1.6毫米为强制更换"
+      },
+      {
+        "entryName": "youqianlun2",
+        "entryDisplayName": "右前轮",
+        "title": "",
+        "entryValue": "2.1",
+        "result": true,
+        "range": "",
+        "standardRefer": "<=1.6毫米为强制更换"
+      },
+      {
+        "entryName": "youhoulun2",
+        "entryDisplayName": "右后轮",
+        "title": "",
+        "entryValue": "2.0",
+        "result": true,
+        "range": "",
+        "standardRefer": "<=1.6毫米为强制更换"
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "dipan",
+    "mainCategoryDisplayName": "底盘",
+    "result": true,
+    "photos": "",
+    "remark": "底盘的文字描述",
+    "subCategoryList": [
+      {
+        "entryName": "dipan2",
+        "entryDisplayName": "底盘",
+        "title": "",
+        "entryValue": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "luntai",
+    "mainCategoryDisplayName": "轮胎",
+    "result": false,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "zuoqianlun_neice",
+        "entryDisplayName": "左前轮",
+        "title": "内侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "zuoqianlun_waice",
+        "entryDisplayName": "左前轮",
+        "title": "外侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "zuohoulun_neice",
+        "entryDisplayName": "左后轮",
+        "title": "内侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "zuohoulun_waice",
+        "entryDisplayName": "左后轮",
+        "title": "外侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "youqianlun_neice",
+        "entryDisplayName": "右前轮",
+        "title": "内侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "youqianlun_waice",
+        "entryDisplayName": "右前轮",
+        "title": "外侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "youhoulun_neice",
+        "entryDisplayName": "右后轮",
+        "title": "内侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "youhoulun_waice",
+        "entryDisplayName": "右后轮",
+        "title": "外侧",
+        "entryValue": "第一点：2.0 第二点：2.1 第三点：2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "zuoqianlun3",
+        "entryDisplayName": "左前轮",
+        "title": "胎压",
+        "entryValue": "2.4",
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值：2.3-2.5之间"
+      },
+      {
+        "entryName": "zuohoulun3",
+        "entryDisplayName": "左后轮",
+        "title": "胎压",
+        "entryValue": "2.3",
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值：2.3-2.5之间"
+      },
+      {
+        "entryName": "youqianlun3",
+        "entryDisplayName": "左前轮",
+        "title": "胎压",
+        "entryValue": "2.4",
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值：2.3-2.5之间"
+      },
+      {
+        "entryName": "youhoulun3",
+        "entryDisplayName": "左后轮",
+        "title": "胎压",
+        "entryValue": "2.2",
+        "result": false,
+        "range": "",
+        "standardRefer": "参考值：2.3-2.5之间"
+      },
+    ]
+  },
+  {
+    "mainCategoryName": "pidai",
+    "mainCategoryDisplayName": "皮带",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "zhangjindu",
+        "entryDisplayName": "张紧度",
+        "title": "",
+        "entryValue": "",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "biansuxiangyou",
+    "mainCategoryDisplayName": "变速箱油",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "lengtai",
+        "entryDisplayName": "冷态",
+        "title": "油尺刻度位置",
+        "entryValue": "12",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      },
+      {
+        "entryName": "retai",
+        "entryDisplayName": "热态",
+        "title": "油尺刻度位置",
+        "entryValue": "13",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "dianping",
+    "mainCategoryDisplayName": "电瓶",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "dianya",
+        "entryDisplayName": "电压",
+        "title": "",
+        "entryValue": "12.45V",
+        "result": true,
+        "range": "",
+        "standardRefer": ""
+      }
+    ]
+  },
+  {
+    "mainCategoryName": "kongtiao",
+    "mainCategoryDisplayName": "空调",
+    "result": true,
+    "photos": "",
+    "remark": "",
+    "subCategoryList": [
+      {
+        "entryName": "gaoya",
+        "entryDisplayName": "高压",
+        "title": "",
+        "entryValue": 1532,
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值1400-1600kpa"
+      },
+      {
+        "entryName": "diya",
+        "entryDisplayName": "低压",
+        "title": "",
+        "entryValue": 160,
+        "result": true,
+        "range": "",
+        "standardRefer": "参考值150-250kpa"
+      }
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+.login .scroll-content {
+  background: #fff; }
+  .login .scroll-content .setting-header {
+    position: relative;
+    height: 6.5rem;
+    background: url("../../img2/login/login.png") no-repeat top;
+    background-size: 100%; }
+  .login .scroll-content .input-title {
+    margin-left: 1.35rem;
+    line-height: 2.8rem;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: #333; }
+  .login .scroll-content .list {
+    margin-top: 20px;
+    padding: 0 1rem;
+    border-radius: 0.05rem; }
+    .login .scroll-content .list .item {
+      background: #fff;
+      border: 0;
+      /*.title {
+        width: 2rem;
+        font-size: 0.37rem;
+        color: #666;
+      }*/ }
+      .login .scroll-content .list .item .title {
+        margin-right: 0.2rem;
+        width: 0.6rem;
+        height: 0.6rem; }
+      .login .scroll-content .list .item input {
+        margin-right: 0.5rem;
+        color: #000;
+        border-bottom: 0.01rem solid #ddd; }
+      .login .scroll-content .list .item i {
+        position: absolute;
+        right: 0;
+        margin-right: 0.5rem;
+        font-size: 0.37rem;
+        color: #999; }
+      .login .scroll-content .list .item .icon-text {
+        color: #2348d7; }
+  .login .scroll-content .btn-box {
+    margin-top: 0.65rem;
+    text-align: center; }
+    .login .scroll-content .btn-box button {
+      margin: 0 0.25rem;
+      width: 4.7rem;
+      height: 0.9rem;
+      line-height: 0.9rem;
+      cursor: pointer; }
+
+/*# sourceMappingURL=login2.css.map */

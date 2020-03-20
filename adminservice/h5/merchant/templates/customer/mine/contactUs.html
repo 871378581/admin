@@ -1,0 +1,56 @@
+<ion-view class="carAdd" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('tab.mine')">
+        <img src="img/return.svg"/>
+    </div>
+    <div class="bar bar-header">
+        <div class="buttons">
+            <button class="button"><i class="icon ion-chevron-left"></i></button>
+        </div>
+        <h1 class="title">EGE数联·生态</h1>
+    </div>
+    <ion-content scroll="true">
+        <!--<p class="input-title">投诉建议</p>
+        <div class="list">
+          <div class="item item-input" style="padding: 0;">
+            <textarea style="padding: 0.3rem; border-radius: 0.1rem;" placeholder="请输入投诉内容"
+                      ng-model="formData.content"></textarea>
+            <i class="icon"></i>
+          </div>
+          <div class="btn-box">
+            <button class="button btn-mine btn-linear" ng-click="doSuggest()">
+              我要投诉
+            </button>
+          </div>
+        </div>-->
+        <p class="input-title">联系我们</p>
+        <div class="list">
+            <!--<div class="item item-input" style="display: list-item">
+              <p class="title" style="display: inline-block;">客服电话</p>
+              <input type="text" ng-model="contactInfo.customer_service_phone" disabled="disabled"
+                     style="float: right; width: 6.6rem; border-bottom: 0;"/>
+              <input type="text" ng-model="contactInfo.customer_service_phone2" disabled="disabled"
+                     style="float: right; width: 6.6rem;"/>
+              <i class="icon"></i>
+            </div>-->
+            <div class="item item-input" style="margin-bottom: 0.25rem;height: 2.9rem;border-radius: 0.1rem;">
+                <p class="title2">微信客服</p>
+                <img ng-src="{{contactInfo.customer_service_wechat_qr_code}}" style="width: 1.7rem; height: 1.7rem;">
+                <i class="icon"></i>
+            </div>
+            <a ng-href="{{'tel:' + contactInfo.customer_service_phone}}" style="color: #666;">
+                <div class="item item-input" style="margin-bottom: 0.25rem;height: 2.9rem;border-radius: 0.1rem;">
+                    <p class="title2">客服电话</p>
+                    <input type="text" ng-model="contactInfo.customer_service_phone" style="border-bottom: 0"
+                           disabled="disabled"/>
+                    <i class="icon"><img class="img-btn" src="img/mine/list_contact.png"></i>
+                </div>
+            </a>
+            <div class="item item-input" style="margin-bottom: 0.25rem;height: 2.9rem;border-radius: 0.1rem;">
+                <p class="title2">电子邮箱</p>
+                <input type="text" ng-model="contactInfo.customer_service_email" style="border-bottom: 0"
+                       disabled="disabled"/>
+                <i class="icon"></i>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

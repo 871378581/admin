@@ -1,0 +1,87 @@
+<ion-view class="testResult" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.order')" ng-show="!showItemLiveImg">
+    <img src="img/return.svg"/>
+  </div>
+  <div class="close-box" ng-click="closeLiveImg()" ng-show="showItemLiveImg">
+    <img src="img/close.png"/>
+  </div>
+  <ion-content scroll="true">
+    <img src="img/order/cover.png" class="cover"/>
+    <p class="input-title">检测报告</p>
+    <div class="bg-white">
+      <div class="title">
+        <img src="img/order/list_car.png" class="img-left"/>
+        <span>车辆信息</span>
+      </div>
+      <p class="detail-item">车主：{{detail.user_name}}<span class="level-name">{{detail.card_level_name}}</span></p>
+      <p class="detail-item">车牌：{{detail.car_plate}}</p>
+      <p class="detail-item">车型：{{detail.car_type}}</p>
+      <p class="detail-item">当前公里数：{{detail.curr_maintenance_miles}}</p>
+      <p class="detail-item">保养时间：{{detail.service_date}}</p>
+      <p class="detail-item">上次保养公里数：{{detail.last_maintenance_miles}}<!--<u><span class="last-record">上次保养记录</span></u>--></p>
+    </div>
+    <div class="bg-white">
+      <div class="title">
+        <img src="img/order/list_repair.png" class="img-left"/>
+        <span>本次保养指标</span>
+        <!--<img src="img/order/list_warning.png" class="img-right"/>-->
+      </div>
+      <div class="result-item" ng-repeat="item in report_items | limitTo:report_items.length-1 track by $index"
+           ng-init="outerIndex=$index">
+        <p class="result-title">{{item.mainCategoryDisplayName}}
+          <img src="img/order/list_warning.png" class="img-right" ng-show="item.photos.length>0"
+               ng-click="toShowItemLiveImg(item)" />
+          <span ng-class="item.result ? 'normal' : 'abnormal'">{{item.result ? '正常' : '不正常'}}<i></i></span>
+          <!--<button class="button btn-mine btn-black"  ng-show="item.photos.length>0"
+                  ng-click="toShowItemLiveImg(item)">图片详情</button>-->
+        </p>
+        <ul class="list">
+          <li ng-repeat="child in item.subCategoryList track by $index"
+              ng-init="innerIndex=$index">
+            <p ng-show="item.mainCategoryName!='dipan'">{{child.entryDisplayName}}
+              <span ng-class="child.result ? 'normal' : 'abnormal'">{{child.entryValue}}
+                <i class="icon" ng-class="{'ion-arrow-up-c':child.range=='high','ion-arrow-down-c':child.range=='low'}"
+                   ng-if="child.range"></i>
+              </span>
+            </p>
+            <p ng-show="item.mainCategoryName=='dipan'" style="text-align: left;">{{child.entryValue}}</p>
+            <p ng-if="child.standardRefer">{{child.standardRefer}}</p>
+          </li>
+        </ul>
+        <!--<ul class="img-add-box" ng-show="item.photos.length>0">
+          <li class="img-box" ng-repeat="photo in item.photos.split(',') track by $index">
+            <img class="img-pre" ng-src="{{photo}}" />
+          </li>
+        </ul>-->
+      </div>
+    </div>
+    <div class="bg-white">
+      <div class="title">
+        <img src="img/order/list_oil.png" class="img-left"/>
+        <span>保养建议</span>
+      </div>
+      <div>
+        <p class="detail-item">建议下次保养公里数<span>{{report_items[report_items.length-1].subCategoryList[0].entryValue}}公里</span></p>
+        <p class="detail-item" ng-show="report_items[report_items.length-1].subCategoryList[0].standardRefer">
+          <span>{{report_items[report_items.length-1].subCategoryList[0].standardRefer}}</span>
+        </p>
+      </div>
+    </div>
+  </ion-content>
+  <ion-content scroll="false" ng-show="showItemLiveImg" style="background: rgba(0,0,0,0.3);">
+    <div class="banner">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" ng-repeat="img in live_imgs track by $index">
+            <img ng-src="{{img}}"/>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

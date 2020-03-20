@@ -1,0 +1,76 @@
+<ion-view class="mine" hide-tabs="toHideTabs">
+    <!--<div class="bar bar-header">
+        <div class="buttons">
+            <button class="button"><i class="icon ion-chevron-left"></i></button>
+        </div>
+        <h1 class="title">EGE数联·生态</h1>
+    </div>-->
+    <ion-content scroll="true">
+        <div class="header-box">
+            <img class="header-bg" src="img/title-tab-blue.png"/>
+            <img class="portrait" ng-src="{{scopeUserInfo.user_head ? scopeUserInfo.user_head : 'img/mine/portrait-blue.png'}}"/>
+            <p class="title" ng-style="{'font-size': showName.length>8 ? '0.35rem' : '0.5rem'}">
+                {{showName}}
+                <span ng-if="scopeUserInfo.card_level_name"> {{scopeUserInfo.card_level_name}}</span>
+                <span ng-if="scopeUserInfo.car_level_name"> {{scopeUserInfo.car_level_name}}</span>
+            </p>
+            <p class="sub-title" ng-if="scopeUserInfo.phone">{{scopeUserInfo.phone}}</p>
+            <p class="sub-title" ng-if="!scopeUserInfo.phone" ng-click="goState('bindingPhone')">未绑定手机号</p>
+            <p class="content" ng-if="scopeUserInfo.default_car_tye && scopeUserInfo.default_plate">
+                {{scopeUserInfo.default_car_tye + ' ' + scopeUserInfo.default_plate}}
+                <span ng-show="defaultCarStatus"> {{defaultCarStatus}}</span></p>
+            <p class="content" style="top: 3.6rem" ng-show="defaultCar.gmt_take_effect && defaultCar.gmt_lose_effect">
+                会员有效期：{{defaultCar.gmt_take_effect + '~' + defaultCar.gmt_lose_effect}}</p>
+        </div>
+        <ul class="btn-list">
+            <li class="item" ng-click="goState('carList')">
+                <img class="left_icon" src="img/mine/list_car-blue.png"/>
+                <span class="title">车辆管理</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+            <li class="item" ng-click="goState('carList')">
+                <img class="left_icon" src="img/mine/list_card-blue.png"/>
+                <span class="title">卡片激活</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+            <li class="item" ng-click="goState('informationSetting')">
+                <img class="left_icon" src="img/mine/list_mine-blue.png"/>
+                <span class="title">个人信息</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+        </ul>
+        <ul class="btn-list">
+            <li class="item" ng-click="goState('membershipInterest')">
+                <img class="left_icon" src="img/mine/list_member-blue.png"/>
+                <span class="title">会员权益</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+            <li class="item" ng-click="goState('collection')">
+                <img class="left_icon" src="img/mine/list_collection-blue.png"/>
+                <span class="title">我的收藏</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+        </ul>
+        <ul class="btn-list">
+            <li class="item" ng-click="goState('contactUs')">
+                <img class="left_icon" src="img/mine/list_contact-blue.png"/>
+                <span class="title">联系我们</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+            <li class="item" ng-click="goState('businessCooperation')">
+                <img class="left_icon" src="img/mine/list_cooperation-blue.png"/>
+                <span class="title">商务合作</span>
+                <i class="icon ion-chevron-right"></i>
+            </li>
+        </ul>
+    </ion-content>
+    <!--<div class="bar bar-footer mine-tabs-nav">
+    <ul>
+      <li ng-repeat="tab in tabs" ng-class="tabs.length==2 ? 'tabs_two_column' : ''"
+          ng-click="goState(tab.url)">
+        <img ng-src="{{tab.icon}}" />
+        <p ng-class="tab.selected ? 'tab-active' : ''">{{tab.text}}</p>
+      </li>
+    </ul>
+  </div>-->
+</ion-view>

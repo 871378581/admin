@@ -1,0 +1,11 @@
+.cxscroll{}
+.cxscroll .box{overflow: hidden;}
+.cxscroll .list{overflow: hidden; width: 9999px;}
+.cxscroll .list li{float: left; width: 100vw; height: 100vh;}
+.cxscroll .list li img{width: 100%; height: 100%;}
+.cxscroll .prev, .cxscroll .next{position: absolute; top: 50%; margin-top: -25px; width: 40px; height: 50px;
+	background-image: url(../../img/control.png); background-repeat: no-repeat; font:0/0 Arial; cursor:pointer;}
+.cxscroll .prev{left: 5px; background-position: 0 0;}
+.cxscroll .next{right: 5px; background-position: -40px 0;}
+.cxscroll .prev:hover{background-position: 0 -50px;}
+.cxscroll .next:hover{background-position: -40px -50px;}

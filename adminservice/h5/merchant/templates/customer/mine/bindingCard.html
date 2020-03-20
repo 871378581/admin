@@ -1,0 +1,75 @@
+<ion-view class="bindingCard" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('carList')">
+        <img src="img/return.svg"/>
+    </div>
+    <ion-content scroll="true">
+        <p class="input-title">会员卡激活</p>
+        <div class="setting-header">
+            <img class="card-demo" src="img/mine/card2.png"/>
+            <p class="btn-buy" ng-click="buyCard()">还没有卡 立即购买</p>
+        </div>
+        <!--<p class="input-title">待激活车辆</p>-->
+        <div class="list">
+            <!--<div class="car-item">
+              <img ng-src="{{item.car_logo_url}}" />
+              <ul>
+                <li>{{item.car_type_name}}</li>
+                <li>{{item.plate}}</li>
+              </ul>
+              <p>{{item.car_status_name}}</p>
+            </div>-->
+            <div class="item item-input">
+                <p class="title">姓名</p>
+                <input type="text" ng-model="formData.user_name" placeholder="请输入车主姓名" style="text-align: right"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input no-border">
+                <p class="title">电话</p>
+                <input type="text" ng-model="formData.phone" placeholder="请输入车主电话" style="text-align: right"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title">车型</p>
+                <input type="text" ng-model="item.car_type_name" disabled="disabled" style="text-align: right"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title">车牌</p>
+                <input type="text" ng-model="item.plate" disabled="disabled" style="text-align: right"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title">卡号</p>
+                <input type="text" ng-model="formData.card_id" placeholder="请输入卡号" style="text-align: right"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title">密码</p>
+                <input type="text" ng-model="formData.password" placeholder="请输入密码" style="text-align: right"/>
+                <i class="icon"></i>
+            </div>
+            <ul class="checkbox-box">
+                <li>
+                    <div class="checkbox-rect">
+                        <input type="checkbox" ng-model="checked1" ng-click="changeChecked(1)"/>
+                        <p ng-click="changeModalShow()">已阅读并同意EGE会员协议</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="checkbox-box">
+                <li>
+                    <div class="checkbox-rect">
+                        <input type="checkbox" ng-model="checked2" ng-click="changeChecked(2)"/>
+                        <p ng-click="changeModalShow2()">本人承诺本车辆为非运营车辆</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="btn-box">
+                <button class="button btn-mine btn-linear" ng-click="saveData()">
+                    确认激活
+                </button>
+                <p>一旦激活车辆信息不能再被更改</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+{
+	"success": true,
+  	"errorCode": null,
+  	"message": "",
+  	"data": {
+  		"page": {
+			"currentPage": 1,
+			"totalPage": 1
+		},
+		"list":[
+			{	
+				"cover": "img/title-tab.png",
+				"name": "余杭VOLVO4S店",
+				"distance":"300m",
+				"businessScope": "维修/保养",
+				"score": "3.9",
+				"comment": "没有比这更好的点，10年老店。",
+				"tags": ["服务好", "性价比高", "店员负责"]
+			}
+		]
+  	}
+}

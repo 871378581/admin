@@ -1,0 +1,68 @@
+{
+  "success": true,
+  "errorCode": null,
+  "message": "",
+  "data": {
+    "car_detail": {
+      "user": "花朵朵",
+      "model": "宝马X5",
+      "licensePlate": "A208W1",
+      "status": "1"
+    },
+    "result": [
+      {
+        "key": "灯光",
+        "result": true,
+        "type": 1,
+        "children": [
+          {
+            "key": "行车灯",
+            "result": true,
+            "type": 1
+          },
+          {
+            "key": "近光灯 ",
+            "result": true,
+            "type": 1
+          }
+        ]
+      },
+      {
+        "key": "机油 ",
+        "result": true,
+        "type": 1,
+        "children": [
+          {
+            "key": "放油量",
+            "result": 4.2,
+            "type": 2
+          },
+          {
+            "key": "近光灯 ",
+            "result": "爱德龙4.25升 ",
+            "type": 3
+          }
+        ]
+      },
+      {
+        "key": "防冻液 ",
+        "result": true,
+        "type": 1,
+        "children": [
+          {
+            "key": "PH值",
+            "result": 8,
+            "type": 2,
+            "remark":"参考值7-9.5"
+          },
+          {
+            "key": "冰点",
+            "result": -20,
+            "type": 2,
+            "remark":"参考值-68~-15摄氏度"
+          }
+        ]
+      }
+    ]
+  }
+}

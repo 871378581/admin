@@ -1,0 +1,65 @@
+<ion-view class="orderList" hide-tabs="toHideTabs">
+  <ion-content scroll="true">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="请输入车牌号" ng-model="formData.keyword">
+      </label>
+    </div>
+    <ul class="store-tabs">
+      <li ng-click="changeOrder('ALL')">全部
+        <span ng-class="formData.order_status=='ALL' ?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder('1')">保养中
+        <span ng-class="formData.order_status=='1' ?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder('2')">检测异常
+        <span ng-class="formData.order_status=='2' ?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder('3')">附加服务中
+        <span ng-class="formData.order_status=='3' ?'tab-active-bottom':''"></span>
+      </li>
+      <li ng-click="changeOrder('4')">已完成
+        <span ng-class="formData.order_status=='4' ?'tab-active-bottom':''"></span>
+      </li>
+    </ul>
+    <ion-scroll>
+      <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshData()"></ion-refresher>
+      <ul class="list">
+        <li class="item" ng-repeat="item in list">
+          <div class="item-content">
+            <div class="item-left-cover">
+              <img ng-src="{{item.car_type_img_url}}">
+            </div>
+            <div class="item-main">
+              <p class="title">{{item.order_string_id}}</p>
+              <p class="title">{{item.car_plate}}</p>
+              <p>{{item.car_type_name}}</p>
+              <p>{{item.user_name + ' ' + item.card_level_name}}</p>
+              <a ng-href="{{'tel:' + item.phone}}" ng-show="item.phone">
+                <p>{{item.phone}}</p>
+                <img class="img-btn" src="img/mine/list_contact-blue.png" />
+              </a>
+            </div>
+            <div class="item-right">
+              <p ng-class="{'color-green':item.order_status=='E','color-red':item.child_status=='N'}">{{item.order_tips}}</p>
+              <p class="btn-operate" ng-click="enterTestReport(item)"
+                 ng-show="item.child_status=='K'">检测报告录入</p>
+              <p class="btn-operate" ng-click="enterTestReport(item)"
+                 ng-show="item.order_status!='I' && item.order_status!='A' && item.child_status!='J' && item.child_status!='K'">检测报告详情</p>
+              <p class="btn-operate" ng-click="enterChargingItem(item)"
+                 ng-show="(item.order_status=='B' && item.child_status=='N') || item.order_status=='C'">增加附加项</p>
+              <p class="btn-operate" ng-click="confirmPayment(item)"
+                 ng-show="item.order_status=='W'">确认用户付款</p>
+            </div>
+          </div>
+        </li>
+        <li class="item-load-all" ng-if="newListData && newListData.length==0 && list.length>0">暂无更多订单</li>
+      </ul>
+      <ion-infinite-scroll on-infinite="loadMore()" distance="1%"
+                           ng-if="undefined==newListData || newListData.length>0">
+      </ion-infinite-scroll>
+    </ion-scroll>
+    <p class="tips" ng-show="!firstLoad && list.length==0">店内没有订单</p>
+  </ion-content>
+</ion-view>

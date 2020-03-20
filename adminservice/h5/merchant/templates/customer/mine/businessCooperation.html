@@ -1,0 +1,63 @@
+<ion-view class="carAdd" hide-tabs="toHideTabs">
+    <div class="return-box" ng-click="goState('tab.mine')">
+        <img src="img/return.svg"/>
+    </div>
+    <ion-content scroll="true">
+        <p class="input-title">商务合作</p>
+        <div class="list">
+            <div class="item item-input">
+                <p class="title2">合作类型</p>
+                <div id="merchant_type" class="main">
+                    <input type="text" ng-model="merchant_type_name" placeholder="请选择合作类型" disabled="disabled"/>
+                </div>
+                <i class="icon ion-chevron-right"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title2">姓名</p>
+                <input type="text" ng-model="formData.name" placeholder="请输入姓名"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input">
+                <p class="title2">电话</p>
+                <input type="text" ng-model="formData.phone" placeholder="请输入电话"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input" ng-show="formData.merchant_type === 1">
+                <p class="title2">门店名称</p>
+                <input type="text" ng-model="formData.shop_name" placeholder="请输入门店名称"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input" ng-show="formData.merchant_type === 1">
+                <p class="title2">门店面积</p>
+                <input type="text" ng-model="formData.shop_area_size" placeholder="请输入门店面积"/>
+                <i class="icon"></i>
+            </div>
+            <div class="item item-input" ng-show="formData.merchant_type === 1">
+                <p class="title2">门店地址</p>
+                <input type="text" ng-model="formData.shop_address" placeholder="请输入门店地址"/>
+                <i class="icon"></i>
+            </div>
+            <!--<div class="item item-input">
+              <p class="title2" style="width: 2.5rem;">期望联系时间</p>
+              <input type="text" ng-model="formData.expect_contact_time" style="border-bottom: 0" />
+              <i class="icon"></i>
+            </div>-->
+        </div>
+        <div class="checkbox-rect">
+            <input type="checkbox" ng-model="checked" ng-click="changeChecked(1)"/>
+            <p ng-click="changeModalShow()">已阅读并遵守条款</p>
+        </div>
+        <!--<p class="input-title">合作方式介绍</p>
+        <div class="list">
+          <div class="item item-input" style="padding: 0;">
+            <textarea ng-model="formData.cooperate_type_description"></textarea>
+            <i class="icon"></i>
+          </div>
+        </div>-->
+        <div class="btn-box" style="text-align: center">
+            <button class="button btn-mine btn-linear" ng-click="doCooperate()">
+                提交申请
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

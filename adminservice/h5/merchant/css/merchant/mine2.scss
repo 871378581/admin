@@ -1,0 +1,179 @@
+@charset "utf-8";
+
+// 我的
+.mine {
+  .scroll-content {
+    .header-box {
+      position: relative;
+      width: 10rem;
+      height: 4.4rem;
+      text-align: center;
+      color: #fff;
+      background: url("../../img/title-bg-blue.png") no-repeat top;
+      background-size: 100%;
+      .header-bg {
+        position: absolute;
+        top: 1.3rem;
+        left: 0.42rem;
+        width: 9.16rem;
+        height: 2.9rem;
+      }
+      .portrait {
+        position: absolute;
+        top: 0.8rem;
+        left: 0.8rem;
+        width: 1.7rem;
+        height: 1.7rem;
+        border-radius: 50%;
+      }
+      .title {
+        position: absolute;
+        top: 1.5rem;
+        left: 2.9rem;
+        width: 6.5rem;
+        height: 1rem;
+        line-height: 1rem;
+        text-align: left;
+        font-size: 0.47rem;
+        font-weight: bold;
+        overflow: hidden;
+      }
+      .sub-title {
+        position: absolute;
+        top: 2.4rem;
+        left: 2.9rem;
+        font-size: 0.35rem;
+      }
+      .content {
+        position: absolute;
+        top: 3.2rem;
+        left: 1.2rem;
+        font-size: 0.35rem;
+        color: #fff;
+      }
+    }
+    .btn-list {
+      margin-top: 0.1rem;
+      .item {
+        margin-bottom: 0.2vh;
+        padding: 0;
+        padding-left: 0.75rem;
+        line-height: 1.35rem;
+        font-size: 0.4rem;
+        border: none;
+        border-bottom: 0.1vh solid #ccc;
+        background: #fff;
+        .left_icon {
+          position: relative;
+          top: 0.05rem;
+          margin-right: 0.25rem;
+          width: 0.45rem;
+          height: 0.45rem;
+        }
+        .title {
+          display: inline-block;
+          width: 6.5rem;
+          color: #666;
+        }
+        .icon {
+          width: 0.47rem;
+          height: 0.47rem;
+        }
+        .ion-chevron-right {
+          float: right;
+          margin-right: 0.45rem;
+          font-weight: bold;
+          color: #999;
+        }
+      }
+      .item:nth-last-child(1) {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+// 个人信息
+.informationSetting {
+  .setting-header {
+    position: relative;
+    height: 6.5rem;
+    background: url("../img/title-bg-blue2.png") no-repeat top;
+    background-size: 100%;
+    .portrait {
+      position: absolute;
+      left: 4rem;
+      top: 2.3rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+    }
+    p {
+      position: absolute;
+      width: 10rem;
+      font-size: 0.4rem;
+      text-align: center;
+      span {
+        margin-left: 0.3rem;
+        color: #f7b52b;
+      }
+    }
+    p:nth-child(2) {
+      top: 4.5rem;
+      color: #333;
+    }
+    p:nth-child(3) {
+      top: 5.2rem;
+      color: #666;
+      span{
+        color: #2348d7;
+      }
+    }
+  }
+  .input-title {
+    margin-left: 0.4rem;
+    /*line-height: 1.4rem;*/
+    line-height: 8vh;
+    font-size: 0.47rem;
+    font-weight: bold;
+    color: #000;
+  }
+  .list {
+    padding: 0 0.25rem;
+    border-radius: 0.05rem;
+    .item {
+      background: #fff;
+      border: 0;
+      .title {
+        width: 2rem;
+        font-size: 0.37rem;
+        color: #666;
+      }
+      input {
+        margin-right: 0.5rem;
+        color: #000;
+        border-bottom: 0.01rem solid #ddd;
+      }
+      i {
+        position: absolute;
+        right: 0;
+        margin-right: 0.5rem;
+        font-size: 0.37rem;
+        color: #999;
+      }
+      .icon-text {
+        color: #2348d7;
+      }
+    }
+  }
+  .btn-box {
+    margin-top: 0.65rem;
+    text-align: center;
+    button {
+      margin: 0 0.25rem;
+      height: 0.9rem;
+      line-height: 0.9rem;
+      cursor: pointer;
+    }
+  }
+}

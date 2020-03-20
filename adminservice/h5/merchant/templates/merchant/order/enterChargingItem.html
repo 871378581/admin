@@ -1,0 +1,58 @@
+<ion-view class="enterChargingItem" hide-tabs="toHideTabs">
+  <div class="return-box" ng-click="goState('tab.order')">
+    <img src="img/return.svg"/>
+  </div>
+  <ion-content scroll="true" class="has-footer">
+    <p class="input-title">附加服务收费项目</p>
+    <div class="list">
+      <div class="item" ng-repeat="item in formData.feeDetails track by $index">
+        <ul class="charge-detail">
+          <li>
+            <p class="detail"><span>费用项</span>{{item.each_item}}</p>
+          </li>
+          <li>
+            <p class="detail"><span>金额</span>{{item.each_fee}}</p>
+          </li>
+        </ul>
+        <div class="btn-box">
+          <button class="button btn-mine btn-black" ng-click="removeItem($index)">
+            取消
+          </button>
+          <button class="button btn-mine btn-linear" ng-click="editItem($index)">
+            编辑
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-add" ng-click="editItem()">
+      +
+    </div>
+  </ion-content>
+  <div class="bar bar-footer">
+    <button class="button btn-mine btn-linear" ng-click="saveData()">
+      提交
+    </button>
+    <!--<button class="button btn-mine btn-black" ng-click="back()">
+      取消
+    </button>-->
+  </div>
+
+  <div class="select-page" ng-show="showAddItem">
+    <img class="btn-close" src="img2/order/enterChargingItem/close.png" ng-click="cancelEdit()"/>
+    <div class="input-box">
+      <ul>
+        <li>
+          <span>费用项名称</span>
+          <input type="text" ng-model="feeItem.each_item"/>
+        </li>
+        <li>
+          <span>金额</span>
+          <input type="text" ng-model="feeItem.each_fee"/>
+        </li>
+      </ul>
+      <button class="button btn-mine btn-linear" ng-click="saveItem()">
+        添加附加项目
+      </button>
+    </div>
+  </div>
+</ion-view>

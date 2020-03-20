@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>菜单管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+</head>
+<body class="body">
+
+<!-- 工具集 -->
+<div class="my-btn-box">
+    <span class="fl">
+        <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
+        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
+        <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
+    </span>
+
+    <span class="fr">
+        <span class="layui-form-label">菜单名：</span>
+        <div class="layui-input-inline">
+            <input type="text"  id="searchMenuName" autocomplete="off" placeholder="请输入菜单名" class="layui-input">
+        </div>
+        <button class="layui-btn mgl-20" id="btn-search">查询</button>
+    </span>
+</div>
+
+<!-- 表格 -->
+<table id="dateTable"  lay-filter="table"></table>
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['table', 'form', 'layer', 'vip_table'], function () {
+
+        // 操作对象
+        var form = layui.form
+                , table = layui.table
+                , layer = layui.layer
+                , vipTable = layui.vip_table
+                , $ = layui.jquery;
+
+        // 表格渲染
+        var tableIns = table.render({
+            elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
+            ,filter:'table'
+            , height: vipTable.getFullHeight()    //容器高度
+            , cols: [[                  //标题栏
+              {checkbox: true, sort: true, fixed: true, space: true}
+              , {field: 'id', title: 'ID', width: 80}
+              , {field: 'group', title: '菜单组', width: 120}
+              , {field: 'menu_name', title: '菜单名', width: 120}
+              , {field: 'url', title: '访问地址', width: 170}
+              , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+              , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+              , {field: 'creator_account', title: '创建人', width: 100}
+              , {field: 'modifier_account', title: '修改人', width: 100}
+              , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+            ]]
+            , id: 'dataCheck'
+            //, url: './../../json/user_data_table.json'
+            , url: wholeUrl+"/admin/menu/list?token="+localStorage.getItem("token")
+            , method: 'post'
+            , page: true
+            , limits: [10, 20, 30, 50, 100]
+            , limit: 10 //默认采用10
+            , loading: false
+            , where:{menuName:$("#searchMenuName").val()}
+            , done: function (res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+            }
+        });
+
+        // 获取选中行
+        table.on('checkbox(dataCheck)', function (obj) {
+            layer.msg('123');
+            console.log(obj.checked); //当前是否选中状态
+            console.log(obj.data); //选中行的相关数据
+            console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        });
+
+        // 刷新
+        $('#btn-refresh').on('click', function () {
+            tableIns.reload();
+        });
+
+        // 添加
+        $('#btn-add').on('click', function () {
+        layer.open({
+            type: 2,
+            title: '添加'
+            ,area:['450px','300px']
+            ,content:"/egecarservice/admin/ege-admin/app/menu/menu-add.html"
+          });
+        });
+
+        // 查询
+        $('#btn-search').on('click', function () {
+            tableIns.reload({where:{menuName:$("#searchMenuName").val()}});
+        });
+        //监听行工具事件
+        table.on('tool(table)', function(obj){
+          var data = obj.data;
+          console.log(data)
+          if(obj.event === 'del'){
+            layer.confirm('确定删除？', function(index){
+              //obj.del();
+              $.ajax({
+                url:wholeUrl+"/admin/menu/delete?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                data:{id:data.id},
+                success:function(result){
+                  console.log(result);
+                  if(result.success){
+                    layer.msg("删除成功")
+                    tableIns.reload();
+                  }else{
+                    layer.msg("删除失败");
+                  }
+
+                }
+              });
+              layer.close(index);
+            });
+
+          } else if(obj.event === 'edit'){
+            console.log(obj.data);
+            var data = obj.data;
+            layer.open({
+              type: 2,
+              title: '编辑'
+              ,area:['450px','300px']
+              ,content:"/egecarservice/admin/ege-admin/app/menu/menu-edit.html?id="+data.id
+            });
+
+          }
+        });
+
+        // 获取选中数据
+        $('#btn-select-all').on('click', function () {
+          var checkStatus = table.checkStatus('dataCheck')
+          ,data = checkStatus.data;
+          layer.alert(JSON.stringify(data));
+        });
+        // var $ = layui.$, active = {
+        //   getCheckData: function(){ //获取选中数据
+        //     var checkStatus = table.checkStatus('dataCheck')
+        //     ,data = checkStatus.data;
+        //     layer.alert(JSON.stringify(data));
+        //   }
+        //   ,getCheckLength: function(){ //获取选中数目
+        //     var checkStatus = table.checkStatus('dataCheck')
+        //     ,data = checkStatus.data;
+        //     layer.msg('选中了：'+ data.length + ' 个');
+        //   }
+        //   ,isAll: function(){ //验证是否全选
+        //     var checkStatus = table.checkStatus('dataCheck');
+        //     layer.msg(checkStatus.isAll ? '全选': '未全选')
+        //   }
+        // };
+        // $('.demoTable .layui-btn').on('click', function(){
+        //     var type = $(this).data('type');
+        //     active[type] ? active[type].call(this) : '';
+        //   });
+        // you code ...
+
+        window.reloadParent = function(){
+          tableIns.reload();
+        }
+
+    });
+</script>
+<!-- 表格操作按钮集 -->
+<script type="text/html" id="barOption">
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>会员管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+</head>
+<body class="body">
+<style>
+    .my-btn-box{
+        height:100px !important;
+    }
+</style>
+
+<div class="my-btn-box">
+    <span class="">
+    <div class="layui-form">
+        <div class="layui-inline">
+          <label class="layui-form-label">昵称:</label>
+          <div class="layui-input-inline">
+            <input type="text"  id="nick_name" autocomplete="off" placeholder="请输入昵称" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">姓名:</label>
+          <div class="layui-input-inline">
+              <input type="text"  id="userName" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+          </div>
+       </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">账号:</label>
+          <div class="layui-input-inline">
+            <input type="text"  id="account" autocomplete="off" placeholder="请输入账号" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">手机号:</label>
+          <div class="layui-input-inline">
+            <input type="text"  id="phone" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+          </div>
+        </div>
+
+        <button class="layui-btn mgl-20" id="btn-search">查询</button>
+    </div>
+
+    </span>
+</div>
+
+
+<!-- 表格 -->
+<table id="dateTable"  lay-filter="table"></table>
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['table', 'form', 'layer', 'vip_table'], function () {
+
+        // 操作对象
+        var form = layui.form
+                , table = layui.table
+                , layer = layui.layer
+                , vipTable = layui.vip_table
+                , $ = layui.jquery;
+
+        // 表格渲染
+        var tableIns = table.render({
+            elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
+            ,filter:'table'
+            , height: vipTable.getFullHeight()    //容器高度
+            , cols: [[                  //标题栏
+              {checkbox: true, sort: true, fixed: true, space: true}
+                , {field: 'id', title: 'ID', width: 80}
+                , {field: "account", title: '账号', width: 120}
+               // , {field: "user_id", title: '用户ID', width: 120}
+                , {field: "nick_name", title: '昵称', width: 120}
+              //  , {field: 'user_head', title: '头像', width: 120,templet:'<div><img alt="无图片" src="{{d.user_head}}"/></div>'}
+                , {field: "user_name", title: '用户名', width: 120}
+                , {field: "phone", title: '手机号码', width: 120}
+                , {field: "membership_level", title: '会员等级', width: 120}
+                /*, {field: "birth", title: '生日', width: 120}
+                , {field: "sex", title: '性别', width: 120}
+                , {field: "id_card", title: '会员身份证号', width: 120}
+                , {field: "has_bind_phone", title: '是否绑定手机', width: 120}
+                , {field: "place_city", title: '所在城市', width: 120}
+                , {field: "last_longitude", title: '最后登录经度', width: 120}
+                , {field: "last_latitude", title: '最后登录纬度', width: 120}
+                , {field: "job", title: '工作', width: 120}
+                , {field: "default_plate", title: '默认车辆车牌', width: 120}
+                , {field: "default_car_tye", title: '默认车辆车型', width: 120}
+                , {field: 'has_default_car', title: '是否设置默认车辆', width: 120,templet:'<div>{{ d.is_disable==true?"是":"否"}}</div>'}
+*/
+                , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+               // , {field: 'creator_account', title: '创建人', width: 100}
+               // , {field: 'modifier_account', title: '修改人', width: 100}
+                , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+            ]]
+            , id: 'dataCheck'
+            //, url: './../../json/user_data_table.json'
+            , url: wholeUrl+"/admin/wx_user/list?token="+localStorage.getItem("token")
+            , method: 'post'
+            , page: true
+            , limits: [10, 20, 30, 50, 100]
+            , limit: 10 //默认采用10
+            , loading: false
+            , where:{userName:$("#userName").val(),account:$("#account").val(),phone:$("#phone").val(),nick_name:$("#nick_name").val()}
+            , done: function (res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+            }
+        });
+
+        // 获取选中行
+        table.on('checkbox(dataCheck)', function (obj) {
+            console.log(obj.checked); //当前是否选中状态
+            console.log(obj.data); //选中行的相关数据
+            console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        });
+
+        // 刷新
+        $('#btn-refresh').on('click', function () {
+            tableIns.reload();
+        });
+
+        // 添加
+        $('#btn-add').on('click', function () {
+        layer.open({
+            type: 2,
+            title: '添加'
+            ,area:['500px','400px']
+            ,content:"/egecarservice/admin/ege-admin/app/wx_user_manage/add.html"
+          });
+        });
+
+        // 查询
+        $('#btn-search').on('click', function () {
+            tableIns.reload({where:{userName:$("#userName").val(),account:$("#account").val(),phone:$("#phone").val(),nick_name:$("#nick_name").val()}});
+        });
+        //监听行工具事件
+        table.on('tool(table)', function(obj){
+          var data = obj.data;
+          console.log(data)
+          if(obj.event === 'del'){
+            layer.confirm('确定删除？', function(index){
+              //obj.del();
+             /* $.ajax({
+                url:wholeUrl+"/admin/wx_user/delete?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                data:{id:data.id},
+                success:function(result){
+                  console.log(result);
+                  if(result.success){
+                    layer.msg("删除成功")
+                    tableIns.reload();
+                  }else{
+                    layer.msg("删除失败");
+                  }
+
+                }
+              });*/
+              layer.close(index);
+            });
+
+          } else if(obj.event === 'edit'){
+            console.log(obj.data);
+            var data = obj.data;
+            layer.open({
+              type: 2,
+              title: '编辑'
+              ,area:['900px','500px']
+              ,content:"/egecarservice/admin/ege-admin/app/wx_user_manage/edit.html?id="+data.id
+            });
+
+          }else if(obj.event === 'detail'){
+              console.log(obj.data);
+              var data = obj.data;
+              layer.open({
+                  type: 2,
+                  title: '详情'
+                  ,area:['900px','500px']
+                  ,content:"/egecarservice/admin/ege-admin/app/wx_user_manage/detail.html?id="+data.id
+              });
+
+          }
+        });
+
+        // 获取选中数据
+        $('#btn-select-all').on('click', function () {
+          var checkStatus = table.checkStatus('dataCheck')
+          ,data = checkStatus.data;
+          layer.alert(JSON.stringify(data));
+        });
+        // var $ = layui.$, active = {
+        //   getCheckData: function(){ //获取选中数据
+        //     var checkStatus = table.checkStatus('dataCheck')
+        //     ,data = checkStatus.data;
+        //     layer.alert(JSON.stringify(data));
+        //   }
+        //   ,getCheckLength: function(){ //获取选中数目
+        //     var checkStatus = table.checkStatus('dataCheck')
+        //     ,data = checkStatus.data;
+        //     layer.msg('选中了：'+ data.length + ' 个');
+        //   }
+        //   ,isAll: function(){ //验证是否全选
+        //     var checkStatus = table.checkStatus('dataCheck');
+        //     layer.msg(checkStatus.isAll ? '全选': '未全选')
+        //   }
+        // };
+        // $('.demoTable .layui-btn').on('click', function(){
+        //     var type = $(this).data('type');
+        //     active[type] ? active[type].call(this) : '';
+        //   });
+        // you code ...
+
+        window.reloadParent = function(){
+          tableIns.reload();
+        }
+
+    });
+
+</script>
+<!-- 表格操作按钮集 -->
+<script type="text/html" id="barOption">
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="detail">详情</a>
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
+    <!--<a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>-->
+</script>
+</body>
+</html>

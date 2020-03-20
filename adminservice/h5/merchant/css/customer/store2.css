@@ -1,0 +1,561 @@
+.storeList .store-tabs {
+  display: flex;
+  margin: 0 0.25rem;
+  margin-bottom: 0.2rem;
+  width: 95%;
+  height: 1.05rem;
+  background-color: #f1f1f1; }
+  .storeList .store-tabs li {
+    flex: 1;
+    float: left;
+    width: 33.332%;
+    line-height: 1.05rem;
+    font-size: 0.35rem;
+    color: #000;
+    text-align: center; }
+    .storeList .store-tabs li span {
+      position: relative; }
+      .storeList .store-tabs li span .icon {
+        display: inline-block;
+        position: absolute;
+        left: 0.2rem;
+        font-size: 0.3rem;
+        color: #2348d7; }
+      .storeList .store-tabs li span .ion-arrow-up-b {
+        transform: translateY(-8%); }
+      .storeList .store-tabs li span .ion-arrow-down-b {
+        transform: translateY(8%); }
+      .storeList .store-tabs li span .icon-selected {
+        color: #f02e57; }
+  .storeList .store-tabs li:nth-last-child(1) {
+    border-right: none; }
+  .storeList .store-tabs .tab-active-bottom {
+    display: block;
+    content: '';
+    margin: 0 auto;
+    height: 0.5vh;
+    width: 0.5rem;
+    background: #2348d7;
+    transform: translateY(-0.15rem); }
+.storeList .scroll-view {
+  height: 77.5vh; }
+  .storeList .scroll-view .list .item {
+    margin-bottom: 0.1rem;
+    padding: 0 0.25rem;
+    border: 0;
+    background: #f1f1f1; }
+    .storeList .scroll-view .list .item .item-content {
+      padding: 0.4rem;
+      padding-right: 0;
+      padding-bottom: 0;
+      background: #fff;
+      border-radius: 0.05rem; }
+      .storeList .scroll-view .list .item .item-content .item-left-cover {
+        float: left;
+        width: 3.35rem;
+        height: 3.7rem; }
+      .storeList .scroll-view .list .item .item-content .item-main {
+        float: left;
+        margin-left: 0.25rem;
+        width: 5.5rem; }
+        .storeList .scroll-view .list .item .item-content .item-main p {
+          line-height: 0.5rem;
+          color: #666;
+          font-size: 0.32rem; }
+        .storeList .scroll-view .list .item .item-content .item-main .name {
+          height: 1rem;
+          font-size: 0.4rem;
+          font-weight: bold;
+          color: #333; }
+        .storeList .scroll-view .list .item .item-content .item-main .location img {
+          width: 0.35rem;
+          height: 0.35rem;
+          transform: translateY(15%); }
+        .storeList .scroll-view .list .item .item-content .item-main .location span {
+          font-size: 0.3rem;
+          color: #2348d7; }
+        .storeList .scroll-view .list .item .item-content .item-main .score ul li {
+          float: left; }
+          .storeList .scroll-view .list .item .item-content .item-main .score ul li img {
+            width: 0.3rem;
+            height: 0.3rem; }
+        .storeList .scroll-view .list .item .item-content .item-main .score span {
+          margin-left: 0.1rem;
+          font-size: 0.3rem;
+          color: #999; }
+        .storeList .scroll-view .list .item .item-content .item-main .comment {
+          color: #858585; }
+      .storeList .scroll-view .list .item .item-content .item-footer {
+        float: right;
+        margin: 0.3rem;
+        padding-top: 0.33rem;
+        width: 97%;
+        border-top: 0.01rem solid #E5E5E5; }
+        .storeList .scroll-view .list .item .item-content .item-footer .tag-list {
+          position: absolute;
+          left: 0.6rem;
+          margin-top: 0.25rem;
+          width: 5.7rem; }
+          .storeList .scroll-view .list .item .item-content .item-footer .tag-list .tag-list-item {
+            float: left;
+            margin-right: 0.2rem;
+            padding: 0 0.25rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            color: #666;
+            font-size: 0.3rem;
+            border-radius: 0.25rem;
+            background-color: #DDD; }
+        .storeList .scroll-view .list .item .item-content .item-footer .btn-list {
+          float: right; }
+          .storeList .scroll-view .list .item .item-content .item-footer .btn-list .btn-list-item {
+            float: left;
+            padding: 0 0.8rem;
+            height: 0.9rem;
+            line-height: 0.9rem;
+            border-radius: 0.45rem;
+            font-size: 0.3rem;
+            text-align: center; }
+        .storeList .scroll-view .list .item .item-content .item-footer p {
+          font-size: 0.3rem;
+          color: #858585;
+          text-align: left; }
+      .storeList .scroll-view .list .item .item-content .right-tab {
+        position: absolute;
+        top: 0.4rem;
+        right: 0.1rem;
+        width: 1.65rem;
+        height: 0.7rem;
+        line-height: 0.65rem;
+        text-align: center;
+        background-size: 120%;
+        background-position: center; }
+        .storeList .scroll-view .list .item .item-content .right-tab p {
+          color: #000;
+          font-size: 0.3rem; }
+  .storeList .scroll-view .list .item-load-all {
+    margin: 0.5rem;
+    color: #000;
+    text-align: center; }
+
+.storeDetail .cover {
+  width: 10rem;
+  height: 10rem;
+  background: #fff; }
+.storeDetail .banner {
+  width: 100%;
+  height: 7.13rem; }
+  .storeDetail .banner .slider {
+    height: 100%; }
+    .storeDetail .banner .slider img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10rem;
+      height: 7.13rem; }
+.storeDetail .detail-text-box {
+  margin: 0.1rem;
+  padding: 0.25rem;
+  color: #666;
+  background: #fff;
+  border-radius: 0.1rem; }
+  .storeDetail .detail-text-box .text-title {
+    display: inline-block;
+    width: 7.3rem;
+    line-height: 1.6rem;
+    font-size: 0.55rem;
+    color: #333; }
+  .storeDetail .detail-text-box .btn-title {
+    display: contents; }
+    .storeDetail .detail-text-box .btn-title img {
+      float: right;
+      margin: 0.5rem 0.2rem;
+      width: 0.6rem;
+      height: 0.6rem; }
+  .storeDetail .detail-text-box .share-arrow {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.5rem; }
+  .storeDetail .detail-text-box .text-main {
+    line-height: 0.8rem; }
+    .storeDetail .detail-text-box .text-main .img-btn {
+      width: 0.4rem;
+      height: 0.4rem;
+      transform: translate(50%, 15%); }
+    .storeDetail .detail-text-box .text-main .title {
+      display: inline-block;
+      margin-right: 0.4rem;
+      width: 1.6rem;
+      text-align: justify;
+      text-align-last: justify; }
+    .storeDetail .detail-text-box .text-main .content {
+      display: inline-block;
+      width: 7rem;
+      vertical-align: top; }
+    .storeDetail .detail-text-box .text-main .score {
+      display: inline-block; }
+      .storeDetail .detail-text-box .text-main .score li {
+        display: inline-block; }
+        .storeDetail .detail-text-box .text-main .score li img {
+          width: 0.35rem;
+          height: 0.35rem; }
+  .storeDetail .detail-text-box .introduce-title {
+    line-height: 1.2rem;
+    font-size: 0.4rem;
+    color: #333;
+    border-bottom: 1px solid #ebebeb; }
+  .storeDetail .detail-text-box .introduce-main {
+    padding: 0.3rem;
+    line-height: 0.6rem;
+    font-size: 0.35rem;
+    color: #858585; }
+  .storeDetail .detail-text-box .tags {
+    margin-top: 0.3rem;
+    padding: 0.35rem 0;
+    border-top: 1px solid #ebebeb; }
+    .storeDetail .detail-text-box .tags li {
+      display: inline-block;
+      margin-right: 0.25rem;
+      padding: 0 0.25rem;
+      line-height: 0.5rem;
+      color: #666;
+      font-size: 0.3rem;
+      background: #e1e1e1;
+      border-radius: 0.25rem; }
+.storeDetail .list .item {
+  margin-bottom: 0.1rem;
+  padding: 0.4rem 0.5rem;
+  height: 2.35rem;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #eee; }
+  .storeDetail .list .item .cover {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%; }
+  .storeDetail .list .item p {
+    position: absolute;
+    display: inline-block;
+    margin-left: 0.25rem;
+    width: 7.5rem;
+    color: #999;
+    font-size: 0.3rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+  .storeDetail .list .item .title {
+    color: #666; }
+  .storeDetail .list .item .time {
+    top: 1rem; }
+  .storeDetail .list .item .main {
+    top: 1.35rem;
+    border-bottom: none; }
+.storeDetail .list .btn-more {
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center; }
+.storeDetail .engine-oil {
+  margin: 0 0.1rem;
+  background: #fff;
+  border-radius: 0.1rem; }
+  .storeDetail .engine-oil li {
+    float: left;
+    position: relative;
+    width: 4.7rem;
+    height: 2.4rem; }
+    .storeDetail .engine-oil li .cover {
+      /*margin: 0.4rem 0.2rem;
+      width: 1.6rem;
+      height: 1.6rem;*/
+      margin: 0.4rem 0.2rem;
+      margin-top: 1.2rem;
+      width: 1.6rem;
+      height: auto;
+      transform: translate(0, -50%); }
+    .storeDetail .engine-oil li .text-box {
+      float: right;
+      margin-top: 1.2rem;
+      width: 2.5rem;
+      transform: translate(0, -50%); }
+      .storeDetail .engine-oil li .text-box p {
+        display: inline-block;
+        line-height: 0.35rem;
+        color: #666;
+        font-size: 0.3rem;
+        word-break: break-all; }
+      .storeDetail .engine-oil li .text-box .title {
+        top: 0.35rem; }
+      .storeDetail .engine-oil li .text-box .main {
+        top: 1rem; }
+.storeDetail .evaluate-box {
+  margin: 0.1rem;
+  padding: 0.25rem;
+  background: #1f2025;
+  border-radius: 0.1rem; }
+.storeDetail .swiper-container {
+  --swiper-theme-color: #007aff;
+  --swiper-navigation-color: #007aff;
+  --swiper-navigation-size: 30px; }
+
+.storeAppointment .input-title {
+  margin-left: 0.4rem;
+  line-height: 8vh;
+  font-size: 0.47rem;
+  font-weight: bold;
+  color: #333; }
+  .storeAppointment .input-title span {
+    float: right;
+    margin-right: 0.3rem;
+    color: #858585;
+    font-size: 0.3rem; }
+.storeAppointment .store-detail-box .store-title {
+  width: 5.5rem;
+  line-height: 0.8rem; }
+.storeAppointment .store-detail-box .store-title:nth-child(1) {
+  font-size: 0.37rem;
+  font-weight: bold;
+  color: #333; }
+.storeAppointment .store-detail-box .store-title:nth-child(2) {
+  font-size: 0.32rem;
+  color: #666; }
+.storeAppointment .store-detail-box .tags {
+  margin-top: 0.3rem;
+  width: 5.5rem; }
+  .storeAppointment .store-detail-box .tags li {
+    display: inline-block;
+    margin-right: 0.25rem;
+    margin-bottom: 0.2rem;
+    padding: 0 0.25rem;
+    width: 2rem;
+    line-height: 0.5rem;
+    color: #666;
+    font-size: 0.3rem;
+    background: #e1e1e1;
+    border-radius: 0.25rem;
+    text-align: center; }
+.storeAppointment .store-detail-box .right-img {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem; }
+.storeAppointment .car-box .swiper-slide {
+  position: relative;
+  margin: 0 0.3rem;
+  width: 6.65rem !important;
+  background: #fff; }
+  .storeAppointment .car-box .swiper-slide .car-item {
+    display: block;
+    padding: 0.3rem;
+    width: 100%;
+    height: 3.1rem; }
+    .storeAppointment .car-box .swiper-slide .car-item .title {
+      font-size: 0.37rem;
+      color: #333;
+      text-align: left; }
+    .storeAppointment .car-box .swiper-slide .car-item .logo {
+      height: 1.1rem;
+      width: 3.5rem; }
+    .storeAppointment .car-box .swiper-slide .car-item .car-detail-box .detail-item {
+      display: inline-block;
+      font-size: 0.28rem;
+      color: #858585;
+      vertical-align: top; }
+      .storeAppointment .car-box .swiper-slide .car-item .car-detail-box .detail-item p {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; }
+    .storeAppointment .car-box .swiper-slide .car-item .car-detail-box .detail-item:nth-child(1) {
+      width: 1rem; }
+    .storeAppointment .car-box .swiper-slide .car-item .car-detail-box .detail-item:nth-child(2) {
+      width: 2.6rem; }
+.storeAppointment .car-box .selected {
+  border: 0.01rem solid #00ae1c; }
+  .storeAppointment .car-box .selected .right-img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0.7rem;
+    height: 0.6rem;
+    transform: translate(1px, -1px); }
+.storeAppointment .oil-box ul li {
+  padding: 0.25rem;
+  /*height: 1.6rem;*/
+  min-height: 1.6rem;
+  max-height: 2rem;
+  border-bottom: 0.01rem solid #d9d9d9; }
+  .storeAppointment .oil-box ul li .logo {
+    /*float: left;
+    width: 1rem;
+    height: 1rem;*/
+    float: left;
+    margin-top: 0.8rem;
+    width: 1.6rem;
+    height: auto;
+    transform: translate(0, -50%); }
+  .storeAppointment .oil-box ul li .text-box {
+    display: inline-block;
+    margin-left: 0.3rem;
+    width: 5rem; }
+    .storeAppointment .oil-box ul li .text-box .title {
+      /*display: inline-block;
+      margin-left: 0.3rem;
+      width: 5rem;*/
+      font-size: 0.32rem;
+      color: #858585; }
+  .storeAppointment .oil-box ul li .oil-select {
+    content: '';
+    float: right;
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 0.01rem solid #00ae1c;
+    border-radius: 50%; }
+    .storeAppointment .oil-box ul li .oil-select img {
+      width: 100%;
+      height: 100%; }
+.storeAppointment .oil-box .oil-none {
+  font-size: 0.32rem;
+  color: #999; }
+.storeAppointment .time-choose .list .item {
+  display: flex;
+  border: none; }
+  .storeAppointment .time-choose .list .item .input-item {
+    flex: 1; }
+.storeAppointment .time-choose .tips {
+  font-size: 0.32rem;
+  color: #3057ed; }
+.storeAppointment .time-choose pre {
+  line-height: 0.56rem;
+  font-size: 0.32rem;
+  color: #666; }
+.storeAppointment .list .item {
+  margin-bottom: 0.25rem;
+  padding: 0 0.25rem;
+  background: #f3f3f3;
+  border: 0; }
+  .storeAppointment .list .item .item-content {
+    background: #fff;
+    border-radius: 0.05rem; }
+    .storeAppointment .list .item .item-content .item-left-cover {
+      float: left;
+      width: 2.3rem;
+      height: 2.95rem;
+      text-align: center; }
+      .storeAppointment .list .item .item-content .item-left-cover img {
+        margin-top: 0.35rem;
+        margin-bottom: 0.15rem;
+        width: 1.4rem;
+        height: 1.4rem; }
+      .storeAppointment .list .item .item-content .item-left-cover p {
+        margin: 0 auto;
+        width: 1.45rem;
+        color: #000;
+        background: #d8d8d8;
+        padding: 0.1rem;
+        font-size: 0.3rem;
+        border-radius: 0.1rem; }
+    .storeAppointment .list .item .item-content .item-main {
+      float: left;
+      margin-left: 0.25rem;
+      width: 6.65rem; }
+      .storeAppointment .list .item .item-content .item-main p {
+        font-size: 0.3rem;
+        color: #666; }
+      .storeAppointment .list .item .item-content .item-main p:nth-child(1) {
+        margin-top: 0.25rem;
+        height: 1rem;
+        font-size: 0.37rem;
+        color: #333;
+        overflow: unset;
+        text-overflow: unset;
+        white-space: pre-line; }
+      .storeAppointment .list .item .item-content .item-main .btn-list {
+        position: absolute;
+        top: 1.3rem;
+        right: 0.4rem; }
+        .storeAppointment .list .item .item-content .item-main .btn-list .btn-list-item {
+          float: left;
+          margin-left: 0.3rem;
+          width: 1.7rem;
+          height: 0.5rem;
+          line-height: 0.5rem;
+          border-radius: 0.25rem;
+          font-size: 0.3rem;
+          text-align: center; }
+    .storeAppointment .list .item .item-content .item-footer {
+      float: right;
+      margin-top: 0.3rem;
+      width: 6rem; }
+      .storeAppointment .list .item .item-content .item-footer p {
+        font-size: 0.3rem;
+        color: #858585;
+        text-align: right; }
+    .storeAppointment .list .item .item-content .right-tab {
+      position: absolute;
+      right: 0.2rem;
+      width: 1.4rem;
+      height: 0.9rem; }
+    .storeAppointment .list .item .item-content .right-select {
+      position: absolute;
+      top: 1rem;
+      right: 0.9rem;
+      content: '';
+      width: 0.6rem;
+      height: 0.6rem;
+      border: 0.01rem solid #00ae1c;
+      border-radius: 50%; }
+      .storeAppointment .list .item .item-content .right-select img {
+        width: 100%;
+        height: 100%; }
+.storeAppointment .car-list-box {
+  /*z-index: 2;
+  position: absolute;
+  top: 0;
+  width: 10rem;
+  background: #fff;*/ }
+.storeAppointment #startDate {
+  height: 34px;
+  line-height: 34px; }
+.storeAppointment #startTime {
+  height: 34px;
+  line-height: 34px; }
+
+.appointmentResult .btn-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.6rem;
+  width: 0.6rem;
+  height: 0.6rem; }
+.appointmentResult .result-img {
+  position: absolute;
+  top: 1.6rem;
+  left: 50%;
+  width: 3rem;
+  height: 3rem;
+  transform: translate(-50%, 0); }
+.appointmentResult .title {
+  position: absolute;
+  top: 5.5rem;
+  width: 100%;
+  font-weight: bold;
+  font-size: 0.45rem;
+  color: #2a51e4;
+  text-align: center; }
+.appointmentResult .content {
+  position: absolute;
+  top: 6.5rem;
+  width: 100%;
+  font-size: 0.32rem;
+  color: #2a51e4;
+  text-align: center; }
+.appointmentResult .btn-mine {
+  position: absolute;
+  top: 8rem;
+  left: 50%;
+  font-size: 0.32rem !important;
+  transform: translate(-50%, 0); }
+
+/*# sourceMappingURL=store2.css.map */

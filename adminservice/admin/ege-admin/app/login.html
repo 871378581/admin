@@ -38,8 +38,8 @@
         <p><!--<a href="javascript:;" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>-->
     </form>
 </div>
-<script src="/egecarservice/admin/ege-admin/frame/layui/layui.js"></script>
-<script type="text/javascript" src="/egecarservice/admin/ege-admin/js/index.js"></script>
+<script src="/adminservice/admin/ege-admin/frame/layui/layui.js"></script>
+<script type="text/javascript" src="/adminservice/admin/ege-admin/js/index.js"></script>
 <script type="text/javascript">
     layui.use(['form'], function () {
 
@@ -74,7 +74,7 @@
                 localStorage.setItem("timeOut",new Date().getTime()+60*60*1000*168);
                 layer.msg("登录成功！", {time: 700},
                   function(){
-                    window.location.href="/egecarservice/admin/ege-admin/index.html";
+                    window.location.href="/adminservice/admin/ege-admin/index.html";
                   }
                 );
               }else{

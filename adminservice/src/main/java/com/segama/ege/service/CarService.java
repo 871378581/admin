@@ -75,7 +75,7 @@ public class CarService {
         }
 
         for (CarType carType : carTypes) {
-            String url = String.format("%s/egecarservice/demo/car/%s.png", cacheService.get(SYSTEM_CURRENT_API_HOST), carType.getBrand_code());
+            String url = String.format("%s/adminservice/demo/car/%s.png", cacheService.get(SYSTEM_CURRENT_API_HOST), carType.getBrand_code());
             carType.setLogo_url(url);
         }
     }

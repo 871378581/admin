@@ -7,7 +7,7 @@ ionicApp.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvide
     if ($.isEmptyObject(COOKIE)) {
       //alert("not login. redirect to wechat auth.");
       var state = "abc";
-      // $.saveRefLocation(state, "/egecarservice/h5/merchant/index.html");
+      // $.saveRefLocation(state, "/adminservice/h5/merchant/index.html");
       $.saveRefLocation(state, location.pathname + window.location.hash);
       location.href = "/ege/api/wechat/browser/auth?state=" + state;
     } else {

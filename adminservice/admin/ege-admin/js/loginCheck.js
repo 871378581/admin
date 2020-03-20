@@ -13,7 +13,7 @@ function init(){
                         localStorage.removeItem("token");
                         localStorage.removeItem("account");
                         localStorage.removeItem("timeOut");
-                        location.href="/egecarservice/admin/ege-admin/app/login.html";
+                        location.href="/adminservice/admin/ege-admin/app/login.html";
                     });
                 }
             });
@@ -38,7 +38,7 @@ function init(){
                                 localStorage.removeItem("token");
                                 localStorage.removeItem("account");
                                 localStorage.removeItem("timeOut");
-                                location.href="/egecarservice/admin/ege-admin/app/login.html";
+                                location.href="/adminservice/admin/ege-admin/app/login.html";
                             });
                         });
                     }

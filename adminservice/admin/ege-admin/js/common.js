@@ -5,7 +5,7 @@ layui.use(['form', 'layer'], function () {
   layer = layui.layer;
   if(localStorage.getItem("token") == null){
       layer.msg('未登陆！',{time:700}, function(index){
-         location.href="/egecarservice/admin/ege-admin/app/login.html";
+         location.href="/adminservice/admin/ege-admin/app/login.html";
       });
   }
 });
@@ -21,6 +21,6 @@ function logout(){
   //   }
   // });
   layer.msg('已退出！',{time:700}, function(index){
-     location.href="/egecarservice/admin/ege-admin/app/login.html"
+     location.href="/adminservice/admin/ege-admin/app/login.html"
   });
 }

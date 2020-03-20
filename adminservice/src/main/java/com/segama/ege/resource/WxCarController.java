@@ -297,8 +297,8 @@ public class WxCarController extends BaseController {
     }
 
     private String renderCarTypeUrl(String brand_code, String type_code) {
-        return String.format("%s/egecarservice/demo/car/type/car.png", cacheService.get(SYSTEM_CURRENT_API_HOST));
-//        return String.format("%s/egecarservice/demo/car/type/%s/%s.png", cacheService.get(SYSTEM_CURRENT_API_HOST), brand_code, type_code);
+        return String.format("%s/adminservice/demo/car/type/car.png", cacheService.get(SYSTEM_CURRENT_API_HOST));
+//        return String.format("%s/adminservice/demo/car/type/%s/%s.png", cacheService.get(SYSTEM_CURRENT_API_HOST), brand_code, type_code);
     }
 
     @PostMapping("/deleteCarById")

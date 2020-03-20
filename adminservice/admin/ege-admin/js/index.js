@@ -3,7 +3,7 @@
  * @author: hxj
  */
 layui.config({
-    base: '/egecarservice/admin/ege-admin/frame/static/js/'   // 模块目录
+    base: '/adminservice/admin/ege-admin/frame/static/js/'   // 模块目录
 }).extend({                         // 模块别名
     vip_nav: 'vip_nav'
     , vip_tab: 'vip_tab'

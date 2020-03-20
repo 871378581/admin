@@ -214,7 +214,7 @@ public class WxOrderService {
             carTypeExample.createCriteria().andCar_typeEqualTo(car.getCar_type_name());
             List<CarType> carTypes = this.carTypeMapper.selectByExample(carTypeExample);
             if (!CollectionUtils.isEmpty(carTypes)) {
-                car_type_img_url = String.format("%s/egecarservice/demo/car/%s.png", cacheService.get(SYSTEM_CURRENT_API_HOST), carTypes.get(0).getBrand_code());
+                car_type_img_url = String.format("%s/adminservice/demo/car/%s.png", cacheService.get(SYSTEM_CURRENT_API_HOST), carTypes.get(0).getBrand_code());
             }
         }
         Pay pay = this.payMapper.selectByPrimaryKey(serviceOrder.getPay_id());
@@ -691,7 +691,7 @@ public class WxOrderService {
                 serviceOrder.setChild_status(ServiceOrderStatus.order_succeed.getCode());
                 try {
                     String prefix = cacheService.getConfig(Constants.SYSTEM_CURRENT_API_HOST);
-                    String url = prefix + "/egecarservice/h5/merchant/indexMerchant.html#/tab/scan?orderId=" + serviceOrder.getId();
+                    String url = prefix + "/adminservice/h5/merchant/indexMerchant.html#/tab/scan?orderId=" + serviceOrder.getId();
                     String img_url = fileSerivce.generateQRCodeImage(url);
                     serviceOrder.setOrder_qr_code(img_url);
                     ret = this.serviceOrderMapper.updateByPrimaryKeySelective(serviceOrder);
@@ -764,7 +764,7 @@ public class WxOrderService {
             serviceOrder.setChild_status(ServiceOrderStatus.order_succeed.getCode());
             try {
                 String prefix = cacheService.getConfig(Constants.SYSTEM_CURRENT_API_HOST);
-                String url = prefix + "/egecarservice/h5/merchant/indexMerchant.html#/tab/scan?orderId=" + serviceOrder.getId();
+                String url = prefix + "/adminservice/h5/merchant/indexMerchant.html#/tab/scan?orderId=" + serviceOrder.getId();
                 serviceOrder.setGmt_service_date(serviceOrder.getGmt_change_service_date());
                 serviceOrder.setGmt_service_begin_time(serviceOrder.getGmt_change_service_begin_time());
                 serviceOrder.setGmt_service_end_time(serviceOrder.getGmt_change_service_end_time());

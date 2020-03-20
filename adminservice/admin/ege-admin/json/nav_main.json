@@ -1,104 +1,5 @@
 {
-  "data": [{
-    "text": "会员管理",
-    "icon": "&#xe620;",
-    "subset": [
-      {
-        "text": "会员管理",
-        "icon": "&#xe621;",
-        "href": "app/wx_user_manage/manage.html"
-      }
-    ]
-  },
-    {
-      "text": "基础设置",
-      "icon": "&#xe620;",
-      "subset": [
-        {
-          "text": "车型管理",
-          "icon": "&#xe621;",
-          "href": "app/car_type_manage/car-type-manage.html"
-        },
-        {
-          "text": "banner管理",
-          "icon": "&#xe621;",
-          "href": "app/banner_manage/banner-manage.html"
-        },
-        {
-          "text": "热门推荐",
-          "icon": "&#xe621;",
-          "href": "app/hot_recommend_manage/hot-recommend-manage.html"
-        },
-        {
-          "text": "机油管理",
-          "icon": "&#xe621;",
-          "href": "app/engine_oil_manage/engine-oil-manage.html"
-        },
-        {
-          "text": "商务合作申请管理",
-          "icon": "&#xe621;",
-          "href": "app/business_cooperate_apply_manage/manage.html"
-        },
-        {
-          "text": "投诉建议管理",
-          "icon": "&#xe621;",
-          "href": "app/complain_suggest_manage/complain-suggest-manage.html"
-        }
-      ]
-    },
-    {
-      "text": "区域管理",
-      "icon": "&#xe620;",
-      "subset": [
-        {
-          "text": "区域管理",
-          "icon": "&#xe621;",
-          "href": "app/prov_city_area/prov-city-area-manage.html"
-        }
-      ]
-    },
-    {
-      "text": "店铺管理",
-      "icon": "&#xe620;",
-      "subset": [
-        {
-          "text": "店铺管理",
-          "icon": "&#xe621;",
-          "href": "app/shop_manage/shop-manage.html"
-        },
-        {
-          "text": "门店机油供应",
-          "icon": "&#xe621;",
-          "href": "app/shop_oil_supply_manage/manage.html"
-        },
-        {
-          "text": "店铺评价管理",
-          "icon": "&#xe621;",
-          "href": "app/shop_evaluate_detail/manage.html"
-        },
-        {
-          "text": "门店管理员管理",
-          "icon": "&#xe621;",
-          "href": "app/shop-admin-user/manage.html"
-        },
-        {
-          "text": "店铺图片资源管理",
-          "icon": "&#xe621;",
-          "href": "app/shop_photo_manage/manage.html"
-        }
-      ]
-    },
-    {
-      "text": "会员卡管理",
-      "icon": "&#xe620;",
-      "subset": [
-        {
-          "text": "会员卡管理",
-          "icon": "&#xe621;",
-          "href": "app/membership_card_manage/membership-card-manage.html"
-        }
-      ]
-    },
+  "data": [
     {
       "text": "系统设置",
       "icon": "&#xe620;",
@@ -119,6 +20,11 @@
           "href": "app/menu/menu-manage.html"
         },
         {
+          "text": "菜单组管理",
+          "icon": "&#xe621;",
+          "href": "app/menu_group/menu-manage.html"
+        },
+        {
           "text": "角色菜单关系管理",
           "icon": "&#xe621;",
           "href": "app/role_menu_relation/role-menu-relation-manage.html"
@@ -132,22 +38,6 @@
           "text": "系统配置项管理",
           "icon": "&#xe621;",
           "href": "app/system_config/system-config-manage.html"
-        }
-      ]
-    },
-    {
-      "text": "车辆管理",
-      "icon": "&#xe620;",
-      "subset": [
-        {
-          "text": "车辆管理",
-          "icon": "&#xe621;",
-          "href": "app/car_manage/manage.html"
-        },
-        {
-          "text": "绑定激活记录",
-          "icon": "&#xe621;",
-          "href": "app/member_card_bind_log_manage/manage.html"
         }
       ]
     }

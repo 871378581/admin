@@ -17,7 +17,7 @@ sleep 10
 
 echo "preload checking..."
 echo "============================================="
-curl -i "http://localhost:8080/ege/api/test/preload"
+curl -i "http://localhost:80/ege/api/test/preload"
 echo "============================================="
 echo "preload done"
 

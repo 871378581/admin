@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-echo "git checkout dev"
-git checkout dev
+echo "git checkout develop"
+git checkout develop
 echo "git pull"
 git pull
 echo "building package..."

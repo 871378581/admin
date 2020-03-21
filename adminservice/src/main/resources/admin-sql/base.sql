@@ -119,3 +119,6 @@ CREATE TABLE `admin_user_role_relation` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `user_id_role_id_UNIQUE` (`user_id`,`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+#插入管理员
+insert into admin_user(gmt_create,gmt_modify,creator_account,modifier_account,account,password,version)values(now(),now(),'sys','sys','admin','admin',1);

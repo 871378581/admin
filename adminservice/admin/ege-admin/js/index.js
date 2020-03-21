@@ -11,8 +11,8 @@ layui.config({
 });
 
 //全局接口变量
-var port=":8080";
-//var port="";
+//var port=":8080";
+var port="";
 var prefix = "/ege/api";
 var wholeUrl = window.location.protocol+"//"+window.location.host+port+prefix;
 var downUrl = window.location.protocol+"//"+window.location.host;

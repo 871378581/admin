@@ -3,11 +3,9 @@ package com.segama.ege.admin.controller;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.segama.ege.admin.vo.BaseVO;
-import com.segama.ege.entity.ShopAdminMenu;
-import com.segama.ege.entity.ShopAdminMenuExample;
-import com.segama.ege.entity.AdminRoleMenuRelationExample;
-import com.segama.ege.entity.ShopAdminRoleMenuRelationExample;
-import com.segama.ege.repository.*;
+import com.segama.ege.entity.ThChannelManage;
+import com.segama.ege.entity.ThChannelManageExample;
+import com.segama.ege.repository.ThChannelManageMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +14,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 /**
  * @author hxj
  * @version 1.0
@@ -29,42 +25,37 @@ import java.util.Map;
  * @date 2019-10-07 14:33
  */
 @RestController
-@RequestMapping("/ege/api/admin/shop_menu")
+@RequestMapping("/ege/api/admin/channel_manage")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class ShopMenuController {
+public class ChannelManageController {
+    
     @Resource
-    private ShopAdminMenuMapper shopAdminMenuMapper;
+    private ThChannelManageMapper thChannelManageMapper;
 
-    @Resource
-    private ShopAdminRoleMenuRelationMapper shopAdminRoleMenuRelationMapper;
-
-
-    private static Logger LOG = LoggerFactory.getLogger(ShopMenuController.class);
+    private static Logger LOG = LoggerFactory.getLogger(ChannelManageController.class);
 
     @RequestMapping("/list")
     public BaseVO list(
-            @RequestParam("menuName") String menuName
+            @RequestParam(value = "menuName",required = false) String menuName
             ,@RequestParam("limit") Integer pageSize,
             @RequestParam("page") Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
         try {
-            ShopAdminMenuExample adminMenuExample = new ShopAdminMenuExample();
-            ShopAdminMenuExample.Criteria adminMenuExampleCriteria = adminMenuExample.createCriteria();
-            if(StringUtils.isNotEmpty(menuName)) {
-                adminMenuExampleCriteria.andMenu_nameLike("%" + menuName + "%");
-            }
-            int count = shopAdminMenuMapper.countByExample(adminMenuExample);
+            ThChannelManageExample adminMenuExample = new ThChannelManageExample();
+            ThChannelManageExample.Criteria adminMenuExampleCriteria = adminMenuExample.createCriteria();
+            
+            int count = thChannelManageMapper.countByExample(adminMenuExample);
             adminMenuExample.setPageCount(pageSize);
             adminMenuExample.setPageIndex(pageIndex);
             adminMenuExample.setOrderByClause("gmt_create desc");
-            List<ShopAdminMenu> adminMenus = shopAdminMenuMapper.selectByExample(adminMenuExample);
+            List<ThChannelManage> adminMenus = thChannelManageMapper.selectByExample(adminMenuExample);
             baseVO.setData(adminMenus);
             baseVO.setSuccess(true);
             baseVO.setCount(count);
             baseVO.setCode(0);
         }catch (Exception e){
             baseVO.setSuccess(false);
-            LOG.error("ShopMenuController#list error",e);
+            LOG.error("ThChannelManageController#list error",e);
         }
         return baseVO;
     }
@@ -76,11 +67,7 @@ public class ShopMenuController {
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("id为空不能删除！");
         }else {
-            shopAdminMenuMapper.deleteByPrimaryKey(id);
-            ShopAdminRoleMenuRelationExample example = new ShopAdminRoleMenuRelationExample();
-            ShopAdminRoleMenuRelationExample.Criteria criteria = example.createCriteria();
-            criteria.andMenu_idEqualTo(id);
-            shopAdminRoleMenuRelationMapper.deleteByExample(example);
+            thChannelManageMapper.deleteByPrimaryKey(id);
             baseVO.setSuccess(true);
         }
         return baseVO;
@@ -99,24 +86,19 @@ public class ShopMenuController {
                 baseVO.setSuccess(false);
                 return baseVO;
             }
-            ShopAdminMenu adminMenu = shopAdminMenuMapper.selectByPrimaryKey(id);
-            if(!StringUtils.isEmpty(menuName)){
-                adminMenu.setMenu_name(menuName);
-            }
-            if(!StringUtils.isEmpty(url)){
-                adminMenu.setUrl(url);
-            }
+            ThChannelManage adminMenu = thChannelManageMapper.selectByPrimaryKey(id);
+           /*
             if(!StringUtils.isEmpty(group)){
                 adminMenu.setGroup(group);
-            }
+            }*/
             adminMenu.setGmt_modify(new Date());
             adminMenu.setModifier_account(account);
-            shopAdminMenuMapper.updateByPrimaryKey(adminMenu);
+            thChannelManageMapper.updateByPrimaryKey(adminMenu);
             baseVO.setSuccess(true);
         } catch (Exception e) {
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("编辑异常！");
-            LOG.error("ShopMenuController#edit error",e);
+            LOG.error("ThChannelManageController#edit error",e);
         }
         return baseVO;
     }
@@ -135,26 +117,15 @@ public class ShopMenuController {
                 baseVO.setSuccess(false);
                 return baseVO;
             }
-            ShopAdminMenu adminMenu = new ShopAdminMenu();
-            if(!StringUtils.isEmpty(menuName)){
-                adminMenu.setMenu_name(menuName);
-            }
-
-            if(!StringUtils.isEmpty(url)){
-                adminMenu.setUrl(url);
-            }
-            if(!StringUtils.isEmpty(group)){
-                adminMenu.setGroup(group);
-            }
+            ThChannelManage adminMenu = new ThChannelManage();
             adminMenu.setCreator_account(account);
             adminMenu.setModifier_account(account);
-            adminMenu.setVersion(0);
             adminMenu.setGmt_create(new Date());
             adminMenu.setGmt_modify(new Date());
-            shopAdminMenuMapper.insert(adminMenu);
+            thChannelManageMapper.insert(adminMenu);
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ShopMenuController#add error",e);
+            LOG.error("ThChannelManageController#add error",e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("添加异常！");
         }
@@ -169,28 +140,28 @@ public class ShopMenuController {
                 baseVO.setErrorMsg("id为不能为空！");
                 baseVO.setSuccess(false);
             }else {
-                ShopAdminMenu adminMenu = shopAdminMenuMapper.selectByPrimaryKey(id);
+                ThChannelManage adminMenu = thChannelManageMapper.selectByPrimaryKey(id);
                 baseVO.setData(adminMenu);
             }
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ShopMenuController#get Exception input param is id:"+id,e);
+            LOG.error("ThChannelManageController#get Exception input param is id:"+id,e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询信息异常！");
         }
         return baseVO;
     }
 
-    @RequestMapping("/get_all_menu")
+    @RequestMapping("/get_all_channel")
     public BaseVO getAllMenu() {
         BaseVO baseVO = new BaseVO();
         try {
-            List<ShopAdminMenu> adminMenus = shopAdminMenuMapper.selectByExample(new ShopAdminMenuExample());
+            List<ThChannelManage> adminMenus = thChannelManageMapper.selectByExample(new ThChannelManageExample());
             List<Map<String,Object>> result = Lists.newArrayList();
             if(!CollectionUtils.isEmpty(adminMenus)){
-                for (ShopAdminMenu menuInfo : adminMenus) {
+                for (ThChannelManage menuInfo : adminMenus) {
                     Map<String,Object> map = Maps.newHashMap();
-                    map.put("label",menuInfo.getMenu_name());
+                    map.put("label",menuInfo.getChannel_name());
                     map.put("value",menuInfo.getId());
                     result.add(map);
                 }
@@ -198,7 +169,7 @@ public class ShopMenuController {
             baseVO.setData(result);
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ShopMenuController#getAllMenu error",e);
+            LOG.error("ThChannelManageController#getAllMenu error",e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询信息异常！");
         }

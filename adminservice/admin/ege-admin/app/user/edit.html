@@ -43,6 +43,14 @@
                   </select>
               </div>
           </div>
+          <div class="layui-inline" disabled="disabled" id="userSelectA">
+              <label class="layui-form-label">父级账号</label>
+              <div class="layui-input-inline">
+                  <select name="parent_account" id="userSelect" >
+
+                  </select>
+              </div>
+          </div>
           <div class="layui-inline">
               <label class="layui-form-label">渠道名称</label>
               <div class="layui-input-inline">
@@ -198,6 +206,19 @@
           var index = parent.tableIns.reload(); //先得到当前iframe层的索引
           //parent.layer.close(index); //再执行关闭
         });
+        $("#userSelectA").hide();
+        form.on('select(channel_type)', function(data){
+            console.log(data.value);
+            var type=data.value;
+            if(type==2){
+                $("#userSelectA").show();
+            }else{
+                $("#userSelectA").hide();
+                $("#userSelectA").val("")
+            }
+            form.render();
+        });
+
         $(()=>{
           var url = location.href;
           var id = new URL(url).searchParams.get("id");
@@ -216,6 +237,9 @@
                 console.log(result);
                 if(result.success){
                     if(result.data!=null){
+                        if(result.data.channel_type==2){
+                            $("#userSelectA").show();
+                        }
                         form.val("channelForm", result.data);
                         $("#gmt_create").val(Format(result.data.gmt_create,"yyyy-MM-dd hh:mm:ss"));
                         $("#gmt_modify").val(Format(result.data.gmt_modify,"yyyy-MM-dd hh:mm:ss"));
@@ -229,31 +253,32 @@
             });
           }
 
-        $.ajax({
-            url: wholeUrl + "/admin/menu_group/get_all_channel?token=" + localStorage.getItem("token"),
-            method: "post",
-            contentType: "application/x-www-form-urlencoded",
-            dataType: "json",
-            data: {},
-            async: false,
-            success: function (result) {
-                console.log(result);
-                if (result.success) {
-                    if (result.data != null) {
-                        var menuList = result.data;
-                        var html = '<option value="">请选择</option>';
-                        for (var i = 0; i < menuList.length; i++) {
-                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
-                        }
-                        $("#menuGroupSelect").html(html);
-                        form.render();
-                    }
-                } else {
-                    layer.msg("渠道数据加载异常！");
-                }
 
-            }
-        });
+            $.ajax({
+                url:wholeUrl+"/admin/user/get_all_usersA?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                data:{},
+                async:false,
+                success:function(result){
+                    console.log(result);
+                    if(result.success){
+                        if(result.data!=null){
+                            var roleList = result.data;
+                            var html = '<option value="">请选择</option>';
+                            for(var i=0;i<roleList.length;i++){
+                                html = html+'<option value="'+roleList[i].value+'">'+roleList[i].label+'</option>';
+                            }
+                            $("#userSelect").html(html);
+                            form.render();
+                        }
+                    }else{
+                        layer.msg("数据加载异常！");
+                    }
+
+                }
+            });
 
         });
 

@@ -56,6 +56,8 @@ public class AdminUser implements Serializable {
 
     private String description;
 
+    private String parent_account;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -266,6 +268,14 @@ public class AdminUser implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getParent_account() {
+        return parent_account;
+    }
+
+    public void setParent_account(String parent_account) {
+        this.parent_account = parent_account == null ? null : parent_account.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -298,6 +308,7 @@ public class AdminUser implements Serializable {
         sb.append(", open_bank_area=").append(open_bank_area);
         sb.append(", real_name=").append(real_name);
         sb.append(", description=").append(description);
+        sb.append(", parent_account=").append(parent_account);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

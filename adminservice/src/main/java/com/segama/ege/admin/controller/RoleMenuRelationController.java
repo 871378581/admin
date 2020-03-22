@@ -135,7 +135,11 @@ public class RoleMenuRelationController{
             baseVO.setSuccess(true);
         } catch (Exception e) {
             LOG.error("RoleMenuRelationController#edit Exception",e);
-            baseVO.setErrorMsg("编辑异常");
+            String msg="";
+            if(!StringUtils.isEmpty(e.getMessage())&&e.getMessage().contains("Duplicate")){
+                msg="请勿重复添加！";
+            }
+            baseVO.setErrorMsg("编辑异常"+msg);
             baseVO.setSuccess(false);
         }
         return baseVO;
@@ -175,7 +179,11 @@ public class RoleMenuRelationController{
             baseVO.setSuccess(true);
         } catch (Exception e) {
             LOG.error("RoleMenuRelationResource#add Exception",e);
-            baseVO.setErrorMsg("添加异常");
+            String msg="";
+            if(!StringUtils.isEmpty(e.getMessage())&&e.getMessage().contains("Duplicate")){
+                msg="请勿重复添加！";
+            }
+            baseVO.setErrorMsg("添加异常"+msg);
             baseVO.setSuccess(false);
         }
         return baseVO;

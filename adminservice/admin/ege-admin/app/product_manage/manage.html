@@ -25,9 +25,9 @@
     </span>
 
     <span class="fr">
-        <span class="layui-form-label">菜单名：</span>
+        <span class="layui-form-label">产品名称：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="searchMenuName" autocomplete="off" placeholder="请输入菜单名" class="layui-input">
+            <input type="text"  id="searchMenuName" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
         </div>
         <button class="layui-btn mgl-20" id="btn-search">查询</button>
     </span>
@@ -59,20 +59,11 @@
             , cols: [[                  //标题栏
               {checkbox: true, sort: true, fixed: true, space: true}
               , {field: 'id', title: 'ID', width: 80}
-              , {field: 'channel_code', title: '渠道编码', width: 120}
-              , {field: 'channel_name', title: '渠道名称', width: 120}
-              , {field: 'main_body', title: '主体', width: 170}
-              , {field: 'contacter', title: '联系人', width: 170}
-              , {field: 'contacter_phone', title: '联系电话', width: 170}
-              , {field: 'status', title: '状态', width: 170}
-              , {field: 'jieru_way', title: '接入方式', width: 170}
-              , {field: 'meiti_type', title: '媒体类型', width: 170}
-              , {field: 'meiti_pwd', title: '媒体密码', width: 170}
-              , {field: 'meiti_account', title: '媒体账户', width: 170}
-              , {field: 'account_id', title: '账户id', width: 170}
-              , {field: 'bank_card', title:'银行卡号', width: 170}
-              , {field: 'open_bank_area', title:'开户行', width: 170}
-              , {field: 'real_name', title:'真实姓名', width: 170}
+              , {field: 'product_code', title: '产品编码', width: 120}
+              , {field: 'product_name', title: '产品名称', width: 120}
+              , {field: 'business_name', title: '商户名称', width: 120}
+              , {field: 'product_status', title: '产品状态', width: 170,templet:'<div>{{ d.product_status==1?"上线":"下线" }}</div>'}
+              , {field: 'url', title: '连接', width: 170}
               , {field: 'description', title:'描述', width: 170}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
@@ -82,13 +73,13 @@
             ]]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
-            , url: wholeUrl+"/admin/channel_manage/list?token="+localStorage.getItem("token")
+            , url: wholeUrl+"/admin/product_manage/list?token="+localStorage.getItem("token")
             , method: 'post'
             , page: true
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{menuName:$("#searchMenuName").val()}
+            , where:{product_name:$("#searchMenuName").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -121,13 +112,13 @@
             type: 2,
             title: '添加'
             ,area:['100%','100%']
-            ,content:"/adminservice/admin/ege-admin/app/channel_manage/add.html"
+            ,content:"/adminservice/admin/ege-admin/app/product_manage/add.html"
           });
         });
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{menuName:$("#searchMenuName").val()}});
+            tableIns.reload({where:{product_name:$("#searchMenuName").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){
@@ -137,11 +128,11 @@
             layer.confirm('确定删除？', function(index){
               //obj.del();
               $.ajax({
-                url:wholeUrl+"/admin/channel_manage/delete?token="+localStorage.getItem("token"),
+                url:wholeUrl+"/admin/product_manage/delete?token="+localStorage.getItem("token"),
                 method:"post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType:"json",
-                data:{id:data.id},
+                data:{product_code:data.product_code},
                 success:function(result){
                   console.log(result);
                   if(result.success){
@@ -163,7 +154,7 @@
               type: 2,
               title: '编辑'
                 ,area:['100%','100%']
-              ,content:"/adminservice/admin/ege-admin/app/channel_manage/edit.html?id="+data.id
+              ,content:"/adminservice/admin/ege-admin/app/product_manage/edit.html?id="+data.id
             });
 
           }

@@ -1874,6 +1874,76 @@ public class AdminUserExample {
             addCriterion("`description` not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andParent_accountIsNull() {
+            addCriterion("`parent_account` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountIsNotNull() {
+            addCriterion("`parent_account` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountEqualTo(String value) {
+            addCriterion("`parent_account` =", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountNotEqualTo(String value) {
+            addCriterion("`parent_account` <>", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountGreaterThan(String value) {
+            addCriterion("`parent_account` >", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountGreaterThanOrEqualTo(String value) {
+            addCriterion("`parent_account` >=", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountLessThan(String value) {
+            addCriterion("`parent_account` <", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountLessThanOrEqualTo(String value) {
+            addCriterion("`parent_account` <=", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountLike(String value) {
+            addCriterion("`parent_account` like", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountNotLike(String value) {
+            addCriterion("`parent_account` not like", value, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountIn(List<String> values) {
+            addCriterion("`parent_account` in", values, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountNotIn(List<String> values) {
+            addCriterion("`parent_account` not in", values, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountBetween(String value1, String value2) {
+            addCriterion("`parent_account` between", value1, value2, "parent_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andParent_accountNotBetween(String value1, String value2) {
+            addCriterion("`parent_account` not between", value1, value2, "parent_account");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

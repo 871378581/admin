@@ -141,6 +141,10 @@ public class AdminUserSqlProvider {
             VALUES("`description`", "#{description,jdbcType=VARCHAR}");
         }
         
+        if (record.getParent_account() != null) {
+            VALUES("`parent_account`", "#{parent_account,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -176,6 +180,7 @@ public class AdminUserSqlProvider {
         SELECT("`open_bank_area`");
         SELECT("`real_name`");
         SELECT("`description`");
+        SELECT("`parent_account`");
         FROM("`admin_user`");
         applyWhere(example, false);
         
@@ -303,6 +308,10 @@ public class AdminUserSqlProvider {
             SET("`description` = #{record.description,jdbcType=VARCHAR}");
         }
         
+        if (record.getParent_account() != null) {
+            SET("`parent_account` = #{record.parent_account,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -337,6 +346,7 @@ public class AdminUserSqlProvider {
         SET("`open_bank_area` = #{record.open_bank_area,jdbcType=VARCHAR}");
         SET("`real_name` = #{record.real_name,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        SET("`parent_account` = #{record.parent_account,jdbcType=VARCHAR}");
         
         AdminUserExample example = (AdminUserExample) parameter.get("example");
         applyWhere(example, true);
@@ -445,6 +455,10 @@ public class AdminUserSqlProvider {
         
         if (record.getDescription() != null) {
             SET("`description` = #{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getParent_account() != null) {
+            SET("`parent_account` = #{parent_account,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

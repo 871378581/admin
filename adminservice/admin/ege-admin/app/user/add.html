@@ -37,9 +37,17 @@
       <div class="layui-inline">
           <label class="layui-form-label">类型</label>
           <div class="layui-input-inline">
-              <select name="channel_type" lay-filter="status"  lay-verify="required">
+              <select name="channel_type" lay-filter="channel_type"  lay-verify="required">
                   <option value="1">A</option>
                   <option value="2">b</option>
+              </select>
+          </div>
+      </div>
+      <div class="layui-inline" id="userSelectA">
+          <label class="layui-form-label">父级账号</label>
+          <div class="layui-input-inline">
+              <select name="parent_account" id="userSelect" >
+
               </select>
           </div>
       </div>
@@ -199,28 +207,40 @@
           var index = parent.tableIns.reload(); //先得到当前iframe层的索引
           //parent.layer.close(index); //再执行关闭
         });
+        $("#userSelectA").hide();
+        form.on('select(channel_type)', function(data){
+            console.log(data.value);
+            var type=data.value;
+            if(type==2){
+                $("#userSelectA").show();
+            }else{
+                $("#userSelectA").hide();
+                $("#userSelectA").val("");
+            }
+            form.render();
+        });
 
         $.ajax({
-            url: wholeUrl + "/admin/menu_group/get_all_menu_group?token=" + localStorage.getItem("token"),
-            method: "post",
+            url:wholeUrl+"/admin/user/get_all_usersA?token="+localStorage.getItem("token"),
+            method:"post",
             contentType: "application/x-www-form-urlencoded",
-            dataType: "json",
-            data: {},
-            async: false,
-            success: function (result) {
+            dataType:"json",
+            data:{},
+            async:false,
+            success:function(result){
                 console.log(result);
-                if (result.success) {
-                    if (result.data != null) {
-                        var menuList = result.data;
+                if(result.success){
+                    if(result.data!=null){
+                        var roleList = result.data;
                         var html = '<option value="">请选择</option>';
-                        for (var i = 0; i < menuList.length; i++) {
-                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                        for(var i=0;i<roleList.length;i++){
+                            html = html+'<option value="'+roleList[i].value+'">'+roleList[i].label+'</option>';
                         }
-                        $("#menuGroupSelect").html(html);
+                        $("#userSelect").html(html);
                         form.render();
                     }
-                } else {
-                    layer.msg("菜单数据加载异常！");
+                }else{
+                    layer.msg("数据加载异常！");
                 }
 
             }

@@ -91,6 +91,7 @@ CREATE TABLE `admin_user` (
   `creator_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `modifier_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `version` int(11) NOT NULL DEFAULT '0',
   `token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

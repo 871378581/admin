@@ -43,7 +43,7 @@ public interface AdminUserMapper {
         "`meiti_pwd`, `meiti_account`, ",
         "`account_id`, `bank_card`, ",
         "`open_bank_area`, `real_name`, ",
-        "`description`)",
+        "`description`, `parent_account`)",
         "values (#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
         "#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
@@ -56,7 +56,7 @@ public interface AdminUserMapper {
         "#{meiti_pwd,jdbcType=VARCHAR}, #{meiti_account,jdbcType=VARCHAR}, ",
         "#{account_id,jdbcType=VARCHAR}, #{bank_card,jdbcType=VARCHAR}, ",
         "#{open_bank_area,jdbcType=VARCHAR}, #{real_name,jdbcType=VARCHAR}, ",
-        "#{description,jdbcType=VARCHAR})"
+        "#{description,jdbcType=VARCHAR}, #{parent_account,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(AdminUser record);
@@ -92,7 +92,8 @@ public interface AdminUserMapper {
         @Result(column="bank_card", property="bank_card", jdbcType=JdbcType.VARCHAR),
         @Result(column="open_bank_area", property="open_bank_area", jdbcType=JdbcType.VARCHAR),
         @Result(column="real_name", property="real_name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="parent_account", property="parent_account", jdbcType=JdbcType.VARCHAR)
     })
     List<AdminUser> selectByExample(AdminUserExample example);
 
@@ -102,7 +103,7 @@ public interface AdminUserMapper {
         "`password`, `version`, `token`, `expire_time`, `channel_code`, `channel_name`, ",
         "`main_body`, `contacter`, `contacter_phone`, `status`, `channel_type`, `jieru_way`, ",
         "`meiti_type`, `meiti_pwd`, `meiti_account`, `account_id`, `bank_card`, `open_bank_area`, ",
-        "`real_name`, `description`",
+        "`real_name`, `description`, `parent_account`",
         "from `admin_user`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -132,7 +133,8 @@ public interface AdminUserMapper {
         @Result(column="bank_card", property="bank_card", jdbcType=JdbcType.VARCHAR),
         @Result(column="open_bank_area", property="open_bank_area", jdbcType=JdbcType.VARCHAR),
         @Result(column="real_name", property="real_name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="parent_account", property="parent_account", jdbcType=JdbcType.VARCHAR)
     })
     AdminUser selectByPrimaryKey(Long id);
 
@@ -171,7 +173,8 @@ public interface AdminUserMapper {
           "`bank_card` = #{bank_card,jdbcType=VARCHAR},",
           "`open_bank_area` = #{open_bank_area,jdbcType=VARCHAR},",
           "`real_name` = #{real_name,jdbcType=VARCHAR},",
-          "`description` = #{description,jdbcType=VARCHAR}",
+          "`description` = #{description,jdbcType=VARCHAR},",
+          "`parent_account` = #{parent_account,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(AdminUser record);

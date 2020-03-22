@@ -153,7 +153,11 @@ public class RoleController {
         } catch (Exception e) {
             LOG.error("AdminRoleController#add error",e);
             baseVO.setSuccess(false);
-            baseVO.setErrorMsg("添加异常！");
+            String msg = "";
+            if(StringUtils.isNotEmpty(e.getMessage())&&e.getMessage().contains("Duplicate")){
+                msg="请勿重复添加！";
+            }
+            baseVO.setErrorMsg("添加异常"+msg);
         }
         return baseVO;
     }

@@ -1,5 +1,6 @@
 {
-  "data": [{
+  "data": [
+    {
     "text": "渠道管理",
     "icon": "&#xe620;",
     "subset": [
@@ -9,6 +10,16 @@
         "href": "app/user/manage.html"
       }]
    },
+    {
+      "text": "产品管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "产品管理",
+          "icon": "&#xe621;",
+          "href": "app/product_manage/manage.html"
+        }]
+    },
     {
       "text": "系统设置",
       "icon": "&#xe620;",

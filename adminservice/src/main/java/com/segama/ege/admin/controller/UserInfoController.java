@@ -129,6 +129,9 @@ public class UserInfoController {
 
             adminRole.setGmt_modify(new Date());
             adminRole.setModifier_account(editAccount);
+            if(adminRoleNew.getChannel_type()==1){
+                adminRoleNew.setParent_account(null);
+            }
             BeanUtils.copyProperties(adminRoleNew,adminRole);
             adminUserMapper.updateByPrimaryKey(adminRole);
             baseVO.setSuccess(true);
@@ -157,6 +160,9 @@ public class UserInfoController {
             adminUser.setChannel_code(UUIDUtils.UUID());
             adminUser.setGmt_create(new Date());
             adminUser.setGmt_modify(new Date());
+            if(adminUser.getChannel_type()==1){
+                adminUser.setParent_account(null);
+            }
             adminUserMapper.insert(adminUser);
             baseVO.setSuccess(true);
         } catch (Exception e) {
@@ -205,6 +211,34 @@ public class UserInfoController {
             baseVO.setSuccess(true);
         } catch (Exception e) {
             LOG.error("AdminUserController#getAllMenu error",e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("查询用户信息信息异常！");
+        }
+        return baseVO;
+    }
+
+    //查询所有A
+    @RequestMapping("/get_all_usersA")
+    public BaseVO getAllUsers() {
+        BaseVO baseVO = new BaseVO();
+        try {
+            AdminUserExample adminUserExample = new AdminUserExample();
+            AdminUserExample.Criteria criteria = adminUserExample.createCriteria();
+            criteria.andChannel_typeEqualTo(1);
+            List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminUserExample);
+            List<Map<String,Object>> result = Lists.newArrayList();
+            if(!CollectionUtils.isEmpty(adminUsers)){
+                for (AdminUser adminUser : adminUsers) {
+                    Map<String,Object> map = Maps.newHashMap();
+                    map.put("label",adminUser.getAccount());
+                    map.put("value",adminUser.getAccount());
+                    result.add(map);
+                }
+            }
+            baseVO.setData(result);
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("AdminUserController#getAllUsers error",e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询用户信息信息异常！");
         }

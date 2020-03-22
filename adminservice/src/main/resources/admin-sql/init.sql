@@ -2,7 +2,7 @@
 INSERT INTO `admin_menu_group` (`id`,`gmt_create`,`gmt_modify`,`creator_account`,`modifier_account`,`group`,`sort`) VALUES (15,'2020-03-21 00:35:57','2020-03-21 00:35:57','admin','admin','系统设置',1);
 
 #菜单
-INSERT INTO `admin_menu` (`id`,`menu_name`,`gmt_create`,`gmt_modify`,`creator_account`,`modifier_account`,`url`,`group`,`version`) VALUES (49,'后台用户管理','2020-03-21 00:39:49','2020-03-21 00:39:49','admin','admin','app/user/user-manage.html','系统设置',0);
+INSERT INTO `admin_menu` (`id`,`menu_name`,`gmt_create`,`gmt_modify`,`creator_account`,`modifier_account`,`url`,`group`,`version`) VALUES (49,'渠道管理','2020-03-21 00:39:49','2020-03-21 00:39:49','admin','admin','app/user/manage.html','渠道管理',0);
 INSERT INTO `admin_menu` (`id`,`menu_name`,`gmt_create`,`gmt_modify`,`creator_account`,`modifier_account`,`url`,`group`,`version`) VALUES (50,'后台角色管理','2020-03-21 00:40:47','2020-03-21 00:40:47','admin','admin','app/role/role-manage.html','系统设置',0);
 INSERT INTO `admin_menu` (`id`,`menu_name`,`gmt_create`,`gmt_modify`,`creator_account`,`modifier_account`,`url`,`group`,`version`) VALUES (51,'菜单管理','2020-03-21 00:41:10','2020-03-21 00:41:10','admin','admin','app/menu/menu-manage.html','系统设置',0);
 INSERT INTO `admin_menu` (`id`,`menu_name`,`gmt_create`,`gmt_modify`,`creator_account`,`modifier_account`,`url`,`group`,`version`) VALUES (52,'菜单组管理','2020-03-21 00:41:29','2020-03-21 00:41:29','admin','admin','app/menu_group/menu-manage.html','系统设置',0);

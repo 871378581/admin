@@ -142,7 +142,7 @@
                 method:"post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType:"json",
-                data:{id:data.id},
+                data:{id:data.id,account:data.account},
                 success:function(result){
                   console.log(result);
                   if(result.success){

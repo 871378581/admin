@@ -35,12 +35,28 @@ public interface AdminUserMapper {
         "`creator_account`, `modifier_account`, ",
         "`account`, `password`, ",
         "`version`, `token`, ",
-        "`expire_time`)",
+        "`expire_time`, `channel_code`, ",
+        "`channel_name`, `main_body`, ",
+        "`contacter`, `contacter_phone`, ",
+        "`status`, `channel_type`, ",
+        "`jieru_way`, `meiti_type`, ",
+        "`meiti_pwd`, `meiti_account`, ",
+        "`account_id`, `bank_card`, ",
+        "`open_bank_area`, `real_name`, ",
+        "`description`)",
         "values (#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
         "#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
         "#{version,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, ",
-        "#{expire_time,jdbcType=TIMESTAMP})"
+        "#{expire_time,jdbcType=TIMESTAMP}, #{channel_code,jdbcType=VARCHAR}, ",
+        "#{channel_name,jdbcType=VARCHAR}, #{main_body,jdbcType=VARCHAR}, ",
+        "#{contacter,jdbcType=VARCHAR}, #{contacter_phone,jdbcType=VARCHAR}, ",
+        "#{status,jdbcType=INTEGER}, #{channel_type,jdbcType=INTEGER}, ",
+        "#{jieru_way,jdbcType=VARCHAR}, #{meiti_type,jdbcType=VARCHAR}, ",
+        "#{meiti_pwd,jdbcType=VARCHAR}, #{meiti_account,jdbcType=VARCHAR}, ",
+        "#{account_id,jdbcType=VARCHAR}, #{bank_card,jdbcType=VARCHAR}, ",
+        "#{open_bank_area,jdbcType=VARCHAR}, #{real_name,jdbcType=VARCHAR}, ",
+        "#{description,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(AdminUser record);
@@ -60,14 +76,33 @@ public interface AdminUserMapper {
         @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
         @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
         @Result(column="token", property="token", jdbcType=JdbcType.VARCHAR),
-        @Result(column="expire_time", property="expire_time", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="expire_time", property="expire_time", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_name", property="channel_name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="main_body", property="main_body", jdbcType=JdbcType.VARCHAR),
+        @Result(column="contacter", property="contacter", jdbcType=JdbcType.VARCHAR),
+        @Result(column="contacter_phone", property="contacter_phone", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
+        @Result(column="channel_type", property="channel_type", jdbcType=JdbcType.INTEGER),
+        @Result(column="jieru_way", property="jieru_way", jdbcType=JdbcType.VARCHAR),
+        @Result(column="meiti_type", property="meiti_type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="meiti_pwd", property="meiti_pwd", jdbcType=JdbcType.VARCHAR),
+        @Result(column="meiti_account", property="meiti_account", jdbcType=JdbcType.VARCHAR),
+        @Result(column="account_id", property="account_id", jdbcType=JdbcType.VARCHAR),
+        @Result(column="bank_card", property="bank_card", jdbcType=JdbcType.VARCHAR),
+        @Result(column="open_bank_area", property="open_bank_area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="real_name", property="real_name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
     })
     List<AdminUser> selectByExample(AdminUserExample example);
 
     @Select({
         "select",
         "`id`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, `account`, ",
-        "`password`, `version`, `token`, `expire_time`",
+        "`password`, `version`, `token`, `expire_time`, `channel_code`, `channel_name`, ",
+        "`main_body`, `contacter`, `contacter_phone`, `status`, `channel_type`, `jieru_way`, ",
+        "`meiti_type`, `meiti_pwd`, `meiti_account`, `account_id`, `bank_card`, `open_bank_area`, ",
+        "`real_name`, `description`",
         "from `admin_user`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -81,7 +116,23 @@ public interface AdminUserMapper {
         @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
         @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
         @Result(column="token", property="token", jdbcType=JdbcType.VARCHAR),
-        @Result(column="expire_time", property="expire_time", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="expire_time", property="expire_time", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_name", property="channel_name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="main_body", property="main_body", jdbcType=JdbcType.VARCHAR),
+        @Result(column="contacter", property="contacter", jdbcType=JdbcType.VARCHAR),
+        @Result(column="contacter_phone", property="contacter_phone", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.INTEGER),
+        @Result(column="channel_type", property="channel_type", jdbcType=JdbcType.INTEGER),
+        @Result(column="jieru_way", property="jieru_way", jdbcType=JdbcType.VARCHAR),
+        @Result(column="meiti_type", property="meiti_type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="meiti_pwd", property="meiti_pwd", jdbcType=JdbcType.VARCHAR),
+        @Result(column="meiti_account", property="meiti_account", jdbcType=JdbcType.VARCHAR),
+        @Result(column="account_id", property="account_id", jdbcType=JdbcType.VARCHAR),
+        @Result(column="bank_card", property="bank_card", jdbcType=JdbcType.VARCHAR),
+        @Result(column="open_bank_area", property="open_bank_area", jdbcType=JdbcType.VARCHAR),
+        @Result(column="real_name", property="real_name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
     })
     AdminUser selectByPrimaryKey(Long id);
 
@@ -104,7 +155,23 @@ public interface AdminUserMapper {
           "`password` = #{password,jdbcType=VARCHAR},",
           "`version` = #{version,jdbcType=INTEGER},",
           "`token` = #{token,jdbcType=VARCHAR},",
-          "`expire_time` = #{expire_time,jdbcType=TIMESTAMP}",
+          "`expire_time` = #{expire_time,jdbcType=TIMESTAMP},",
+          "`channel_code` = #{channel_code,jdbcType=VARCHAR},",
+          "`channel_name` = #{channel_name,jdbcType=VARCHAR},",
+          "`main_body` = #{main_body,jdbcType=VARCHAR},",
+          "`contacter` = #{contacter,jdbcType=VARCHAR},",
+          "`contacter_phone` = #{contacter_phone,jdbcType=VARCHAR},",
+          "`status` = #{status,jdbcType=INTEGER},",
+          "`channel_type` = #{channel_type,jdbcType=INTEGER},",
+          "`jieru_way` = #{jieru_way,jdbcType=VARCHAR},",
+          "`meiti_type` = #{meiti_type,jdbcType=VARCHAR},",
+          "`meiti_pwd` = #{meiti_pwd,jdbcType=VARCHAR},",
+          "`meiti_account` = #{meiti_account,jdbcType=VARCHAR},",
+          "`account_id` = #{account_id,jdbcType=VARCHAR},",
+          "`bank_card` = #{bank_card,jdbcType=VARCHAR},",
+          "`open_bank_area` = #{open_bank_area,jdbcType=VARCHAR},",
+          "`real_name` = #{real_name,jdbcType=VARCHAR},",
+          "`description` = #{description,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(AdminUser record);

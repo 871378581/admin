@@ -21,6 +21,29 @@
 
   <form class="layui-form" action="" lay-filter="example">
   <div class="layui-form-item">
+
+      <div class="layui-inline">
+          <label class="layui-form-label">账号</label>
+          <div class="layui-input-inline">
+              <input type="text" name="account" maxlength="100" required lay-verify="required" lay-verify="title" id="account" autocomplete="off" placeholder="请输入账号" class="layui-input">
+          </div>
+      </div>
+      <div class="layui-inline">
+          <label class="layui-form-label">密码</label>
+          <div class="layui-input-inline">
+              <input type="text" name="password" maxlength="100" required lay-verify="required" placeholder="密码" id="password" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+      <div class="layui-inline">
+          <label class="layui-form-label">类型</label>
+          <div class="layui-input-inline">
+              <select name="channel_type" lay-filter="status"  lay-verify="required">
+                  <option value="1">A</option>
+                  <option value="2">b</option>
+              </select>
+          </div>
+      </div>
+
     <div class="layui-inline">
       <label class="layui-form-label">渠道名称</label>
       <div class="layui-input-inline">
@@ -50,7 +73,7 @@
           <div class="layui-input-inline">
               <select name="status" lay-filter="status"  lay-verify="required">
                 <option value="1">有效</option>
-                <option value="2">无效</option>
+                <option value="0">无效</option>
               </select>
           </div>
       </div>
@@ -119,6 +142,7 @@
 
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/index.js"></script>
+  <script type="text/javascript" src="../../js/utils.js"></script>
 <script type="text/javascript">
 
     // layui方法
@@ -138,15 +162,19 @@
         form.on('submit(save)', function(data){
           var field = data.field;
           var account = localStorage.getItem("account");
+            if(!CheckPassWord(field.account)){
+                layer.msg("账号必须包含数字和字母！");
+                return false;
+            }
           $.ajax({
-            url:wholeUrl+"/admin/channel_manage/add?token="+localStorage.getItem("token"),
+            url:wholeUrl+"/admin/user/add?token="+localStorage.getItem("token"),
             method:"post",
             contentType: "application/x-www-form-urlencoded",
             dataType:"json",
             async:false,
             data:{
                 ...field,
-              account:account
+                editAccount:account
             },
             success:function(result){
               console.log(result);
@@ -198,6 +226,7 @@
         });
 
     });
+
 
 
 </script>

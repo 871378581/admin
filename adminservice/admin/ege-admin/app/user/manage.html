@@ -57,19 +57,20 @@
             ,filter:'table'
             , height: vipTable.getFullHeight()    //容器高度
             , cols: [[                  //标题栏
-              {checkbox: true, sort: true, fixed: true, space: true}
-              , {field: 'id', title: 'ID', width: 80}
-              , {field: 'channel_code', title: '渠道编码', width: 120}
+              //{checkbox: true, sort: true, fixed: true, space: true},
+               {field: 'id', title: 'ID', width: 80}
+              , {field: 'account', title: '账号', width: 120}
+              , {field: 'password', title: '登录密码', width: 120}
+              , {field: 'channel_type', title: '渠道类型', width: 120,templet:'<div>{{d.channel_type==1?"A":d.channel_type==2?"b":"-"}}</div>'}
               , {field: 'channel_name', title: '渠道名称', width: 120}
               , {field: 'main_body', title: '主体', width: 170}
               , {field: 'contacter', title: '联系人', width: 170}
               , {field: 'contacter_phone', title: '联系电话', width: 170}
-              , {field: 'status', title: '状态', width: 170}
+              , {field: 'status', title: '状态', width: 170,templet:'<div>{{d.status==1?"有效":"无效"}}</div>'}
               , {field: 'jieru_way', title: '接入方式', width: 170}
               , {field: 'meiti_type', title: '媒体类型', width: 170}
               , {field: 'meiti_pwd', title: '媒体密码', width: 170}
               , {field: 'meiti_account', title: '媒体账户', width: 170}
-              , {field: 'account_id', title: '账户id', width: 170}
               , {field: 'bank_card', title:'银行卡号', width: 170}
               , {field: 'open_bank_area', title:'开户行', width: 170}
               , {field: 'real_name', title:'真实姓名', width: 170}
@@ -82,7 +83,7 @@
             ]]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
-            , url: wholeUrl+"/admin/channel_manage/list?token="+localStorage.getItem("token")
+            , url: wholeUrl+"/admin/user/list?token="+localStorage.getItem("token")
             , method: 'post'
             , page: true
             , limits: [10, 20, 30, 50, 100]
@@ -121,7 +122,7 @@
             type: 2,
             title: '添加'
             ,area:['100%','100%']
-            ,content:"/adminservice/admin/ege-admin/app/channel_manage/add.html"
+            ,content:"/adminservice/admin/ege-admin/app/user/add.html"
           });
         });
 
@@ -137,7 +138,7 @@
             layer.confirm('确定删除？', function(index){
               //obj.del();
               $.ajax({
-                url:wholeUrl+"/admin/channel_manage/delete?token="+localStorage.getItem("token"),
+                url:wholeUrl+"/admin/user/delete?token="+localStorage.getItem("token"),
                 method:"post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType:"json",
@@ -163,7 +164,7 @@
               type: 2,
               title: '编辑'
                 ,area:['100%','100%']
-              ,content:"/adminservice/admin/ege-admin/app/channel_manage/edit.html?id="+data.id
+              ,content:"/adminservice/admin/ege-admin/app/user/edit.html?id="+data.id
             });
 
           }

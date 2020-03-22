@@ -1,7 +1,6 @@
 #渠道管理
 drop table if exists th_channel_manage;
 #渠道管理
-
 CREATE TABLE `th_channel_manage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `channel_code` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -10,6 +9,7 @@ CREATE TABLE `th_channel_manage` (
   `contacter` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `contacter_phone` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int(10) DEFAULT NULL,
+  `channel_type` int(10) DEFAULT NULL,
   `jieru_way` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meiti_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meiti_pwd` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

@@ -24,6 +24,38 @@ public class AdminUser implements Serializable {
 
     private Date expire_time;
 
+    private String channel_code;
+
+    private String channel_name;
+
+    private String main_body;
+
+    private String contacter;
+
+    private String contacter_phone;
+
+    private Integer status;
+
+    private Integer channel_type;
+
+    private String jieru_way;
+
+    private String meiti_type;
+
+    private String meiti_pwd;
+
+    private String meiti_account;
+
+    private String account_id;
+
+    private String bank_card;
+
+    private String open_bank_area;
+
+    private String real_name;
+
+    private String description;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -106,6 +138,134 @@ public class AdminUser implements Serializable {
         this.expire_time = expire_time;
     }
 
+    public String getChannel_code() {
+        return channel_code;
+    }
+
+    public void setChannel_code(String channel_code) {
+        this.channel_code = channel_code == null ? null : channel_code.trim();
+    }
+
+    public String getChannel_name() {
+        return channel_name;
+    }
+
+    public void setChannel_name(String channel_name) {
+        this.channel_name = channel_name == null ? null : channel_name.trim();
+    }
+
+    public String getMain_body() {
+        return main_body;
+    }
+
+    public void setMain_body(String main_body) {
+        this.main_body = main_body == null ? null : main_body.trim();
+    }
+
+    public String getContacter() {
+        return contacter;
+    }
+
+    public void setContacter(String contacter) {
+        this.contacter = contacter == null ? null : contacter.trim();
+    }
+
+    public String getContacter_phone() {
+        return contacter_phone;
+    }
+
+    public void setContacter_phone(String contacter_phone) {
+        this.contacter_phone = contacter_phone == null ? null : contacter_phone.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getChannel_type() {
+        return channel_type;
+    }
+
+    public void setChannel_type(Integer channel_type) {
+        this.channel_type = channel_type;
+    }
+
+    public String getJieru_way() {
+        return jieru_way;
+    }
+
+    public void setJieru_way(String jieru_way) {
+        this.jieru_way = jieru_way == null ? null : jieru_way.trim();
+    }
+
+    public String getMeiti_type() {
+        return meiti_type;
+    }
+
+    public void setMeiti_type(String meiti_type) {
+        this.meiti_type = meiti_type == null ? null : meiti_type.trim();
+    }
+
+    public String getMeiti_pwd() {
+        return meiti_pwd;
+    }
+
+    public void setMeiti_pwd(String meiti_pwd) {
+        this.meiti_pwd = meiti_pwd == null ? null : meiti_pwd.trim();
+    }
+
+    public String getMeiti_account() {
+        return meiti_account;
+    }
+
+    public void setMeiti_account(String meiti_account) {
+        this.meiti_account = meiti_account == null ? null : meiti_account.trim();
+    }
+
+    public String getAccount_id() {
+        return account_id;
+    }
+
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id == null ? null : account_id.trim();
+    }
+
+    public String getBank_card() {
+        return bank_card;
+    }
+
+    public void setBank_card(String bank_card) {
+        this.bank_card = bank_card == null ? null : bank_card.trim();
+    }
+
+    public String getOpen_bank_area() {
+        return open_bank_area;
+    }
+
+    public void setOpen_bank_area(String open_bank_area) {
+        this.open_bank_area = open_bank_area == null ? null : open_bank_area.trim();
+    }
+
+    public String getReal_name() {
+        return real_name;
+    }
+
+    public void setReal_name(String real_name) {
+        this.real_name = real_name == null ? null : real_name.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -122,6 +282,22 @@ public class AdminUser implements Serializable {
         sb.append(", version=").append(version);
         sb.append(", token=").append(token);
         sb.append(", expire_time=").append(expire_time);
+        sb.append(", channel_code=").append(channel_code);
+        sb.append(", channel_name=").append(channel_name);
+        sb.append(", main_body=").append(main_body);
+        sb.append(", contacter=").append(contacter);
+        sb.append(", contacter_phone=").append(contacter_phone);
+        sb.append(", status=").append(status);
+        sb.append(", channel_type=").append(channel_type);
+        sb.append(", jieru_way=").append(jieru_way);
+        sb.append(", meiti_type=").append(meiti_type);
+        sb.append(", meiti_pwd=").append(meiti_pwd);
+        sb.append(", meiti_account=").append(meiti_account);
+        sb.append(", account_id=").append(account_id);
+        sb.append(", bank_card=").append(bank_card);
+        sb.append(", open_bank_area=").append(open_bank_area);
+        sb.append(", real_name=").append(real_name);
+        sb.append(", description=").append(description);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

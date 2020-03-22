@@ -2,6 +2,8 @@ package com.segama.ege.admin.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.segama.ege.admin.utils.BeanUtils;
+import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.entity.AdminUser;
 import com.segama.ege.entity.AdminUserExample;
@@ -39,9 +41,9 @@ public class UserInfoController {
 
     @RequestMapping("/list")
     public BaseVO list(
-            @RequestParam("account") String account
-            ,@RequestParam("limit") Integer pageSize,
-            @RequestParam("page") Integer pageIndex) {
+            @RequestParam(value = "account" ,required = false) String account
+            ,@RequestParam(value = "limit",required = false) Integer pageSize,
+            @RequestParam(value = "page",required = false) Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
         try {
             AdminUserExample adminRoleExample = new AdminUserExample();
@@ -113,29 +115,46 @@ public class UserInfoController {
         return baseVO;
     }
 
-    @RequestMapping("/add")
-    public BaseVO add(
-            @RequestParam("editAccount") String editAccount,
-            @RequestParam("account") String account,
-            @RequestParam("password") String password) {
-
+    @RequestMapping("/edit_user")
+    public BaseVO edit_user(AdminUser adminRoleNew,
+                       @RequestParam("editAccount") String editAccount) {
         BaseVO baseVO = new BaseVO();
         try {
-            if( StringUtils.isEmpty(account)|| StringUtils.isEmpty(password)){
+            if(adminRoleNew.getId()==null || StringUtils.isEmpty(adminRoleNew.getPassword())){
                 baseVO.setErrorMsg("请检查必填参数是否填写完整！");
                 baseVO.setSuccess(false);
                 return baseVO;
             }
-            AdminUser adminUser = new AdminUser();
-            if(!StringUtils.isEmpty(account)){
-                adminUser.setAccount(account);
-            }
-            if(!StringUtils.isEmpty(password)){
-                adminUser.setPassword(password);
+            AdminUser adminRole = adminUserMapper.selectByPrimaryKey(adminRoleNew.getId());
+
+            adminRole.setGmt_modify(new Date());
+            adminRole.setModifier_account(editAccount);
+            BeanUtils.copyProperties(adminRoleNew,adminRole);
+            adminUserMapper.updateByPrimaryKey(adminRole);
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("编辑异常！");
+            LOG.error("AdminUserController#edit error",e);
+        }
+        return baseVO;
+    }
+
+    @RequestMapping("/add")
+    public BaseVO add(AdminUser adminUser,
+            @RequestParam("editAccount") String editAccount) {
+
+        BaseVO baseVO = new BaseVO();
+        try {
+            if( StringUtils.isEmpty(adminUser.getAccount())|| StringUtils.isEmpty(adminUser.getPassword())){
+                baseVO.setErrorMsg("请检查必填参数是否填写完整！");
+                baseVO.setSuccess(false);
+                return baseVO;
             }
             adminUser.setCreator_account(editAccount);
             adminUser.setModifier_account(editAccount);
             adminUser.setVersion(0);
+            adminUser.setChannel_code(UUIDUtils.UUID());
             adminUser.setGmt_create(new Date());
             adminUser.setGmt_modify(new Date());
             adminUserMapper.insert(adminUser);

@@ -77,6 +77,70 @@ public class AdminUserSqlProvider {
             VALUES("`expire_time`", "#{expire_time,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getChannel_code() != null) {
+            VALUES("`channel_code`", "#{channel_code,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_name() != null) {
+            VALUES("`channel_name`", "#{channel_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMain_body() != null) {
+            VALUES("`main_body`", "#{main_body,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getContacter() != null) {
+            VALUES("`contacter`", "#{contacter,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getContacter_phone() != null) {
+            VALUES("`contacter_phone`", "#{contacter_phone,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            VALUES("`status`", "#{status,jdbcType=INTEGER}");
+        }
+        
+        if (record.getChannel_type() != null) {
+            VALUES("`channel_type`", "#{channel_type,jdbcType=INTEGER}");
+        }
+        
+        if (record.getJieru_way() != null) {
+            VALUES("`jieru_way`", "#{jieru_way,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_type() != null) {
+            VALUES("`meiti_type`", "#{meiti_type,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_pwd() != null) {
+            VALUES("`meiti_pwd`", "#{meiti_pwd,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_account() != null) {
+            VALUES("`meiti_account`", "#{meiti_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAccount_id() != null) {
+            VALUES("`account_id`", "#{account_id,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBank_card() != null) {
+            VALUES("`bank_card`", "#{bank_card,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOpen_bank_area() != null) {
+            VALUES("`open_bank_area`", "#{open_bank_area,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getReal_name() != null) {
+            VALUES("`real_name`", "#{real_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDescription() != null) {
+            VALUES("`description`", "#{description,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -96,6 +160,22 @@ public class AdminUserSqlProvider {
         SELECT("`version`");
         SELECT("`token`");
         SELECT("`expire_time`");
+        SELECT("`channel_code`");
+        SELECT("`channel_name`");
+        SELECT("`main_body`");
+        SELECT("`contacter`");
+        SELECT("`contacter_phone`");
+        SELECT("`status`");
+        SELECT("`channel_type`");
+        SELECT("`jieru_way`");
+        SELECT("`meiti_type`");
+        SELECT("`meiti_pwd`");
+        SELECT("`meiti_account`");
+        SELECT("`account_id`");
+        SELECT("`bank_card`");
+        SELECT("`open_bank_area`");
+        SELECT("`real_name`");
+        SELECT("`description`");
         FROM("`admin_user`");
         applyWhere(example, false);
         
@@ -159,6 +239,70 @@ public class AdminUserSqlProvider {
             SET("`expire_time` = #{record.expire_time,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getChannel_code() != null) {
+            SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_name() != null) {
+            SET("`channel_name` = #{record.channel_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMain_body() != null) {
+            SET("`main_body` = #{record.main_body,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getContacter() != null) {
+            SET("`contacter` = #{record.contacter,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getContacter_phone() != null) {
+            SET("`contacter_phone` = #{record.contacter_phone,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            SET("`status` = #{record.status,jdbcType=INTEGER}");
+        }
+        
+        if (record.getChannel_type() != null) {
+            SET("`channel_type` = #{record.channel_type,jdbcType=INTEGER}");
+        }
+        
+        if (record.getJieru_way() != null) {
+            SET("`jieru_way` = #{record.jieru_way,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_type() != null) {
+            SET("`meiti_type` = #{record.meiti_type,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_pwd() != null) {
+            SET("`meiti_pwd` = #{record.meiti_pwd,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_account() != null) {
+            SET("`meiti_account` = #{record.meiti_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAccount_id() != null) {
+            SET("`account_id` = #{record.account_id,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBank_card() != null) {
+            SET("`bank_card` = #{record.bank_card,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOpen_bank_area() != null) {
+            SET("`open_bank_area` = #{record.open_bank_area,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getReal_name() != null) {
+            SET("`real_name` = #{record.real_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDescription() != null) {
+            SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -177,6 +321,22 @@ public class AdminUserSqlProvider {
         SET("`version` = #{record.version,jdbcType=INTEGER}");
         SET("`token` = #{record.token,jdbcType=VARCHAR}");
         SET("`expire_time` = #{record.expire_time,jdbcType=TIMESTAMP}");
+        SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
+        SET("`channel_name` = #{record.channel_name,jdbcType=VARCHAR}");
+        SET("`main_body` = #{record.main_body,jdbcType=VARCHAR}");
+        SET("`contacter` = #{record.contacter,jdbcType=VARCHAR}");
+        SET("`contacter_phone` = #{record.contacter_phone,jdbcType=VARCHAR}");
+        SET("`status` = #{record.status,jdbcType=INTEGER}");
+        SET("`channel_type` = #{record.channel_type,jdbcType=INTEGER}");
+        SET("`jieru_way` = #{record.jieru_way,jdbcType=VARCHAR}");
+        SET("`meiti_type` = #{record.meiti_type,jdbcType=VARCHAR}");
+        SET("`meiti_pwd` = #{record.meiti_pwd,jdbcType=VARCHAR}");
+        SET("`meiti_account` = #{record.meiti_account,jdbcType=VARCHAR}");
+        SET("`account_id` = #{record.account_id,jdbcType=VARCHAR}");
+        SET("`bank_card` = #{record.bank_card,jdbcType=VARCHAR}");
+        SET("`open_bank_area` = #{record.open_bank_area,jdbcType=VARCHAR}");
+        SET("`real_name` = #{record.real_name,jdbcType=VARCHAR}");
+        SET("`description` = #{record.description,jdbcType=VARCHAR}");
         
         AdminUserExample example = (AdminUserExample) parameter.get("example");
         applyWhere(example, true);
@@ -221,6 +381,70 @@ public class AdminUserSqlProvider {
         
         if (record.getExpire_time() != null) {
             SET("`expire_time` = #{expire_time,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getChannel_code() != null) {
+            SET("`channel_code` = #{channel_code,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_name() != null) {
+            SET("`channel_name` = #{channel_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMain_body() != null) {
+            SET("`main_body` = #{main_body,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getContacter() != null) {
+            SET("`contacter` = #{contacter,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getContacter_phone() != null) {
+            SET("`contacter_phone` = #{contacter_phone,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            SET("`status` = #{status,jdbcType=INTEGER}");
+        }
+        
+        if (record.getChannel_type() != null) {
+            SET("`channel_type` = #{channel_type,jdbcType=INTEGER}");
+        }
+        
+        if (record.getJieru_way() != null) {
+            SET("`jieru_way` = #{jieru_way,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_type() != null) {
+            SET("`meiti_type` = #{meiti_type,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_pwd() != null) {
+            SET("`meiti_pwd` = #{meiti_pwd,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getMeiti_account() != null) {
+            SET("`meiti_account` = #{meiti_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAccount_id() != null) {
+            SET("`account_id` = #{account_id,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBank_card() != null) {
+            SET("`bank_card` = #{bank_card,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOpen_bank_area() != null) {
+            SET("`open_bank_area` = #{open_bank_area,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getReal_name() != null) {
+            SET("`real_name` = #{real_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDescription() != null) {
+            SET("`description` = #{description,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

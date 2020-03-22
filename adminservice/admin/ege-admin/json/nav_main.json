@@ -1,14 +1,18 @@
 {
-  "data": [
+  "data": [{
+    "text": "渠道管理",
+    "icon": "&#xe620;",
+    "subset": [
+      {
+        "text": "渠道管理",
+        "icon": "&#xe621;",
+        "href": "app/user/manage.html"
+      }]
+   },
     {
       "text": "系统设置",
       "icon": "&#xe620;",
       "subset": [
-        {
-          "text": "后台用户管理",
-          "icon": "&#xe621;",
-          "href": "app/user/user-manage.html"
-        },
         {
           "text": "后台角色管理",
           "icon": "&#xe621;",

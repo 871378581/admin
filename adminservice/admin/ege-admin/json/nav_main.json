@@ -21,6 +21,45 @@
         }]
     },
     {
+      "text": "链接管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "链接管理",
+          "icon": "&#xe621;",
+          "href": "app/url_manage/manage.html"
+        }]
+    },
+    {
+      "text": "统计结算管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "统计结算管理",
+          "icon": "&#xe621;",
+          "href": "app/settle_manage/manage.html"
+        }]
+    },
+    {
+      "text": "订单管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "订单管理",
+          "icon": "&#xe621;",
+          "href": "app/order_manage/manage.html"
+        }]
+    },{
+      "text": "打款记录管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "打款记录管理",
+          "icon": "&#xe621;",
+          "href": "app/make_money_manage/manage.html"
+        }]
+    },
+    {
       "text": "系统设置",
       "icon": "&#xe620;",
       "subset": [

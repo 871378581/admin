@@ -25,9 +25,9 @@
     </span>
 
     <span class="fr">
-        <span class="layui-form-label">菜单名：</span>
+        <span class="layui-form-label">账号：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="searchMenuName" autocomplete="off" placeholder="请输入菜单名" class="layui-input">
+            <input type="text"  id="account" autocomplete="off" placeholder="请输入账号" class="layui-input">
         </div>
         <button class="layui-btn mgl-20" id="btn-search">查询</button>
     </span>
@@ -89,7 +89,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{menuName:$("#searchMenuName").val()}
+            , where:{menuName:$("#account").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -128,7 +128,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{menuName:$("#searchMenuName").val()}});
+            tableIns.reload({where:{account:$("#account").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){

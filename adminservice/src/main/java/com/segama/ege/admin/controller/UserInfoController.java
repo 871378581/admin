@@ -61,11 +61,12 @@ public class UserInfoController {
                 adminRoleExampleCriteria.andChannel_typeEqualTo(channel_type);
             }
             int count = adminUserMapper.countByExample(adminRoleExample);
+            List<AdminUser> collect = Lists.newArrayList();
             if(count!=0) {
                 adminRoleExample.setPageCount(pageSize);
                 adminRoleExample.setPageIndex(pageIndex);
                 List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminRoleExample);
-                List<AdminUser> collect = adminUsers.stream().filter(e -> !"admin".equals(e.getAccount())).collect(Collectors.toList());
+                collect = adminUsers.stream().filter(e -> !"admin".equals(e.getAccount())).collect(Collectors.toList());
                 baseVO.setData(collect);
                 baseVO.setSuccess(true);
             }

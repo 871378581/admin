@@ -52,11 +52,12 @@ public class ProductController {
                 adminRoleExampleCriteria.andProduct_nameLike("%" + product_name + "%");
             }
             int count = thProductManageMapper.countByExample(adminRoleExample);
+            List<ThProductManage> thProductManages = Lists.newArrayList();
             if(count!=0) {
                 adminRoleExample.setPageCount(pageSize);
                 adminRoleExample.setPageIndex(pageIndex);
-                List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(adminRoleExample);
-                baseVO.setData(ThProductManages);
+                thProductManages = thProductManageMapper.selectByExample(adminRoleExample);
+                baseVO.setData(thProductManages);
                 baseVO.setSuccess(true);
             }
 

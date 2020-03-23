@@ -52,11 +52,12 @@ public class UrlController {
                 adminRoleExampleCriteria.andProduct_nameLike("%" + product_name + "%");
             }
             int count = thUrlManageMapper.countByExample(adminRoleExample);
+            List<ThUrlManage> thUrlManages = Lists.newArrayList();
             if(count!=0) {
                 adminRoleExample.setPageCount(pageSize);
                 adminRoleExample.setPageIndex(pageIndex);
-                List<ThUrlManage> ThUrlManages = thUrlManageMapper.selectByExample(adminRoleExample);
-                baseVO.setData(ThUrlManages);
+                thUrlManages = thUrlManageMapper.selectByExample(adminRoleExample);
+                baseVO.setData(thUrlManages);
                 baseVO.setSuccess(true);
             }
 

@@ -25,7 +25,8 @@
               <div class="layui-inline">
                   <label class="layui-form-label">产品名称</label>
                   <div class="layui-input-inline">
-                      <input type="text" name="product_name" maxlength="30" required lay-verify="required" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                      <select name="product_name"id="product" placeholder="请输入产品名称"  lay-verify="required">
+                      </select>
                   </div>
               </div>
               <div class="layui-inline">
@@ -36,9 +37,9 @@
               </div>
 
               <div class="layui-inline">
-                  <label class="layui-form-label">产品状态</label>
+                  <label class="layui-form-label">链接状态</label>
                   <div class="layui-input-inline">
-                      <select name="product_status" lay-filter="product_status"  lay-verify="required">
+                      <select name="url_status" lay-filter="product_status"  lay-verify="required">
                           <option value="1">上线</option>
                           <option value="0">下线</option>
                       </select>
@@ -59,12 +60,41 @@
                   </div>
               </div>
               <div class="layui-inline">
+                  <label class="layui-form-label">业务线</label>
+                  <div class="layui-input-inline">
+                      <input name="biz_line"  lay-verify="required"placeholder="请输入业务线" class="layui-input"/>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">渠道号</label>
+                  <div class="layui-input-inline">
+                      <input name="channel_code"  lay-verify="required"placeholder="请输入渠道号" class="layui-input"/>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">产品渠道码</label>
+                  <div class="layui-input-inline">
+                      <input name="product_qudao_code"  lay-verify="required" placeholder="请输入产品渠道码" class="layui-input"/>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">开票主体</label>
+                  <div class="layui-input-inline">
+                      <input name="open_ticket_main_body"  lay-verify="required"placeholder="请输入开票主体" class="layui-input"/>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">有效时间:</label>
+                  <div class="layui-input-inline">
+                      <input type="text" name="youxiao_time" class="layui-input" id="youxiao_time" placeholder="请选择有效时间">
+                  </div>
+              </div>
+              <div class="layui-inline">
                   <label class="layui-form-label">描述</label>
                   <div class="layui-input-inline">
                       <textarea name="description"  lay-verify="required" placeholder="请输入描述" class="layui-textarea"></textarea>
                   </div>
               </div>
-
           </div>
           <div class="layui-input-block">
               <div class="layui-block" align="center">
@@ -81,11 +111,12 @@
 <script type="text/javascript">
 
     // layui方法
-    layui.use(['form', 'layer'], function () {
+    layui.use(['form','laydate' ,'layer'], function () {
 
         // 操作对象
         var form = layui.form
                 , layer = layui.layer
+                ,laydate=layui.laydate
                 , $ = layui.jquery;
         //your code
         //监听关闭
@@ -94,11 +125,19 @@
           parent.layer.close(index);
         });
 
+        //日期时间选择器
+        laydate.render({
+            elem: '#youxiao_time'
+            ,type: 'datetime'
+            ,range:true,
+            trigger:'click'
+        });
+
         form.on('submit(save)', function(data){
           var field = data.field;
           var account = localStorage.getItem("account");
           $.ajax({
-            url:wholeUrl+"/admin/product_manage/add?token="+localStorage.getItem("token"),
+            url:wholeUrl+"/admin/url_manage/add?token="+localStorage.getItem("token"),
             method:"post",
             contentType: "application/x-www-form-urlencoded",
             dataType:"json",
@@ -131,7 +170,7 @@
         });
 
         $.ajax({
-            url: wholeUrl + "/admin/menu_group/get_all_menu_group?token=" + localStorage.getItem("token"),
+            url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
             method: "post",
             contentType: "application/x-www-form-urlencoded",
             dataType: "json",
@@ -146,7 +185,7 @@
                         for (var i = 0; i < menuList.length; i++) {
                             html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
                         }
-                        $("#menuGroupSelect").html(html);
+                        $("#product").html(html);
                         form.render();
                     }
                 } else {

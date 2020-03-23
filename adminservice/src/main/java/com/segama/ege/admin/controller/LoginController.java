@@ -74,16 +74,21 @@ public class LoginController {
                 List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminUserExample);
                 if(!CollectionUtils.isEmpty(adminUsers)){
                     AdminUser adminUser = adminUsers.get(0);
-                    loginVO.setStatus(200);
-                    String uuid = UUID();
-                    loginVO.setToken(uuid);
-                    loginVO.setAccount(adminUser.getAccount());
-                    adminUser.setToken(uuid);
-                    Date now = new Date();
-                    Date expireTime = DateUtils.addHours(now, 168);
-                    adminUser.setExpire_time(expireTime);
-                    loginVO.setId(adminUser.getId());
-                    adminUserMapper.updateByPrimaryKey(adminUser);
+                    if(adminUser.getStatus()==0){
+                        loginVO.setErrorMsg("账户状态无效！");
+                        loginVO.setStatus(401);
+                    }else {
+                        loginVO.setStatus(200);
+                        String uuid = UUID();
+                        loginVO.setToken(uuid);
+                        loginVO.setAccount(adminUser.getAccount());
+                        adminUser.setToken(uuid);
+                        Date now = new Date();
+                        Date expireTime = DateUtils.addHours(now, 168);
+                        adminUser.setExpire_time(expireTime);
+                        loginVO.setId(adminUser.getId());
+                        adminUserMapper.updateByPrimaryKey(adminUser);
+                    }
                 }else{
                     loginVO.setErrorMsg("用户名或密码错误！");
                     loginVO.setStatus(401);

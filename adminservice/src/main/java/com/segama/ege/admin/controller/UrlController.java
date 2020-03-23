@@ -5,9 +5,9 @@ import com.google.common.collect.Maps;
 import com.segama.ege.admin.utils.BeanUtils;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
-import com.segama.ege.entity.ThProductManage;
-import com.segama.ege.entity.ThProductManageExample;
-import com.segama.ege.repository.ThProductManageMapper;
+import com.segama.ege.entity.ThUrlManage;
+import com.segama.ege.entity.ThUrlManageExample;
+import com.segama.ege.repository.ThUrlManageMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,18 +25,18 @@ import java.util.Map;
 /**
  * @author hxj
  * @version 1.0
- * @Description 产品相关的接口
+ * @Description 链接相关的接口
  * @date 2019-10-07 14:33
  */
 @RestController
-@RequestMapping("/ege/api/admin/product_manage")
+@RequestMapping("/ege/api/admin/url_manage")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class ProductController {
+public class UrlController {
     
     @Resource
-    private ThProductManageMapper thProductManageMapper;
+    private ThUrlManageMapper thUrlManageMapper;
 
-    private static Logger LOG = LoggerFactory.getLogger(ProductController.class);
+    private static Logger LOG = LoggerFactory.getLogger(UrlController.class);
 
     @RequestMapping("/list")
     public BaseVO list(
@@ -45,18 +45,18 @@ public class ProductController {
             @RequestParam(value = "page",required = false) Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
         try {
-            ThProductManageExample adminRoleExample = new ThProductManageExample();
+            ThUrlManageExample adminRoleExample = new ThUrlManageExample();
             adminRoleExample.setOrderByClause("gmt_create desc");
-            ThProductManageExample.Criteria adminRoleExampleCriteria = adminRoleExample.createCriteria();
+            ThUrlManageExample.Criteria adminRoleExampleCriteria = adminRoleExample.createCriteria();
             if(StringUtils.isNotEmpty(product_name)) {
                 adminRoleExampleCriteria.andProduct_nameLike("%" + product_name + "%");
             }
-            int count = thProductManageMapper.countByExample(adminRoleExample);
+            int count = thUrlManageMapper.countByExample(adminRoleExample);
             if(count!=0) {
                 adminRoleExample.setPageCount(pageSize);
                 adminRoleExample.setPageIndex(pageIndex);
-                List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(adminRoleExample);
-                baseVO.setData(ThProductManages);
+                List<ThUrlManage> ThUrlManages = thUrlManageMapper.selectByExample(adminRoleExample);
+                baseVO.setData(ThUrlManages);
                 baseVO.setSuccess(true);
             }
 
@@ -64,7 +64,7 @@ public class ProductController {
             baseVO.setCode(0);
         }catch (Exception e){
             baseVO.setSuccess(false);
-            LOG.error("ThProductManageController#list error",e);
+            LOG.error("ThUrlManageController#list error",e);
         }
         return baseVO;
     }
@@ -76,17 +76,17 @@ public class ProductController {
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("code为空不能删除！");
         }else {
-            ThProductManageExample thProductManageExample = new ThProductManageExample();
-            ThProductManageExample.Criteria criteria = thProductManageExample.createCriteria();
+            ThUrlManageExample thProductManageExample = new ThUrlManageExample();
+            ThUrlManageExample.Criteria criteria = thProductManageExample.createCriteria();
             criteria.andProduct_codeEqualTo(product_code);
-            thProductManageMapper.deleteByExample(thProductManageExample);
+            thUrlManageMapper.deleteByExample(thProductManageExample);
             baseVO.setSuccess(true);
         }
         return baseVO;
     }
 
     @RequestMapping("/edit")
-    public BaseVO edit_user(ThProductManage adminRoleNew,
+    public BaseVO edit_user(ThUrlManage adminRoleNew,
                        @RequestParam("account") String editAccount) {
         BaseVO baseVO = new BaseVO();
         try {
@@ -95,23 +95,23 @@ public class ProductController {
                 baseVO.setSuccess(false);
                 return baseVO;
             }
-            ThProductManage adminRole = thProductManageMapper.selectByPrimaryKey(adminRoleNew.getId());
+            ThUrlManage adminRole = thUrlManageMapper.selectByPrimaryKey(adminRoleNew.getId());
 
             adminRole.setGmt_modify(new Date());
             adminRole.setModifier_account(editAccount);
             BeanUtils.copyProperties(adminRoleNew,adminRole);
-            thProductManageMapper.updateByPrimaryKey(adminRole);
+            thUrlManageMapper.updateByPrimaryKey(adminRole);
             baseVO.setSuccess(true);
         } catch (Exception e) {
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("编辑异常！");
-            LOG.error("ThProductManageController#edit error",e);
+            LOG.error("ThUrlManageController#edit error",e);
         }
         return baseVO;
     }
 
     @RequestMapping("/add")
-    public BaseVO add(ThProductManage thProductManage,
+    public BaseVO add(ThUrlManage thProductManage,
             @RequestParam("account") String account) {
 
         BaseVO baseVO = new BaseVO();
@@ -126,10 +126,10 @@ public class ProductController {
             thProductManage.setGmt_create(new Date());
             thProductManage.setGmt_modify(new Date());
             thProductManage.setProduct_code(UUIDUtils.UUID());
-            thProductManageMapper.insert(thProductManage);
+            thUrlManageMapper.insert(thProductManage);
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ThProductManageController#add error",e);
+            LOG.error("ThUrlManageController#add error",e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("添加异常！");
         }
@@ -144,12 +144,12 @@ public class ProductController {
                 baseVO.setErrorMsg("id为不能为空！");
                 baseVO.setSuccess(false);
             }else {
-                ThProductManage ThProductManage = thProductManageMapper.selectByPrimaryKey(id);
-                baseVO.setData(ThProductManage);
+                ThUrlManage ThUrlManage = thUrlManageMapper.selectByPrimaryKey(id);
+                baseVO.setData(ThUrlManage);
             }
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ThProductManageController#get Exception input param is id:"+id,e);
+            LOG.error("ThUrlManageController#get Exception input param is id:"+id,e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询信息异常！");
         }
@@ -160,20 +160,20 @@ public class ProductController {
     public BaseVO getAllMenu() {
         BaseVO baseVO = new BaseVO();
         try {
-            List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(new ThProductManageExample());
+            List<ThUrlManage> ThUrlManages = thUrlManageMapper.selectByExample(new ThUrlManageExample());
             List<Map<String,Object>> result = Lists.newArrayList();
-            if(!CollectionUtils.isEmpty(ThProductManages)){
-                for (ThProductManage ThProductManage : ThProductManages) {
+            if(!CollectionUtils.isEmpty(ThUrlManages)){
+                for (ThUrlManage ThUrlManage : ThUrlManages) {
                     Map<String,Object> map = Maps.newHashMap();
-                    map.put("label",ThProductManage.getProduct_name());
-                    map.put("value",ThProductManage.getProduct_name());
+                    map.put("label",ThUrlManage.getProduct_name());
+                    map.put("value",ThUrlManage.getId());
                     result.add(map);
                 }
             }
             baseVO.setData(result);
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ThProductManageController#getAllMenu error",e);
+            LOG.error("ThUrlManageController#getAllMenu error",e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询用户信息信息异常！");
         }

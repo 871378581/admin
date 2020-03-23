@@ -20,17 +20,38 @@
 <div class="my-btn-box">
     <span class="fl">
         <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
-        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
+        <!--<a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>-->
         <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
 
-    <span class="fr">
-        <span class="layui-form-label">账号：</span>
-        <div class="layui-input-inline">
-            <input type="text"  id="account" autocomplete="off" placeholder="请输入账号" class="layui-input">
+    <span>
+        <div class="layui-inline">
+            <label class="layui-form-label">账号</label>
+            <div class="layui-input-inline">
+                <input type="text"  id="account" autocomplete="off" placeholder="请输入账号" class="layui-input">
+            </div>
         </div>
-        <button class="layui-btn mgl-20" id="btn-search">查询</button>
+<form class="layui-form" style="float: left">
+        <div class="layui-inline">
+              <label class="layui-form-label">渠道类型</label>
+              <div class="layui-input-inline">
+                  <select id="channel_type" lay-filter="">
+                      <option value="" >请选择</option>
+                      <option value="1">A</option>
+                      <option value="2">b</option>
+                  </select>
+              </div>
+          </div>
+</form>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-inline">
+                <input type="text"  id="contacter_phone" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+            </div>
+        </div>
     </span>
+    <button class="layui-btn mgl-20" id="btn-search">查询</button>
 </div>
 
 <!-- 表格 -->
@@ -89,7 +110,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{menuName:$("#account").val()}
+            , where:{account:$("#account").val(),contacter_phone:$("#contacter_phone").val(),channel_type:$("#channel_type").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -128,7 +149,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{account:$("#account").val()}});
+            tableIns.reload({where:{account:$("#account").val(),contacter_phone:$("#contacter_phone").val(),channel_type:$("#channel_type").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){

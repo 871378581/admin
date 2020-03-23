@@ -42,6 +42,8 @@ public class UserInfoController {
     @RequestMapping("/list")
     public BaseVO list(
             @RequestParam(value = "account" ,required = false) String account
+            ,@RequestParam(value = "contacter_phone" ,required = false) String contacter_phone
+            ,@RequestParam(value = "channel_type" ,required = false) Integer channel_type
             ,@RequestParam(value = "limit",required = false) Integer pageSize,
             @RequestParam(value = "page",required = false) Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
@@ -51,6 +53,12 @@ public class UserInfoController {
             AdminUserExample.Criteria adminRoleExampleCriteria = adminRoleExample.createCriteria();
             if(StringUtils.isNotEmpty(account)) {
                 adminRoleExampleCriteria.andAccountLike("%" + account + "%");
+            }
+            if(StringUtils.isNotEmpty(contacter_phone)) {
+                adminRoleExampleCriteria.andContacter_phoneLike("%" + contacter_phone + "%");
+            }
+            if(channel_type!=null) {
+                adminRoleExampleCriteria.andChannel_typeEqualTo(channel_type);
             }
             int count = adminUserMapper.countByExample(adminRoleExample);
             if(count!=0) {

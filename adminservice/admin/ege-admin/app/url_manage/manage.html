@@ -1,5 +1,3 @@
-<h1>待开发...</h1>
-<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +16,12 @@
 </head>
 <body class="body">
 
-&lt;!&ndash; 工具集 &ndash;&gt;
+<!-- 工具集 -->
 <div class="my-btn-box">
     <span class="fl">
         <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
-        <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
-        &lt;!&ndash;<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>&ndash;&gt;
+        <!--<a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>-->
+        <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
 
     <span class="fr">
@@ -35,7 +33,7 @@
     </span>
 </div>
 
-&lt;!&ndash; 表格 &ndash;&gt;
+<!-- 表格 -->
 <table id="dateTable"  lay-filter="table"></table>
 
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
@@ -61,11 +59,16 @@
             , cols: [[                  //标题栏
               {checkbox: true, sort: true, fixed: true, space: true}
               , {field: 'id', title: 'ID', width: 80}
+              , {field: 'open_ticket_main_body', title: '开票主体', width: 120}
               , {field: 'product_code', title: '产品编码', width: 120}
+              , {field: 'product_qudao_code', title: '产品渠道编码', width: 120}
               , {field: 'product_name', title: '产品名称', width: 120}
               , {field: 'business_name', title: '商户名称', width: 120}
-              , {field: 'product_status', title: '产品状态', width: 170,templet:'<div>{{ d.product_status==1?"上线":"下线" }}</div>'}
+              , {field: 'url_status', title: '链接状态', width: 170,templet:'<div>{{ d.product_status==1?"上线":"下线" }}</div>'}
               , {field: 'url', title: '连接', width: 170}
+              , {field: 'biz_line', title:'业务线', width: 170}
+              , {field: 'channel_code', title:'渠道号', width: 170}
+              , {field: 'youxiao_time', title:'有效时间', width: 170}
               , {field: 'description', title:'描述', width: 170}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
@@ -75,7 +78,7 @@
             ]]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
-            , url: wholeUrl+"/admin/product_manage/list?token="+localStorage.getItem("token")
+            , url: wholeUrl+"/admin/url_manage/list?token="+localStorage.getItem("token")
             , method: 'post'
             , page: true
             , limits: [10, 20, 30, 50, 100]
@@ -114,7 +117,7 @@
             type: 2,
             title: '添加'
             ,area:['100%','100%']
-            ,content:"/adminservice/admin/ege-admin/app/product_manage/add.html"
+            ,content:"/adminservice/admin/ege-admin/app/url_manage/add.html"
           });
         });
 
@@ -130,7 +133,7 @@
             layer.confirm('确定删除？', function(index){
               //obj.del();
               $.ajax({
-                url:wholeUrl+"/admin/product_manage/delete?token="+localStorage.getItem("token"),
+                url:wholeUrl+"/admin/url_manage/delete?token="+localStorage.getItem("token"),
                 method:"post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType:"json",
@@ -156,7 +159,7 @@
               type: 2,
               title: '编辑'
                 ,area:['100%','100%']
-              ,content:"/adminservice/admin/ege-admin/app/product_manage/edit.html?id="+data.id
+              ,content:"/adminservice/admin/ege-admin/app/url_manage/edit.html?id="+data.id
             });
 
           }
@@ -196,11 +199,10 @@
 
     });
 </script>
-&lt;!&ndash; 表格操作按钮集 &ndash;&gt;
+<!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
 </script>
 </body>
 </html>
--->

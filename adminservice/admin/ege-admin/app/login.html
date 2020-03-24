@@ -68,6 +68,8 @@
                 let token = result.token;
                 let accountV = result.account;
                 let id = result.id;
+                let channelType = result.data;
+                localStorage.setItem("channelType",channelType);
                 localStorage.setItem("token",token);
                 localStorage.setItem("id",id);
                 localStorage.setItem("account",accountV);

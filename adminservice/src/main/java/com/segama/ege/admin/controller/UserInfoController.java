@@ -5,8 +5,11 @@ import com.google.common.collect.Maps;
 import com.segama.ege.admin.utils.BeanUtils;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
+import com.segama.ege.entity.AdminSystemConfig;
+import com.segama.ege.entity.AdminSystemConfigExample;
 import com.segama.ege.entity.AdminUser;
 import com.segama.ege.entity.AdminUserExample;
+import com.segama.ege.repository.AdminSystemConfigMapper;
 import com.segama.ege.repository.AdminUserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,11 +40,15 @@ public class UserInfoController {
     @Resource
     private AdminUserMapper adminUserMapper;
 
+    @Resource
+    private AdminSystemConfigMapper adminSystemConfigMapper;
+
     private static Logger LOG = LoggerFactory.getLogger(UserInfoController.class);
 
     @RequestMapping("/list")
     public BaseVO list(
             @RequestParam(value = "account" ,required = false) String account
+            ,@RequestParam(value = "ownAccount" ,required = false) String ownAccount
             ,@RequestParam(value = "contacter_phone" ,required = false) String contacter_phone
             ,@RequestParam(value = "channel_type" ,required = false) Integer channel_type
             ,@RequestParam(value = "limit",required = false) Integer pageSize,
@@ -53,6 +60,9 @@ public class UserInfoController {
             AdminUserExample.Criteria adminRoleExampleCriteria = adminRoleExample.createCriteria();
             if(StringUtils.isNotEmpty(account)) {
                 adminRoleExampleCriteria.andAccountLike("%" + account + "%");
+            }
+            if(!showAllUser(ownAccount) && StringUtils.isNotEmpty(ownAccount)) {
+                adminRoleExampleCriteria.andCreator_accountEqualTo(ownAccount);
             }
             if(StringUtils.isNotEmpty(contacter_phone)) {
                 adminRoleExampleCriteria.andContacter_phoneLike("%" + contacter_phone + "%");
@@ -78,6 +88,26 @@ public class UserInfoController {
             LOG.error("AdminUserController#list error",e);
         }
         return baseVO;
+    }
+
+    //展示所有用户
+    private Boolean showAllUser(String ownAccount){
+        AdminSystemConfigExample example = new AdminSystemConfigExample();
+        AdminSystemConfigExample.Criteria criteria = example.createCriteria();
+        // TODO 展示所有用户配置项
+        criteria.andKeyEqualTo("showAllUserAccounts");
+        List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
+            AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
+            String value = adminSystemConfig.getValue();
+            String[] split = value.split(",");
+            for (String s : split) {
+                if(ownAccount.equals(s)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @RequestMapping("/delete")
@@ -134,6 +164,11 @@ public class UserInfoController {
                 baseVO.setSuccess(false);
                 return baseVO;
             }
+            if(adminRoleNew.getChannel_type()==1 && !showAllUser(editAccount)){
+                baseVO.setErrorMsg("您暂时没有权限将渠道类型设置为A！");
+                baseVO.setSuccess(false);
+                return baseVO;
+            }
             AdminUser adminRole = adminUserMapper.selectByPrimaryKey(adminRoleNew.getId());
 
             adminRole.setGmt_modify(new Date());
@@ -160,6 +195,11 @@ public class UserInfoController {
         try {
             if( StringUtils.isEmpty(adminUser.getAccount())|| StringUtils.isEmpty(adminUser.getPassword())){
                 baseVO.setErrorMsg("请检查必填参数是否填写完整！");
+                baseVO.setSuccess(false);
+                return baseVO;
+            }
+            if(adminUser.getChannel_type()==1 && !showAllUser(editAccount)){
+                baseVO.setErrorMsg("您暂时没有权限将渠道类型设置为A！");
                 baseVO.setSuccess(false);
                 return baseVO;
             }
@@ -226,22 +266,29 @@ public class UserInfoController {
         return baseVO;
     }
 
-    //查询所有A
+    //查询所有A 如果是允许的账户可以展示所有的A 否则只展示自己
     @RequestMapping("/get_all_usersA")
-    public BaseVO getAllUsers() {
+    public BaseVO getAllUsers(@RequestParam(value = "account",required = false) String account ) {
         BaseVO baseVO = new BaseVO();
         try {
-            AdminUserExample adminUserExample = new AdminUserExample();
-            AdminUserExample.Criteria criteria = adminUserExample.createCriteria();
-            criteria.andChannel_typeEqualTo(1);
-            List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminUserExample);
             List<Map<String,Object>> result = Lists.newArrayList();
-            if(!CollectionUtils.isEmpty(adminUsers)){
-                for (AdminUser adminUser : adminUsers) {
-                    Map<String,Object> map = Maps.newHashMap();
-                    map.put("label",adminUser.getAccount());
-                    map.put("value",adminUser.getAccount());
-                    result.add(map);
+            if(!StringUtils.isEmpty(account) && !showAllUser(account)){
+                Map<String,Object> map = Maps.newHashMap();
+                map.put("label",account);
+                map.put("value",account);
+            }else {
+                AdminUserExample adminUserExample = new AdminUserExample();
+                AdminUserExample.Criteria criteria = adminUserExample.createCriteria();
+                criteria.andChannel_typeEqualTo(1);
+                List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminUserExample);
+
+                if (!CollectionUtils.isEmpty(adminUsers)) {
+                    for (AdminUser adminUser : adminUsers) {
+                        Map<String, Object> map = Maps.newHashMap();
+                        map.put("label", adminUser.getAccount());
+                        map.put("value", adminUser.getAccount());
+                        result.add(map);
+                    }
                 }
             }
             baseVO.setData(result);

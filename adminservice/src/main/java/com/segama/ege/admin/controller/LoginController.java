@@ -81,6 +81,7 @@ public class LoginController {
                         loginVO.setStatus(200);
                         String uuid = UUID();
                         loginVO.setToken(uuid);
+                        loginVO.setData(adminUser.getChannel_type());
                         loginVO.setAccount(adminUser.getAccount());
                         adminUser.setToken(uuid);
                         Date now = new Date();

@@ -161,7 +161,11 @@ public class ProductController {
     public BaseVO getAllMenu() {
         BaseVO baseVO = new BaseVO();
         try {
-            List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(new ThProductManageExample());
+            ThProductManageExample example = new ThProductManageExample();
+            ThProductManageExample.Criteria criteria = example.createCriteria();
+            //只查上线的产品
+            criteria.andProduct_statusEqualTo(1);
+            List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(example);
             List<Map<String,Object>> result = Lists.newArrayList();
             if(!CollectionUtils.isEmpty(ThProductManages)){
                 for (ThProductManage ThProductManage : ThProductManages) {

@@ -2,6 +2,7 @@ package com.segama.ege.admin.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.segama.ege.admin.constants.IconEnum;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.entity.*;
 import com.segama.ege.repository.AdminMenuMapper;
@@ -88,6 +89,7 @@ public class MenuController {
     @RequestMapping("/edit")
     public BaseVO edit(@RequestParam("id") Long id,
                     @RequestParam("group") String group,
+                    @RequestParam("icon") String icon,
                     @RequestParam("menuName") String menuName,
                     @RequestParam("account") String account,
                     @RequestParam("url") String url) {
@@ -101,6 +103,9 @@ public class MenuController {
             AdminMenu adminMenu = adminMenuMapper.selectByPrimaryKey(id);
             if(!StringUtils.isEmpty(menuName)){
                 adminMenu.setMenu_name(menuName);
+            }
+            if(!StringUtils.isEmpty(icon)){
+                adminMenu.setIcon(icon);
             }
             if(!StringUtils.isEmpty(url)){
                 adminMenu.setUrl(url);
@@ -123,6 +128,7 @@ public class MenuController {
     @RequestMapping("/add")
     public BaseVO add(@RequestParam("menuName") String menuName,
                                @RequestParam("group") String group,
+                                @RequestParam("icon") String icon,
                                @RequestParam("url") String url,
                                @RequestParam("account") String account) {
 
@@ -137,6 +143,10 @@ public class MenuController {
             AdminMenu adminMenu = new AdminMenu();
             if(!StringUtils.isEmpty(menuName)){
                 adminMenu.setMenu_name(menuName);
+            }
+
+            if(!StringUtils.isEmpty(icon)){
+                adminMenu.setIcon(icon);
             }
 
             if(!StringUtils.isEmpty(url)){

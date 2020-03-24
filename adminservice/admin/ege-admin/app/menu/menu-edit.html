@@ -28,6 +28,13 @@
         </select>
       </div>
     </div>
+      <div class="layui-form-item">
+          <label class="layui-form-label">图标</label>
+          <div class="layui-input-block">
+              <select name="icon" lay-filter="group" id="icon" required lay-verify="required">
+              </select>
+          </div>
+      </div>
     <div class="layui-form-item">
       <label class="layui-form-label">菜单名</label>
       <div class="layui-input-block">
@@ -49,6 +56,7 @@
 
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/index.js"></script>
+    <script type="text/javascript" src="../../js/utils.js"></script>
 <script type="text/javascript">
 
     // layui方法
@@ -78,6 +86,7 @@
               id:field.id,
               menuName:field.menuName,
               url:field.url,
+              icon:field.icon,
               group:field.group,
               account:account
             },
@@ -125,6 +134,7 @@
                     if(result.data!=null){
                       $("#menuName").val(result.data.menu_name);
                       $("#url").val(result.data.url);
+                      $("#icon").val(result.data.icon);
                       $("#menuGroupSelect").val(result.data.group);
                       form.render();
                     }
@@ -161,6 +171,32 @@
 
             }
         });
+
+            $.ajax({
+                url: wholeUrl + "/admin/common/icon?token=" + localStorage.getItem("token"),
+                method: "post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {},
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result.success) {
+                        if (result.data != null) {
+                            var menuList = result.data;
+                            var html = '<option value="">请选择</option>';
+                            for (var i = 0; i < menuList.length; i++) {
+                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                            }
+                            $("#icon").html(html);
+                            form.render();
+                        }
+                    } else {
+                        layer.msg("数据加载异常！");
+                    }
+
+                }
+            });
 
         });
 

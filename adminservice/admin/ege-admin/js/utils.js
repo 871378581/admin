@@ -35,3 +35,38 @@ function CheckPassWord(password) {//密码必须包含数字和字母
     if (reg.test(str))
         return true;
 }
+
+function getIcon(id){
+    var map = new Map()
+    map.set("1","&#xe68f;");
+    map.set("2","&#xe68c;");
+    map.set("3","&#xe748;");
+    map.set("4","&#xe68d;");
+    map.set("5","&#xe627;");
+    map.set("6","&#xe626;");
+    map.set("7","&#xe66d;");
+    map.set("8","&#xe6c9;");
+    map.set("9","&#xe67a;");
+    map.set("10","&#xe66f;");
+    map.set("11","&#xe68e;");
+    map.set("12","&#xe66e;");
+    map.set("13","&#xe702;");
+    map.set("14","&#xe66c;");
+    map.set("15","&#xe716;");
+    map.set("16","&#xe665;");
+    map.set("17","&#xe653;");
+    map.set("18","&#xe65f;");
+    map.set("19","&#xe671;");
+    map.set("20","&#xe715;");
+    map.set("21","&#xe705;");
+    map.set("22","&#xe857;");
+    map.set("23","&#xe770;");
+    map.set("24","&#xe670;");
+    map.set("25","&#xe631;");
+    map.set("26","&#xe623;");
+    map.set("27","&#xe620;");
+    map.set("28","&#xe614;");
+    map.set("29","&#xe658;");
+    map.set("30","&#xe606;");
+    return map.get(id);
+}

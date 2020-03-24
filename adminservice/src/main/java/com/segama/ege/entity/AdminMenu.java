@@ -22,6 +22,8 @@ public class AdminMenu implements Serializable {
 
     private Integer version;
 
+    private String icon;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -96,6 +98,14 @@ public class AdminMenu implements Serializable {
         this.version = version;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -111,6 +121,7 @@ public class AdminMenu implements Serializable {
         sb.append(", url=").append(url);
         sb.append(", group=").append(group);
         sb.append(", version=").append(version);
+        sb.append(", icon=").append(icon);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -18,6 +18,8 @@ public class AdminMenuGroup implements Serializable {
 
     private Long sort;
 
+    private String icon;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -76,6 +78,14 @@ public class AdminMenuGroup implements Serializable {
         this.sort = sort;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -89,6 +99,7 @@ public class AdminMenuGroup implements Serializable {
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", group=").append(group);
         sb.append(", sort=").append(sort);
+        sb.append(", icon=").append(icon);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

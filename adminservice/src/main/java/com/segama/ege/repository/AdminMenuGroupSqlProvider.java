@@ -65,6 +65,10 @@ public class AdminMenuGroupSqlProvider {
             VALUES("`sort`", "#{sort,jdbcType=BIGINT}");
         }
         
+        if (record.getIcon() != null) {
+            VALUES("`icon`", "#{icon,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -81,6 +85,7 @@ public class AdminMenuGroupSqlProvider {
         SELECT("`modifier_account`");
         SELECT("`group`");
         SELECT("`sort`");
+        SELECT("`icon`");
         FROM("`admin_menu_group`");
         applyWhere(example, false);
         
@@ -132,6 +137,10 @@ public class AdminMenuGroupSqlProvider {
             SET("`sort` = #{record.sort,jdbcType=BIGINT}");
         }
         
+        if (record.getIcon() != null) {
+            SET("`icon` = #{record.icon,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -147,6 +156,7 @@ public class AdminMenuGroupSqlProvider {
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`group` = #{record.group,jdbcType=VARCHAR}");
         SET("`sort` = #{record.sort,jdbcType=BIGINT}");
+        SET("`icon` = #{record.icon,jdbcType=VARCHAR}");
         
         AdminMenuGroupExample example = (AdminMenuGroupExample) parameter.get("example");
         applyWhere(example, true);
@@ -179,6 +189,10 @@ public class AdminMenuGroupSqlProvider {
         
         if (record.getSort() != null) {
             SET("`sort` = #{sort,jdbcType=BIGINT}");
+        }
+        
+        if (record.getIcon() != null) {
+            SET("`icon` = #{icon,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

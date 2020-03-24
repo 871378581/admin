@@ -1,5 +1,6 @@
 package com.segama.ege.admin.controller;
 
+import com.segama.ege.admin.constants.IconEnum;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.service.FileSerivce;
 import com.segama.ege.util.CommonUtil;
@@ -47,6 +48,15 @@ public class CommonController {
                 }
             }
         }
+        return baseVO;
+    }
+
+
+    @RequestMapping("/icon")
+    public BaseVO icon() {
+        BaseVO baseVO = new BaseVO();
+        baseVO.setData(IconEnum.getAllIcon());
+        baseVO.setSuccess(true);
         return baseVO;
     }
 

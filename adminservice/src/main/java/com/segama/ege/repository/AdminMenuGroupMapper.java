@@ -33,10 +33,10 @@ public interface AdminMenuGroupMapper {
     @Insert({
         "insert into `admin_menu_group` (`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
-        "`group`, `sort`)",
+        "`group`, `sort`, `icon`)",
         "values (#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
-        "#{group,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT})"
+        "#{group,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT}, #{icon,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(AdminMenuGroup record);
@@ -53,14 +53,15 @@ public interface AdminMenuGroupMapper {
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="group", property="group", jdbcType=JdbcType.VARCHAR),
-        @Result(column="sort", property="sort", jdbcType=JdbcType.BIGINT)
+        @Result(column="sort", property="sort", jdbcType=JdbcType.BIGINT),
+        @Result(column="icon", property="icon", jdbcType=JdbcType.VARCHAR)
     })
     List<AdminMenuGroup> selectByExample(AdminMenuGroupExample example);
 
     @Select({
         "select",
         "`id`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, `group`, ",
-        "`sort`",
+        "`sort`, `icon`",
         "from `admin_menu_group`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -71,7 +72,8 @@ public interface AdminMenuGroupMapper {
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="group", property="group", jdbcType=JdbcType.VARCHAR),
-        @Result(column="sort", property="sort", jdbcType=JdbcType.BIGINT)
+        @Result(column="sort", property="sort", jdbcType=JdbcType.BIGINT),
+        @Result(column="icon", property="icon", jdbcType=JdbcType.VARCHAR)
     })
     AdminMenuGroup selectByPrimaryKey(Long id);
 
@@ -91,7 +93,8 @@ public interface AdminMenuGroupMapper {
           "`creator_account` = #{creator_account,jdbcType=VARCHAR},",
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
           "`group` = #{group,jdbcType=VARCHAR},",
-          "`sort` = #{sort,jdbcType=BIGINT}",
+          "`sort` = #{sort,jdbcType=BIGINT},",
+          "`icon` = #{icon,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(AdminMenuGroup record);

@@ -85,6 +85,7 @@ public class MenuGroupController {
     @RequestMapping("/edit")
     public BaseVO edit(@RequestParam("id") Long id,
                     @RequestParam("group") String group,
+                    @RequestParam("icon") String icon,
                     @RequestParam("account") String account,
                     @RequestParam("sort") Long sort) {
         BaseVO baseVO = new BaseVO();
@@ -95,6 +96,10 @@ public class MenuGroupController {
                 return baseVO;
             }
             AdminMenuGroup adminMenu = adminMenuGroupMapper.selectByPrimaryKey(id);
+
+            if(!StringUtils.isEmpty(icon)){
+                adminMenu.setIcon(icon);
+            }
 
             if(sort!=null){
                 adminMenu.setSort(sort);
@@ -117,6 +122,7 @@ public class MenuGroupController {
     @RequestMapping("/add")
     public BaseVO add(
                    @RequestParam("group") String group,
+                   @RequestParam("icon") String icon,
                    @RequestParam("sort") Long sort,
                    @RequestParam("account") String account) {
 
@@ -129,6 +135,9 @@ public class MenuGroupController {
                 return baseVO;
             }
             AdminMenuGroup adminMenu = new AdminMenuGroup();
+            if(!StringUtils.isEmpty(icon)){
+                adminMenu.setIcon(icon);
+            }
             if(sort!=null){
                 adminMenu.setSort(sort);
             }

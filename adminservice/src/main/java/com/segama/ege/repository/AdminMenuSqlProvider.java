@@ -73,6 +73,10 @@ public class AdminMenuSqlProvider {
             VALUES("`version`", "#{version,jdbcType=INTEGER}");
         }
         
+        if (record.getIcon() != null) {
+            VALUES("`icon`", "#{icon,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -91,6 +95,7 @@ public class AdminMenuSqlProvider {
         SELECT("`url`");
         SELECT("`group`");
         SELECT("`version`");
+        SELECT("`icon`");
         FROM("`admin_menu`");
         applyWhere(example, false);
         
@@ -150,6 +155,10 @@ public class AdminMenuSqlProvider {
             SET("`version` = #{record.version,jdbcType=INTEGER}");
         }
         
+        if (record.getIcon() != null) {
+            SET("`icon` = #{record.icon,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -167,6 +176,7 @@ public class AdminMenuSqlProvider {
         SET("`url` = #{record.url,jdbcType=VARCHAR}");
         SET("`group` = #{record.group,jdbcType=VARCHAR}");
         SET("`version` = #{record.version,jdbcType=INTEGER}");
+        SET("`icon` = #{record.icon,jdbcType=VARCHAR}");
         
         AdminMenuExample example = (AdminMenuExample) parameter.get("example");
         applyWhere(example, true);
@@ -207,6 +217,10 @@ public class AdminMenuSqlProvider {
         
         if (record.getVersion() != null) {
             SET("`version` = #{version,jdbcType=INTEGER}");
+        }
+        
+        if (record.getIcon() != null) {
+            SET("`icon` = #{icon,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

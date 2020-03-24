@@ -28,6 +28,13 @@
           </div>
       </div>
       <div class="layui-form-item">
+          <label class="layui-form-label">图标</label>
+          <div class="layui-input-block">
+              <select name="icon" lay-filter="group" id="icon" required lay-verify="required">
+              </select>
+          </div>
+      </div>
+      <div class="layui-form-item">
           <label class="layui-form-label">排序</label>
           <div class="layui-input-block">
               <input type="text" name="sort" maxlength="2048" required lay-verify="required" placeholder="请输入排序" id="sort" autocomplete="off" class="layui-input">
@@ -42,6 +49,7 @@
 
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/index.js"></script>
+  <script type="text/javascript" src="../../js/utils.js"></script>
 <script type="text/javascript">
 
     // layui方法
@@ -126,6 +134,32 @@
               }
             });
           }
+
+            $.ajax({
+                url: wholeUrl + "/admin/common/icon?token=" + localStorage.getItem("token"),
+                method: "post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {},
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result.success) {
+                        if (result.data != null) {
+                            var menuList = result.data;
+                            var html = '<option value="">请选择</option>';
+                            for (var i = 0; i < menuList.length; i++) {
+                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                            }
+                            $("#icon").html(html);
+                            form.render();
+                        }
+                    } else {
+                        layer.msg("数据加载异常！");
+                    }
+
+                }
+            });
         });
 
     });

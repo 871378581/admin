@@ -34,11 +34,13 @@ public interface AdminMenuMapper {
         "insert into `admin_menu` (`menu_name`, `gmt_create`, ",
         "`gmt_modify`, `creator_account`, ",
         "`modifier_account`, `url`, ",
-        "`group`, `version`)",
+        "`group`, `version`, ",
+        "`icon`)",
         "values (#{menu_name,jdbcType=VARCHAR}, #{gmt_create,jdbcType=TIMESTAMP}, ",
         "#{gmt_modify,jdbcType=TIMESTAMP}, #{creator_account,jdbcType=VARCHAR}, ",
         "#{modifier_account,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, ",
-        "#{group,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER})"
+        "#{group,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, ",
+        "#{icon,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(AdminMenu record);
@@ -57,14 +59,15 @@ public interface AdminMenuMapper {
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
         @Result(column="group", property="group", jdbcType=JdbcType.VARCHAR),
-        @Result(column="version", property="version", jdbcType=JdbcType.INTEGER)
+        @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
+        @Result(column="icon", property="icon", jdbcType=JdbcType.VARCHAR)
     })
     List<AdminMenu> selectByExample(AdminMenuExample example);
 
     @Select({
         "select",
         "`id`, `menu_name`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, ",
-        "`url`, `group`, `version`",
+        "`url`, `group`, `version`, `icon`",
         "from `admin_menu`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -77,7 +80,8 @@ public interface AdminMenuMapper {
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
         @Result(column="group", property="group", jdbcType=JdbcType.VARCHAR),
-        @Result(column="version", property="version", jdbcType=JdbcType.INTEGER)
+        @Result(column="version", property="version", jdbcType=JdbcType.INTEGER),
+        @Result(column="icon", property="icon", jdbcType=JdbcType.VARCHAR)
     })
     AdminMenu selectByPrimaryKey(Long id);
 
@@ -99,7 +103,8 @@ public interface AdminMenuMapper {
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
           "`url` = #{url,jdbcType=VARCHAR},",
           "`group` = #{group,jdbcType=VARCHAR},",
-          "`version` = #{version,jdbcType=INTEGER}",
+          "`version` = #{version,jdbcType=INTEGER},",
+          "`icon` = #{icon,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(AdminMenu record);

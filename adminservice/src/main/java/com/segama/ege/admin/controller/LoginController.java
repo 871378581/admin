@@ -3,6 +3,7 @@ package com.segama.ege.admin.controller;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.segama.ege.admin.constants.IconEnum;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.admin.vo.LoginVO;
 import com.segama.ege.admin.vo.MainMenuVO;
@@ -164,11 +165,23 @@ public class LoginController {
                 for (Map.Entry<String, List<AdminMenu>> stringListEntry : menuMapGroup.entrySet()) {
                     MainMenuVO mainMenuVO  = new MainMenuVO();
                     mainMenuVO.setText(stringListEntry.getKey());
+
+                    AdminMenuGroupExample example = new AdminMenuGroupExample();
+                    AdminMenuGroupExample.Criteria criteria1 = example.createCriteria();
+                    criteria1.andGroupEqualTo(stringListEntry.getKey());
+                    List<AdminMenuGroup> adminMenuGroups = adminMenuGroupMapper.selectByExample(example);
+
+                    if(!CollectionUtils.isEmpty(adminMenuGroups)&&!StringUtils.isEmpty(adminMenuGroups.get(0).getIcon())){
+                        mainMenuVO.setIcon(IconEnum.getCode(Integer.valueOf(adminMenuGroups.get(0).getIcon())));
+                    }
                     List<SubMenuVO> subMenus = Lists.newArrayList();
                     for (AdminMenu adminMenu : stringListEntry.getValue()) {
                         SubMenuVO subMenu = new SubMenuVO();
                         subMenu.setHref(adminMenu.getUrl());
                         subMenu.setText(adminMenu.getMenu_name());
+                        if(!StringUtils.isEmpty(adminMenu.getIcon())){
+                            subMenu.setIcon(IconEnum.getCode(Integer.valueOf(adminMenu.getIcon())));
+                        }
                         subMenus.add(subMenu);
                     }
                     mainMenuVO.setSubset(subMenus);

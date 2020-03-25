@@ -79,6 +79,7 @@
               id:field.id,
               sort:field.sort,
               group:field.group,
+              icon:field.icon,
               account:account
             },
             success:function(result){
@@ -125,6 +126,7 @@
                     if(result.data!=null){
                       $("#sort").val(result.data.sort);
                       $("#group").val(result.data.group);
+                      $("#icon").val(result.data.icon);
                       form.render();
                     }
                 }else{

@@ -169,7 +169,11 @@ public class UserInfoController {
                 baseVO.setSuccess(false);
                 return baseVO;
             }
+
             AdminUser adminRole = adminUserMapper.selectByPrimaryKey(adminRoleNew.getId());
+            if(adminRoleNew.getChannel_type()==1){
+                adminRole.setParent_account(null);
+            }
 
             adminRole.setGmt_modify(new Date());
             adminRole.setModifier_account(editAccount);
@@ -289,6 +293,38 @@ public class UserInfoController {
                         map.put("value", adminUser.getAccount());
                         result.add(map);
                     }
+                }
+            }
+            baseVO.setData(result);
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("AdminUserController#getAllUsers error",e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("查询用户信息信息异常！");
+        }
+        return baseVO;
+    }
+
+
+
+    //查询所有A 如果是允许的账户可以展示所有的A 否则只展示自己
+    @RequestMapping("/get_all_users_of_A")
+    public BaseVO getAllUsersAA() {
+        BaseVO baseVO = new BaseVO();
+        try {
+            List<Map<String,Object>> result = Lists.newArrayList();
+
+            AdminUserExample adminUserExample = new AdminUserExample();
+            AdminUserExample.Criteria criteria = adminUserExample.createCriteria();
+            criteria.andChannel_typeEqualTo(1);
+            List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminUserExample);
+
+            if (!CollectionUtils.isEmpty(adminUsers)) {
+                for (AdminUser adminUser : adminUsers) {
+                    Map<String, Object> map = Maps.newHashMap();
+                    map.put("label", adminUser.getReal_name());
+                    map.put("value", adminUser.getAccount());
+                    result.add(map);
                 }
             }
             baseVO.setData(result);

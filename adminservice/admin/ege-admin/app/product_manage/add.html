@@ -130,32 +130,6 @@
           //parent.layer.close(index); //再执行关闭
         });
 
-        $.ajax({
-            url: wholeUrl + "/admin/menu_group/get_all_menu_group?token=" + localStorage.getItem("token"),
-            method: "post",
-            contentType: "application/x-www-form-urlencoded",
-            dataType: "json",
-            data: {},
-            async: false,
-            success: function (result) {
-                console.log(result);
-                if (result.success) {
-                    if (result.data != null) {
-                        var menuList = result.data;
-                        var html = '<option value="">请选择</option>';
-                        for (var i = 0; i < menuList.length; i++) {
-                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
-                        }
-                        $("#menuGroupSelect").html(html);
-                        form.render();
-                    }
-                } else {
-                    layer.msg("菜单数据加载异常！");
-                }
-
-            }
-        });
-
     });
 
 

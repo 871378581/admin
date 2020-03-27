@@ -37,7 +37,7 @@ import static com.segama.ege.admin.utils.UUIDUtils.UUID;
 @RestController
 @RequestMapping("/ege/api/admin")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class LoginController {
+public class LoginController extends BaseController {
     @Resource
     private AdminUserMapper adminUserMapper;
 
@@ -143,8 +143,15 @@ public class LoginController {
                         );
             }
 
-            //获取去重后的菜单id
+            //如果类型是A读取A菜单的配置，如果类型是b读取b的菜单配置。menu_id_config_A,menu_id_config_b
             Set<Long> menuIds = Sets.newHashSet();
+            if(adminUser.getChannel_type().equals(1)){
+                menuIds.addAll(getMenuConfig("menu_id_config_A"));
+            }else if(adminUser.getChannel_type().equals(2)){
+                menuIds.addAll(getMenuConfig("menu_id_config_b"));
+            }
+
+            //获取去重后的菜单id
             if(!CollectionUtils.isEmpty(roleIds)){
                 AdminRoleMenuRelationExample adminRoleMenuRelationE = new AdminRoleMenuRelationExample();
                 AdminRoleMenuRelationExample.Criteria criteria1 = adminRoleMenuRelationE.createCriteria();

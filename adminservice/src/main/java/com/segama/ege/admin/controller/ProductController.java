@@ -5,8 +5,9 @@ import com.google.common.collect.Maps;
 import com.segama.ege.admin.utils.BeanUtils;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
-import com.segama.ege.entity.ThProductManage;
-import com.segama.ege.entity.ThProductManageExample;
+import com.segama.ege.entity.*;
+import com.segama.ege.repository.AdminSystemConfigMapper;
+import com.segama.ege.repository.ThProductChannelMapMapper;
 import com.segama.ege.repository.ThProductManageMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -36,6 +37,12 @@ public class ProductController {
     @Resource
     private ThProductManageMapper thProductManageMapper;
 
+    @Resource
+    private AdminSystemConfigMapper adminSystemConfigMapper;
+
+    @Resource
+    private ThProductChannelMapMapper thProductChannelMapMapper;
+
     private static Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
     @RequestMapping("/list")
@@ -57,10 +64,10 @@ public class ProductController {
                 adminRoleExample.setPageCount(pageSize);
                 adminRoleExample.setPageIndex(pageIndex);
                 thProductManages = thProductManageMapper.selectByExample(adminRoleExample);
-                baseVO.setData(thProductManages);
-                baseVO.setSuccess(true);
-            }
 
+            }
+            baseVO.setData(thProductManages);
+            baseVO.setSuccess(true);
             baseVO.setCount(count);
             baseVO.setCode(0);
         }catch (Exception e){
@@ -158,21 +165,47 @@ public class ProductController {
     }
 
     @RequestMapping("/get_all_product")
-    public BaseVO getAllMenu() {
+    public BaseVO get_all_product(@RequestParam(value = "account",required = false) String account ) {
         BaseVO baseVO = new BaseVO();
         try {
             ThProductManageExample example = new ThProductManageExample();
             ThProductManageExample.Criteria criteria = example.createCriteria();
-            //只查上线的产品
-            criteria.andProduct_statusEqualTo(1);
-            List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(example);
-            List<Map<String,Object>> result = Lists.newArrayList();
-            if(!CollectionUtils.isEmpty(ThProductManages)){
-                for (ThProductManage ThProductManage : ThProductManages) {
-                    Map<String,Object> map = Maps.newHashMap();
-                    map.put("label",ThProductManage.getProduct_name());
-                    map.put("value",ThProductManage.getProduct_name());
-                    result.add(map);
+
+            List<Map<String, Object>> result = Lists.newArrayList();
+            if(showAllUser(account)) {
+                //只查上线的产品
+                criteria.andProduct_statusEqualTo(1);
+                List<ThProductManage> ThProductManages = thProductManageMapper.selectByExample(example);
+                if (!CollectionUtils.isEmpty(ThProductManages)) {
+                    for (ThProductManage ThProductManage : ThProductManages) {
+                        Map<String, Object> map = Maps.newHashMap();
+                        map.put("label", ThProductManage.getProduct_name());
+                        map.put("value", ThProductManage.getProduct_code());
+                        result.add(map);
+                    }
+                }
+            }else{
+                //查询A下面的所有产品
+                ThProductChannelMapExample example1 = new ThProductChannelMapExample();
+                ThProductChannelMapExample.Criteria criteria1 = example1.createCriteria();
+                criteria1.andProduct_onwer_accountEqualTo(account);
+                List<ThProductChannelMap> thProductChannelMaps = thProductChannelMapMapper.selectByExample(example1);
+                if(!CollectionUtils.isEmpty(thProductChannelMaps)){
+                    for (ThProductChannelMap thProductChannelMap : thProductChannelMaps) {
+                        ThProductManageExample example2 = new ThProductManageExample();
+                        ThProductManageExample.Criteria criteria2 = example.createCriteria();
+                        criteria2.andProduct_codeEqualTo(thProductChannelMap.getProduct_code());
+                        List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
+                        if(!CollectionUtils.isEmpty(thProductManages)){
+                            ThProductManage thProductManage = thProductManages.get(0);
+                            if(thProductManage.getProduct_status().equals(1)){
+                                Map<String, Object> map = Maps.newHashMap();
+                                map.put("label", thProductManage.getProduct_name());
+                                map.put("value", thProductManage.getProduct_code());
+                                result.add(map);
+                            }
+                        }
+                    }
                 }
             }
             baseVO.setData(result);
@@ -180,10 +213,30 @@ public class ProductController {
         } catch (Exception e) {
             LOG.error("ThProductManageController#getAllMenu error",e);
             baseVO.setSuccess(false);
-            baseVO.setErrorMsg("查询用户信息信息异常！");
+            baseVO.setErrorMsg("查询信息异常！");
         }
         return baseVO;
     }
 
+
+    //展示所有用户
+    private Boolean showAllUser(String ownAccount){
+        AdminSystemConfigExample example = new AdminSystemConfigExample();
+        AdminSystemConfigExample.Criteria criteria = example.createCriteria();
+        // TODO 展示所有用户配置项
+        criteria.andKeyEqualTo("showAllUserAccounts");
+        List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
+            AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
+            String value = adminSystemConfig.getValue();
+            String[] split = value.split(",");
+            for (String s : split) {
+                if(ownAccount.equals(s)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

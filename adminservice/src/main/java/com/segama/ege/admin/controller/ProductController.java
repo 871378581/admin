@@ -193,8 +193,9 @@ public class ProductController {
                 if(!CollectionUtils.isEmpty(thProductChannelMaps)){
                     for (ThProductChannelMap thProductChannelMap : thProductChannelMaps) {
                         ThProductManageExample example2 = new ThProductManageExample();
-                        ThProductManageExample.Criteria criteria2 = example.createCriteria();
+                        ThProductManageExample.Criteria criteria2 = example2.createCriteria();
                         criteria2.andProduct_codeEqualTo(thProductChannelMap.getProduct_code());
+
                         List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
                         if(!CollectionUtils.isEmpty(thProductManages)){
                             ThProductManage thProductManage = thProductManages.get(0);

@@ -285,7 +285,7 @@ public class UrlController extends BaseController{
             if(!CollectionUtils.isEmpty(adminUsers1)){
                 AdminUser adminUser = adminUsers1.get(0);
                 Map<String, Object> map = Maps.newHashMap();
-                map.put("label", adminUser.getChannel_name());
+                map.put("label", StringUtils.isEmpty(adminUser.getChannel_name())?adminUser.getAccount():adminUser.getChannel_name());
                 map.put("value", adminUser.getAccount());
                 result.add(map);
             }

@@ -19,7 +19,7 @@
 </head>
 <body class="body">
 
-<form class="layui-form" action="" lay-filter="example">
+<form class="layui-form" style="display: none" action="" lay-filter="example" id="formID">
     <div class="layui-form-item">
         <div class="layui-form-item">
             <input type="hidden" name="source_url" id="source_url"/>
@@ -47,7 +47,7 @@
             </div>
 
         </div>
-        <div class="layui-input-block">
+        <div class="layui-input-block" >
             <div class="layui-block" align="center">
                 <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
                 <button class="layui-btn" lay-submit="" lay-filter="refesh">重置</button>
@@ -114,6 +114,7 @@
                 console.log(result);
                 if (result.success) {
                     $("#source_url").val(result.data);
+                    $("#formID").show();
                 } else {
                     layer.msg("网络异常，请刷新！");
                 }

@@ -28,6 +28,8 @@ public class ThProductManage implements Serializable {
 
     private String description;
 
+    private String source_url;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -126,6 +128,14 @@ public class ThProductManage implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getSource_url() {
+        return source_url;
+    }
+
+    public void setSource_url(String source_url) {
+        this.source_url = source_url == null ? null : source_url.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -144,6 +154,7 @@ public class ThProductManage implements Serializable {
         sb.append(", creator_account=").append(creator_account);
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
+        sb.append(", source_url=").append(source_url);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

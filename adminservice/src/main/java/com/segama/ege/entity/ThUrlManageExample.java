@@ -255,6 +255,146 @@ public class ThUrlManageExample {
             return (Criteria) this;
         }
 
+        public Criteria andUrl_codeIsNull() {
+            addCriterion("`url_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeIsNotNull() {
+            addCriterion("`url_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeEqualTo(String value) {
+            addCriterion("`url_code` =", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeNotEqualTo(String value) {
+            addCriterion("`url_code` <>", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeGreaterThan(String value) {
+            addCriterion("`url_code` >", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`url_code` >=", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeLessThan(String value) {
+            addCriterion("`url_code` <", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeLessThanOrEqualTo(String value) {
+            addCriterion("`url_code` <=", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeLike(String value) {
+            addCriterion("`url_code` like", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeNotLike(String value) {
+            addCriterion("`url_code` not like", value, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeIn(List<String> values) {
+            addCriterion("`url_code` in", values, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeNotIn(List<String> values) {
+            addCriterion("`url_code` not in", values, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeBetween(String value1, String value2) {
+            addCriterion("`url_code` between", value1, value2, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrl_codeNotBetween(String value1, String value2) {
+            addCriterion("`url_code` not between", value1, value2, "url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeIsNull() {
+            addCriterion("`share_url_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeIsNotNull() {
+            addCriterion("`share_url_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeEqualTo(String value) {
+            addCriterion("`share_url_code` =", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeNotEqualTo(String value) {
+            addCriterion("`share_url_code` <>", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeGreaterThan(String value) {
+            addCriterion("`share_url_code` >", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`share_url_code` >=", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeLessThan(String value) {
+            addCriterion("`share_url_code` <", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeLessThanOrEqualTo(String value) {
+            addCriterion("`share_url_code` <=", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeLike(String value) {
+            addCriterion("`share_url_code` like", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeNotLike(String value) {
+            addCriterion("`share_url_code` not like", value, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeIn(List<String> values) {
+            addCriterion("`share_url_code` in", values, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeNotIn(List<String> values) {
+            addCriterion("`share_url_code` not in", values, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeBetween(String value1, String value2) {
+            addCriterion("`share_url_code` between", value1, value2, "share_url_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andShare_url_codeNotBetween(String value1, String value2) {
+            addCriterion("`share_url_code` not between", value1, value2, "share_url_code");
+            return (Criteria) this;
+        }
+
         public Criteria andOpen_ticket_main_bodyIsNull() {
             addCriterion("`open_ticket_main_body` is null");
             return (Criteria) this;
@@ -1132,6 +1272,76 @@ public class ThUrlManageExample {
 
         public Criteria andCreator_accountNotBetween(String value1, String value2) {
             addCriterion("`creator_account` not between", value1, value2, "creator_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountIsNull() {
+            addCriterion("`owner_account` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountIsNotNull() {
+            addCriterion("`owner_account` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountEqualTo(String value) {
+            addCriterion("`owner_account` =", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountNotEqualTo(String value) {
+            addCriterion("`owner_account` <>", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountGreaterThan(String value) {
+            addCriterion("`owner_account` >", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountGreaterThanOrEqualTo(String value) {
+            addCriterion("`owner_account` >=", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountLessThan(String value) {
+            addCriterion("`owner_account` <", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountLessThanOrEqualTo(String value) {
+            addCriterion("`owner_account` <=", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountLike(String value) {
+            addCriterion("`owner_account` like", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountNotLike(String value) {
+            addCriterion("`owner_account` not like", value, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountIn(List<String> values) {
+            addCriterion("`owner_account` in", values, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountNotIn(List<String> values) {
+            addCriterion("`owner_account` not in", values, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountBetween(String value1, String value2) {
+            addCriterion("`owner_account` between", value1, value2, "owner_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_accountNotBetween(String value1, String value2) {
+            addCriterion("`owner_account` not between", value1, value2, "owner_account");
             return (Criteria) this;
         }
 

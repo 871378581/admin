@@ -8,6 +8,10 @@ public class ThUrlManage implements Serializable {
 
     private String business_name;
 
+    private String url_code;
+
+    private String share_url_code;
+
     private String open_ticket_main_body;
 
     private String product_name;
@@ -34,6 +38,8 @@ public class ThUrlManage implements Serializable {
 
     private String creator_account;
 
+    private String owner_account;
+
     private String modifier_account;
 
     private String description;
@@ -54,6 +60,22 @@ public class ThUrlManage implements Serializable {
 
     public void setBusiness_name(String business_name) {
         this.business_name = business_name == null ? null : business_name.trim();
+    }
+
+    public String getUrl_code() {
+        return url_code;
+    }
+
+    public void setUrl_code(String url_code) {
+        this.url_code = url_code == null ? null : url_code.trim();
+    }
+
+    public String getShare_url_code() {
+        return share_url_code;
+    }
+
+    public void setShare_url_code(String share_url_code) {
+        this.share_url_code = share_url_code == null ? null : share_url_code.trim();
     }
 
     public String getOpen_ticket_main_body() {
@@ -160,6 +182,14 @@ public class ThUrlManage implements Serializable {
         this.creator_account = creator_account == null ? null : creator_account.trim();
     }
 
+    public String getOwner_account() {
+        return owner_account;
+    }
+
+    public void setOwner_account(String owner_account) {
+        this.owner_account = owner_account == null ? null : owner_account.trim();
+    }
+
     public String getModifier_account() {
         return modifier_account;
     }
@@ -184,6 +214,8 @@ public class ThUrlManage implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", business_name=").append(business_name);
+        sb.append(", url_code=").append(url_code);
+        sb.append(", share_url_code=").append(share_url_code);
         sb.append(", open_ticket_main_body=").append(open_ticket_main_body);
         sb.append(", product_name=").append(product_name);
         sb.append(", product_code=").append(product_code);
@@ -197,6 +229,7 @@ public class ThUrlManage implements Serializable {
         sb.append(", gmt_create=").append(gmt_create);
         sb.append(", gmt_modify=").append(gmt_modify);
         sb.append(", creator_account=").append(creator_account);
+        sb.append(", owner_account=").append(owner_account);
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>产品渠道关系管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+    <style>
+        .layui-input-inline{width: 250px !important;}
+    </style>
+</head>
+<body class="body">
+
+<form class="layui-form" action="" lay-filter="example">
+    <div class="layui-form-item">
+        <div class="layui-form-item">
+            <input type="hidden" name="source_url" id="source_url"/>
+            <input type="hidden" name="request_url" id="request_url"/>
+            <input type="hidden" name="share_url_code" id="share_url_code"/>
+            <div class="layui-inline">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-inline">
+                    <input name="phone" id="phone" lay-filter="phone" class="layui-input"  lay-verify="required"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-inline">
+                    <input name="user_name" id="user_name" lay-filter="user_name" class="layui-input" lay-verify="required"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-inline">
+                    <input name="address" id="address" lay-filter="address"  class="layui-input" lay-verify="required"/>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-input-block">
+            <div class="layui-block" align="center">
+                <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
+                <button class="layui-btn" lay-submit="" lay-filter="refesh">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['form', 'layer'], function () {
+
+        // 操作对象
+        var form = layui.form
+            , layer = layui.layer
+            , $ = layui.jquery;
+        //your code
+        //监听关闭
+        form.on('submit(close)', function(data){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+
+        form.on('submit(save)', function(data){
+            var field = data.field;
+            $.ajax({
+                url:wholeUrl+"/other/customer/put_info",
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                async:false,
+                data:{
+                    ...field
+                },
+                success:function(result){
+                    console.log(result);
+                    if(result.success){
+                        /*layer.msg('成功',{time:700}, function(index){
+                        });*/
+                        location.href=$("#source_url").val();
+                    }else{
+                        layer.msg(result.errorMsg);
+                    }
+                }
+            });
+            return false;
+        });
+
+        $("#request_url").val(location.href);
+        var share_url_code = new URLSearchParams(location.search).get("code");
+        $("#share_url_code").val(share_url_code);
+        $.ajax({
+            url: wholeUrl + "/other/customer/get_real_url",
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {url_code:share_url_code},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    $("#source_url").val(result.data);
+                } else {
+                    layer.msg("网络异常，请刷新！");
+                }
+
+            }
+        });
+
+
+    });
+
+
+</script>
+
+</body>
+</html>

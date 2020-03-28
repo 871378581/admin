@@ -185,8 +185,12 @@ public class UserInfoController {
             baseVO.setSuccess(true);
         } catch (Exception e) {
             baseVO.setSuccess(false);
-            baseVO.setErrorMsg("编辑异常！");
             LOG.error("AdminUserController#edit error",e);
+            String msg = "";
+            if(StringUtils.isNotEmpty(e.getMessage())&&e.getMessage().contains("Duplicate")){
+                msg="请勿重复添加！";
+            }
+            baseVO.setErrorMsg("编辑异常，"+msg);
         }
         return baseVO;
     }
@@ -220,8 +224,11 @@ public class UserInfoController {
             baseVO.setSuccess(true);
         } catch (Exception e) {
             LOG.error("AdminUserController#add error",e);
-            baseVO.setSuccess(false);
-            baseVO.setErrorMsg("添加异常！");
+            String msg = "";
+            if(StringUtils.isNotEmpty(e.getMessage())&&e.getMessage().contains("Duplicate")){
+                msg="请勿重复添加！";
+            }
+            baseVO.setErrorMsg("添加异常，"+msg);
         }
         return baseVO;
     }
@@ -277,9 +284,19 @@ public class UserInfoController {
         try {
             List<Map<String,Object>> result = Lists.newArrayList();
             if(!StringUtils.isEmpty(account) && !showAllUser(account)){
-                Map<String,Object> map = Maps.newHashMap();
-                map.put("label",account);
-                map.put("value",account);
+
+                AdminUserExample adminUserExample = new AdminUserExample();
+                AdminUserExample.Criteria criteria = adminUserExample.createCriteria();
+                criteria.andAccountEqualTo(account);
+                List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminUserExample);
+                if(!CollectionUtils.isEmpty(adminUsers)){
+                    AdminUser adminUser = adminUsers.get(0);
+                    Map<String,Object> map = Maps.newHashMap();
+                    map.put("label",adminUser.getChannel_name());
+                    map.put("value",account);
+                    result.add(map);
+                }
+
             }else {
                 AdminUserExample adminUserExample = new AdminUserExample();
                 AdminUserExample.Criteria criteria = adminUserExample.createCriteria();
@@ -289,7 +306,7 @@ public class UserInfoController {
                 if (!CollectionUtils.isEmpty(adminUsers)) {
                     for (AdminUser adminUser : adminUsers) {
                         Map<String, Object> map = Maps.newHashMap();
-                        map.put("label", adminUser.getAccount());
+                        map.put("label", adminUser.getChannel_name());
                         map.put("value", adminUser.getAccount());
                         result.add(map);
                     }
@@ -322,7 +339,7 @@ public class UserInfoController {
             if (!CollectionUtils.isEmpty(adminUsers)) {
                 for (AdminUser adminUser : adminUsers) {
                     Map<String, Object> map = Maps.newHashMap();
-                    map.put("label", adminUser.getReal_name());
+                    map.put("label", adminUser.getChannel_name());
                     map.put("value", adminUser.getAccount());
                     result.add(map);
                 }

@@ -22,7 +22,7 @@ public class BaseController {
     AdminSystemConfigMapper adminSystemConfigMapper;
 
     //展示所有用户
-    private Boolean showAllUser(String ownAccount){
+    public Boolean showAllUser(String ownAccount){
         AdminSystemConfigExample example = new AdminSystemConfigExample();
         AdminSystemConfigExample.Criteria criteria = example.createCriteria();
         // TODO 展示所有用户配置项

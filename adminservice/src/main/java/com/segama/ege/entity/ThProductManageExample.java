@@ -924,6 +924,76 @@ public class ThProductManageExample {
             addCriterion("`description` not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andSource_urlIsNull() {
+            addCriterion("`source_url` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlIsNotNull() {
+            addCriterion("`source_url` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlEqualTo(String value) {
+            addCriterion("`source_url` =", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlNotEqualTo(String value) {
+            addCriterion("`source_url` <>", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlGreaterThan(String value) {
+            addCriterion("`source_url` >", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlGreaterThanOrEqualTo(String value) {
+            addCriterion("`source_url` >=", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlLessThan(String value) {
+            addCriterion("`source_url` <", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlLessThanOrEqualTo(String value) {
+            addCriterion("`source_url` <=", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlLike(String value) {
+            addCriterion("`source_url` like", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlNotLike(String value) {
+            addCriterion("`source_url` not like", value, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlIn(List<String> values) {
+            addCriterion("`source_url` in", values, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlNotIn(List<String> values) {
+            addCriterion("`source_url` not in", values, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlBetween(String value1, String value2) {
+            addCriterion("`source_url` between", value1, value2, "source_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andSource_urlNotBetween(String value1, String value2) {
+            addCriterion("`source_url` not between", value1, value2, "source_url");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

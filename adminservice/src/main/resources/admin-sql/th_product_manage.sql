@@ -8,6 +8,7 @@ CREATE TABLE `th_product_manage` (
   `product_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_type` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_status` int(10) DEFAULT NULL,
   `gmt_create` datetime DEFAULT NULL,
   `gmt_modify` datetime DEFAULT NULL,

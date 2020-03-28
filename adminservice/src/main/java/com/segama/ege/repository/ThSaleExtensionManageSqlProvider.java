@@ -13,48 +13,40 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import com.segama.ege.entity.ThUrlManage;
-import com.segama.ege.entity.ThUrlManageExample.Criteria;
-import com.segama.ege.entity.ThUrlManageExample.Criterion;
-import com.segama.ege.entity.ThUrlManageExample;
+import com.segama.ege.entity.ThSaleExtensionManage;
+import com.segama.ege.entity.ThSaleExtensionManageExample.Criteria;
+import com.segama.ege.entity.ThSaleExtensionManageExample.Criterion;
+import com.segama.ege.entity.ThSaleExtensionManageExample;
 import java.util.List;
 import java.util.Map;
 
-public class ThUrlManageSqlProvider {
+public class ThSaleExtensionManageSqlProvider {
 
-    public String countByExample(ThUrlManageExample example) {
+    public String countByExample(ThSaleExtensionManageExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("`th_url_manage`");
+        FROM("`th_sale_extension_manage`");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(ThUrlManageExample example) {
+    public String deleteByExample(ThSaleExtensionManageExample example) {
         BEGIN();
-        DELETE_FROM("`th_url_manage`");
+        DELETE_FROM("`th_sale_extension_manage`");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(ThUrlManage record) {
+    public String insertSelective(ThSaleExtensionManage record) {
         BEGIN();
-        INSERT_INTO("`th_url_manage`");
+        INSERT_INTO("`th_sale_extension_manage`");
         
-        if (record.getBusiness_name() != null) {
-            VALUES("`business_name`", "#{business_name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUrl_code() != null) {
-            VALUES("`url_code`", "#{url_code,jdbcType=VARCHAR}");
+        if (record.getCode() != null) {
+            VALUES("`code`", "#{code,jdbcType=VARCHAR}");
         }
         
         if (record.getShare_url_code() != null) {
             VALUES("`share_url_code`", "#{share_url_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOpen_ticket_main_body() != null) {
-            VALUES("`open_ticket_main_body`", "#{open_ticket_main_body,jdbcType=VARCHAR}");
         }
         
         if (record.getProduct_name() != null) {
@@ -65,88 +57,61 @@ public class ThUrlManageSqlProvider {
             VALUES("`product_code`", "#{product_code,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_type() != null) {
-            VALUES("`product_type`", "#{product_type,jdbcType=VARCHAR}");
+        if (record.getRequest_url() != null) {
+            VALUES("`request_url`", "#{request_url,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_qudao_code() != null) {
-            VALUES("`product_qudao_code`", "#{product_qudao_code,jdbcType=VARCHAR}");
+        if (record.getSource_url() != null) {
+            VALUES("`source_url`", "#{source_url,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            VALUES("`url`", "#{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUrl_status() != null) {
-            VALUES("`url_status`", "#{url_status,jdbcType=INTEGER}");
-        }
-        
-        if (record.getBiz_line() != null) {
-            VALUES("`biz_line`", "#{biz_line,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannel_code() != null) {
-            VALUES("`channel_code`", "#{channel_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getYouxiao_time() != null) {
-            VALUES("`youxiao_time`", "#{youxiao_time,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGmt_create() != null) {
-            VALUES("`gmt_create`", "#{gmt_create,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getGmt_modify() != null) {
-            VALUES("`gmt_modify`", "#{gmt_modify,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getCreator_account() != null) {
-            VALUES("`creator_account`", "#{creator_account,jdbcType=VARCHAR}");
+        if (record.getPhone() != null) {
+            VALUES("`phone`", "#{phone,jdbcType=VARCHAR}");
         }
         
         if (record.getOwner_account() != null) {
             VALUES("`owner_account`", "#{owner_account,jdbcType=VARCHAR}");
         }
         
-        if (record.getModifier_account() != null) {
-            VALUES("`modifier_account`", "#{modifier_account,jdbcType=VARCHAR}");
+        if (record.getCreate_account() != null) {
+            VALUES("`create_account`", "#{create_account,jdbcType=VARCHAR}");
         }
         
-        if (record.getDescription() != null) {
-            VALUES("`description`", "#{description,jdbcType=VARCHAR}");
+        if (record.getUser_name() != null) {
+            VALUES("`user_name`", "#{user_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAddress() != null) {
+            VALUES("`address`", "#{address,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGmt_create() != null) {
+            VALUES("`gmt_create`", "#{gmt_create,jdbcType=TIMESTAMP}");
         }
         
         return SQL();
     }
 
-    public String selectByExample(ThUrlManageExample example) {
+    public String selectByExample(ThSaleExtensionManageExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("`id`");
         } else {
             SELECT("`id`");
         }
-        SELECT("`business_name`");
-        SELECT("`url_code`");
+        SELECT("`code`");
         SELECT("`share_url_code`");
-        SELECT("`open_ticket_main_body`");
         SELECT("`product_name`");
         SELECT("`product_code`");
-        SELECT("`product_type`");
-        SELECT("`product_qudao_code`");
-        SELECT("`url`");
-        SELECT("`url_status`");
-        SELECT("`biz_line`");
-        SELECT("`channel_code`");
-        SELECT("`youxiao_time`");
-        SELECT("`gmt_create`");
-        SELECT("`gmt_modify`");
-        SELECT("`creator_account`");
+        SELECT("`request_url`");
+        SELECT("`source_url`");
+        SELECT("`phone`");
         SELECT("`owner_account`");
-        SELECT("`modifier_account`");
-        SELECT("`description`");
-        FROM("`th_url_manage`");
+        SELECT("`create_account`");
+        SELECT("`user_name`");
+        SELECT("`address`");
+        SELECT("`gmt_create`");
+        FROM("`th_sale_extension_manage`");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -163,30 +128,22 @@ public class ThUrlManageSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        ThUrlManage record = (ThUrlManage) parameter.get("record");
-        ThUrlManageExample example = (ThUrlManageExample) parameter.get("example");
+        ThSaleExtensionManage record = (ThSaleExtensionManage) parameter.get("record");
+        ThSaleExtensionManageExample example = (ThSaleExtensionManageExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("`th_url_manage`");
+        UPDATE("`th_sale_extension_manage`");
         
         if (record.getId() != null) {
             SET("`id` = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getBusiness_name() != null) {
-            SET("`business_name` = #{record.business_name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUrl_code() != null) {
-            SET("`url_code` = #{record.url_code,jdbcType=VARCHAR}");
+        if (record.getCode() != null) {
+            SET("`code` = #{record.code,jdbcType=VARCHAR}");
         }
         
         if (record.getShare_url_code() != null) {
             SET("`share_url_code` = #{record.share_url_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOpen_ticket_main_body() != null) {
-            SET("`open_ticket_main_body` = #{record.open_ticket_main_body,jdbcType=VARCHAR}");
         }
         
         if (record.getProduct_name() != null) {
@@ -197,56 +154,36 @@ public class ThUrlManageSqlProvider {
             SET("`product_code` = #{record.product_code,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_type() != null) {
-            SET("`product_type` = #{record.product_type,jdbcType=VARCHAR}");
+        if (record.getRequest_url() != null) {
+            SET("`request_url` = #{record.request_url,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_qudao_code() != null) {
-            SET("`product_qudao_code` = #{record.product_qudao_code,jdbcType=VARCHAR}");
+        if (record.getSource_url() != null) {
+            SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            SET("`url` = #{record.url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUrl_status() != null) {
-            SET("`url_status` = #{record.url_status,jdbcType=INTEGER}");
-        }
-        
-        if (record.getBiz_line() != null) {
-            SET("`biz_line` = #{record.biz_line,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannel_code() != null) {
-            SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getYouxiao_time() != null) {
-            SET("`youxiao_time` = #{record.youxiao_time,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGmt_create() != null) {
-            SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getGmt_modify() != null) {
-            SET("`gmt_modify` = #{record.gmt_modify,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getCreator_account() != null) {
-            SET("`creator_account` = #{record.creator_account,jdbcType=VARCHAR}");
+        if (record.getPhone() != null) {
+            SET("`phone` = #{record.phone,jdbcType=VARCHAR}");
         }
         
         if (record.getOwner_account() != null) {
             SET("`owner_account` = #{record.owner_account,jdbcType=VARCHAR}");
         }
         
-        if (record.getModifier_account() != null) {
-            SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
+        if (record.getCreate_account() != null) {
+            SET("`create_account` = #{record.create_account,jdbcType=VARCHAR}");
         }
         
-        if (record.getDescription() != null) {
-            SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        if (record.getUser_name() != null) {
+            SET("`user_name` = #{record.user_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAddress() != null) {
+            SET("`address` = #{record.address,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGmt_create() != null) {
+            SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(example, true);
@@ -255,52 +192,37 @@ public class ThUrlManageSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("`th_url_manage`");
+        UPDATE("`th_sale_extension_manage`");
         
         SET("`id` = #{record.id,jdbcType=BIGINT}");
-        SET("`business_name` = #{record.business_name,jdbcType=VARCHAR}");
-        SET("`url_code` = #{record.url_code,jdbcType=VARCHAR}");
+        SET("`code` = #{record.code,jdbcType=VARCHAR}");
         SET("`share_url_code` = #{record.share_url_code,jdbcType=VARCHAR}");
-        SET("`open_ticket_main_body` = #{record.open_ticket_main_body,jdbcType=VARCHAR}");
         SET("`product_name` = #{record.product_name,jdbcType=VARCHAR}");
         SET("`product_code` = #{record.product_code,jdbcType=VARCHAR}");
-        SET("`product_type` = #{record.product_type,jdbcType=VARCHAR}");
-        SET("`product_qudao_code` = #{record.product_qudao_code,jdbcType=VARCHAR}");
-        SET("`url` = #{record.url,jdbcType=VARCHAR}");
-        SET("`url_status` = #{record.url_status,jdbcType=INTEGER}");
-        SET("`biz_line` = #{record.biz_line,jdbcType=VARCHAR}");
-        SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
-        SET("`youxiao_time` = #{record.youxiao_time,jdbcType=VARCHAR}");
-        SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
-        SET("`gmt_modify` = #{record.gmt_modify,jdbcType=TIMESTAMP}");
-        SET("`creator_account` = #{record.creator_account,jdbcType=VARCHAR}");
+        SET("`request_url` = #{record.request_url,jdbcType=VARCHAR}");
+        SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
+        SET("`phone` = #{record.phone,jdbcType=VARCHAR}");
         SET("`owner_account` = #{record.owner_account,jdbcType=VARCHAR}");
-        SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
-        SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        SET("`create_account` = #{record.create_account,jdbcType=VARCHAR}");
+        SET("`user_name` = #{record.user_name,jdbcType=VARCHAR}");
+        SET("`address` = #{record.address,jdbcType=VARCHAR}");
+        SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
         
-        ThUrlManageExample example = (ThUrlManageExample) parameter.get("example");
+        ThSaleExtensionManageExample example = (ThSaleExtensionManageExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(ThUrlManage record) {
+    public String updateByPrimaryKeySelective(ThSaleExtensionManage record) {
         BEGIN();
-        UPDATE("`th_url_manage`");
+        UPDATE("`th_sale_extension_manage`");
         
-        if (record.getBusiness_name() != null) {
-            SET("`business_name` = #{business_name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUrl_code() != null) {
-            SET("`url_code` = #{url_code,jdbcType=VARCHAR}");
+        if (record.getCode() != null) {
+            SET("`code` = #{code,jdbcType=VARCHAR}");
         }
         
         if (record.getShare_url_code() != null) {
             SET("`share_url_code` = #{share_url_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOpen_ticket_main_body() != null) {
-            SET("`open_ticket_main_body` = #{open_ticket_main_body,jdbcType=VARCHAR}");
         }
         
         if (record.getProduct_name() != null) {
@@ -311,56 +233,36 @@ public class ThUrlManageSqlProvider {
             SET("`product_code` = #{product_code,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_type() != null) {
-            SET("`product_type` = #{product_type,jdbcType=VARCHAR}");
+        if (record.getRequest_url() != null) {
+            SET("`request_url` = #{request_url,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_qudao_code() != null) {
-            SET("`product_qudao_code` = #{product_qudao_code,jdbcType=VARCHAR}");
+        if (record.getSource_url() != null) {
+            SET("`source_url` = #{source_url,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            SET("`url` = #{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUrl_status() != null) {
-            SET("`url_status` = #{url_status,jdbcType=INTEGER}");
-        }
-        
-        if (record.getBiz_line() != null) {
-            SET("`biz_line` = #{biz_line,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannel_code() != null) {
-            SET("`channel_code` = #{channel_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getYouxiao_time() != null) {
-            SET("`youxiao_time` = #{youxiao_time,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGmt_create() != null) {
-            SET("`gmt_create` = #{gmt_create,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getGmt_modify() != null) {
-            SET("`gmt_modify` = #{gmt_modify,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getCreator_account() != null) {
-            SET("`creator_account` = #{creator_account,jdbcType=VARCHAR}");
+        if (record.getPhone() != null) {
+            SET("`phone` = #{phone,jdbcType=VARCHAR}");
         }
         
         if (record.getOwner_account() != null) {
             SET("`owner_account` = #{owner_account,jdbcType=VARCHAR}");
         }
         
-        if (record.getModifier_account() != null) {
-            SET("`modifier_account` = #{modifier_account,jdbcType=VARCHAR}");
+        if (record.getCreate_account() != null) {
+            SET("`create_account` = #{create_account,jdbcType=VARCHAR}");
         }
         
-        if (record.getDescription() != null) {
-            SET("`description` = #{description,jdbcType=VARCHAR}");
+        if (record.getUser_name() != null) {
+            SET("`user_name` = #{user_name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAddress() != null) {
+            SET("`address` = #{address,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGmt_create() != null) {
+            SET("`gmt_create` = #{gmt_create,jdbcType=TIMESTAMP}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");
@@ -368,7 +270,7 @@ public class ThUrlManageSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(ThUrlManageExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(ThSaleExtensionManageExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

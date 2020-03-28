@@ -10,6 +10,7 @@ public class BaseVO<T>{
     private String token;
     private Integer status;
     private String errorMsg;
+    private String error;
     private Boolean success;
     private T data;
     private Integer count;
@@ -89,5 +90,13 @@ public class BaseVO<T>{
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

@@ -24,12 +24,22 @@
         <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
     <span>
-        <div class="layui-inline">
-            <label class="layui-form-label">产品名称</label>
-            <div class="layui-input-inline">
-                <input type="text"  id="searchMenuName" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
-            </div>
-        </div>
+        <form class="layui-form" style="float: left">
+            <div class="layui-inline">
+                  <label class="layui-form-label">产品</label>
+                  <div class="layui-input-inline">
+                      <select id="product_code" lay-filter="">
+                      </select>
+                  </div>
+              </div>
+            <div class="layui-inline">
+                  <label class="layui-form-label">渠道</label>
+                  <div class="layui-input-inline">
+                      <select disabled="disabled" name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
+                      </select>
+                  </div>
+              </div>
+        </form>
     </span>
     <button class="layui-btn mgl-20" id="btn-search">查询</button>
 </div>
@@ -60,15 +70,18 @@
             , cols: [[                  //标题栏
               {checkbox: true, sort: true, fixed: true, space: true}
               , {field: 'id', title: 'ID', width: 80}
-              , {field: 'open_ticket_main_body', title: '开票主体', width: 120}
+              , {field: 'url_code', title:'编码', width: 170}
+              //, {field: 'open_ticket_main_body', title: '开票主体', width: 120}
               , {field: 'product_code', title: '产品编码', width: 120}
-              , {field: 'product_qudao_code', title: '产品渠道编码', width: 120}
+              //, {field: 'product_qudao_code', title: '产品渠道编码', width: 120}
               , {field: 'product_name', title: '产品名称', width: 120}
-              , {field: 'business_name', title: '商户名称', width: 120}
-              , {field: 'url_status', title: '链接状态', width: 170,templet:'<div>{{ d.product_status==1?"上线":"下线" }}</div>'}
+              , {field: 'owner_account', title: '渠道', width: 120}
+             // , {field: 'business_name', title: '商户名称', width: 120}
+              , {field: 'url_status', title: '链接状态', width: 170,templet:'<div>{{ d.url_status==1?"上线":"下线" }}</div>'}
               , {field: 'url', title: '连接', width: 170}
-              , {field: 'biz_line', title:'业务线', width: 170}
-              , {field: 'channel_code', title:'渠道号', width: 170}
+             // , {field: 'biz_line', title:'业务线', width: 170}
+              //, {field: 'channel_code', title:'渠道号', width: 170}
+
               , {field: 'youxiao_time', title:'有效时间', width: 170}
               , {field: 'description', title:'描述', width: 170}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
@@ -85,7 +98,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{product_name:$("#searchMenuName").val()}
+            , where:{owner_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -124,7 +137,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{product_name:$("#searchMenuName").val()}});
+            tableIns.reload({where:{owner_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){
@@ -138,7 +151,7 @@
                 method:"post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType:"json",
-                data:{product_code:data.product_code},
+                data:{url_code:data.url_code},
                 success:function(result){
                   console.log(result);
                   if(result.success){
@@ -164,6 +177,58 @@
             });
 
           }
+        });
+
+        $.ajax({
+            url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {account:localStorage.getItem("account")},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if (result.data != null) {
+                        var menuList = result.data;
+                        var html = '<option value="">请选择</option>';
+                        for (var i = 0; i < menuList.length; i++) {
+                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                        }
+                        $("#product_code").html(html);
+                        form.render();
+                    }
+                } else {
+                    layer.msg("数据加载异常！");
+                }
+
+            }
+        });
+
+        $.ajax({
+            url: wholeUrl + "/admin/url_manage/get_channel_b_and_own?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {account:localStorage.getItem("account")},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if (result.data != null) {
+                        var menuList = result.data;
+                        var html = '<option value="">请选择</option>';
+                        for (var i = 0; i < menuList.length; i++) {
+                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                        }
+                        $("#owner_account").html(html);
+                        form.render();
+                    }
+                } else {
+                    layer.msg("数据加载异常！");
+                }
+
+            }
         });
 
         // 获取选中数据

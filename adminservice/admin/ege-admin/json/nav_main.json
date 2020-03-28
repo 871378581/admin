@@ -21,7 +21,7 @@
         },{
           "text": "产品渠道关系管理",
           "icon": "&#xe621;",
-          "href": "/app/product_channel_map/manage.html"
+          "href": "app/product_channel_map/manage.html"
         }
       ]
     },

@@ -77,7 +77,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{menuName:$("#searchMenuName").val()}
+            , where:{account:localStorage.getItem("account"),menuName:$("#searchMenuName").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -116,7 +116,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{menuName:$("#searchMenuName").val()}});
+            tableIns.reload({where:{account:localStorage.getItem("account"),menuName:$("#searchMenuName").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){

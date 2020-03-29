@@ -1,6 +1,15 @@
 {
   "data": [
     {
+    "text": "商户管理",
+    "icon": "&#xe620;",
+    "subset": [
+      {
+        "text": "商户管理",
+        "icon": "&#xe621;",
+        "href": "app/business_merchant_manage/manage.html"
+      }]
+   },{
     "text": "渠道管理",
     "icon": "&#xe620;",
     "subset": [

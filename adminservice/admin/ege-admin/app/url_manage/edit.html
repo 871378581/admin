@@ -15,6 +15,7 @@
     <link rel="icon" href="../../frame/static/image/code.png">
     <style>
       .layui-input-inline{width: 250px !important;}
+      .layui-form-label{width:100px !important;}
     </style>
 </head>
 <body class="body">
@@ -24,6 +25,14 @@
       <div class="layui-form-item">
           <div class="layui-form-item">
               <div class="layui-inline">
+                  <label class="layui-form-label">渠道</label>
+                  <div class="layui-input-inline">
+                      <select disabled="disabled" name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
+                      </select>
+                  </div>
+              </div>
+
+              <div class="layui-inline">
                   <label class="layui-form-label">产品</label>
                   <div class="layui-input-inline">
                       <select  disabled="disabled" name="product_code"id="product_code" lay-filter="product_code" lay-verify="required">
@@ -31,13 +40,7 @@
                   </div>
               </div>
 
-              <div class="layui-inline">
-                  <label class="layui-form-label">渠道</label>
-                  <div class="layui-input-inline">
-                      <select disabled="disabled" name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
-                      </select>
-                  </div>
-              </div>
+
               <!--<div class="layui-inline">
                   <label class="layui-form-label">商户名称</label>
                   <div class="layui-input-inline">
@@ -100,7 +103,7 @@
                   </div>
               </div>-->
               <div class="layui-inline">
-                  <label class="layui-form-label">有效时间:</label>
+                  <label class="layui-form-label">有效时间</label>
                   <div class="layui-input-inline">
                       <input type="text" name="youxiao_time" class="layui-input" id="youxiao_time" placeholder="请选择有效时间">
                   </div>

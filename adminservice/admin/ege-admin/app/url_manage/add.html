@@ -15,6 +15,7 @@
     <link rel="icon" href="../../frame/static/image/code.png">
     <style>
       .layui-input-inline{width: 250px !important;}
+      .layui-form-label{width:100px !important;}
     </style>
 </head>
 <body class="body">
@@ -23,6 +24,14 @@
       <div class="layui-form-item">
           <div class="layui-form-item">
               <div class="layui-inline">
+                  <label class="layui-form-label">渠道</label>
+                  <div class="layui-input-inline">
+                      <select name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
+                      </select>
+                  </div>
+              </div>
+
+              <div class="layui-inline">
                   <label class="layui-form-label">产品</label>
                   <div class="layui-input-inline">
                       <select name="product_code"id="product_code" lay-filter="product_code" lay-verify="required">
@@ -30,13 +39,7 @@
                   </div>
               </div>
 
-              <div class="layui-inline">
-                  <label class="layui-form-label">渠道</label>
-                  <div class="layui-input-inline">
-                      <select name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
-                      </select>
-                  </div>
-              </div>
+
               <!--<div class="layui-inline">
                   <label class="layui-form-label">商户名称</label>
                   <div class="layui-input-inline">
@@ -99,7 +102,7 @@
                   </div>
               </div>-->
               <div class="layui-inline">
-                  <label class="layui-form-label">有效时间:</label>
+                  <label class="layui-form-label">有效时间</label>
                   <div class="layui-input-inline">
                       <input type="text" name="youxiao_time" class="layui-input" id="youxiao_time" placeholder="请选择有效时间">
                   </div>
@@ -149,16 +152,19 @@
         });
 
         form.on('select(product_code)', function(data){
-            console.log(data.value);
-            var product_code=data.value;
+            var owner=$("#owner_account").val();
+            var prd= $("#product_code").val();
+            if(owner==null||prd==null||owner==""||prd==""){
+                return false;
+            }
             $.ajax({
                 url: wholeUrl + "/admin/url_manage/buildUrl?token=" + localStorage.getItem("token"),
                 method: "post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
-                data: {ownerAccount:localStorage.getItem("account"),
+                data: {ownerAccount:owner,
                     account:localStorage.getItem("account"),
-                    product_code:product_code},
+                    product_code:prd},
                 async: false,
                 success: function (result) {
                     console.log(result);
@@ -173,6 +179,36 @@
             });
             form.render();
         });
+
+        form.on('select(owner_account)', function(data){
+            var owner=$("#owner_account").val();
+            var prd= $("#product_code").val();
+            if(owner==null||prd==null||owner==""||prd==""){
+                return false;
+            }
+            $.ajax({
+                url: wholeUrl + "/admin/url_manage/buildUrl?token=" + localStorage.getItem("token"),
+                method: "post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {ownerAccount:owner,
+                    account:localStorage.getItem("account"),
+                    product_code:prd},
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result.success) {
+                        $("#url").val(result.data.buildUrl);
+                        $("#share_url_code").val(result.data.shareCode);
+                    } else {
+                        layer.msg("数据加载异常！");
+                    }
+
+                }
+            });
+            form.render();
+        });
+
 
         form.on('submit(save)', function(data){
           var field = data.field;

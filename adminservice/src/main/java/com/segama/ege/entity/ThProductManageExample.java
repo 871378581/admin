@@ -994,6 +994,76 @@ public class ThProductManageExample {
             addCriterion("`source_url` not between", value1, value2, "source_url");
             return (Criteria) this;
         }
+
+        public Criteria andBusiness_codeIsNull() {
+            addCriterion("`business_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeIsNotNull() {
+            addCriterion("`business_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeEqualTo(String value) {
+            addCriterion("`business_code` =", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotEqualTo(String value) {
+            addCriterion("`business_code` <>", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeGreaterThan(String value) {
+            addCriterion("`business_code` >", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`business_code` >=", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeLessThan(String value) {
+            addCriterion("`business_code` <", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeLessThanOrEqualTo(String value) {
+            addCriterion("`business_code` <=", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeLike(String value) {
+            addCriterion("`business_code` like", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotLike(String value) {
+            addCriterion("`business_code` not like", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeIn(List<String> values) {
+            addCriterion("`business_code` in", values, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotIn(List<String> values) {
+            addCriterion("`business_code` not in", values, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeBetween(String value1, String value2) {
+            addCriterion("`business_code` between", value1, value2, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotBetween(String value1, String value2) {
+            addCriterion("`business_code` not between", value1, value2, "business_code");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

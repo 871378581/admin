@@ -89,6 +89,10 @@ public class ThProductManageSqlProvider {
             VALUES("`source_url`", "#{source_url,jdbcType=VARCHAR}");
         }
         
+        if (record.getBusiness_code() != null) {
+            VALUES("`business_code`", "#{business_code,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -111,6 +115,7 @@ public class ThProductManageSqlProvider {
         SELECT("`modifier_account`");
         SELECT("`description`");
         SELECT("`source_url`");
+        SELECT("`business_code`");
         FROM("`th_product_manage`");
         applyWhere(example, false);
         
@@ -186,6 +191,10 @@ public class ThProductManageSqlProvider {
             SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
         }
         
+        if (record.getBusiness_code() != null) {
+            SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -207,6 +216,7 @@ public class ThProductManageSqlProvider {
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
         SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
+        SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
         
         ThProductManageExample example = (ThProductManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -263,6 +273,10 @@ public class ThProductManageSqlProvider {
         
         if (record.getSource_url() != null) {
             SET("`source_url` = #{source_url,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBusiness_code() != null) {
+            SET("`business_code` = #{business_code,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

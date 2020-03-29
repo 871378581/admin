@@ -24,15 +24,16 @@
       <div class="layui-form-item">
           <div class="layui-form-item">
               <div class="layui-inline">
-                  <label class="layui-form-label">产品名称</label>
+                  <label class="layui-form-label">商户名称</label>
                   <div class="layui-input-inline">
-                      <input type="text" name="product_name" maxlength="30" required lay-verify="required" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                      <select id="business_code" name="business_code" lay-filter="business_code" id="icon" required lay-verify="required">
+                      </select>
                   </div>
               </div>
               <div class="layui-inline">
-                  <label class="layui-form-label">商户名称</label>
+                  <label class="layui-form-label">产品名称</label>
                   <div class="layui-input-inline">
-                      <input type="text" name="business_name" maxlength="2048"  lay-verify="required" placeholder="请输入商户名称"  autocomplete="off" class="layui-input">
+                      <input type="text" name="product_name" maxlength="30" required lay-verify="required" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
                   </div>
               </div>
 
@@ -137,6 +138,33 @@
           var index = parent.tableIns.reload(); //先得到当前iframe层的索引
           //parent.layer.close(index); //再执行关闭
         });
+
+        $.ajax({
+            url: wholeUrl + "/admin/business_merchant/get_all_merchants?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if (result.data != null) {
+                        var menuList = result.data;
+                        var html = '<option value="">请选择</option>';
+                        for (var i = 0; i < menuList.length; i++) {
+                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                        }
+                        $("#business_code").html(html);
+                        form.render();
+                    }
+                } else {
+                    layer.msg("数据加载异常！");
+                }
+
+            }
+        });
+
         $(()=>{
           var url = location.href;
           var id = new URL(url).searchParams.get("id");
@@ -167,7 +195,6 @@
               }
             });
           }
-
         });
 
     });

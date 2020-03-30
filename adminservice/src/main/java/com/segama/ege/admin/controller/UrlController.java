@@ -193,7 +193,7 @@ public class UrlController extends BaseController{
 
         BaseVO baseVO = new BaseVO();
         try {
-            if( StringUtils.isEmpty(thProductManage.getUrl())|| StringUtils.isEmpty(thProductManage.getShare_url_code())){
+            if( StringUtils.isEmpty(thProductManage.getUrl())){
                 baseVO.setErrorMsg("请检查必填参数是否填写完整！");
                 baseVO.setSuccess(false);
                 return baseVO;

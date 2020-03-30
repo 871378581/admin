@@ -61,11 +61,11 @@
               , {field: 'id', title: 'ID', width: 80}
               , {field: 'business_code', title: '商户编码', width: 120}
               , {field: 'business_name', title: '商户名称', width: 120}
-              , {field: 'business_short_name', title: '商户简称', width: 170}
-              , {field: 'contact_phone', title: '商户联系电话', width: 170}
+              //, {field: 'business_short_name', title: '商户简称', width: 170}
+              //, {field: 'contact_phone', title: '商户联系电话', width: 170}
               , {field: 'contact_name', title: '商户联系人', width: 170}
-              , {field: 'contact_email', title: '联系邮箱', width: 170}
-              , {field: 'business_status', title: '创建时间', width: 170,templet:'<div>{{d.business_status==1?"上线":"下线" }}</div>'}
+              //, {field: 'contact_email', title: '联系邮箱', width: 170}
+              , {field: 'business_status', title: '商户状态', width: 170,templet:'<div>{{d.business_status==1?"上线":"下线" }}</div>'}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'creator_account', title: '创建人', width: 100}

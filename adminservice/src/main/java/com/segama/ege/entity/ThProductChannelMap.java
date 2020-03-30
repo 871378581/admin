@@ -24,6 +24,8 @@ public class ThProductChannelMap implements Serializable {
 
     private String description;
 
+    private String business_code;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -106,6 +108,14 @@ public class ThProductChannelMap implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getBusiness_code() {
+        return business_code;
+    }
+
+    public void setBusiness_code(String business_code) {
+        this.business_code = business_code == null ? null : business_code.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -122,6 +132,7 @@ public class ThProductChannelMap implements Serializable {
         sb.append(", creator_account=").append(creator_account);
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
+        sb.append(", business_code=").append(business_code);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

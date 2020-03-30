@@ -19,7 +19,7 @@ CREATE TABLE `th_url_manage` (
   `gmt_create` datetime DEFAULT NULL,
   `gmt_modify` datetime DEFAULT NULL,
   `creator_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner_account` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `modifier_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(500) COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),

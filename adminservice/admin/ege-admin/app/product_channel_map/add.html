@@ -22,6 +22,13 @@
   <form class="layui-form" action="" lay-filter="example">
       <div class="layui-form-item">
           <div class="layui-form-item">
+              <div class="layui-inline">
+                  <label class="layui-form-label">商户名称</label>
+                  <div class="layui-input-inline">
+                      <select name="business_code" id="business_code" lay-filter="business_code"  lay-verify="required">
+                      </select>
+                  </div>
+              </div>
 
               <div class="layui-inline">
                   <label class="layui-form-label">产品名称</label>
@@ -68,6 +75,40 @@
           parent.layer.close(index);
         });
 
+        form.on('select(business_code)', function(data){
+            console.log(data.value);
+            var code=data.value;
+            if(code==""||code==null){
+                return false;
+            }
+            $.ajax({
+                url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
+                method: "post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {shifou_2_kaifa:"是",code:code,account:localStorage.getItem("account")},
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result.success) {
+                        if (result.data != null) {
+                            var menuList = result.data;
+                            var html = '<option value="">请选择</option>';
+                            for (var i = 0; i < menuList.length; i++) {
+                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                            }
+                            $("#product_code").html(html);
+                            form.render();
+                        }
+                    } else {
+                        layer.msg("数据加载异常！");
+                    }
+
+                }
+            });
+            form.render();
+        });
+
         form.on('submit(save)', function(data){
           var field = data.field;
           var account = localStorage.getItem("account");
@@ -104,31 +145,7 @@
           //parent.layer.close(index); //再执行关闭
         });
 
-        $.ajax({
-            url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
-            method: "post",
-            contentType: "application/x-www-form-urlencoded",
-            dataType: "json",
-            data: {account:localStorage.getItem("account")},
-            async: false,
-            success: function (result) {
-                console.log(result);
-                if (result.success) {
-                    if (result.data != null) {
-                        var menuList = result.data;
-                        var html = '<option value="">请选择</option>';
-                        for (var i = 0; i < menuList.length; i++) {
-                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
-                        }
-                        $("#product_code").html(html);
-                        form.render();
-                    }
-                } else {
-                    layer.msg("数据加载异常！");
-                }
 
-            }
-        });
 
         $.ajax({
             url: wholeUrl + "/admin/user/get_all_users_of_A?token=" + localStorage.getItem("token"),
@@ -147,6 +164,32 @@
                             html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
                         }
                         $("#product_onwer_account").html(html);
+                        form.render();
+                    }
+                } else {
+                    layer.msg("数据加载异常！");
+                }
+
+            }
+        });
+
+        $.ajax({
+            url: wholeUrl + "/admin/business_merchant/get_all_merchants?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {shifou_2_kaifa:"是"},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if (result.data != null) {
+                        var menuList = result.data;
+                        var html = '<option value="">请选择</option>';
+                        for (var i = 0; i < menuList.length; i++) {
+                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                        }
+                        $("#business_code").html(html);
                         form.render();
                     }
                 } else {

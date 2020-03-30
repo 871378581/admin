@@ -19,7 +19,8 @@
 <!-- 工具集 -->
 <div class="my-btn-box">
     <span class="fl">
-        <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
+        <a class="layui-btn btn-add btn-default" style="display: none" id="btn-add">添加</a>
+        <a class="layui-btn btn-add btn-default" style="display: none" id="btn-add2">添加</a>
         <!--<a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>-->
         <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
@@ -75,20 +76,20 @@
               , {field: 'product_code', title: '产品编码', width: 120}
               //, {field: 'product_qudao_code', title: '产品渠道编码', width: 120}
               , {field: 'product_name', title: '产品名称', width: 120}
-              , {field: 'owner_account', title: '渠道', width: 120}
+              , {field: 'owner_account', title: '分配渠道', width: 120}
              // , {field: 'business_name', title: '商户名称', width: 120}
               , {field: 'url_status', title: '链接状态', width: 170,templet:'<div>{{ d.url_status==1?"上线":"下线" }}</div>'}
               , {field: 'url', title: '连接', width: 170}
              // , {field: 'biz_line', title:'业务线', width: 170}
-              //, {field: 'channel_code', title:'渠道号', width: 170}
+              , {field: 'channel_code', title:'渠道码', width: 170}
 
-              , {field: 'youxiao_time', title:'有效时间', width: 170}
+              //, {field: 'youxiao_time', title:'有效时间', width: 170}
               , {field: 'description', title:'描述', width: 170}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'creator_account', title: '创建人', width: 100}
               , {field: 'modifier_account', title: '修改人', width: 100}
-              , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+              , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
@@ -135,6 +136,16 @@
           });
         });
 
+        // 添加2 A添加链接
+        $('#btn-add2').on('click', function () {
+            layer.open({
+                type: 2,
+                title: '添加'
+                ,area:['100%','100%']
+                ,content:"/adminservice/admin/ege-admin/app/url_manage/A_add.html"
+            });
+        });
+
         // 查询
         $('#btn-search').on('click', function () {
             tableIns.reload({where:{owner_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}});
@@ -175,6 +186,16 @@
                 ,area:['100%','100%']
               ,content:"/adminservice/admin/ege-admin/app/url_manage/edit.html?id="+data.id
             });
+
+          }else if(obj.event === 'fenpei'){
+              console.log(obj.data);
+              var data = obj.data;
+              layer.open({
+                  type: 2,
+                  title: '分配'
+                  ,area:['100%','100%']
+                  ,content:"/adminservice/admin/ege-admin/app/url_manage/fenpei.html?id="+data.id
+              });
 
           }
         });
@@ -231,6 +252,28 @@
             }
         });
 
+        $.ajax({
+            url: wholeUrl + "/admin/url_manage/showAddUrl?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {account:localStorage.getItem("account")},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if(localStorage.getItem("channelType")!=2){
+                        if (result.data) {
+                            $("#btn-add").show();
+                        }else{
+                            $("#btn-add2").show();
+                        }
+                    }
+                }
+
+            }
+        });
+
         // 获取选中数据
         $('#btn-select-all').on('click', function () {
           var checkStatus = table.checkStatus('dataCheck')
@@ -267,6 +310,7 @@
 </script>
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
+    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="fenpei">分配</a>
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
 </script>

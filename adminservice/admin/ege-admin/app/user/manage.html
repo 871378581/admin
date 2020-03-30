@@ -84,18 +84,18 @@
               , {field: 'password', title: '登录密码', width: 120}
               , {field: 'channel_type', title: '渠道类型', width: 120,templet:'<div>{{d.channel_type==1?"A":d.channel_type==2?"b":"-"}}</div>'}
               , {field: 'channel_name', title: '渠道名称', width: 120}
-              , {field: 'main_body', title: '主体', width: 170}
+              , {field: 'main_body', title: '负责BD', width: 170}
               , {field: 'contacter', title: '联系人', width: 170}
               , {field: 'contacter_phone', title: '联系电话', width: 170}
               , {field: 'status', title: '状态', width: 170,templet:'<div>{{d.status==1?"有效":"无效"}}</div>'}
-              , {field: 'jieru_way', title: '接入方式', width: 170}
+              /*, {field: 'jieru_way', title: '接入方式', width: 170}
               , {field: 'meiti_type', title: '媒体类型', width: 170}
               , {field: 'meiti_pwd', title: '媒体密码', width: 170}
               , {field: 'meiti_account', title: '媒体账户', width: 170}
               , {field: 'bank_card', title:'银行卡号', width: 170}
               , {field: 'open_bank_area', title:'开户行', width: 170}
               , {field: 'real_name', title:'真实姓名', width: 170}
-              , {field: 'description', title:'描述', width: 170}
+              */, {field: 'description', title:'描述', width: 170}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'creator_account', title: '创建人', width: 100}

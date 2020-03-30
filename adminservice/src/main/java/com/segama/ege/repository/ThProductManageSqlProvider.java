@@ -93,6 +93,14 @@ public class ThProductManageSqlProvider {
             VALUES("`business_code`", "#{business_code,jdbcType=VARCHAR}");
         }
         
+        if (record.getType() != null) {
+            VALUES("`type`", "#{type,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShifou_2_kaifa() != null) {
+            VALUES("`shifou_2_kaifa`", "#{shifou_2_kaifa,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -116,6 +124,8 @@ public class ThProductManageSqlProvider {
         SELECT("`description`");
         SELECT("`source_url`");
         SELECT("`business_code`");
+        SELECT("`type`");
+        SELECT("`shifou_2_kaifa`");
         FROM("`th_product_manage`");
         applyWhere(example, false);
         
@@ -195,6 +205,14 @@ public class ThProductManageSqlProvider {
             SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
         }
         
+        if (record.getType() != null) {
+            SET("`type` = #{record.type,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShifou_2_kaifa() != null) {
+            SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -217,6 +235,8 @@ public class ThProductManageSqlProvider {
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
         SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
         SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
+        SET("`type` = #{record.type,jdbcType=VARCHAR}");
+        SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
         
         ThProductManageExample example = (ThProductManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -277,6 +297,14 @@ public class ThProductManageSqlProvider {
         
         if (record.getBusiness_code() != null) {
             SET("`business_code` = #{business_code,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getType() != null) {
+            SET("`type` = #{type,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShifou_2_kaifa() != null) {
+            SET("`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

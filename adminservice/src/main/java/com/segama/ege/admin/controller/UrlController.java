@@ -121,7 +121,7 @@ public class UrlController extends BaseController{
                        @RequestParam("account") String editAccount) {
         BaseVO baseVO = new BaseVO();
         try {
-            if(adminRoleNew.getId()==null || StringUtils.isEmpty(adminRoleNew.getUrl())|| StringUtils.isEmpty(adminRoleNew.getShare_url_code())){
+            if(adminRoleNew.getId()==null){
                 baseVO.setErrorMsg("请检查必填参数是否填写完整！");
                 baseVO.setSuccess(false);
                 return baseVO;
@@ -130,6 +130,52 @@ public class UrlController extends BaseController{
             adminRole.setGmt_modify(new Date());
             adminRole.setModifier_account(editAccount);
             BeanUtils.copyProperties(adminRoleNew,adminRole);
+            thUrlManageMapper.updateByPrimaryKey(adminRole);
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            baseVO.setError(JSON.toJSONString(e));
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("编辑异常！");
+            LOG.error("ThUrlManageController#edit error",e);
+        }
+        return baseVO;
+    }
+
+    @RequestMapping("/fenpei")
+    public BaseVO fenpei(ThUrlManage adminRoleNew,
+                            @RequestParam("account") String editAccount) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if(adminRoleNew.getId()==null){
+                baseVO.setErrorMsg("请检查必填参数是否填写完整！");
+                baseVO.setSuccess(false);
+                return baseVO;
+            }
+
+            ThUrlManage adminRole = thUrlManageMapper.selectByPrimaryKey(adminRoleNew.getId());
+            adminRole.setGmt_modify(new Date());
+            adminRole.setModifier_account(editAccount);
+            BeanUtils.copyProperties(adminRoleNew,adminRole);
+            String share_url_code = adminRole.getShare_url_code();
+            String[] s = share_url_code.split("_");
+            String code = s[0]+"_"+s[1]+"_"+s[2]+"_"+adminRoleNew.getOwner_account();
+            adminRole.setShare_url_code(code);
+
+            ThProductManageExample example = new ThProductManageExample();
+            example.createCriteria()
+                    .andProduct_codeEqualTo(s[1])
+                    .andProduct_statusEqualTo(1);
+
+            List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
+            String url = "";
+            if(!CollectionUtils.isEmpty(thProductManages)){
+                ThProductManage thProductManage = thProductManages.get(0);
+                url = thProductManage.getUrl();
+            }else{
+                throw new RuntimeException("未查询到相关产品或产品已下线！");
+            }
+            String url2 = url + "?code=" + code;
+            adminRole.setUrl(url2);
             thUrlManageMapper.updateByPrimaryKey(adminRole);
             baseVO.setSuccess(true);
         } catch (Exception e) {
@@ -216,7 +262,7 @@ public class UrlController extends BaseController{
     }
 
     @RequestMapping("/buildUrl")
-    public BaseVO buildUrl(@RequestParam("ownerAccount") String ownerAccount,@RequestParam("account") String account,@RequestParam("product_code") String product_code) {
+    public BaseVO buildUrl(@RequestParam("account") String account,@RequestParam("product_code") String product_code) {
         BaseVO baseVO = new BaseVO();
         BuildUrlVO buildUrlVO = new BuildUrlVO();
         baseVO.setData(buildUrlVO);
@@ -247,12 +293,12 @@ public class UrlController extends BaseController{
                 String share_url_code = thUrlManage.getShare_url_code();
                 String[] split = share_url_code.split("_");
                 Long newVersion = Long.valueOf(split[2])+1L;
-                String newShareCode = account+"_"+product_code+"_"+newVersion+"_"+ownerAccount;
+                String newShareCode = account+"_"+product_code+"_"+newVersion;
                 buildUrlVO.setBuildUrl(sourceUrl+"?code="+newShareCode);
                 buildUrlVO.setShareCode(newShareCode);
             }else{
                 //code逻辑 创建人账号_产品code_版本_归属人账号
-                String newShareCode = account+"_"+product_code+"_"+1+"_"+ownerAccount;
+                String newShareCode = account+"_"+product_code+"_"+1;
                 buildUrlVO.setBuildUrl(sourceUrl+"?code="+newShareCode);
                 buildUrlVO.setShareCode(newShareCode);
             }
@@ -309,6 +355,23 @@ public class UrlController extends BaseController{
         } catch (Exception e) {
             baseVO.setError(JSON.toJSONString(e));
             LOG.error("AdminUserController#getAllUsers error",e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("查询渠道信息异常！");
+        }
+        return baseVO;
+    }
+
+
+    //根据权限控制显示什么添加按钮
+    @RequestMapping("/showAddUrl")
+    public BaseVO showAddUrl(@RequestParam("account") String account) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            baseVO.setData(showAllUser(account));
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            baseVO.setError(JSON.toJSONString(e));
+            LOG.error("AdminUserController#showAddUrl error",e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询渠道信息异常！");
         }

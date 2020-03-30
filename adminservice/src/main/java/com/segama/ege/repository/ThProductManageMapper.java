@@ -37,14 +37,16 @@ public interface ThProductManageMapper {
         "`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
         "`description`, `source_url`, ",
-        "`business_code`)",
+        "`business_code`, `type`, ",
+        "`shifou_2_kaifa`)",
         "values (#{business_name,jdbcType=VARCHAR}, #{product_name,jdbcType=VARCHAR}, ",
         "#{product_code,jdbcType=VARCHAR}, #{product_type,jdbcType=VARCHAR}, ",
         "#{url,jdbcType=VARCHAR}, #{product_status,jdbcType=INTEGER}, ",
         "#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
         "#{description,jdbcType=VARCHAR}, #{source_url,jdbcType=VARCHAR}, ",
-        "#{business_code,jdbcType=VARCHAR})"
+        "#{business_code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
+        "#{shifou_2_kaifa,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThProductManage record);
@@ -68,7 +70,9 @@ public interface ThProductManageMapper {
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
         @Result(column="source_url", property="source_url", jdbcType=JdbcType.VARCHAR),
-        @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR)
+        @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR)
     })
     List<ThProductManage> selectByExample(ThProductManageExample example);
 
@@ -76,7 +80,7 @@ public interface ThProductManageMapper {
         "select",
         "`id`, `business_name`, `product_name`, `product_code`, `product_type`, `url`, ",
         "`product_status`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, ",
-        "`description`, `source_url`, `business_code`",
+        "`description`, `source_url`, `business_code`, `type`, `shifou_2_kaifa`",
         "from `th_product_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -94,7 +98,9 @@ public interface ThProductManageMapper {
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
         @Result(column="source_url", property="source_url", jdbcType=JdbcType.VARCHAR),
-        @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR)
+        @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR)
     })
     ThProductManage selectByPrimaryKey(Long id);
 
@@ -121,7 +127,9 @@ public interface ThProductManageMapper {
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
           "`description` = #{description,jdbcType=VARCHAR},",
           "`source_url` = #{source_url,jdbcType=VARCHAR},",
-          "`business_code` = #{business_code,jdbcType=VARCHAR}",
+          "`business_code` = #{business_code,jdbcType=VARCHAR},",
+          "`type` = #{type,jdbcType=VARCHAR},",
+          "`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThProductManage record);

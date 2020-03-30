@@ -4,6 +4,7 @@ drop table if exists th_product_channel_map;
 CREATE TABLE `th_product_channel_map` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `biz_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `business_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_onwer_account` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

@@ -32,6 +32,10 @@ public class ThProductManage implements Serializable {
 
     private String business_code;
 
+    private String type;
+
+    private String shifou_2_kaifa;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -146,6 +150,22 @@ public class ThProductManage implements Serializable {
         this.business_code = business_code == null ? null : business_code.trim();
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    public String getShifou_2_kaifa() {
+        return shifou_2_kaifa;
+    }
+
+    public void setShifou_2_kaifa(String shifou_2_kaifa) {
+        this.shifou_2_kaifa = shifou_2_kaifa == null ? null : shifou_2_kaifa.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -166,6 +186,8 @@ public class ThProductManage implements Serializable {
         sb.append(", description=").append(description);
         sb.append(", source_url=").append(source_url);
         sb.append(", business_code=").append(business_code);
+        sb.append(", type=").append(type);
+        sb.append(", shifou_2_kaifa=").append(shifou_2_kaifa);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

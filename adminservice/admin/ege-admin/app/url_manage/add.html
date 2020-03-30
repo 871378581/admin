@@ -23,10 +23,11 @@
   <form class="layui-form" action="" lay-filter="example">
       <div class="layui-form-item">
           <div class="layui-form-item">
+
               <div class="layui-inline">
-                  <label class="layui-form-label">渠道</label>
+                  <label class="layui-form-label">商户名称</label>
                   <div class="layui-input-inline">
-                      <select name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
+                      <select name="business_code" id="business_code" lay-filter="business_code" lay-verify="required">
                       </select>
                   </div>
               </div>
@@ -67,16 +68,16 @@
               <div class="layui-inline">
                   <label class="layui-form-label">链接</label>
                   <div class="layui-input-inline">
-                      <textarea name="url" id="url" disabled="disabled" lay-verify="required"placeholder="请输入链接" class="layui-textarea"></textarea>
+                      <textarea name="url" id="url" lay-verify="required"placeholder="请输入链接" class="layui-textarea"></textarea>
                   </div>
               </div>
 
-              <div class="layui-inline">
+              <!--<div class="layui-inline">
                   <label class="layui-form-label">分享的链接编码</label>
                   <div class="layui-input-inline">
                       <input name="share_url_code" id="share_url_code" disabled="disabled" lay-verify="required" class="layui-input"/>
                   </div>
-              </div>
+              </div>-->
               <!--<div class="layui-inline">
                   <label class="layui-form-label">业务线</label>
                   <div class="layui-input-inline">
@@ -101,10 +102,16 @@
                       <input name="open_ticket_main_body"  lay-verify="required"placeholder="请输入开票主体" class="layui-input"/>
                   </div>
               </div>-->
-              <div class="layui-inline">
+             <!-- <div class="layui-inline">
                   <label class="layui-form-label">有效时间</label>
                   <div class="layui-input-inline">
                       <input type="text" name="youxiao_time" class="layui-input" id="youxiao_time" placeholder="请选择有效时间">
+                  </div>
+              </div>-->
+              <div class="layui-inline">
+                  <label class="layui-form-label">渠道码</label>
+                  <div class="layui-input-inline">
+                      <input name="channel_code" id="channel_code" placeholder="请输入渠道码" lay-verify="required" class="layui-input"/>
                   </div>
               </div>
               <div class="layui-inline">
@@ -180,26 +187,30 @@
             form.render();
         });
 
-        form.on('select(owner_account)', function(data){
-            var owner=$("#owner_account").val();
-            var prd= $("#product_code").val();
-            if(owner==null||prd==null||owner==""||prd==""){
+        form.on('select(business_code)', function(data){
+            var business_code=$("#business_code").val();
+            if(business_code==null||business_code==""){
                 return false;
             }
             $.ajax({
-                url: wholeUrl + "/admin/url_manage/buildUrl?token=" + localStorage.getItem("token"),
+                url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
                 method: "post",
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
-                data: {ownerAccount:owner,
-                    account:localStorage.getItem("account"),
-                    product_code:prd},
+                data: {code:business_code,account:localStorage.getItem("account")},
                 async: false,
                 success: function (result) {
                     console.log(result);
                     if (result.success) {
-                        $("#url").val(result.data.buildUrl);
-                        $("#share_url_code").val(result.data.shareCode);
+                        if (result.data != null) {
+                            var menuList = result.data;
+                            var html = '<option value="">请选择</option>';
+                            for (var i = 0; i < menuList.length; i++) {
+                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                            }
+                            $("#product_code").html(html);
+                            form.render();
+                        }
                     } else {
                         layer.msg("数据加载异常！");
                     }
@@ -247,11 +258,11 @@
         });
 
         $.ajax({
-            url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
+            url: wholeUrl + "/admin/business_merchant/get_all_merchants?token=" + localStorage.getItem("token"),
             method: "post",
             contentType: "application/x-www-form-urlencoded",
             dataType: "json",
-            data: {account:localStorage.getItem("account")},
+            data: {},
             async: false,
             success: function (result) {
                 console.log(result);
@@ -262,7 +273,7 @@
                         for (var i = 0; i < menuList.length; i++) {
                             html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
                         }
-                        $("#product_code").html(html);
+                        $("#business_code").html(html);
                         form.render();
                     }
                 } else {
@@ -271,6 +282,8 @@
 
             }
         });
+
+
 
         $.ajax({
             url: wholeUrl + "/admin/url_manage/get_channel_b_and_own?token=" + localStorage.getItem("token"),

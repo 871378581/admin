@@ -35,12 +35,12 @@ public interface ThProductChannelMapMapper {
         "`product_name`, `product_onwer_account`, ",
         "`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
-        "`description`)",
+        "`description`, `business_code`)",
         "values (#{biz_code,jdbcType=VARCHAR}, #{product_code,jdbcType=VARCHAR}, ",
         "#{product_name,jdbcType=VARCHAR}, #{product_onwer_account,jdbcType=VARCHAR}, ",
         "#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
-        "#{description,jdbcType=VARCHAR})"
+        "#{description,jdbcType=VARCHAR}, #{business_code,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThProductChannelMap record);
@@ -60,14 +60,15 @@ public interface ThProductChannelMapMapper {
         @Result(column="gmt_modify", property="gmt_modify", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR)
     })
     List<ThProductChannelMap> selectByExample(ThProductChannelMapExample example);
 
     @Select({
         "select",
         "`id`, `biz_code`, `product_code`, `product_name`, `product_onwer_account`, `gmt_create`, ",
-        "`gmt_modify`, `creator_account`, `modifier_account`, `description`",
+        "`gmt_modify`, `creator_account`, `modifier_account`, `description`, `business_code`",
         "from `th_product_channel_map`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -81,7 +82,8 @@ public interface ThProductChannelMapMapper {
         @Result(column="gmt_modify", property="gmt_modify", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR)
     })
     ThProductChannelMap selectByPrimaryKey(Long id);
 
@@ -104,7 +106,8 @@ public interface ThProductChannelMapMapper {
           "`gmt_modify` = #{gmt_modify,jdbcType=TIMESTAMP},",
           "`creator_account` = #{creator_account,jdbcType=VARCHAR},",
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
-          "`description` = #{description,jdbcType=VARCHAR}",
+          "`description` = #{description,jdbcType=VARCHAR},",
+          "`business_code` = #{business_code,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThProductChannelMap record);

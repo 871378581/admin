@@ -77,6 +77,10 @@ public class ThProductChannelMapSqlProvider {
             VALUES("`description`", "#{description,jdbcType=VARCHAR}");
         }
         
+        if (record.getBusiness_code() != null) {
+            VALUES("`business_code`", "#{business_code,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -96,6 +100,7 @@ public class ThProductChannelMapSqlProvider {
         SELECT("`creator_account`");
         SELECT("`modifier_account`");
         SELECT("`description`");
+        SELECT("`business_code`");
         FROM("`th_product_channel_map`");
         applyWhere(example, false);
         
@@ -159,6 +164,10 @@ public class ThProductChannelMapSqlProvider {
             SET("`description` = #{record.description,jdbcType=VARCHAR}");
         }
         
+        if (record.getBusiness_code() != null) {
+            SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -177,6 +186,7 @@ public class ThProductChannelMapSqlProvider {
         SET("`creator_account` = #{record.creator_account,jdbcType=VARCHAR}");
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
         
         ThProductChannelMapExample example = (ThProductChannelMapExample) parameter.get("example");
         applyWhere(example, true);
@@ -221,6 +231,10 @@ public class ThProductChannelMapSqlProvider {
         
         if (record.getDescription() != null) {
             SET("`description` = #{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBusiness_code() != null) {
+            SET("`business_code` = #{business_code,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

@@ -1064,6 +1064,146 @@ public class ThProductManageExample {
             addCriterion("`business_code` not between", value1, value2, "business_code");
             return (Criteria) this;
         }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("`type` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("`type` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("`type` =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("`type` <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("`type` >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("`type` >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("`type` <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("`type` <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLike(String value) {
+            addCriterion("`type` like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("`type` not like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("`type` in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("`type` not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("`type` between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("`type` not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaIsNull() {
+            addCriterion("`shifou_2_kaifa` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaIsNotNull() {
+            addCriterion("`shifou_2_kaifa` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` =", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` <>", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaGreaterThan(String value) {
+            addCriterion("`shifou_2_kaifa` >", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaGreaterThanOrEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` >=", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaLessThan(String value) {
+            addCriterion("`shifou_2_kaifa` <", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaLessThanOrEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` <=", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaLike(String value) {
+            addCriterion("`shifou_2_kaifa` like", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotLike(String value) {
+            addCriterion("`shifou_2_kaifa` not like", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaIn(List<String> values) {
+            addCriterion("`shifou_2_kaifa` in", values, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotIn(List<String> values) {
+            addCriterion("`shifou_2_kaifa` not in", values, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaBetween(String value1, String value2) {
+            addCriterion("`shifou_2_kaifa` between", value1, value2, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotBetween(String value1, String value2) {
+            addCriterion("`shifou_2_kaifa` not between", value1, value2, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

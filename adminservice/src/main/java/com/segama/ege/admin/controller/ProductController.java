@@ -76,7 +76,7 @@ public class ProductController {
                             List<ThBusinessMerchantManage> thBusinessMerchantManages = thBusinessMerchantManageMapper.selectByExample(example);
                             if (!CollectionUtils.isEmpty(thBusinessMerchantManages)) {
                                 ThBusinessMerchantManage manage = thBusinessMerchantManages.get(0);
-                                thProductManage.setProduct_name(manage.getBusiness_name());
+                                thProductManage.setBusiness_name(manage.getBusiness_name());
                             }
                         }
                     }
@@ -181,12 +181,20 @@ public class ProductController {
     }
 
     @RequestMapping("/get_all_product")
-    public BaseVO get_all_product(@RequestParam(value = "account", required = false) String account) {
+    public BaseVO get_all_product(
+            @RequestParam(value = "shifou_2_kaifa", required = false) String shifou_2_kaifa
+            ,@RequestParam(value = "code", required = false) String code,
+            @RequestParam(value = "account", required = false) String account) {
         BaseVO baseVO = new BaseVO();
         try {
             ThProductManageExample example = new ThProductManageExample();
             ThProductManageExample.Criteria criteria = example.createCriteria();
-
+            if(!StringUtils.isEmpty(code)){
+                criteria.andBusiness_codeEqualTo(code);
+            }
+            if(!StringUtils.isEmpty(shifou_2_kaifa)){
+                criteria.andShifou_2_kaifaEqualTo(shifou_2_kaifa);
+            }
             List<Map<String, Object>> result = Lists.newArrayList();
             if (showAllUser(account)) {
                 //只查上线的产品
@@ -205,6 +213,10 @@ public class ProductController {
                 ThProductChannelMapExample example1 = new ThProductChannelMapExample();
                 ThProductChannelMapExample.Criteria criteria1 = example1.createCriteria();
                 criteria1.andProduct_onwer_accountEqualTo(account);
+                if(!StringUtils.isEmpty(code)){
+                    criteria1.andBusiness_codeEqualTo(code);
+                }
+
                 List<ThProductChannelMap> thProductChannelMaps = thProductChannelMapMapper.selectByExample(example1);
                 if (!CollectionUtils.isEmpty(thProductChannelMaps)) {
                     for (ThProductChannelMap thProductChannelMap : thProductChannelMaps) {
@@ -215,11 +227,21 @@ public class ProductController {
                         List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
                         if (!CollectionUtils.isEmpty(thProductManages)) {
                             ThProductManage thProductManage = thProductManages.get(0);
-                            if (thProductManage.getProduct_status().equals(1)) {
-                                Map<String, Object> map = Maps.newHashMap();
-                                map.put("label", thProductManage.getProduct_name());
-                                map.put("value", thProductManage.getProduct_code());
-                                result.add(map);
+                            if(!StringUtils.isEmpty(shifou_2_kaifa)){
+                                if (thProductManage.getShifou_2_kaifa().equals(shifou_2_kaifa)
+                                        && thProductManage.getProduct_status().equals(1)) {
+                                    Map<String, Object> map = Maps.newHashMap();
+                                    map.put("label", thProductManage.getProduct_name());
+                                    map.put("value", thProductManage.getProduct_code());
+                                    result.add(map);
+                                }
+                            }else {
+                                if (thProductManage.getProduct_status().equals(1)) {
+                                    Map<String, Object> map = Maps.newHashMap();
+                                    map.put("label", thProductManage.getProduct_name());
+                                    map.put("value", thProductManage.getProduct_code());
+                                    result.add(map);
+                                }
                             }
                         }
                     }

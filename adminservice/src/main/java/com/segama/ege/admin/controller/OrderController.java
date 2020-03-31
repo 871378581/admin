@@ -1,0 +1,307 @@
+package com.segama.ege.admin.controller;
+
+import com.segama.ege.admin.utils.BeanUtils;
+import com.segama.ege.admin.utils.UUIDUtils;
+import com.segama.ege.admin.vo.BaseVO;
+import com.segama.ege.entity.ThOrderManage;
+import com.segama.ege.entity.ThOrderManageExample;
+import com.segama.ege.repository.ThOrderManageMapper;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * @author hxj
+ * @version 1.0
+ * @Description 订单相关的接口
+ * @date 2019-10-07 14:33
+ */
+@RestController
+@RequestMapping("/ege/api/admin/order")
+@CrossOrigin(origins = "*", maxAge = 3600)
+public class OrderController {
+    @Resource
+    private ThOrderManageMapper thOrderManageMapper;
+
+    private static Logger LOG = LoggerFactory.getLogger(OrderController.class);
+
+    @RequestMapping("/list")
+    public BaseVO list(
+            ThOrderManage thOrderManage
+            ,@RequestParam("limit") Integer pageSize,
+            @RequestParam("page") Integer pageIndex) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            ThOrderManageExample thOrderManageExample = new ThOrderManageExample();
+            ThOrderManageExample.Criteria thOrderManageExampleCriteria = thOrderManageExample.createCriteria();
+            if(StringUtils.isNotEmpty(thOrderManage.getGood_name())) {
+                thOrderManageExampleCriteria.andGood_nameLike("%" + thOrderManage.getGood_name() + "%");
+            }
+            int count = thOrderManageMapper.countByExample(thOrderManageExample);
+            thOrderManageExample.setPageCount(pageSize);
+            thOrderManageExample.setPageIndex(pageIndex);
+            thOrderManageExample.setOrderByClause("gmt_create desc");
+            List<ThOrderManage> thOrderManages = thOrderManageMapper.selectByExample(thOrderManageExample);
+            baseVO.setData(thOrderManages);
+            baseVO.setSuccess(true);
+            baseVO.setCount(count);
+            baseVO.setCode(0);
+        }catch (Exception e){
+            baseVO.setSuccess(false);
+            LOG.error("ThOrderManageController#list error",e);
+        }
+        return baseVO;
+    }
+
+    @RequestMapping("/edit")
+    public BaseVO edit(ThOrderManage thOrderManageNew,
+                    @RequestParam("account") String account) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if(thOrderManageNew.getId()==null){
+                baseVO.setErrorMsg("请检查必填参数是否填写完整！");
+                baseVO.setSuccess(false);
+                return baseVO;
+            }
+            ThOrderManage thOrderManage = thOrderManageMapper.selectByPrimaryKey(thOrderManageNew.getId());
+            thOrderManage.setGmt_modify(new Date());
+            thOrderManage.setModifier_account(account);
+            BeanUtils.copyProperties(thOrderManageNew, thOrderManage);
+            thOrderManageMapper.updateByPrimaryKey(thOrderManage);
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("编辑异常！");
+            LOG.error("ThOrderManageController#edit error",e);
+        }
+        return baseVO;
+    }
+
+    @RequestMapping("/add")
+    public BaseVO add(@RequestParam("menuName") String menuName,
+                               @RequestParam("group") String group,
+                                @RequestParam("icon") String icon,
+                               @RequestParam("url") String url,
+                               @RequestParam("account") String account) {
+
+        BaseVO baseVO = new BaseVO();
+        try {
+            if( StringUtils.isEmpty(menuName) ||
+                    StringUtils.isEmpty(url)){
+                baseVO.setErrorMsg("请检查必填参数是否填写完整！");
+                baseVO.setSuccess(false);
+                return baseVO;
+            }
+            ThOrderManage thOrderManage = new ThOrderManage();
+            thOrderManage.setCreator_account(account);
+            thOrderManage.setModifier_account(account);
+            thOrderManage.setGmt_create(new Date());
+            thOrderManage.setGmt_modify(new Date());
+            thOrderManageMapper.insert(thOrderManage);
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("ThOrderManageController#add error",e);
+            baseVO.setSuccess(false);
+            String msg = "";
+            if(StringUtils.isNotEmpty(e.getMessage())&&e.getMessage().contains("Duplicate")){
+                msg="请勿重复添加！";
+            }
+            baseVO.setErrorMsg("添加异常"+msg);
+        }
+        return baseVO;
+    }
+
+    @RequestMapping("/get")
+    public BaseVO get(@RequestParam("id") Long id ) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if(id == null){
+                baseVO.setErrorMsg("id为不能为空！");
+                baseVO.setSuccess(false);
+            }else {
+                ThOrderManage thOrderManage = thOrderManageMapper.selectByPrimaryKey(id);
+                baseVO.setData(thOrderManage);
+            }
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("ThOrderManageController#get Exception input param is id:"+id,e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("查询信息异常！");
+        }
+        return baseVO;
+    }
+    @RequestMapping("/delete")
+    public BaseVO delete(@RequestParam("order_code") String order_code ) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if(StringUtils.isEmpty(order_code)){
+                baseVO.setErrorMsg("code为不能为空！");
+                baseVO.setSuccess(false);
+            }else {
+                ThOrderManageExample example = new ThOrderManageExample();
+                example.createCriteria().andOrder_codeEqualTo(order_code);
+                thOrderManageMapper.deleteByExample(example);
+            }
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("ThOrderManageController#get Exception input param is order_code:"+order_code,e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("操作异常！");
+        }
+        return baseVO;
+    }
+
+    @RequestMapping("/import")
+    public BaseVO StringinstallExcel(@RequestParam("account") String account,
+                                     @RequestParam(value = "file", required = false) MultipartFile file) {
+        BaseVO baseVO = new BaseVO();
+        StringBuffer sb = new StringBuffer();
+        try {
+            String fname = file.getOriginalFilename();
+            InputStream is = file.getInputStream();
+            Workbook wb = null;
+            if (fname.endsWith("xls")) {
+                wb = new HSSFWorkbook(is);
+            } else if (fname.endsWith("xlsx")) {
+                wb = new XSSFWorkbook(is);
+            }
+            List<ThOrderManage> list = new ArrayList<ThOrderManage>();
+            if (wb != null) {
+                for (int sheetNum = 0; sheetNum < wb.getNumberOfSheets(); sheetNum++) {
+                    Sheet sheet = wb.getSheetAt(sheetNum);
+                    if (sheet == null) {
+                        continue;
+                    }
+                    //获得当前sheet的开始行
+                    int firstRowNum = sheet.getFirstRowNum();
+                    int lastRowNum = sheet.getLastRowNum();
+
+                    //行
+                    for (int rowNum = firstRowNum + 1; rowNum <= lastRowNum; rowNum++) {
+                        Row row = sheet.getRow(rowNum);
+                        if (row == null) {
+                            continue;
+                        }
+
+                        //获得当前行的开始列
+                        int firstCellNum = row.getFirstCellNum();
+                        int lastCellNum = row.getLastCellNum();
+                        ThOrderManage orderManage = new ThOrderManage();
+                        String[] str = new String[17];
+
+                        //列
+
+                        for (int cellNum = firstCellNum; cellNum < lastCellNum; cellNum++) {
+                            Cell cell = row.getCell(cellNum);
+                            String cellValue = "";
+                            if (cell == null) {
+                                str[cellNum] = cellValue;
+                            } else {
+                                if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+                                    cell.setCellType(cell.CELL_TYPE_STRING);
+                                }
+                                switch (cell.getCellType()) {
+                                    case Cell.CELL_TYPE_NUMERIC:
+                                        cellValue = String.valueOf(cell.getNumericCellValue());
+                                        break;
+                                    case Cell.CELL_TYPE_STRING:
+                                        cellValue = String.valueOf(cell.getStringCellValue());
+                                        break;
+                                    case Cell.CELL_TYPE_FORMULA:
+                                        cellValue = String.valueOf(cell.getCellFormula());
+                                        break;
+                                    case Cell.CELL_TYPE_BLANK:
+                                        cellValue = "";
+                                        break;
+                                    case Cell.CELL_TYPE_ERROR:
+                                        cellValue = "非法字符";
+                                        break;
+                                    default:
+                                        cellValue = "未知字符";
+                                        break;
+
+                                }
+                                str[cellNum] = cellValue;
+
+                            }
+                        }
+                        orderManage.setOperate_type("下线");
+                        orderManage.setOrder_code(UUIDUtils.UUID());
+                        orderManage.setOrder_time(str[0]);
+                        orderManage.setOrder_phone_number(str[1]);
+                        orderManage.setProv(str[2]);
+                        orderManage.setCity(str[3]);
+                        orderManage.setOrder_status(str[4]);
+                        orderManage.setCustomer_name(str[5]);
+                        orderManage.setCertificate_type(str[6]);
+                        orderManage.setCertificate_num(str[7]);
+                        orderManage.setCustomer_contact_num(str[8]);
+                        orderManage.setGood_name(str[9]);
+                        orderManage.setAddress(str[10]);
+                        orderManage.setActive_status(str[11]);
+                        orderManage.setCudian_code(str[12]);
+                        orderManage.setShoucong_amt(str[13]);
+                        orderManage.setShoucong_time(str[14]);
+                        orderManage.setXiehaozhuanwang_type(str[15]);
+                        orderManage.setZhuanhualvtichu_reason(str[16]);
+
+                        orderManage.setCreator_account(account);
+                        orderManage.setModifier_account(account);
+                        orderManage.setGmt_create(new Date());
+                        orderManage.setGmt_modify(new Date());
+                        list.add(orderManage);
+                    }
+
+                    if(!CollectionUtils.isEmpty(list)){
+                        for (int i=0;i<list.size();i++) {
+
+                            try {
+                                thOrderManageMapper.insert(list.get(i));
+                            } catch (NumberFormatException e) {
+                                sb.append("第"+(i+1)+"条导入失败；失败原因:类目等级必须为数字;\n");
+                            }catch (Exception e) {
+                                if(e.getMessage().contains("category_code_UNIQUE")){
+                                    sb.append("第"+(i+1)+"条导入失败；失败原因:类目编码重复\n");
+                                }else{
+                                    sb.append("第"+(i+1)+"条导入失败；失败原因:系统忙请稍后再试！\n");
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            baseVO = BaseVO.createSuccess();
+            String result="";
+            if(sb.length()>500){
+                result = sb.substring(0,500)+"...";
+            }else{
+                result = sb.toString();
+            }
+            baseVO.setErrorMsg(result);
+            return baseVO;
+        } catch (Exception e) {
+            LOG.error("CarTypeController#import error", e);
+            return BaseVO.createFailure("导入失败，请检查数据格式后再试！");
+        }
+    }
+
+}

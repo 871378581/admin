@@ -36,6 +36,12 @@ public class ThProductManage implements Serializable {
 
     private String shifou_2_kaifa;
 
+    private String settle_mode;
+
+    private String settle_column;
+
+    private String settle_value;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -166,6 +172,30 @@ public class ThProductManage implements Serializable {
         this.shifou_2_kaifa = shifou_2_kaifa == null ? null : shifou_2_kaifa.trim();
     }
 
+    public String getSettle_mode() {
+        return settle_mode;
+    }
+
+    public void setSettle_mode(String settle_mode) {
+        this.settle_mode = settle_mode == null ? null : settle_mode.trim();
+    }
+
+    public String getSettle_column() {
+        return settle_column;
+    }
+
+    public void setSettle_column(String settle_column) {
+        this.settle_column = settle_column == null ? null : settle_column.trim();
+    }
+
+    public String getSettle_value() {
+        return settle_value;
+    }
+
+    public void setSettle_value(String settle_value) {
+        this.settle_value = settle_value == null ? null : settle_value.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -188,6 +218,9 @@ public class ThProductManage implements Serializable {
         sb.append(", business_code=").append(business_code);
         sb.append(", type=").append(type);
         sb.append(", shifou_2_kaifa=").append(shifou_2_kaifa);
+        sb.append(", settle_mode=").append(settle_mode);
+        sb.append(", settle_column=").append(settle_column);
+        sb.append(", settle_value=").append(settle_value);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1204,6 +1204,216 @@ public class ThProductManageExample {
             addCriterion("`shifou_2_kaifa` not between", value1, value2, "shifou_2_kaifa");
             return (Criteria) this;
         }
+
+        public Criteria andSettle_modeIsNull() {
+            addCriterion("`settle_mode` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeIsNotNull() {
+            addCriterion("`settle_mode` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeEqualTo(String value) {
+            addCriterion("`settle_mode` =", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeNotEqualTo(String value) {
+            addCriterion("`settle_mode` <>", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeGreaterThan(String value) {
+            addCriterion("`settle_mode` >", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeGreaterThanOrEqualTo(String value) {
+            addCriterion("`settle_mode` >=", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeLessThan(String value) {
+            addCriterion("`settle_mode` <", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeLessThanOrEqualTo(String value) {
+            addCriterion("`settle_mode` <=", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeLike(String value) {
+            addCriterion("`settle_mode` like", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeNotLike(String value) {
+            addCriterion("`settle_mode` not like", value, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeIn(List<String> values) {
+            addCriterion("`settle_mode` in", values, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeNotIn(List<String> values) {
+            addCriterion("`settle_mode` not in", values, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeBetween(String value1, String value2) {
+            addCriterion("`settle_mode` between", value1, value2, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_modeNotBetween(String value1, String value2) {
+            addCriterion("`settle_mode` not between", value1, value2, "settle_mode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnIsNull() {
+            addCriterion("`settle_column` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnIsNotNull() {
+            addCriterion("`settle_column` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnEqualTo(String value) {
+            addCriterion("`settle_column` =", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnNotEqualTo(String value) {
+            addCriterion("`settle_column` <>", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnGreaterThan(String value) {
+            addCriterion("`settle_column` >", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnGreaterThanOrEqualTo(String value) {
+            addCriterion("`settle_column` >=", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnLessThan(String value) {
+            addCriterion("`settle_column` <", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnLessThanOrEqualTo(String value) {
+            addCriterion("`settle_column` <=", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnLike(String value) {
+            addCriterion("`settle_column` like", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnNotLike(String value) {
+            addCriterion("`settle_column` not like", value, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnIn(List<String> values) {
+            addCriterion("`settle_column` in", values, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnNotIn(List<String> values) {
+            addCriterion("`settle_column` not in", values, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnBetween(String value1, String value2) {
+            addCriterion("`settle_column` between", value1, value2, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_columnNotBetween(String value1, String value2) {
+            addCriterion("`settle_column` not between", value1, value2, "settle_column");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueIsNull() {
+            addCriterion("`settle_value` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueIsNotNull() {
+            addCriterion("`settle_value` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueEqualTo(String value) {
+            addCriterion("`settle_value` =", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueNotEqualTo(String value) {
+            addCriterion("`settle_value` <>", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueGreaterThan(String value) {
+            addCriterion("`settle_value` >", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueGreaterThanOrEqualTo(String value) {
+            addCriterion("`settle_value` >=", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueLessThan(String value) {
+            addCriterion("`settle_value` <", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueLessThanOrEqualTo(String value) {
+            addCriterion("`settle_value` <=", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueLike(String value) {
+            addCriterion("`settle_value` like", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueNotLike(String value) {
+            addCriterion("`settle_value` not like", value, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueIn(List<String> values) {
+            addCriterion("`settle_value` in", values, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueNotIn(List<String> values) {
+            addCriterion("`settle_value` not in", values, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueBetween(String value1, String value2) {
+            addCriterion("`settle_value` between", value1, value2, "settle_value");
+            return (Criteria) this;
+        }
+
+        public Criteria andSettle_valueNotBetween(String value1, String value2) {
+            addCriterion("`settle_value` not between", value1, value2, "settle_value");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

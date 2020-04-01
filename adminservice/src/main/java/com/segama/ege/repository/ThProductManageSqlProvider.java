@@ -101,6 +101,18 @@ public class ThProductManageSqlProvider {
             VALUES("`shifou_2_kaifa`", "#{shifou_2_kaifa,jdbcType=VARCHAR}");
         }
         
+        if (record.getSettle_mode() != null) {
+            VALUES("`settle_mode`", "#{settle_mode,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_column() != null) {
+            VALUES("`settle_column`", "#{settle_column,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_value() != null) {
+            VALUES("`settle_value`", "#{settle_value,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -126,6 +138,9 @@ public class ThProductManageSqlProvider {
         SELECT("`business_code`");
         SELECT("`type`");
         SELECT("`shifou_2_kaifa`");
+        SELECT("`settle_mode`");
+        SELECT("`settle_column`");
+        SELECT("`settle_value`");
         FROM("`th_product_manage`");
         applyWhere(example, false);
         
@@ -213,6 +228,18 @@ public class ThProductManageSqlProvider {
             SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
         }
         
+        if (record.getSettle_mode() != null) {
+            SET("`settle_mode` = #{record.settle_mode,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_column() != null) {
+            SET("`settle_column` = #{record.settle_column,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_value() != null) {
+            SET("`settle_value` = #{record.settle_value,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -237,6 +264,9 @@ public class ThProductManageSqlProvider {
         SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
         SET("`type` = #{record.type,jdbcType=VARCHAR}");
         SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
+        SET("`settle_mode` = #{record.settle_mode,jdbcType=VARCHAR}");
+        SET("`settle_column` = #{record.settle_column,jdbcType=VARCHAR}");
+        SET("`settle_value` = #{record.settle_value,jdbcType=VARCHAR}");
         
         ThProductManageExample example = (ThProductManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -305,6 +335,18 @@ public class ThProductManageSqlProvider {
         
         if (record.getShifou_2_kaifa() != null) {
             SET("`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_mode() != null) {
+            SET("`settle_mode` = #{settle_mode,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_column() != null) {
+            SET("`settle_column` = #{settle_column,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getSettle_value() != null) {
+            SET("`settle_value` = #{settle_value,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

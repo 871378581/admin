@@ -55,6 +55,13 @@ public class OrderController {
             if(StringUtils.isNotEmpty(thOrderManage.getGood_name())) {
                 thOrderManageExampleCriteria.andGood_nameLike("%" + thOrderManage.getGood_name() + "%");
             }
+            if(StringUtils.isNotEmpty(thOrderManage.getOperate_type())) {
+                thOrderManageExampleCriteria.andOperate_typeEqualTo( thOrderManage.getOperate_type() );
+            }
+            if(!StringUtils.isEmpty(thOrderManage.getOrder_time())){
+                String[] time = thOrderManage.getOrder_time().split(" - ");
+                thOrderManageExampleCriteria.andOrder_timeBetween(time[0],time[1]);
+            }
             int count = thOrderManageMapper.countByExample(thOrderManageExample);
             thOrderManageExample.setPageCount(pageSize);
             thOrderManageExample.setPageIndex(pageIndex);

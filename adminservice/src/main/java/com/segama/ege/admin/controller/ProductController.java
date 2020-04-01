@@ -52,6 +52,7 @@ public class ProductController {
     @RequestMapping("/list")
     public BaseVO list(
             @RequestParam(value = "product_name", required = false) String product_name
+            ,@RequestParam(value = "type", required = false) String type
             , @RequestParam(value = "limit", required = false) Integer pageSize,
             @RequestParam(value = "page", required = false) Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
@@ -61,6 +62,9 @@ public class ProductController {
             ThProductManageExample.Criteria adminRoleExampleCriteria = adminRoleExample.createCriteria();
             if (StringUtils.isNotEmpty(product_name)) {
                 adminRoleExampleCriteria.andProduct_nameLike("%" + product_name + "%");
+            }
+            if (StringUtils.isNotEmpty(type)) {
+                adminRoleExampleCriteria.andTypeEqualTo(type);
             }
             int count = thProductManageMapper.countByExample(adminRoleExample);
             List<ThProductManage> thProductManages = Lists.newArrayList();

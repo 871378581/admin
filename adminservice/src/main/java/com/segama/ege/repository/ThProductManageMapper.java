@@ -38,7 +38,8 @@ public interface ThProductManageMapper {
         "`creator_account`, `modifier_account`, ",
         "`description`, `source_url`, ",
         "`business_code`, `type`, ",
-        "`shifou_2_kaifa`)",
+        "`shifou_2_kaifa`, `settle_mode`, ",
+        "`settle_column`, `settle_value`)",
         "values (#{business_name,jdbcType=VARCHAR}, #{product_name,jdbcType=VARCHAR}, ",
         "#{product_code,jdbcType=VARCHAR}, #{product_type,jdbcType=VARCHAR}, ",
         "#{url,jdbcType=VARCHAR}, #{product_status,jdbcType=INTEGER}, ",
@@ -46,7 +47,8 @@ public interface ThProductManageMapper {
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
         "#{description,jdbcType=VARCHAR}, #{source_url,jdbcType=VARCHAR}, ",
         "#{business_code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
-        "#{shifou_2_kaifa,jdbcType=VARCHAR})"
+        "#{shifou_2_kaifa,jdbcType=VARCHAR}, #{settle_mode,jdbcType=VARCHAR}, ",
+        "#{settle_column,jdbcType=VARCHAR}, #{settle_value,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThProductManage record);
@@ -72,7 +74,10 @@ public interface ThProductManageMapper {
         @Result(column="source_url", property="source_url", jdbcType=JdbcType.VARCHAR),
         @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR),
         @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
-        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR)
+        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR),
+        @Result(column="settle_mode", property="settle_mode", jdbcType=JdbcType.VARCHAR),
+        @Result(column="settle_column", property="settle_column", jdbcType=JdbcType.VARCHAR),
+        @Result(column="settle_value", property="settle_value", jdbcType=JdbcType.VARCHAR)
     })
     List<ThProductManage> selectByExample(ThProductManageExample example);
 
@@ -80,7 +85,8 @@ public interface ThProductManageMapper {
         "select",
         "`id`, `business_name`, `product_name`, `product_code`, `product_type`, `url`, ",
         "`product_status`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, ",
-        "`description`, `source_url`, `business_code`, `type`, `shifou_2_kaifa`",
+        "`description`, `source_url`, `business_code`, `type`, `shifou_2_kaifa`, `settle_mode`, ",
+        "`settle_column`, `settle_value`",
         "from `th_product_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -100,7 +106,10 @@ public interface ThProductManageMapper {
         @Result(column="source_url", property="source_url", jdbcType=JdbcType.VARCHAR),
         @Result(column="business_code", property="business_code", jdbcType=JdbcType.VARCHAR),
         @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
-        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR)
+        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR),
+        @Result(column="settle_mode", property="settle_mode", jdbcType=JdbcType.VARCHAR),
+        @Result(column="settle_column", property="settle_column", jdbcType=JdbcType.VARCHAR),
+        @Result(column="settle_value", property="settle_value", jdbcType=JdbcType.VARCHAR)
     })
     ThProductManage selectByPrimaryKey(Long id);
 
@@ -129,7 +138,10 @@ public interface ThProductManageMapper {
           "`source_url` = #{source_url,jdbcType=VARCHAR},",
           "`business_code` = #{business_code,jdbcType=VARCHAR},",
           "`type` = #{type,jdbcType=VARCHAR},",
-          "`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR}",
+          "`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR},",
+          "`settle_mode` = #{settle_mode,jdbcType=VARCHAR},",
+          "`settle_column` = #{settle_column,jdbcType=VARCHAR},",
+          "`settle_value` = #{settle_value,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThProductManage record);

@@ -1,6 +1,6 @@
 #产品管理
 drop table if exists th_product_manage;
-#产品管理 type 类型：金融、CPS、通信
+#产品管理 type 类型：金融、CPS、通信、结算模式（CPA、CPS）、结算公式（）结算字段 * 结算值
 CREATE TABLE `th_product_manage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -8,6 +8,11 @@ CREATE TABLE `th_product_manage` (
   `product_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_type` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+
+  `settle_mode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settle_column` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settle_value` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+
   `shifou_2_kaifa` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `source_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

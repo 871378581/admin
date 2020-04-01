@@ -27,13 +27,36 @@
         <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
 
-    <span class="fr">
-        <span class="layui-form-label">商品名称：</span>
-        <div class="layui-input-inline">
-            <input type="text"  id="good_name" autocomplete="off" placeholder="请输入商品名称" class="layui-input">
-        </div>
-        <button class="layui-btn mgl-20" id="btn-search">查询</button>
+    <span>
+        <form class="layui-form" style="float: left">
+            <div class="layui-inline">
+                  <label class="layui-form-label">商品名称</label>
+                  <div class="layui-input-inline">
+                      <input type="text"  id="good_name" autocomplete="off" placeholder="请输入商品名称" class="layui-input">
+                  </div>
+              </div>
+            <div class="layui-inline">
+                  <label class="layui-form-label">操作类型</label>
+                  <div class="layui-input-inline" style="width:80px;">
+                      <select name="operate_type" id="operate_type" lay-filter="operate_type"  lay-verify="required">
+                          <option value="">请选择</option>
+                          <option value="上线">上线</option>
+                          <option value="下线">下线</option>
+                      </select>
+                  </div>
+              </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">订单时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="order_time" class="layui-input" id="order_time" placeholder="请选择订单时间">
+                </div>
+            </div>
+        </form>
     </span>
+    <button class="layui-btn mgl-20" style="margin-left: 10px;" id="btn-search">查询</button>
+
+
 </div>
 
 <!-- 表格 -->
@@ -45,7 +68,7 @@
 <script type="text/javascript">
 
     // layui方法
-    layui.use(['table', 'form', 'layer', 'vip_table','upload'], function () {
+    layui.use(['table', 'form', 'layer', 'laydate','vip_table','upload'], function () {
 
         // 操作对象
         var form = layui.form
@@ -53,6 +76,7 @@
                 , layer = layui.layer
                 , vipTable = layui.vip_table
                 , upload = layui.upload
+            ,laydate=layui.laydate
                 , $ = layui.jquery;
 
         //执行实例
@@ -89,6 +113,14 @@
                     }
                 });
             }
+        });
+
+        //日期时间选择器
+        laydate.render({
+            elem: '#order_time'
+            ,type: 'datetime'
+            ,range:true,
+            trigger:'click'
         });
 
         // 表格渲染
@@ -133,7 +165,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{good_name:$("#good_name").val()}
+            , where:{operate_type:$("#operate_type").val(),order_time:$("#order_time").val(),good_name:$("#good_name").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -178,7 +210,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{good_name:$("#good_name").val()}});
+            tableIns.reload({where:{operate_type:$("#operate_type").val(),order_time:$("#order_time").val(),good_name:$("#good_name").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){

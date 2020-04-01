@@ -24,14 +24,27 @@
         <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
     <span>
+        <form class="layui-form" style="float: left">
+        <div class="layui-inline">
+              <label class="layui-form-label">类型</label>
+              <div class="layui-input-inline">
+                  <select name="type" id="type" lay-filter="type"  lay-verify="required">
+                      <option value="">请选择</option>
+                      <option value="金融">金融</option>
+                      <option value="CPA">CPA</option>
+                      <option value="通信">通信</option>
+                  </select>
+              </div>
+          </div>
         <div class="layui-inline">
             <label class="layui-form-label">产品名称</label>
             <div class="layui-input-inline">
                 <input type="text"  id="searchMenuName" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
             </div>
         </div>
+        </form>
+        <button class="layui-btn mgl-20" id="btn-search">查询</button>
     </span>
-    <button class="layui-btn mgl-20" id="btn-search">查询</button>
 </div>
 
 <!-- 表格 -->
@@ -73,7 +86,7 @@
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'creator_account', title: '创建人', width: 100}
               , {field: 'modifier_account', title: '修改人', width: 100}
-              , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+              , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
@@ -83,7 +96,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{product_name:$("#searchMenuName").val()}
+            , where:{product_name:$("#searchMenuName").val(),type:$("#type").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -122,7 +135,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{product_name:$("#searchMenuName").val()}});
+            tableIns.reload({where:{product_name:$("#searchMenuName").val(),type:$("#type").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){
@@ -160,6 +173,16 @@
                 ,area:['100%','100%']
               ,content:"/adminservice/admin/ege-admin/app/product_manage/edit.html?id="+data.id
             });
+
+          }else if(obj.event === 'settle_set'){
+              console.log(obj.data);
+              var data = obj.data;
+              layer.open({
+                  type: 2,
+                  title: '结算模式'
+                  ,area:['100%','100%']
+                  ,content:"/adminservice/admin/ege-admin/app/product_manage/edit_settle.html?id="+data.id
+              });
 
           }
         });
@@ -202,6 +225,7 @@
 <script type="text/html" id="barOption">
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="settle_set">结算模式</a>
 </script>
 </body>
 </html>

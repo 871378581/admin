@@ -40,7 +40,8 @@ public interface ThUrlManageMapper {
         "`youxiao_time`, `gmt_create`, ",
         "`gmt_modify`, `creator_account`, ",
         "`owner_account`, `modifier_account`, ",
-        "`description`)",
+        "`description`, `shifou_2_kaifa`, ",
+        "`owner_1_account`)",
         "values (#{business_name,jdbcType=VARCHAR}, #{url_code,jdbcType=VARCHAR}, ",
         "#{share_url_code,jdbcType=VARCHAR}, #{open_ticket_main_body,jdbcType=VARCHAR}, ",
         "#{product_name,jdbcType=VARCHAR}, #{product_code,jdbcType=VARCHAR}, ",
@@ -50,7 +51,8 @@ public interface ThUrlManageMapper {
         "#{youxiao_time,jdbcType=VARCHAR}, #{gmt_create,jdbcType=TIMESTAMP}, ",
         "#{gmt_modify,jdbcType=TIMESTAMP}, #{creator_account,jdbcType=VARCHAR}, ",
         "#{owner_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
-        "#{description,jdbcType=VARCHAR})"
+        "#{description,jdbcType=VARCHAR}, #{shifou_2_kaifa,jdbcType=VARCHAR}, ",
+        "#{owner_1_account,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThUrlManage record);
@@ -80,7 +82,9 @@ public interface ThUrlManageMapper {
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="owner_account", property="owner_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR),
+        @Result(column="owner_1_account", property="owner_1_account", jdbcType=JdbcType.VARCHAR)
     })
     List<ThUrlManage> selectByExample(ThUrlManageExample example);
 
@@ -89,7 +93,8 @@ public interface ThUrlManageMapper {
         "`id`, `business_name`, `url_code`, `share_url_code`, `open_ticket_main_body`, ",
         "`product_name`, `product_code`, `product_type`, `product_qudao_code`, `url`, ",
         "`url_status`, `biz_line`, `channel_code`, `youxiao_time`, `gmt_create`, `gmt_modify`, ",
-        "`creator_account`, `owner_account`, `modifier_account`, `description`",
+        "`creator_account`, `owner_account`, `modifier_account`, `description`, `shifou_2_kaifa`, ",
+        "`owner_1_account`",
         "from `th_url_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -113,7 +118,9 @@ public interface ThUrlManageMapper {
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="owner_account", property="owner_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR),
+        @Result(column="owner_1_account", property="owner_1_account", jdbcType=JdbcType.VARCHAR)
     })
     ThUrlManage selectByPrimaryKey(Long id);
 
@@ -146,7 +153,9 @@ public interface ThUrlManageMapper {
           "`creator_account` = #{creator_account,jdbcType=VARCHAR},",
           "`owner_account` = #{owner_account,jdbcType=VARCHAR},",
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
-          "`description` = #{description,jdbcType=VARCHAR}",
+          "`description` = #{description,jdbcType=VARCHAR},",
+          "`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR},",
+          "`owner_1_account` = #{owner_1_account,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThUrlManage record);

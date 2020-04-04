@@ -1,6 +1,6 @@
 #产品管理
 drop table if exists th_product_manage;
-#产品管理 type 类型：金融、CPS、通信、结算模式（CPA、CPS）、结算公式（）结算字段 * 结算值
+#产品管理 type 类型：金融、CPS、通信、结算模式（CPA、CPS）、结算公式（）结算字段 * 结算值 是否二次开发
 CREATE TABLE `th_product_manage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

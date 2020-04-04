@@ -65,9 +65,8 @@ public class UrlController extends BaseController{
 
             //不是管理员只能查看自己创建的链接
             if(!showAllUser(account)){
-                adminRoleExampleCriteria.andCreator_accountEqualTo(account);
+                adminRoleExampleCriteria.andOwner_1_accountEqualTo(account);
             }
-
 
             int count = thUrlManageMapper.countByExample(adminRoleExample);
             List<ThUrlManage> thUrlManages = Lists.newArrayList();
@@ -81,8 +80,10 @@ public class UrlController extends BaseController{
                         example.createCriteria().andProduct_codeEqualTo(thUrlManage.getProduct_code());
                         List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
                         if(!CollectionUtils.isEmpty(thProductManages)){
-                            String product_name1 = thProductManages.get(0).getProduct_name();
+                            ThProductManage thProductManage = thProductManages.get(0);
+                            String product_name1 = thProductManage.getProduct_name();
                             thUrlManage.setProduct_name(product_name1);
+                            thUrlManage.setShifou_2_kaifa(thProductManage.getShifou_2_kaifa());
                         }
                     }
                 }
@@ -201,6 +202,7 @@ public class UrlController extends BaseController{
             //分享的唯一编码
             thProductManage.setUrl_code(UUIDUtils.UUID());
             thProductManage.setCreator_account(account);
+            thProductManage.setOwner_1_account(account);
             thProductManage.setModifier_account(account);
             thProductManage.setGmt_create(new Date());
             thProductManage.setGmt_modify(new Date());

@@ -44,6 +44,10 @@ public class ThUrlManage implements Serializable {
 
     private String description;
 
+    private String shifou_2_kaifa;
+
+    private String owner_1_account;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -206,6 +210,22 @@ public class ThUrlManage implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getShifou_2_kaifa() {
+        return shifou_2_kaifa;
+    }
+
+    public void setShifou_2_kaifa(String shifou_2_kaifa) {
+        this.shifou_2_kaifa = shifou_2_kaifa == null ? null : shifou_2_kaifa.trim();
+    }
+
+    public String getOwner_1_account() {
+        return owner_1_account;
+    }
+
+    public void setOwner_1_account(String owner_1_account) {
+        this.owner_1_account = owner_1_account == null ? null : owner_1_account.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -232,6 +252,8 @@ public class ThUrlManage implements Serializable {
         sb.append(", owner_account=").append(owner_account);
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
+        sb.append(", shifou_2_kaifa=").append(shifou_2_kaifa);
+        sb.append(", owner_1_account=").append(owner_1_account);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

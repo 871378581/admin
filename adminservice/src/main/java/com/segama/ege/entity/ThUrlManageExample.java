@@ -1484,6 +1484,146 @@ public class ThUrlManageExample {
             addCriterion("`description` not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andShifou_2_kaifaIsNull() {
+            addCriterion("`shifou_2_kaifa` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaIsNotNull() {
+            addCriterion("`shifou_2_kaifa` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` =", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` <>", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaGreaterThan(String value) {
+            addCriterion("`shifou_2_kaifa` >", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaGreaterThanOrEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` >=", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaLessThan(String value) {
+            addCriterion("`shifou_2_kaifa` <", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaLessThanOrEqualTo(String value) {
+            addCriterion("`shifou_2_kaifa` <=", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaLike(String value) {
+            addCriterion("`shifou_2_kaifa` like", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotLike(String value) {
+            addCriterion("`shifou_2_kaifa` not like", value, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaIn(List<String> values) {
+            addCriterion("`shifou_2_kaifa` in", values, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotIn(List<String> values) {
+            addCriterion("`shifou_2_kaifa` not in", values, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaBetween(String value1, String value2) {
+            addCriterion("`shifou_2_kaifa` between", value1, value2, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andShifou_2_kaifaNotBetween(String value1, String value2) {
+            addCriterion("`shifou_2_kaifa` not between", value1, value2, "shifou_2_kaifa");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountIsNull() {
+            addCriterion("`owner_1_account` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountIsNotNull() {
+            addCriterion("`owner_1_account` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountEqualTo(String value) {
+            addCriterion("`owner_1_account` =", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountNotEqualTo(String value) {
+            addCriterion("`owner_1_account` <>", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountGreaterThan(String value) {
+            addCriterion("`owner_1_account` >", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountGreaterThanOrEqualTo(String value) {
+            addCriterion("`owner_1_account` >=", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountLessThan(String value) {
+            addCriterion("`owner_1_account` <", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountLessThanOrEqualTo(String value) {
+            addCriterion("`owner_1_account` <=", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountLike(String value) {
+            addCriterion("`owner_1_account` like", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountNotLike(String value) {
+            addCriterion("`owner_1_account` not like", value, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountIn(List<String> values) {
+            addCriterion("`owner_1_account` in", values, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountNotIn(List<String> values) {
+            addCriterion("`owner_1_account` not in", values, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountBetween(String value1, String value2) {
+            addCriterion("`owner_1_account` between", value1, value2, "owner_1_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwner_1_accountNotBetween(String value1, String value2) {
+            addCriterion("`owner_1_account` not between", value1, value2, "owner_1_account");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

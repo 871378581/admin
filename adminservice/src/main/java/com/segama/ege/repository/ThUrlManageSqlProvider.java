@@ -117,6 +117,14 @@ public class ThUrlManageSqlProvider {
             VALUES("`description`", "#{description,jdbcType=VARCHAR}");
         }
         
+        if (record.getShifou_2_kaifa() != null) {
+            VALUES("`shifou_2_kaifa`", "#{shifou_2_kaifa,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOwner_1_account() != null) {
+            VALUES("`owner_1_account`", "#{owner_1_account,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -146,6 +154,8 @@ public class ThUrlManageSqlProvider {
         SELECT("`owner_account`");
         SELECT("`modifier_account`");
         SELECT("`description`");
+        SELECT("`shifou_2_kaifa`");
+        SELECT("`owner_1_account`");
         FROM("`th_url_manage`");
         applyWhere(example, false);
         
@@ -249,6 +259,14 @@ public class ThUrlManageSqlProvider {
             SET("`description` = #{record.description,jdbcType=VARCHAR}");
         }
         
+        if (record.getShifou_2_kaifa() != null) {
+            SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOwner_1_account() != null) {
+            SET("`owner_1_account` = #{record.owner_1_account,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -277,6 +295,8 @@ public class ThUrlManageSqlProvider {
         SET("`owner_account` = #{record.owner_account,jdbcType=VARCHAR}");
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
+        SET("`owner_1_account` = #{record.owner_1_account,jdbcType=VARCHAR}");
         
         ThUrlManageExample example = (ThUrlManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -361,6 +381,14 @@ public class ThUrlManageSqlProvider {
         
         if (record.getDescription() != null) {
             SET("`description` = #{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShifou_2_kaifa() != null) {
+            SET("`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOwner_1_account() != null) {
+            SET("`owner_1_account` = #{owner_1_account,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

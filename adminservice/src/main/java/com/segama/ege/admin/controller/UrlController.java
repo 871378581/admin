@@ -46,9 +46,10 @@ public class UrlController extends BaseController{
 
     @RequestMapping("/list")
     public BaseVO list(
-            @RequestParam(value = "owner_account" ,required = false) String owner_account
+            @RequestParam(value = "owner_1_account" ,required = false) String owner_1_account
             ,@RequestParam(value = "product_code" ,required = false) String product_code
             ,@RequestParam(value = "account") String account
+            ,@RequestParam(value = "channel_type") String channel_type
             ,@RequestParam(value = "limit",required = false) Integer pageSize,
             @RequestParam(value = "page",required = false) Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
@@ -59,13 +60,21 @@ public class UrlController extends BaseController{
             if(StringUtils.isNotEmpty(product_code)) {
                 adminRoleExampleCriteria.andProduct_codeEqualTo(product_code);
             }
-            if(StringUtils.isNotEmpty(owner_account)) {
-                adminRoleExampleCriteria.andOwner_accountEqualTo(owner_account);
+            if(StringUtils.isNotEmpty(owner_1_account)) {
+                adminRoleExampleCriteria.andOwner_1_accountEqualTo(owner_1_account);
             }
 
             //不是管理员只能查看自己创建的链接
-            if(!showAllUser(account)){
-                adminRoleExampleCriteria.andOwner_1_accountEqualTo(account);
+            Boolean aBoolean = showAllUser(account);
+            if(!aBoolean){
+                //A登录看数据用这个过滤
+                if("1".equals(channel_type)){
+                    adminRoleExampleCriteria.andOwner_1_accountEqualTo(account);
+
+                    //b用这个字段过滤数据
+                }else if("2".equals(channel_type)){
+                    adminRoleExampleCriteria.andOwner_accountEqualTo(account);
+                }
             }
 
             int count = thUrlManageMapper.countByExample(adminRoleExample);
@@ -84,6 +93,11 @@ public class UrlController extends BaseController{
                             String product_name1 = thProductManage.getProduct_name();
                             thUrlManage.setProduct_name(product_name1);
                             thUrlManage.setShifou_2_kaifa(thProductManage.getShifou_2_kaifa());
+                        }
+                        if(aBoolean){
+                            thUrlManage.setShow_a_fenpei("0");
+                        }else{
+                            thUrlManage.setShow_a_fenpei("1");
                         }
                     }
                 }
@@ -142,6 +156,12 @@ public class UrlController extends BaseController{
         return baseVO;
     }
 
+    /**
+     * 分配链接
+     * @param adminRoleNew
+     * @param editAccount
+     * @return
+     */
     @RequestMapping("/fenpei")
     public BaseVO fenpei(ThUrlManage adminRoleNew,
                             @RequestParam("account") String editAccount) {
@@ -156,27 +176,44 @@ public class UrlController extends BaseController{
             ThUrlManage adminRole = thUrlManageMapper.selectByPrimaryKey(adminRoleNew.getId());
             adminRole.setGmt_modify(new Date());
             adminRole.setModifier_account(editAccount);
-            BeanUtils.copyProperties(adminRoleNew,adminRole);
-            String share_url_code = adminRole.getShare_url_code();
-            String[] s = share_url_code.split("_");
-            String code = s[0]+"_"+s[1]+"_"+s[2]+"_"+adminRoleNew.getOwner_account();
-            adminRole.setShare_url_code(code);
+            String shifou_2_kaifa="";
+            if(adminRole!=null){
+                String product_code = adminRole.getProduct_code();
+                ThProductManageExample example = new ThProductManageExample();
+                example.createCriteria().andProduct_codeEqualTo(product_code);
+                List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thProductManages)) {
+                    ThProductManage thProductManage = thProductManages.get(0);
+                    shifou_2_kaifa = thProductManage.getShifou_2_kaifa();
+                }
 
-            ThProductManageExample example = new ThProductManageExample();
-            example.createCriteria()
-                    .andProduct_codeEqualTo(s[1])
-                    .andProduct_statusEqualTo(1);
-
-            List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
-            String url = "";
-            if(!CollectionUtils.isEmpty(thProductManages)){
-                ThProductManage thProductManage = thProductManages.get(0);
-                url = thProductManage.getUrl();
-            }else{
-                throw new RuntimeException("未查询到相关产品或产品已下线！");
             }
-            String url2 = url + "?code=" + code;
-            adminRole.setUrl(url2);
+            //是二次开发
+            if("是".equals(shifou_2_kaifa)){
+                adminRole.setOwner_account(adminRoleNew.getOwner_account());
+                String share_url_code = adminRole.getShare_url_code();
+                String[] s = share_url_code.split("_");
+                String code = s[0]+"_"+s[1]+"_"+s[2]+"_"+adminRoleNew.getOwner_account();
+                adminRole.setShare_url_code(code);
+
+                ThProductManageExample example = new ThProductManageExample();
+                example.createCriteria()
+                        .andProduct_codeEqualTo(s[1])
+                        .andProduct_statusEqualTo(1);
+
+                List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
+                String url = "";
+                if(!CollectionUtils.isEmpty(thProductManages)){
+                    ThProductManage thProductManage = thProductManages.get(0);
+                    url = thProductManage.getUrl();
+                }else{
+                    throw new RuntimeException("未查询到相关产品或产品已下线！");
+                }
+                String url2 = url + "?code=" + code;
+                adminRole.setUrl(url2);
+            }else{
+                adminRole.setOwner_1_account(adminRoleNew.getOwner_1_account());
+            }
             thUrlManageMapper.updateByPrimaryKey(adminRole);
             baseVO.setSuccess(true);
         } catch (Exception e) {
@@ -347,7 +384,7 @@ public class UrlController extends BaseController{
             if (!CollectionUtils.isEmpty(adminUsers)) {
                 for (AdminUser adminUser : adminUsers) {
                     Map<String, Object> map = Maps.newHashMap();
-                    map.put("label", adminUser.getReal_name());
+                    map.put("label", StringUtils.isEmpty(adminUser.getChannel_name())?adminUser.getAccount():adminUser.getChannel_name());
                     map.put("value", adminUser.getAccount());
                     result.add(map);
                 }

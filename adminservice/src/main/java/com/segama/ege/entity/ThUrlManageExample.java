@@ -1624,6 +1624,146 @@ public class ThUrlManageExample {
             addCriterion("`owner_1_account` not between", value1, value2, "owner_1_account");
             return (Criteria) this;
         }
+
+        public Criteria andShow_a_fenpeiIsNull() {
+            addCriterion("`show_a_fenpei` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiIsNotNull() {
+            addCriterion("`show_a_fenpei` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiEqualTo(String value) {
+            addCriterion("`show_a_fenpei` =", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiNotEqualTo(String value) {
+            addCriterion("`show_a_fenpei` <>", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiGreaterThan(String value) {
+            addCriterion("`show_a_fenpei` >", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiGreaterThanOrEqualTo(String value) {
+            addCriterion("`show_a_fenpei` >=", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiLessThan(String value) {
+            addCriterion("`show_a_fenpei` <", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiLessThanOrEqualTo(String value) {
+            addCriterion("`show_a_fenpei` <=", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiLike(String value) {
+            addCriterion("`show_a_fenpei` like", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiNotLike(String value) {
+            addCriterion("`show_a_fenpei` not like", value, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiIn(List<String> values) {
+            addCriterion("`show_a_fenpei` in", values, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiNotIn(List<String> values) {
+            addCriterion("`show_a_fenpei` not in", values, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiBetween(String value1, String value2) {
+            addCriterion("`show_a_fenpei` between", value1, value2, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_a_fenpeiNotBetween(String value1, String value2) {
+            addCriterion("`show_a_fenpei` not between", value1, value2, "show_a_fenpei");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeIsNull() {
+            addCriterion("`business_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeIsNotNull() {
+            addCriterion("`business_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeEqualTo(String value) {
+            addCriterion("`business_code` =", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotEqualTo(String value) {
+            addCriterion("`business_code` <>", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeGreaterThan(String value) {
+            addCriterion("`business_code` >", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`business_code` >=", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeLessThan(String value) {
+            addCriterion("`business_code` <", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeLessThanOrEqualTo(String value) {
+            addCriterion("`business_code` <=", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeLike(String value) {
+            addCriterion("`business_code` like", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotLike(String value) {
+            addCriterion("`business_code` not like", value, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeIn(List<String> values) {
+            addCriterion("`business_code` in", values, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotIn(List<String> values) {
+            addCriterion("`business_code` not in", values, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeBetween(String value1, String value2) {
+            addCriterion("`business_code` between", value1, value2, "business_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusiness_codeNotBetween(String value1, String value2) {
+            addCriterion("`business_code` not between", value1, value2, "business_code");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

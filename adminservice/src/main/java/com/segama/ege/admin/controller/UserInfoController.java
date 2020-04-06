@@ -77,10 +77,10 @@ public class UserInfoController {
                 adminRoleExample.setPageIndex(pageIndex);
                 List<AdminUser> adminUsers = adminUserMapper.selectByExample(adminRoleExample);
                 collect = adminUsers.stream().filter(e -> !"admin".equals(e.getAccount())).collect(Collectors.toList());
-                baseVO.setData(collect);
-                baseVO.setSuccess(true);
-            }
 
+            }
+            baseVO.setData(collect);
+            baseVO.setSuccess(true);
             baseVO.setCount(count);
             baseVO.setCode(0);
         }catch (Exception e){

@@ -1,11 +1,15 @@
 package com.segama.ege.admin.controller;
 
+import com.google.common.collect.Lists;
 import com.segama.ege.admin.utils.BeanUtils;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.entity.ThOrderManage;
 import com.segama.ege.entity.ThOrderManageExample;
+import com.segama.ege.entity.ThUrlManage;
+import com.segama.ege.entity.ThUrlManageExample;
 import com.segama.ege.repository.ThOrderManageMapper;
+import com.segama.ege.repository.ThUrlManageMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -37,7 +41,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/ege/api/admin/order")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class OrderController {
+public class OrderController extends BaseController {
     @Resource
     private ThOrderManageMapper thOrderManageMapper;
 
@@ -46,6 +50,7 @@ public class OrderController {
     @RequestMapping("/list")
     public BaseVO list(
             ThOrderManage thOrderManage
+            ,@RequestParam("account") String account
             ,@RequestParam("limit") Integer pageSize,
             @RequestParam("page") Integer pageIndex) {
         BaseVO baseVO = new BaseVO();
@@ -62,11 +67,20 @@ public class OrderController {
                 String[] time = thOrderManage.getOrder_time().split(" - ");
                 thOrderManageExampleCriteria.andOrder_timeBetween(time[0],time[1]);
             }
+            Boolean aBoolean = showAllUser(account);
+            if(!aBoolean){
+                //只能查看自己的operateType=1的数据
+                thOrderManageExampleCriteria.andOperate_typeEqualTo("1");
+                thOrderManageExampleCriteria.andChannel_accountEqualTo(account);
+            }
             int count = thOrderManageMapper.countByExample(thOrderManageExample);
             thOrderManageExample.setPageCount(pageSize);
             thOrderManageExample.setPageIndex(pageIndex);
             thOrderManageExample.setOrderByClause("gmt_create desc");
-            List<ThOrderManage> thOrderManages = thOrderManageMapper.selectByExample(thOrderManageExample);
+            List<ThOrderManage> thOrderManages = Lists.newArrayList();
+            if(count>0) {
+                thOrderManages = thOrderManageMapper.selectByExample(thOrderManageExample);
+            }
             baseVO.setData(thOrderManages);
             baseVO.setSuccess(true);
             baseVO.setCount(count);
@@ -83,16 +97,21 @@ public class OrderController {
                     @RequestParam("account") String account) {
         BaseVO baseVO = new BaseVO();
         try {
-            if(thOrderManageNew.getId()==null){
+            if(StringUtils.isEmpty(thOrderManageNew.getOrder_code())){
                 baseVO.setErrorMsg("请检查必填参数是否填写完整！");
                 baseVO.setSuccess(false);
                 return baseVO;
             }
-            ThOrderManage thOrderManage = thOrderManageMapper.selectByPrimaryKey(thOrderManageNew.getId());
-            thOrderManage.setGmt_modify(new Date());
-            thOrderManage.setModifier_account(account);
-            BeanUtils.copyProperties(thOrderManageNew, thOrderManage);
-            thOrderManageMapper.updateByPrimaryKey(thOrderManage);
+            ThOrderManageExample example = new ThOrderManageExample();
+            example.createCriteria().andOrder_codeEqualTo(thOrderManageNew.getOrder_code());
+            List<ThOrderManage> thOrderManages = thOrderManageMapper.selectByExample(example);
+            if(!CollectionUtils.isEmpty(thOrderManages)) {
+                ThOrderManage thOrderManage = thOrderManages.get(0);
+                thOrderManage.setGmt_modify(new Date());
+                thOrderManage.setModifier_account(account);
+                BeanUtils.copyProperties(thOrderManageNew, thOrderManage);
+                thOrderManageMapper.updateByPrimaryKey(thOrderManage);
+            }
             baseVO.setSuccess(true);
         } catch (Exception e) {
             baseVO.setSuccess(false);
@@ -137,19 +156,23 @@ public class OrderController {
     }
 
     @RequestMapping("/get")
-    public BaseVO get(@RequestParam("id") Long id ) {
+    public BaseVO get(@RequestParam("order_code") String order_code ) {
         BaseVO baseVO = new BaseVO();
         try {
-            if(id == null){
-                baseVO.setErrorMsg("id为不能为空！");
+            if(StringUtils.isEmpty(order_code)){
+                baseVO.setErrorMsg("order_code为不能为空！");
                 baseVO.setSuccess(false);
             }else {
-                ThOrderManage thOrderManage = thOrderManageMapper.selectByPrimaryKey(id);
-                baseVO.setData(thOrderManage);
+                ThOrderManageExample thOrderManageExample = new ThOrderManageExample();
+                thOrderManageExample.createCriteria().andOrder_codeEqualTo(order_code);
+                List<ThOrderManage> thOrderManages = thOrderManageMapper.selectByExample(thOrderManageExample);
+                if(!CollectionUtils.isEmpty(thOrderManages)){
+                    baseVO.setData(thOrderManages.get(0));
+                }
             }
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ThOrderManageController#get Exception input param is id:"+id,e);
+            LOG.error("ThOrderManageController#get Exception input param is order_code="+order_code,e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("查询信息异常！");
         }
@@ -175,6 +198,8 @@ public class OrderController {
         }
         return baseVO;
     }
+    @Resource
+    private ThUrlManageMapper thUrlManageMapper;
 
     @RequestMapping("/import")
     public BaseVO StringinstallExcel(@RequestParam("account") String account,
@@ -212,7 +237,7 @@ public class OrderController {
                         int firstCellNum = row.getFirstCellNum();
                         int lastCellNum = row.getLastCellNum();
                         ThOrderManage orderManage = new ThOrderManage();
-                        String[] str = new String[17];
+                        String[] str = new String[18];
 
                         //列
 
@@ -269,6 +294,20 @@ public class OrderController {
                         orderManage.setShoucong_time(str[14]);
                         orderManage.setXiehaozhuanwang_type(str[15]);
                         orderManage.setZhuanhualvtichu_reason(str[16]);
+                        orderManage.setChannel_code(str[17]);
+
+                        //根据渠道编码查询该数据是属于哪个A推荐出去的
+                        //todo 后面需要考虑渠道b怎么区分。owner_1_account 代表管理员将链接分给A，owner_account代表A分给b
+                        if(!StringUtils.isEmpty(str[17])){
+                            ThUrlManageExample example = new ThUrlManageExample();
+                            example.createCriteria()
+                                    .andChannel_codeEqualTo(str[17]);
+                            List<ThUrlManage> thUrlManages = thUrlManageMapper.selectByExample(example);
+                            if(!CollectionUtils.isEmpty(thUrlManages)){
+                                ThUrlManage thUrlManage = thUrlManages.get(0);
+                                orderManage.setChannel_account(thUrlManage.getOwner_1_account());
+                            }
+                        }
 
                         orderManage.setCreator_account(account);
                         orderManage.setModifier_account(account);

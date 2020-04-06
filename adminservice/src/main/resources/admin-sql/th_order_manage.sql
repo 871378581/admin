@@ -7,6 +7,8 @@ CREATE TABLE `th_order_manage` (
   `order_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订单唯一编码',
   `order_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订单时间',
   `order_phone_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订购号码',
+  `channel_account` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '渠道账号',
+  `channel_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '渠道码',
   `prov` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '号码省份',
   `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '号码地市',
   `order_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订单状态',

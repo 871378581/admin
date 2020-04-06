@@ -1,9 +1,11 @@
 #连接管理
 drop table if exists th_url_manage;
-#连接管理url_code 唯一编码，share_url_code 分享编码、链接一级拥有人 编号、商户名称、开票主体、产品名称、产品类型、产品渠道码、产品链接、链接状态、所属业务线、渠道号、有效时间
+#连接管理url_code 唯一编码，show_a_fenpei 是否显示A的分配按钮 1、0 owner_1_account 代表后台分配给A的链接
+#share_url_code 分享编码、链接一级拥有人 编号、商户名称、开票主体、产品名称、产品类型、产品渠道码、产品链接、链接状态、所属业务线、渠道号、有效时间
 CREATE TABLE `th_url_manage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `business_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `business_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `share_url_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `open_ticket_main_body` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE `th_url_manage` (
   `channel_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `youxiao_time` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `shifou_2_kaifa` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `show_a_fenpei` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gmt_create` datetime DEFAULT NULL,
   `gmt_modify` datetime DEFAULT NULL,
   `creator_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,

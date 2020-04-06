@@ -125,6 +125,14 @@ public class ThUrlManageSqlProvider {
             VALUES("`owner_1_account`", "#{owner_1_account,jdbcType=VARCHAR}");
         }
         
+        if (record.getShow_a_fenpei() != null) {
+            VALUES("`show_a_fenpei`", "#{show_a_fenpei,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBusiness_code() != null) {
+            VALUES("`business_code`", "#{business_code,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -156,6 +164,8 @@ public class ThUrlManageSqlProvider {
         SELECT("`description`");
         SELECT("`shifou_2_kaifa`");
         SELECT("`owner_1_account`");
+        SELECT("`show_a_fenpei`");
+        SELECT("`business_code`");
         FROM("`th_url_manage`");
         applyWhere(example, false);
         
@@ -267,6 +277,14 @@ public class ThUrlManageSqlProvider {
             SET("`owner_1_account` = #{record.owner_1_account,jdbcType=VARCHAR}");
         }
         
+        if (record.getShow_a_fenpei() != null) {
+            SET("`show_a_fenpei` = #{record.show_a_fenpei,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBusiness_code() != null) {
+            SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -297,6 +315,8 @@ public class ThUrlManageSqlProvider {
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
         SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
         SET("`owner_1_account` = #{record.owner_1_account,jdbcType=VARCHAR}");
+        SET("`show_a_fenpei` = #{record.show_a_fenpei,jdbcType=VARCHAR}");
+        SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
         
         ThUrlManageExample example = (ThUrlManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -389,6 +409,14 @@ public class ThUrlManageSqlProvider {
         
         if (record.getOwner_1_account() != null) {
             SET("`owner_1_account` = #{owner_1_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShow_a_fenpei() != null) {
+            SET("`show_a_fenpei` = #{show_a_fenpei,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getBusiness_code() != null) {
+            SET("`business_code` = #{business_code,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

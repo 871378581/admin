@@ -51,10 +51,15 @@ public class InfoAddController {
                 String[] shareCodeArr = share_url_code.split("_");
                 String createAcc = shareCodeArr[0];
                 String codeprod = shareCodeArr[1];
-                String ownerAcc = shareCodeArr[3];
                 thSaleExtensionManage.setCreate_account(createAcc);
                 thSaleExtensionManage.setProduct_code(codeprod);
-                thSaleExtensionManage.setOwner_account(ownerAcc);
+                //A 还为分配给b
+                if(shareCodeArr.length==3){
+                    thSaleExtensionManage.setOwner_account(createAcc);
+                }else {
+                    String ownerAcc = shareCodeArr[3];
+                    thSaleExtensionManage.setOwner_account(ownerAcc);
+                }
             }
             thSaleExtensionManage.setGmt_create(new Date());
             thSaleExtensionManageMapper.insert(thSaleExtensionManage);

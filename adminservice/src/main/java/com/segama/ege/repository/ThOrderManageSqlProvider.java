@@ -137,6 +137,14 @@ public class ThOrderManageSqlProvider {
             VALUES("`description`", "#{description,jdbcType=VARCHAR}");
         }
         
+        if (record.getChannel_account() != null) {
+            VALUES("`channel_account`", "#{channel_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_code() != null) {
+            VALUES("`channel_code`", "#{channel_code,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -171,6 +179,8 @@ public class ThOrderManageSqlProvider {
         SELECT("`creator_account`");
         SELECT("`modifier_account`");
         SELECT("`description`");
+        SELECT("`channel_account`");
+        SELECT("`channel_code`");
         FROM("`th_order_manage`");
         applyWhere(example, false);
         
@@ -294,6 +304,14 @@ public class ThOrderManageSqlProvider {
             SET("`description` = #{record.description,jdbcType=VARCHAR}");
         }
         
+        if (record.getChannel_account() != null) {
+            SET("`channel_account` = #{record.channel_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_code() != null) {
+            SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -327,6 +345,8 @@ public class ThOrderManageSqlProvider {
         SET("`creator_account` = #{record.creator_account,jdbcType=VARCHAR}");
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        SET("`channel_account` = #{record.channel_account,jdbcType=VARCHAR}");
+        SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
         
         ThOrderManageExample example = (ThOrderManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -431,6 +451,14 @@ public class ThOrderManageSqlProvider {
         
         if (record.getDescription() != null) {
             SET("`description` = #{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_account() != null) {
+            SET("`channel_account` = #{channel_account,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel_code() != null) {
+            SET("`channel_code` = #{channel_code,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

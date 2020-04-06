@@ -24,7 +24,15 @@
     <input type="hidden" name="id" lay-verify="title" id="id" class="layui-input">
       <div class="layui-form-item">
           <div class="layui-form-item">
-              <div class="layui-inline">
+              <div class="layui-inline" id="channel_id_1" style="display: none">
+                  <label class="layui-form-label">渠道</label>
+                  <div class="layui-input-inline">
+                      <select name="owner_1_account" id="owner_1_account" lay-filter="owner_account" lay-verify="required">
+                      </select>
+                  </div>
+              </div>
+
+              <div class="layui-inline" id="channel_id_2"  style="display: none">
                   <label class="layui-form-label">渠道</label>
                   <div class="layui-input-inline">
                       <select name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
@@ -86,7 +94,7 @@
             success:function(result){
               console.log(result);
               if(result.success){
-                layer.msg('编辑成功',{time:700}, function(index){
+                layer.msg('分配成功',{time:700}, function(index){
                    //do something
                    parent.reloadParent();
                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
@@ -127,8 +135,6 @@
                 if(result.success){
                     if(result.data!=null){
                         form.val("channelForm", result.data);
-                        $("#gmt_create").val(Format(result.data.gmt_create,"yyyy-MM-dd hh:mm:ss"));
-                        $("#gmt_modify").val(Format(result.data.gmt_modify,"yyyy-MM-dd hh:mm:ss"));
                       form.render();
                     }
                 }else{
@@ -139,32 +145,63 @@
             });
           }
 
-
-            $.ajax({
-                url: wholeUrl + "/admin/url_manage/get_channel_b_and_own?token=" + localStorage.getItem("token"),
-                method: "post",
-                contentType: "application/x-www-form-urlencoded",
-                dataType: "json",
-                data: {account:localStorage.getItem("account")},
-                async: false,
-                success: function (result) {
-                    console.log(result);
-                    if (result.success) {
-                        if (result.data != null) {
-                            var menuList = result.data;
-                            var html = '<option value="">请选择</option>';
-                            for (var i = 0; i < menuList.length; i++) {
-                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+            var type = new URL(url).searchParams.get("type");
+            if(type=="A") {
+                $.ajax({
+                    url: wholeUrl + "/admin/url_manage/get_channel_b_and_own?token=" + localStorage.getItem("token"),
+                    method: "post",
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    data: {account: localStorage.getItem("account")},
+                    async: false,
+                    success: function (result) {
+                        console.log(result);
+                        if (result.success) {
+                            if (result.data != null) {
+                                var menuList = result.data;
+                                var html = '<option value="">请选择</option>';
+                                for (var i = 0; i < menuList.length; i++) {
+                                    html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                                }
+                                $("#owner_account").html(html);
+                                $("#channel_id_2").show();
+                                form.render();
                             }
-                            $("#owner_account").html(html);
-                            form.render();
+                        } else {
+                            layer.msg("数据加载异常！");
                         }
-                    } else {
-                        layer.msg("数据加载异常！");
-                    }
 
-                }
-            });
+                    }
+                });
+
+            }else if(type=="admin") {
+                $.ajax({
+                    url: wholeUrl + "/admin/user/get_all_users_of_A?token=" + localStorage.getItem("token"),
+                    method: "post",
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    data: {account: localStorage.getItem("account")},
+                    async: false,
+                    success: function (result) {
+                        console.log(result);
+                        if (result.success) {
+                            if (result.data != null) {
+                                var menuList = result.data;
+                                var html = '<option value="">请选择</option>';
+                                for (var i = 0; i < menuList.length; i++) {
+                                    html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                                }
+                                $("#owner_1_account").html(html);
+                                $("#channel_id_1").show();
+                                form.render();
+                            }
+                        } else {
+                            layer.msg("数据加载异常！");
+                        }
+
+                    }
+                });
+            }
 
         });
 

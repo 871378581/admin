@@ -42,7 +42,8 @@ public interface ThOrderManageMapper {
         "`xiehaozhuanwang_type`, `zhuanhualvtichu_reason`, ",
         "`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
-        "`description`)",
+        "`description`, `channel_account`, ",
+        "`channel_code`)",
         "values (#{operate_type,jdbcType=VARCHAR}, #{order_code,jdbcType=VARCHAR}, ",
         "#{order_time,jdbcType=VARCHAR}, #{order_phone_number,jdbcType=VARCHAR}, ",
         "#{prov,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{order_status,jdbcType=VARCHAR}, ",
@@ -54,7 +55,8 @@ public interface ThOrderManageMapper {
         "#{xiehaozhuanwang_type,jdbcType=VARCHAR}, #{zhuanhualvtichu_reason,jdbcType=VARCHAR}, ",
         "#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
-        "#{description,jdbcType=VARCHAR})"
+        "#{description,jdbcType=VARCHAR}, #{channel_account,jdbcType=VARCHAR}, ",
+        "#{channel_code,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThOrderManage record);
@@ -89,7 +91,9 @@ public interface ThOrderManageMapper {
         @Result(column="gmt_modify", property="gmt_modify", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_account", property="channel_account", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR)
     })
     List<ThOrderManage> selectByExample(ThOrderManageExample example);
 
@@ -99,7 +103,8 @@ public interface ThOrderManageMapper {
         "`city`, `order_status`, `customer_name`, `certificate_type`, `certificate_num`, ",
         "`customer_contact_num`, `good_name`, `address`, `active_status`, `cudian_code`, ",
         "`shoucong_amt`, `shoucong_time`, `xiehaozhuanwang_type`, `zhuanhualvtichu_reason`, ",
-        "`gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, `description`",
+        "`gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, `description`, ",
+        "`channel_account`, `channel_code`",
         "from `th_order_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -128,7 +133,9 @@ public interface ThOrderManageMapper {
         @Result(column="gmt_modify", property="gmt_modify", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_account", property="channel_account", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR)
     })
     ThOrderManage selectByPrimaryKey(Long id);
 
@@ -166,7 +173,9 @@ public interface ThOrderManageMapper {
           "`gmt_modify` = #{gmt_modify,jdbcType=TIMESTAMP},",
           "`creator_account` = #{creator_account,jdbcType=VARCHAR},",
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
-          "`description` = #{description,jdbcType=VARCHAR}",
+          "`description` = #{description,jdbcType=VARCHAR},",
+          "`channel_account` = #{channel_account,jdbcType=VARCHAR},",
+          "`channel_code` = #{channel_code,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThOrderManage record);

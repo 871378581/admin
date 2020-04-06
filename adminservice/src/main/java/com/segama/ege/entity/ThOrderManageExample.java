@@ -1844,6 +1844,146 @@ public class ThOrderManageExample {
             addCriterion("`description` not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andChannel_accountIsNull() {
+            addCriterion("`channel_account` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountIsNotNull() {
+            addCriterion("`channel_account` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountEqualTo(String value) {
+            addCriterion("`channel_account` =", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountNotEqualTo(String value) {
+            addCriterion("`channel_account` <>", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountGreaterThan(String value) {
+            addCriterion("`channel_account` >", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountGreaterThanOrEqualTo(String value) {
+            addCriterion("`channel_account` >=", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountLessThan(String value) {
+            addCriterion("`channel_account` <", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountLessThanOrEqualTo(String value) {
+            addCriterion("`channel_account` <=", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountLike(String value) {
+            addCriterion("`channel_account` like", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountNotLike(String value) {
+            addCriterion("`channel_account` not like", value, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountIn(List<String> values) {
+            addCriterion("`channel_account` in", values, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountNotIn(List<String> values) {
+            addCriterion("`channel_account` not in", values, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountBetween(String value1, String value2) {
+            addCriterion("`channel_account` between", value1, value2, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_accountNotBetween(String value1, String value2) {
+            addCriterion("`channel_account` not between", value1, value2, "channel_account");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeIsNull() {
+            addCriterion("`channel_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeIsNotNull() {
+            addCriterion("`channel_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeEqualTo(String value) {
+            addCriterion("`channel_code` =", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotEqualTo(String value) {
+            addCriterion("`channel_code` <>", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeGreaterThan(String value) {
+            addCriterion("`channel_code` >", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`channel_code` >=", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeLessThan(String value) {
+            addCriterion("`channel_code` <", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeLessThanOrEqualTo(String value) {
+            addCriterion("`channel_code` <=", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeLike(String value) {
+            addCriterion("`channel_code` like", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotLike(String value) {
+            addCriterion("`channel_code` not like", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeIn(List<String> values) {
+            addCriterion("`channel_code` in", values, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotIn(List<String> values) {
+            addCriterion("`channel_code` not in", values, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeBetween(String value1, String value2) {
+            addCriterion("`channel_code` between", value1, value2, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotBetween(String value1, String value2) {
+            addCriterion("`channel_code` not between", value1, value2, "channel_code");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

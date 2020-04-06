@@ -54,6 +54,10 @@ public class ThOrderManage implements Serializable {
 
     private String description;
 
+    private String channel_account;
+
+    private String channel_code;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -256,6 +260,22 @@ public class ThOrderManage implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getChannel_account() {
+        return channel_account;
+    }
+
+    public void setChannel_account(String channel_account) {
+        this.channel_account = channel_account == null ? null : channel_account.trim();
+    }
+
+    public String getChannel_code() {
+        return channel_code;
+    }
+
+    public void setChannel_code(String channel_code) {
+        this.channel_code = channel_code == null ? null : channel_code.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -287,6 +307,8 @@ public class ThOrderManage implements Serializable {
         sb.append(", creator_account=").append(creator_account);
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
+        sb.append(", channel_account=").append(channel_account);
+        sb.append(", channel_code=").append(channel_code);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

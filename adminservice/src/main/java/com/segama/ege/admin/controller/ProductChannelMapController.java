@@ -32,7 +32,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/ege/api/admin/product_channel_map")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class ProductChannelMapController {
+public class ProductChannelMapController extends BaseController{
     
     @Resource
     private ThProductChannelMapMapper thProductChannelMapMapper;
@@ -232,7 +232,7 @@ public class ProductChannelMapController {
         try {
             ThProductChannelMapExample example = new ThProductChannelMapExample();
             ThProductChannelMapExample.Criteria criteria = example.createCriteria();
-            if(!StringUtils.isEmpty(account)){
+            if(!StringUtils.isEmpty(account) && !showAllUser(account)){
                 criteria.andProduct_onwer_accountEqualTo(account);
             }
             List<ThProductChannelMap> thProductChannelMaps = thProductChannelMapMapper.selectByExample(example);

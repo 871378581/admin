@@ -36,7 +36,7 @@
             <div class="layui-inline">
                   <label class="layui-form-label">渠道</label>
                   <div class="layui-input-inline">
-                      <select disabled="disabled" name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
+                      <select  name="owner_account" id="owner_account" lay-filter="owner_account" lay-verify="required">
                       </select>
                   </div>
               </div>
@@ -76,8 +76,9 @@
               , {field: 'product_code', title: '产品编码', width: 120}
               //, {field: 'product_qudao_code', title: '产品渠道编码', width: 120}
               , {field: 'product_name', title: '产品名称', width: 120}
-              , {field: 'owner_account', title: '分配渠道', width: 120}
+             // , {field: 'owner_account', title: '分配渠道', width: 120}
              // , {field: 'business_name', title: '商户名称', width: 120}
+              , {field: 'shifou_2_kaifa', title: '是否二次开发产品', width: 120}
               , {field: 'url_status', title: '链接状态', width: 170,templet:'<div>{{ d.url_status==1?"上线":"下线" }}</div>'}
               , {field: 'url', title: '连接', width: 170}
              // , {field: 'biz_line', title:'业务线', width: 170}
@@ -99,7 +100,7 @@
             , limits: [10, 20, 30, 50, 100]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{owner_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}
+            , where:{channel_type:localStorage.getItem("channelType"),owner_1_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -148,7 +149,7 @@
 
         // 查询
         $('#btn-search').on('click', function () {
-            tableIns.reload({where:{owner_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}});
+            tableIns.reload({where:{channel_type:localStorage.getItem("channelType"),owner_1_account:$("#owner_account").val(),account:localStorage.getItem("account"),product_code:$("#product_code").val()}});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){
@@ -187,14 +188,34 @@
               ,content:"/adminservice/admin/ege-admin/app/url_manage/edit.html?id="+data.id
             });
 
+          }else if(obj.event === 'edit_no_2'){
+              console.log(obj.data);
+              var data = obj.data;
+              layer.open({
+                  type: 2,
+                  title: '编辑'
+                  ,area:['100%','100%']
+                  ,content:"/adminservice/admin/ege-admin/app/url_manage/edit_no_2.html?id="+data.id
+              });
+
           }else if(obj.event === 'fenpei'){
               console.log(obj.data);
               var data = obj.data;
               layer.open({
                   type: 2,
-                  title: '分配'
+                  title: '分配链接'
                   ,area:['100%','100%']
-                  ,content:"/adminservice/admin/ege-admin/app/url_manage/fenpei.html?id="+data.id
+                  ,content:"/adminservice/admin/ege-admin/app/url_manage/fenpei.html?type=admin&id="+data.id
+              });
+
+          }else if(obj.event === 'fenpei2'){
+              console.log(obj.data);
+              var data = obj.data;
+              layer.open({
+                  type: 2,
+                  title: '分配链接'
+                  ,area:['100%','100%']
+                  ,content:"/adminservice/admin/ege-admin/app/url_manage/fenpei.html?type=A&id="+data.id
               });
 
           }
@@ -310,9 +331,20 @@
 </script>
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
+    {{#  if(localStorage.getItem("channelType")!=null && localStorage.getItem("channelType")!="2" && d.show_a_fenpei != null && d.show_a_fenpei == "0" && d.shifou_2_kaifa!="是"){ }}
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="fenpei">分配</a>
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit_no_2">编辑</a>
+    {{#  } }}
+
+    {{#  if(localStorage.getItem("channelType")!=null && localStorage.getItem("channelType")!="2" && d.shifou_2_kaifa=="是" && d.show_a_fenpei != null && d.show_a_fenpei == "1"){ }}
+    <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="fenpei2">分配链接</a>
+    {{#  } }}
+
+    {{#  if(localStorage.getItem("channelType")!=null && localStorage.getItem("channelType")!="2" && d.shifou_2_kaifa=="是"){ }}
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+    <!--<a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>-->
+    {{#  } }}
+
 </script>
 </body>
 </html>

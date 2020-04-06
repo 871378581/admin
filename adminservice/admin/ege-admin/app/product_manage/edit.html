@@ -82,7 +82,7 @@
               <div class="layui-inline">
                   <label class="layui-form-label">链接</label>
                   <div class="layui-input-inline">
-                      <textarea name="url" disabled="disabled" lay-verify="required"placeholder="请输入链接" class="layui-textarea"></textarea>
+                      <textarea name="url"  lay-verify="required"placeholder="请输入链接" class="layui-textarea"></textarea>
                   </div>
               </div>
               <div class="layui-inline">
@@ -209,8 +209,6 @@
                 if(result.success){
                     if(result.data!=null){
                         form.val("channelForm", result.data);
-                        $("#gmt_create").val(Format(result.data.gmt_create,"yyyy-MM-dd hh:mm:ss"));
-                        $("#gmt_modify").val(Format(result.data.gmt_modify,"yyyy-MM-dd hh:mm:ss"));
                       form.render();
                     }
                 }else{

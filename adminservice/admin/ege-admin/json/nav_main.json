@@ -68,9 +68,13 @@
       "icon": "&#xe620;",
       "subset": [
         {
-          "text": "订单管理",
+          "text": "通信订单管理",
           "icon": "&#xe621;",
           "href": "app/order_manage/manage.html"
+        },{
+          "text": "金融/SPA订单管理",
+          "icon": "&#xe621;",
+          "href": "app/order_jinrong_manage/manage.html"
         }]
     },{
       "text": "打款记录管理",

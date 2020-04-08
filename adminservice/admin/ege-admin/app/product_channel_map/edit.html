@@ -27,7 +27,7 @@
               <div class="layui-inline">
                   <label class="layui-form-label">商户名称</label>
                   <div class="layui-input-inline">
-                      <select name="business_code" id="business_code" lay-filter="product_status"  lay-verify="required">
+                      <select name="business_code" id="business_code" lay-filter="business_code"  lay-verify="required">
                       </select>
                   </div>
               </div>
@@ -113,6 +113,42 @@
           var index = parent.tableIns.reload(); //先得到当前iframe层的索引
           //parent.layer.close(index); //再执行关闭
         });
+
+        form.on('select(business_code)', function(data){
+            console.log(data.value);
+            var code=data.value;
+            if(code==""||code==null){
+                return false;
+            }
+            $.ajax({
+                url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
+                method: "post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {shifou_2_kaifa:"是",code:code,account:localStorage.getItem("account")},
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result.success) {
+                        if (result.data != null) {
+                            var menuList = result.data;
+                            var html = '<option value="">请选择</option>';
+                            for (var i = 0; i < menuList.length; i++) {
+                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                            }
+                            $("#product_code").html(html);
+                            form.render();
+                        }
+                    } else {
+                        layer.msg("数据加载异常！");
+                    }
+
+                }
+            });
+            form.render();
+        });
+
+
         $(()=>{
           var url = location.href;
           var id = new URL(url).searchParams.get("id");
@@ -132,6 +168,36 @@
                 if(result.success){
                     if(result.data!=null){
                         form.val("channelForm", result.data);
+                        var business_code = result.data.business_code;
+                        var product_code = result.data.product_code;
+                        if(business_code!=null) {
+                            $.ajax({
+                                url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
+                                method: "post",
+                                contentType: "application/x-www-form-urlencoded",
+                                dataType: "json",
+                                data: {shifou_2_kaifa: "是", code: business_code, account: localStorage.getItem("account")},
+                                async: false,
+                                success: function (result) {
+                                    console.log(result);
+                                    if (result.success) {
+                                        if (result.data != null) {
+                                            var menuList = result.data;
+                                            var html = '<option value="">请选择</option>';
+                                            for (var i = 0; i < menuList.length; i++) {
+                                                html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                                            }
+                                            $("#product_code").html(html);
+                                            $("#product_code").val(product_code);
+                                            form.render();
+                                        }
+                                    } else {
+                                        layer.msg("数据加载异常！");
+                                    }
+
+                                }
+                            });
+                        }
                       form.render();
                     }
                 }else{
@@ -141,41 +207,6 @@
               }
             });
           }
-
-
-            form.on('select(business_code)', function(data){
-                console.log(data.value);
-                var code=data.value;
-                if(code==""||code==null){
-                    return false;
-                }
-                $.ajax({
-                    url: wholeUrl + "/admin/product_manage/get_all_product?token=" + localStorage.getItem("token"),
-                    method: "post",
-                    contentType: "application/x-www-form-urlencoded",
-                    dataType: "json",
-                    data: {shifou_2_kaifa:"是",code:code,account:localStorage.getItem("account")},
-                    async: false,
-                    success: function (result) {
-                        console.log(result);
-                        if (result.success) {
-                            if (result.data != null) {
-                                var menuList = result.data;
-                                var html = '<option value="">请选择</option>';
-                                for (var i = 0; i < menuList.length; i++) {
-                                    html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
-                                }
-                                $("#product_code").html(html);
-                                form.render();
-                            }
-                        } else {
-                            layer.msg("数据加载异常！");
-                        }
-
-                    }
-                });
-                form.render();
-            });
 
             $.ajax({
                 url: wholeUrl + "/admin/user/get_all_users_of_A?token=" + localStorage.getItem("token"),

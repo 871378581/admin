@@ -18,7 +18,7 @@ public class FileSerivce {
     //图片存储位置
     private static String SYSTEM_IMAGE_LOCATION = "/Users/mac/Desktop/photos";
     //图片访问地址 需要配置nginx
-    private static String SYSTEM_IMAGE_REPO_PREFIX = "/th/photos/";
+    private static String SYSTEM_IMAGE_REPO_PREFIX = "/photos/";
 
     public String saveStreamImg(InputStream inputStream) throws IOException {
         String fileName = UUID.randomUUID() + ".jpg";

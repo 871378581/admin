@@ -13,14 +13,18 @@ import static com.segama.ege.constant.Constants.*;
 
 @Component
 public class FileSerivce {
-    @Autowired
-    CacheService cacheService;
+    //图片访问域名
+    private static String SYSTEM_CURRENT_API_HOST = "http://www.hxj1991.com";
+    //图片存储位置
+    private static String SYSTEM_IMAGE_LOCATION = "/Users/mac/Desktop/photos";
+    //图片访问地址 需要配置nginx
+    private static String SYSTEM_IMAGE_REPO_PREFIX = "/th/photos/";
 
     public String saveStreamImg(InputStream inputStream) throws IOException {
         String fileName = UUID.randomUUID() + ".jpg";
-        File file = new File(cacheService.get(SYSTEM_IMAGE_LOCATION), fileName);
+        File file = new File(SYSTEM_IMAGE_LOCATION, fileName);
         FileUtils.copyInputStreamToFile(inputStream, file);
-        return cacheService.get(SYSTEM_CURRENT_API_HOST) + cacheService.get(SYSTEM_IMAGE_REPO_PREFIX) + fileName;
+        return SYSTEM_CURRENT_API_HOST + SYSTEM_IMAGE_REPO_PREFIX + fileName;
     }
 
     /**

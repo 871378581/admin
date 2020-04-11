@@ -42,6 +42,10 @@ public class ThProductManage implements Serializable {
 
     private String settle_value;
 
+    private String channel_code;
+
+    private String template_code;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -196,6 +200,22 @@ public class ThProductManage implements Serializable {
         this.settle_value = settle_value == null ? null : settle_value.trim();
     }
 
+    public String getChannel_code() {
+        return channel_code;
+    }
+
+    public void setChannel_code(String channel_code) {
+        this.channel_code = channel_code == null ? null : channel_code.trim();
+    }
+
+    public String getTemplate_code() {
+        return template_code;
+    }
+
+    public void setTemplate_code(String template_code) {
+        this.template_code = template_code == null ? null : template_code.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -221,6 +241,8 @@ public class ThProductManage implements Serializable {
         sb.append(", settle_mode=").append(settle_mode);
         sb.append(", settle_column=").append(settle_column);
         sb.append(", settle_value=").append(settle_value);
+        sb.append(", channel_code=").append(channel_code);
+        sb.append(", template_code=").append(template_code);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

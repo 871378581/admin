@@ -35,6 +35,17 @@
       ]
     },
     {
+      "text": "模版管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "模版管理",
+          "icon": "&#xe621;",
+          "href": "app/template_manage/manage.html"
+        }
+      ]
+    },
+    {
       "text": "链接管理",
       "icon": "&#xe620;",
       "subset": [

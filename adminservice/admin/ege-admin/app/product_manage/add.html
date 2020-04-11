@@ -15,6 +15,7 @@
     <link rel="icon" href="../../frame/static/image/code.png">
     <style>
       .layui-input-inline{width: 250px !important;}
+        .layui-form-label{width: 90px !important;}
     </style>
 </head>
 <body class="body">
@@ -73,25 +74,41 @@
               <div class="layui-inline">
                   <label class="layui-form-label">是否二次开发</label>
                   <div class="layui-input-inline">
-                      <select name="shifou_2_kaifa"  lay-verify="required">
+                      <select name="shifou_2_kaifa" lay-filter="shifou_2_kaifa" lay-verify="required">
                           <option value="">请选择</option>
                           <option value="是">是</option>
                           <option value="否">否</option>
                       </select>
                   </div>
               </div>
-              <div class="layui-inline">
+
+              <div class="layui-inline" id="moban" style="display: none">
+                  <label class="layui-form-label">模版</label>
+                  <div class="layui-input-inline">
+                      <select  name="template_code" id="template_code"  lay-verify="required">
+                      </select>
+                  </div>
+              </div>
+
+              <div class="layui-inline" id="qudaoma"  style="display: none">
+                  <label class="layui-form-label">渠道码</label>
+                  <div class="layui-input-inline">
+                      <input type="text" name="channel_code" maxlength="30" required lay-verify="required" lay-verify="title" autocomplete="off" placeholder="请输入渠道码" class="layui-input">
+                  </div>
+              </div>
+
+              <!--<div class="layui-inline">
                   <label class="layui-form-label">链接</label>
                   <div class="layui-input-inline">
                       <textarea name="url"  lay-verify="required"placeholder="请输入链接" class="layui-textarea"></textarea>
                   </div>
-              </div>
-              <div class="layui-inline">
+              </div>-->
+              <!--<div class="layui-inline">
                   <label class="layui-form-label">源链接</label>
                   <div class="layui-input-inline">
                       <textarea name="source_url"  lay-verify="required"placeholder="请输入源链接" class="layui-textarea"></textarea>
                   </div>
-              </div>
+              </div>-->
               <div class="layui-inline">
                   <label class="layui-form-label">描述</label>
                   <div class="layui-input-inline">
@@ -128,6 +145,21 @@
           parent.layer.close(index);
         });
 
+        form.on('select(shifou_2_kaifa)', function(data){
+            console.log(data.value);
+            var type=data.value;
+            if(type=="是"){
+                $("#moban").show();
+                $("#qudaoma").show();
+            }else{
+                $("#moban").hide();
+                $("#qudaoma").hide();
+                $("#moban").val("");
+                $("#qudaoma").val("");
+            }
+            form.render();
+        });
+
         form.on('submit(save)', function(data){
           var field = data.field;
           var account = localStorage.getItem("account");
@@ -162,6 +194,32 @@
         form.on('submit(refresh)', function(data){
           var index = parent.tableIns.reload(); //先得到当前iframe层的索引
           //parent.layer.close(index); //再执行关闭
+        });
+
+        $.ajax({
+            url: wholeUrl + "/admin/template_manage/get_all_templates?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if (result.data != null) {
+                        var menuList = result.data;
+                        var html = '<option value="">请选择</option>';
+                        for (var i = 0; i < menuList.length; i++) {
+                            html = html + '<option value="' + menuList[i].value + '">' + menuList[i].label + '</option>';
+                        }
+                        $("#template_code").html(html);
+                        form.render();
+                    }
+                } else {
+                    layer.msg("数据加载异常！");
+                }
+
+            }
         });
 
         $.ajax({

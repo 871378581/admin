@@ -13,56 +13,52 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import com.segama.ege.entity.ThProductManage;
-import com.segama.ege.entity.ThProductManageExample.Criteria;
-import com.segama.ege.entity.ThProductManageExample.Criterion;
-import com.segama.ege.entity.ThProductManageExample;
+import com.segama.ege.entity.ThTemplateManage;
+import com.segama.ege.entity.ThTemplateManageExample.Criteria;
+import com.segama.ege.entity.ThTemplateManageExample.Criterion;
+import com.segama.ege.entity.ThTemplateManageExample;
 import java.util.List;
 import java.util.Map;
 
-public class ThProductManageSqlProvider {
+public class ThTemplateManageSqlProvider {
 
-    public String countByExample(ThProductManageExample example) {
+    public String countByExample(ThTemplateManageExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("`th_product_manage`");
+        FROM("`th_template_manage`");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(ThProductManageExample example) {
+    public String deleteByExample(ThTemplateManageExample example) {
         BEGIN();
-        DELETE_FROM("`th_product_manage`");
+        DELETE_FROM("`th_template_manage`");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(ThProductManage record) {
+    public String insertSelective(ThTemplateManage record) {
         BEGIN();
-        INSERT_INTO("`th_product_manage`");
+        INSERT_INTO("`th_template_manage`");
         
-        if (record.getBusiness_name() != null) {
-            VALUES("`business_name`", "#{business_name,jdbcType=VARCHAR}");
+        if (record.getTemplate_name() != null) {
+            VALUES("`template_name`", "#{template_name,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_name() != null) {
-            VALUES("`product_name`", "#{product_name,jdbcType=VARCHAR}");
+        if (record.getTemplate_code() != null) {
+            VALUES("`template_code`", "#{template_code,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_code() != null) {
-            VALUES("`product_code`", "#{product_code,jdbcType=VARCHAR}");
+        if (record.getBanner1() != null) {
+            VALUES("`banner1`", "#{banner1,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_type() != null) {
-            VALUES("`product_type`", "#{product_type,jdbcType=VARCHAR}");
+        if (record.getBanner2() != null) {
+            VALUES("`banner2`", "#{banner2,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            VALUES("`url`", "#{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getProduct_status() != null) {
-            VALUES("`product_status`", "#{product_status,jdbcType=INTEGER}");
+        if (record.getSub_product() != null) {
+            VALUES("`sub_product`", "#{sub_product,jdbcType=VARCHAR}");
         }
         
         if (record.getGmt_create() != null) {
@@ -85,73 +81,27 @@ public class ThProductManageSqlProvider {
             VALUES("`description`", "#{description,jdbcType=VARCHAR}");
         }
         
-        if (record.getSource_url() != null) {
-            VALUES("`source_url`", "#{source_url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getBusiness_code() != null) {
-            VALUES("`business_code`", "#{business_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getType() != null) {
-            VALUES("`type`", "#{type,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getShifou_2_kaifa() != null) {
-            VALUES("`shifou_2_kaifa`", "#{shifou_2_kaifa,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_mode() != null) {
-            VALUES("`settle_mode`", "#{settle_mode,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_column() != null) {
-            VALUES("`settle_column`", "#{settle_column,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_value() != null) {
-            VALUES("`settle_value`", "#{settle_value,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannel_code() != null) {
-            VALUES("`channel_code`", "#{channel_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getTemplate_code() != null) {
-            VALUES("`template_code`", "#{template_code,jdbcType=VARCHAR}");
-        }
-        
         return SQL();
     }
 
-    public String selectByExample(ThProductManageExample example) {
+    public String selectByExample(ThTemplateManageExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("`id`");
         } else {
             SELECT("`id`");
         }
-        SELECT("`business_name`");
-        SELECT("`product_name`");
-        SELECT("`product_code`");
-        SELECT("`product_type`");
-        SELECT("`url`");
-        SELECT("`product_status`");
+        SELECT("`template_name`");
+        SELECT("`template_code`");
+        SELECT("`banner1`");
+        SELECT("`banner2`");
+        SELECT("`sub_product`");
         SELECT("`gmt_create`");
         SELECT("`gmt_modify`");
         SELECT("`creator_account`");
         SELECT("`modifier_account`");
         SELECT("`description`");
-        SELECT("`source_url`");
-        SELECT("`business_code`");
-        SELECT("`type`");
-        SELECT("`shifou_2_kaifa`");
-        SELECT("`settle_mode`");
-        SELECT("`settle_column`");
-        SELECT("`settle_value`");
-        SELECT("`channel_code`");
-        SELECT("`template_code`");
-        FROM("`th_product_manage`");
+        FROM("`th_template_manage`");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -168,38 +118,34 @@ public class ThProductManageSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        ThProductManage record = (ThProductManage) parameter.get("record");
-        ThProductManageExample example = (ThProductManageExample) parameter.get("example");
+        ThTemplateManage record = (ThTemplateManage) parameter.get("record");
+        ThTemplateManageExample example = (ThTemplateManageExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("`th_product_manage`");
+        UPDATE("`th_template_manage`");
         
         if (record.getId() != null) {
             SET("`id` = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getBusiness_name() != null) {
-            SET("`business_name` = #{record.business_name,jdbcType=VARCHAR}");
+        if (record.getTemplate_name() != null) {
+            SET("`template_name` = #{record.template_name,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_name() != null) {
-            SET("`product_name` = #{record.product_name,jdbcType=VARCHAR}");
+        if (record.getTemplate_code() != null) {
+            SET("`template_code` = #{record.template_code,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_code() != null) {
-            SET("`product_code` = #{record.product_code,jdbcType=VARCHAR}");
+        if (record.getBanner1() != null) {
+            SET("`banner1` = #{record.banner1,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_type() != null) {
-            SET("`product_type` = #{record.product_type,jdbcType=VARCHAR}");
+        if (record.getBanner2() != null) {
+            SET("`banner2` = #{record.banner2,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            SET("`url` = #{record.url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getProduct_status() != null) {
-            SET("`product_status` = #{record.product_status,jdbcType=INTEGER}");
+        if (record.getSub_product() != null) {
+            SET("`sub_product` = #{record.sub_product,jdbcType=VARCHAR}");
         }
         
         if (record.getGmt_create() != null) {
@@ -222,103 +168,53 @@ public class ThProductManageSqlProvider {
             SET("`description` = #{record.description,jdbcType=VARCHAR}");
         }
         
-        if (record.getSource_url() != null) {
-            SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getBusiness_code() != null) {
-            SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getType() != null) {
-            SET("`type` = #{record.type,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getShifou_2_kaifa() != null) {
-            SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_mode() != null) {
-            SET("`settle_mode` = #{record.settle_mode,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_column() != null) {
-            SET("`settle_column` = #{record.settle_column,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_value() != null) {
-            SET("`settle_value` = #{record.settle_value,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannel_code() != null) {
-            SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getTemplate_code() != null) {
-            SET("`template_code` = #{record.template_code,jdbcType=VARCHAR}");
-        }
-        
         applyWhere(example, true);
         return SQL();
     }
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("`th_product_manage`");
+        UPDATE("`th_template_manage`");
         
         SET("`id` = #{record.id,jdbcType=BIGINT}");
-        SET("`business_name` = #{record.business_name,jdbcType=VARCHAR}");
-        SET("`product_name` = #{record.product_name,jdbcType=VARCHAR}");
-        SET("`product_code` = #{record.product_code,jdbcType=VARCHAR}");
-        SET("`product_type` = #{record.product_type,jdbcType=VARCHAR}");
-        SET("`url` = #{record.url,jdbcType=VARCHAR}");
-        SET("`product_status` = #{record.product_status,jdbcType=INTEGER}");
+        SET("`template_name` = #{record.template_name,jdbcType=VARCHAR}");
+        SET("`template_code` = #{record.template_code,jdbcType=VARCHAR}");
+        SET("`banner1` = #{record.banner1,jdbcType=VARCHAR}");
+        SET("`banner2` = #{record.banner2,jdbcType=VARCHAR}");
+        SET("`sub_product` = #{record.sub_product,jdbcType=VARCHAR}");
         SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
         SET("`gmt_modify` = #{record.gmt_modify,jdbcType=TIMESTAMP}");
         SET("`creator_account` = #{record.creator_account,jdbcType=VARCHAR}");
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
-        SET("`source_url` = #{record.source_url,jdbcType=VARCHAR}");
-        SET("`business_code` = #{record.business_code,jdbcType=VARCHAR}");
-        SET("`type` = #{record.type,jdbcType=VARCHAR}");
-        SET("`shifou_2_kaifa` = #{record.shifou_2_kaifa,jdbcType=VARCHAR}");
-        SET("`settle_mode` = #{record.settle_mode,jdbcType=VARCHAR}");
-        SET("`settle_column` = #{record.settle_column,jdbcType=VARCHAR}");
-        SET("`settle_value` = #{record.settle_value,jdbcType=VARCHAR}");
-        SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
-        SET("`template_code` = #{record.template_code,jdbcType=VARCHAR}");
         
-        ThProductManageExample example = (ThProductManageExample) parameter.get("example");
+        ThTemplateManageExample example = (ThTemplateManageExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(ThProductManage record) {
+    public String updateByPrimaryKeySelective(ThTemplateManage record) {
         BEGIN();
-        UPDATE("`th_product_manage`");
+        UPDATE("`th_template_manage`");
         
-        if (record.getBusiness_name() != null) {
-            SET("`business_name` = #{business_name,jdbcType=VARCHAR}");
+        if (record.getTemplate_name() != null) {
+            SET("`template_name` = #{template_name,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_name() != null) {
-            SET("`product_name` = #{product_name,jdbcType=VARCHAR}");
+        if (record.getTemplate_code() != null) {
+            SET("`template_code` = #{template_code,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_code() != null) {
-            SET("`product_code` = #{product_code,jdbcType=VARCHAR}");
+        if (record.getBanner1() != null) {
+            SET("`banner1` = #{banner1,jdbcType=VARCHAR}");
         }
         
-        if (record.getProduct_type() != null) {
-            SET("`product_type` = #{product_type,jdbcType=VARCHAR}");
+        if (record.getBanner2() != null) {
+            SET("`banner2` = #{banner2,jdbcType=VARCHAR}");
         }
         
-        if (record.getUrl() != null) {
-            SET("`url` = #{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getProduct_status() != null) {
-            SET("`product_status` = #{product_status,jdbcType=INTEGER}");
+        if (record.getSub_product() != null) {
+            SET("`sub_product` = #{sub_product,jdbcType=VARCHAR}");
         }
         
         if (record.getGmt_create() != null) {
@@ -341,48 +237,12 @@ public class ThProductManageSqlProvider {
             SET("`description` = #{description,jdbcType=VARCHAR}");
         }
         
-        if (record.getSource_url() != null) {
-            SET("`source_url` = #{source_url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getBusiness_code() != null) {
-            SET("`business_code` = #{business_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getType() != null) {
-            SET("`type` = #{type,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getShifou_2_kaifa() != null) {
-            SET("`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_mode() != null) {
-            SET("`settle_mode` = #{settle_mode,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_column() != null) {
-            SET("`settle_column` = #{settle_column,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSettle_value() != null) {
-            SET("`settle_value` = #{settle_value,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannel_code() != null) {
-            SET("`channel_code` = #{channel_code,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getTemplate_code() != null) {
-            SET("`template_code` = #{template_code,jdbcType=VARCHAR}");
-        }
-        
         WHERE("`id` = #{id,jdbcType=BIGINT}");
         
         return SQL();
     }
 
-    protected void applyWhere(ThProductManageExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(ThTemplateManageExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

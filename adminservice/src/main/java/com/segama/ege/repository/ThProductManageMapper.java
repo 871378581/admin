@@ -39,7 +39,8 @@ public interface ThProductManageMapper {
         "`description`, `source_url`, ",
         "`business_code`, `type`, ",
         "`shifou_2_kaifa`, `settle_mode`, ",
-        "`settle_column`, `settle_value`)",
+        "`settle_column`, `settle_value`, ",
+        "`channel_code`, `template_code`)",
         "values (#{business_name,jdbcType=VARCHAR}, #{product_name,jdbcType=VARCHAR}, ",
         "#{product_code,jdbcType=VARCHAR}, #{product_type,jdbcType=VARCHAR}, ",
         "#{url,jdbcType=VARCHAR}, #{product_status,jdbcType=INTEGER}, ",
@@ -48,7 +49,8 @@ public interface ThProductManageMapper {
         "#{description,jdbcType=VARCHAR}, #{source_url,jdbcType=VARCHAR}, ",
         "#{business_code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
         "#{shifou_2_kaifa,jdbcType=VARCHAR}, #{settle_mode,jdbcType=VARCHAR}, ",
-        "#{settle_column,jdbcType=VARCHAR}, #{settle_value,jdbcType=VARCHAR})"
+        "#{settle_column,jdbcType=VARCHAR}, #{settle_value,jdbcType=VARCHAR}, ",
+        "#{channel_code,jdbcType=VARCHAR}, #{template_code,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThProductManage record);
@@ -77,7 +79,9 @@ public interface ThProductManageMapper {
         @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR),
         @Result(column="settle_mode", property="settle_mode", jdbcType=JdbcType.VARCHAR),
         @Result(column="settle_column", property="settle_column", jdbcType=JdbcType.VARCHAR),
-        @Result(column="settle_value", property="settle_value", jdbcType=JdbcType.VARCHAR)
+        @Result(column="settle_value", property="settle_value", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR),
+        @Result(column="template_code", property="template_code", jdbcType=JdbcType.VARCHAR)
     })
     List<ThProductManage> selectByExample(ThProductManageExample example);
 
@@ -86,7 +90,7 @@ public interface ThProductManageMapper {
         "`id`, `business_name`, `product_name`, `product_code`, `product_type`, `url`, ",
         "`product_status`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, ",
         "`description`, `source_url`, `business_code`, `type`, `shifou_2_kaifa`, `settle_mode`, ",
-        "`settle_column`, `settle_value`",
+        "`settle_column`, `settle_value`, `channel_code`, `template_code`",
         "from `th_product_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -109,7 +113,9 @@ public interface ThProductManageMapper {
         @Result(column="shifou_2_kaifa", property="shifou_2_kaifa", jdbcType=JdbcType.VARCHAR),
         @Result(column="settle_mode", property="settle_mode", jdbcType=JdbcType.VARCHAR),
         @Result(column="settle_column", property="settle_column", jdbcType=JdbcType.VARCHAR),
-        @Result(column="settle_value", property="settle_value", jdbcType=JdbcType.VARCHAR)
+        @Result(column="settle_value", property="settle_value", jdbcType=JdbcType.VARCHAR),
+        @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR),
+        @Result(column="template_code", property="template_code", jdbcType=JdbcType.VARCHAR)
     })
     ThProductManage selectByPrimaryKey(Long id);
 
@@ -141,7 +147,9 @@ public interface ThProductManageMapper {
           "`shifou_2_kaifa` = #{shifou_2_kaifa,jdbcType=VARCHAR},",
           "`settle_mode` = #{settle_mode,jdbcType=VARCHAR},",
           "`settle_column` = #{settle_column,jdbcType=VARCHAR},",
-          "`settle_value` = #{settle_value,jdbcType=VARCHAR}",
+          "`settle_value` = #{settle_value,jdbcType=VARCHAR},",
+          "`channel_code` = #{channel_code,jdbcType=VARCHAR},",
+          "`template_code` = #{template_code,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThProductManage record);

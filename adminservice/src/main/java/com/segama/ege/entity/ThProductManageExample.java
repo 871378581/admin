@@ -1414,6 +1414,146 @@ public class ThProductManageExample {
             addCriterion("`settle_value` not between", value1, value2, "settle_value");
             return (Criteria) this;
         }
+
+        public Criteria andChannel_codeIsNull() {
+            addCriterion("`channel_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeIsNotNull() {
+            addCriterion("`channel_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeEqualTo(String value) {
+            addCriterion("`channel_code` =", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotEqualTo(String value) {
+            addCriterion("`channel_code` <>", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeGreaterThan(String value) {
+            addCriterion("`channel_code` >", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`channel_code` >=", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeLessThan(String value) {
+            addCriterion("`channel_code` <", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeLessThanOrEqualTo(String value) {
+            addCriterion("`channel_code` <=", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeLike(String value) {
+            addCriterion("`channel_code` like", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotLike(String value) {
+            addCriterion("`channel_code` not like", value, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeIn(List<String> values) {
+            addCriterion("`channel_code` in", values, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotIn(List<String> values) {
+            addCriterion("`channel_code` not in", values, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeBetween(String value1, String value2) {
+            addCriterion("`channel_code` between", value1, value2, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannel_codeNotBetween(String value1, String value2) {
+            addCriterion("`channel_code` not between", value1, value2, "channel_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeIsNull() {
+            addCriterion("`template_code` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeIsNotNull() {
+            addCriterion("`template_code` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeEqualTo(String value) {
+            addCriterion("`template_code` =", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeNotEqualTo(String value) {
+            addCriterion("`template_code` <>", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeGreaterThan(String value) {
+            addCriterion("`template_code` >", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeGreaterThanOrEqualTo(String value) {
+            addCriterion("`template_code` >=", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeLessThan(String value) {
+            addCriterion("`template_code` <", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeLessThanOrEqualTo(String value) {
+            addCriterion("`template_code` <=", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeLike(String value) {
+            addCriterion("`template_code` like", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeNotLike(String value) {
+            addCriterion("`template_code` not like", value, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeIn(List<String> values) {
+            addCriterion("`template_code` in", values, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeNotIn(List<String> values) {
+            addCriterion("`template_code` not in", values, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeBetween(String value1, String value2) {
+            addCriterion("`template_code` between", value1, value2, "template_code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplate_codeNotBetween(String value1, String value2) {
+            addCriterion("`template_code` not between", value1, value2, "template_code");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

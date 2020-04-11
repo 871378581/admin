@@ -70,7 +70,7 @@ public class OrderController extends BaseController {
             Boolean aBoolean = showAllUser(account);
             if(!aBoolean){
                 //只能查看自己的operateType=1的数据
-                thOrderManageExampleCriteria.andOperate_typeEqualTo("1");
+                thOrderManageExampleCriteria.andOperate_typeEqualTo("上线");
                 thOrderManageExampleCriteria.andChannel_accountEqualTo(account);
             }
             int count = thOrderManageMapper.countByExample(thOrderManageExample);

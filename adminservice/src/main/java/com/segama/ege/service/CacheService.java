@@ -24,15 +24,9 @@ public class CacheService {
     AdminSystemConfigMapper sysConfigMapper;
 
     static {
-        cacheMap.put(SYSTEM_CURRENT_API_HOST, "http://www.jinlingongyi.cn");
-        cacheMap.put(WX_TOKEN_KEY, "");
-        cacheMap.put(SYSTEM_IMAGE_LOCATION, "/root/ege/adminservice/repo");
+        cacheMap.put(SYSTEM_CURRENT_API_HOST, "http://www.hxj1991.com");
+        cacheMap.put(SYSTEM_IMAGE_LOCATION, "/root/th/adminservice/repo");
         cacheMap.put(SYSTEM_IMAGE_REPO_PREFIX, "/adminservice/repo/");
-        cacheMap.put(WX_JS_TICKET_KEY, "");
-        cacheMap.put(WX_APP_ID, "wx9c007035c17b2e42");
-        cacheMap.put(WX_APP_SECRET, "8c2917321f52baf1f073efa164664208");
-        cacheMap.put("login.auth.redirect.default", "/adminservice/h5/merchant/redirect.html");
-        cacheMap.put("login.auth.redirect.abc", "/adminservice/h5/merchant/redirect.html");
     }
 
 

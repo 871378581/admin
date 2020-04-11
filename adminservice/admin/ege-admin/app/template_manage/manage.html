@@ -164,12 +164,26 @@
               var data = obj.data;
               layer.open({
                   type: 2,
-                  title: '编辑'
+                  title: '预览'
                   ,area:['100%','100%']
                   ,content:"/adminservice/admin/ege-admin/app/template_manage/pre.html?id="+data.id
               });
 
           }
+        });
+
+        $(()=> {
+            $("body").delegate("table img","click",function(){
+                var src = $(this).attr("src");
+                layer.open({
+                    type: 1,
+                    title: $(this).text()
+                    , area: ['600px', '80%']
+                    , content: "<img style='width:600px;height:600px' src='" + src + "'/>",
+                    resize: true
+                });
+                return false;
+            });
         });
 
         // 获取选中数据

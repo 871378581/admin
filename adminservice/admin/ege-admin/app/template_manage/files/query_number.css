@@ -1,0 +1,187 @@
+body{
+    padding:1.0rem 0 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+.body_clr_01 {
+    background-color: #000000;
+}
+
+
+.bannerImg img {
+    height: 100%;
+    width: 100%;
+    margin-top: -1rem;
+    display: block;
+    position:relative;
+}
+
+.bannerImg_BM img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position:relative;
+}
+
+.bannerImg_sec img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position:relative;
+}
+
+.bannerImg_th img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position:relative;
+}
+
+.bannerImg_for img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position:relative;
+}
+
+.bannerImg_fif img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin-bottom: -1rem;
+    position:relative;
+}
+
+.selopt {
+    height: 0.58rem;
+    padding: 0 5%;
+    margin-bottom: 0.4rem;
+}
+
+.inputFrame {
+    width: 70%;
+    margin: auto;
+    position: absolute;
+    top: 4.6rem;
+    left: 1rem;
+}
+
+.inputList {
+    height: 0.7rem;
+    margin-top: 0.2rem;
+    /*padding-left: 1.2rem;*/
+    margin-bottom: 0.3rem;
+    border: 1px #ffffff solid;
+    border-radius: 0.10rem;
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.inputList .iptInput {
+    width: 100%;
+    height: 0.9rem;
+    color: #000;
+    font-size: 0.35rem;
+    border: none;
+    background: #B0E2FF;
+    text-align: center;
+}
+
+.inputList ::-webkit-input-placeholder {
+    color: #000;
+}
+
+.inputList ::-moz-placeholder {
+    color: #000;
+}
+
+.inputList :-moz-placeholder {
+    color: #000;
+}
+
+
+.btnbot a {
+    display: block;
+    line-height: 0.7rem;
+    text-align: center;
+    font-size: 0.38rem;
+    color: #000;
+    border: 1px #ffffff solid;
+    border-radius: 0.10rem;
+    width: 60%;
+    position: absolute;
+    height: 0.7rem;
+    top: 6.3rem;
+    left: 1.3rem;
+    background: #B0E2FF;
+}
+
+ .checkbox { position: relative; margin-top: 1rem; height: 10px;width: 10px;}
+ .checkbox input[type='checkbox'] { position: relative; left: 0; top: 0; width: 30px; height: 30px; opacity: 0; }
+ .checkbox label { position: absolute; left: 30px; top: 0; height: 20px; line-height: 20px; }
+ .checkbox label:before { content: ''; position: absolute; left: -30px; top: 0; width: 20px; height: 20px; border: 1px solid #ddd; border-radius: 50%; transition: all 0.3s ease; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; }
+ .checkbox label:after { content: ''; position: absolute; left: -22px; top: 3px; width: 6px; height: 12px; border: 0; border-right: 1px solid #fff; border-bottom: 1px solid #fff; background: #fff; transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transition: all 0.3s ease; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; }
+ .checkbox input[type='checkbox']:checked + label:before { background: #dba95e; border-color: #dba95e; } .checkbox input[type='checkbox']:checked + label:after { background: #dba95e; }
+
+ .radio { position: relative; margin-top: 1rem; height: 10px;width: 10px;}
+ .radio input[type='radio'] { position: relative; left: 0; top: 0; width: 30px; height: 30px; opacity: 0; }
+ .radio label { position: absolute; left: 30px; top: 0; height: 20px; line-height: 20px; }
+ .radio label:before { content: ''; position: absolute; left: -30px; top: 0; width: 20px; height: 20px; border: 1px solid #ddd; border-radius: 50%; transition: all 0.3s ease; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; }
+ .radio label:after { content: ''; position: absolute; left: -22px; top: 3px; width: 6px; height: 12px; border: 0; border-right: 1px solid #fff; border-bottom: 1px solid #fff; background: #fff; transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transition: all 0.3s ease; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; }
+ .radio input[type='radio']:checked + label:before { background: #db4045; border-color: #db4045; }  .radio input[type='radio']:checked + label:after { background: #db4045; }
+
+.fuli .protocol{
+    position:relative;margin:.5rem 0;height:1.25rem;line-height:1.25rem;font-size:.9rem;-webkit-transform-origin:left;-moz-transform-origin:left;-ms-transform-origin:left;-o-transform-origin:left;transform-origin:left;-webkit-transform:scale(.916);-moz-transform:scale(.916);-ms-transform:scale(.916);-o-transform:scale(.916);transform:scale(.916);color:#787878;padding-left:1.625rem;white-space:nowrap
+}
+
+
+.hidden_pro_au {
+
+    display:none;
+    background: #fff;
+    text-align: center;
+    width: 100%;
+    height: 350px;
+    background: #ffffff;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-right: -5rem;
+    z-index: 9999999;
+    border-radius: 1rem;
+}
+
+
+.lbOverlay{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    zoom: 1;
+    background: #2f2e2e;
+    z-index: 999;
+    width:100%;
+    height:100%;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    opacity:0.5;
+}
+
+#tb{
+
+    text-align: center;
+    width: 100%;
+    height: 180px;
+}
+
+#alert_pic img{
+
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}

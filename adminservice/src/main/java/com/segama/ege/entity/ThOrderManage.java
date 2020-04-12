@@ -58,6 +58,8 @@ public class ThOrderManage implements Serializable {
 
     private String channel_code;
 
+    private String picihao;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -276,6 +278,14 @@ public class ThOrderManage implements Serializable {
         this.channel_code = channel_code == null ? null : channel_code.trim();
     }
 
+    public String getPicihao() {
+        return picihao;
+    }
+
+    public void setPicihao(String picihao) {
+        this.picihao = picihao == null ? null : picihao.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -309,6 +319,7 @@ public class ThOrderManage implements Serializable {
         sb.append(", description=").append(description);
         sb.append(", channel_account=").append(channel_account);
         sb.append(", channel_code=").append(channel_code);
+        sb.append(", picihao=").append(picihao);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

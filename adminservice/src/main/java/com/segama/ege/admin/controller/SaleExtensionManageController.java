@@ -56,9 +56,9 @@ public class SaleExtensionManageController extends BaseController {
             if(!showAllUser(account)){
                 if(!StringUtils.isEmpty(type)){
                     if("1".equals(type)){
-                        criteria.andOwner_accountEqualTo(account);
-                    }else{
                         criteria.andCreate_accountEqualTo(account);
+                    }else{
+                        criteria.andOwner_accountEqualTo(account);
                     }
                 }
             }
@@ -98,14 +98,16 @@ public class SaleExtensionManageController extends BaseController {
             List<ThSaleExtensionManage> adminMenus = thSaleExtensionManageMapper.selectByExample(example);
             if(!CollectionUtils.isEmpty(adminMenus)){
                 for (ThSaleExtensionManage manage : adminMenus) {
-                    ThProductManageExample example2 = new ThProductManageExample();
-                    example2.createCriteria()
-                            .andProduct_codeEqualTo(manage.getProduct_code())
-                    .andProduct_statusEqualTo(1);
-                    List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
-                    if(!CollectionUtils.isEmpty(thProductManages)){
-                        ThProductManage thProductManage = thProductManages.get(0);
-                        manage.setProduct_name(thProductManage.getProduct_name());
+                    if(!StringUtils.isEmpty(manage.getProduct_code())) {
+                        ThProductManageExample example2 = new ThProductManageExample();
+                        example2.createCriteria()
+                                .andProduct_codeEqualTo(manage.getProduct_code())
+                                .andProduct_statusEqualTo(1);
+                        List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
+                        if (!CollectionUtils.isEmpty(thProductManages)) {
+                            ThProductManage thProductManage = thProductManages.get(0);
+                            manage.setProduct_name(thProductManage.getProduct_name());
+                        }
                     }
                 }
             }

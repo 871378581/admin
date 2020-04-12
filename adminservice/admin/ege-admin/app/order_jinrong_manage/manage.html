@@ -16,7 +16,14 @@
     <link rel="icon" href="../../frame/static/image/code.png">
 </head>
 <body class="body">
-
+<style>
+    .layui-inline{
+        padding: 3px;
+    }
+    .my-btn-box{
+        height: 80px !important;
+    }
+</style>
 <!-- 工具集 -->
 <div class="my-btn-box">
     <span class="fl">
@@ -24,11 +31,12 @@
           <i class="layui-icon">&#xe67c;</i>导入
         </button>
         <a class="layui-btn btn-add btn-default" style="display: none" id="btn-down">下载导入模版</a>
-        <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
+        <a class="layui-btn btn-add btn-default" id="batch_online" >批量上线</a>
+        <a class="layui-btn btn-add btn-default" id="batch_off_line" >批量下线</a>
     </span>
 
     <span>
-        <form class="layui-form" style="float: left">
+        <form class="layui-form">
             <div class="layui-inline">
                   <label class="layui-form-label">产品名称</label>
                   <div class="layui-input-inline">
@@ -52,9 +60,16 @@
                     <input type="text" name="order_time" class="layui-input" id="order_time" placeholder="请选择订单时间">
                 </div>
             </div>
+            <div class="layui-inline">
+                  <label class="layui-form-label">批次号</label>
+                  <div class="layui-input-inline">
+                      <input type="text"  id="picihao" autocomplete="off" placeholder="请输入批次号" class="layui-input">
+                  </div>
+              </div>
+            <div class="layui-btn mgl-20" style="margin-left: 10px;" id="btn-search">查询</div>
         </form>
     </span>
-    <button class="layui-btn mgl-20" style="margin-left: 10px;" id="btn-search">查询</button>
+
 
 
 </div>
@@ -88,7 +103,7 @@
                 //上传完毕回调
                 if(res.success&&(res.errorMsg==null || res.errorMsg=='')){
                     layer.open({
-                        content: "导入成功",
+                        content: "导入成功,本次导入批次号为："+res.data,
                         success: function(layero, index){
                             tableIns.reload();
                         }
@@ -132,6 +147,7 @@
               {checkbox: true, sort: true, fixed: true, space: true}
               , {field: 'id', title: 'ID', width: 80}
               , {field: 'order_code', title: '订单编码', width: 120}
+                , {field: 'picihao', title: '批次号', width: 120}
               , {field: 'channel_account', title: '所属渠道', width: 120}
               , {field: 'operate_type', title: '操作类型', width: 120}
               , {field: 'order_time', title: '订单时间', width: 120}
@@ -158,10 +174,16 @@
             , url: wholeUrl+"/admin/order_jinrong/list?token="+localStorage.getItem("token")
             , method: 'post'
             , page: true
-            , limits: [10, 20, 30, 50, 100]
+            , limits: [10, 20, 30, 50, 100,200,300]
             , limit: 10 //默认采用10
             , loading: false
-            , where:{account:localStorage.getItem("account"),operate_type:$("#operate_type").val(),order_time:$("#order_time").val(),product_name:$("#product_name").val()}
+            , where:{
+                account:localStorage.getItem("account"),
+                operate_type:$("#operate_type").val(),
+                order_time:$("#order_time").val(),
+                product_name:$("#product_name").val(),
+                picihao:$("#picihao").val()
+            }
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
@@ -230,7 +252,11 @@
         // 查询
         $('#btn-search').on('click', function () {
             tableIns.reload({where:{account:localStorage.getItem("account"),
-                    operate_type:$("#operate_type").val(),order_time:$("#order_time").val(),product_name:$("#product_name").val()}});
+                    operate_type:$("#operate_type").val(),
+                    order_time:$("#order_time").val(),
+                    product_name:$("#product_name").val(),
+                    picihao:$("#picihao").val()
+            }});
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){
@@ -273,11 +299,79 @@
         });
 
         // 获取选中数据
-        $('#btn-select-all').on('click', function () {
+        $('#batch_online').on('click', function () {
           var checkStatus = table.checkStatus('dataCheck')
           ,data = checkStatus.data;
-          layer.alert(JSON.stringify(data));
+          if(data.length==0){
+              layer.alert("请勾选数据再操作！");
+              return false
+          }
+            var idArr=[];
+            for(var i=0;i<data.length;i++){
+                idArr.push(data[i].id);
+            }
+            $.ajax({
+                url:wholeUrl+"/admin/order_jinrong/batch_update?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                async:true,
+                data:{
+                    ids:idArr.join(","),
+                    account:localStorage.getItem("account"),
+                    operate_type:"上线"
+                },
+                success:function(result){
+                    console.log(result);
+                    if(result.success){
+                        layer.msg("操作成功")
+                        tableIns.reload();
+                    }else{
+                        layer.msg("操作失败");
+                    }
+
+                }
+            });
+
         });
+
+        // 获取选中数据
+        $('#batch_off_line').on('click', function () {
+            var checkStatus = table.checkStatus('dataCheck')
+                ,data = checkStatus.data;
+            if(data.length==0){
+                layer.alert("请勾选数据再操作！");
+                return false
+            }
+            var idArr=[];
+            for(var i=0;i<data.length;i++){
+                idArr.push(data[i].id);
+            }
+            $.ajax({
+                url:wholeUrl+"/admin/order_jinrong/batch_update?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                async:true,
+                data:{
+                    ids:idArr.join(","),
+                    account:localStorage.getItem("account"),
+                    operate_type:"下线"
+                },
+                success:function(result){
+                    console.log(result);
+                    if(result.success){
+                        layer.msg("操作成功")
+                        tableIns.reload();
+                    }else{
+                        layer.msg("操作失败");
+                    }
+
+                }
+            });
+
+        });
+
         // var $ = layui.$, active = {
         //   getCheckData: function(){ //获取选中数据
         //     var checkStatus = table.checkStatus('dataCheck')

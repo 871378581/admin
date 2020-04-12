@@ -39,7 +39,7 @@ public interface ThOrderForJinrongManageMapper {
         "`heka`, `xiakuan`, `xiakuan_amt`, ",
         "`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
-        "`description`)",
+        "`description`, `picihao`)",
         "values (#{operate_type,jdbcType=VARCHAR}, #{order_code,jdbcType=VARCHAR}, ",
         "#{order_time,jdbcType=VARCHAR}, #{product_name,jdbcType=VARCHAR}, ",
         "#{channel_account,jdbcType=VARCHAR}, #{channel_code,jdbcType=VARCHAR}, ",
@@ -48,7 +48,7 @@ public interface ThOrderForJinrongManageMapper {
         "#{heka,jdbcType=VARCHAR}, #{xiakuan,jdbcType=VARCHAR}, #{xiakuan_amt,jdbcType=VARCHAR}, ",
         "#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
-        "#{description,jdbcType=VARCHAR})"
+        "#{description,jdbcType=VARCHAR}, #{picihao,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThOrderForJinrongManage record);
@@ -78,7 +78,8 @@ public interface ThOrderForJinrongManageMapper {
         @Result(column="gmt_modify", property="gmt_modify", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR)
     })
     List<ThOrderForJinrongManage> selectByExample(ThOrderForJinrongManageExample example);
 
@@ -87,7 +88,7 @@ public interface ThOrderForJinrongManageMapper {
         "`id`, `operate_type`, `order_code`, `order_time`, `product_name`, `channel_account`, ",
         "`channel_code`, `zhuce`, `xinhu`, `jinjian`, `jihuo`, `shouxin`, `heka`, `xiakuan`, ",
         "`xiakuan_amt`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, ",
-        "`description`",
+        "`description`, `picihao`",
         "from `th_order_for_jinrong_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -111,7 +112,8 @@ public interface ThOrderForJinrongManageMapper {
         @Result(column="gmt_modify", property="gmt_modify", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR)
     })
     ThOrderForJinrongManage selectByPrimaryKey(Long id);
 
@@ -144,7 +146,8 @@ public interface ThOrderForJinrongManageMapper {
           "`gmt_modify` = #{gmt_modify,jdbcType=TIMESTAMP},",
           "`creator_account` = #{creator_account,jdbcType=VARCHAR},",
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
-          "`description` = #{description,jdbcType=VARCHAR}",
+          "`description` = #{description,jdbcType=VARCHAR},",
+          "`picihao` = #{picihao,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThOrderForJinrongManage record);

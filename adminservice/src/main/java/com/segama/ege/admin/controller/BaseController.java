@@ -2,8 +2,13 @@ package com.segama.ege.admin.controller;
 
 import com.segama.ege.entity.AdminSystemConfig;
 import com.segama.ege.entity.AdminSystemConfigExample;
+import com.segama.ege.entity.AdminUserRoleRelation;
+import com.segama.ege.entity.AdminUserRoleRelationExample;
+import com.segama.ege.repository.AdminRoleMapper;
 import com.segama.ege.repository.AdminSystemConfigMapper;
+import com.segama.ege.repository.AdminUserRoleRelationMapper;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -23,22 +28,39 @@ public class BaseController {
      */
     public static String TEMPALTE_URL_KEY="tempalte_url_key";
 
+    //展示所有用户信息，用于后台管理员获取所有数据 配置的是一个后台超级管理员id
+    public static String SHOW_ALL_USER_ROLE_ID_KEY="show_all_user_role_id_key";
+
     @Resource
     AdminSystemConfigMapper adminSystemConfigMapper;
 
+    @Resource
+    AdminUserRoleRelationMapper adminUserRoleRelationMapper;
+
     //展示所有用户
     public Boolean showAllUser(String ownAccount){
+        if("admin".equals(ownAccount)){
+            return true;
+        }
         AdminSystemConfigExample example = new AdminSystemConfigExample();
         AdminSystemConfigExample.Criteria criteria = example.createCriteria();
         // TODO 展示所有用户配置项
-        criteria.andKeyEqualTo("showAllUserAccounts");
+        criteria.andKeyEqualTo(SHOW_ALL_USER_ROLE_ID_KEY);
+
+        //根据账号查询该账号有哪些权限
+        AdminUserRoleRelationExample example1 = new AdminUserRoleRelationExample();
+        example1.createCriteria().andAccountEqualTo(ownAccount);
+        List<AdminUserRoleRelation> adminUserRoleRelations = adminUserRoleRelationMapper.selectByExample(example1);
+
         List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
         if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
             AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
             String value = adminSystemConfig.getValue();
-            String[] split = value.split(",");
-            for (String s : split) {
-                if(ownAccount.equals(s)){
+            if(StringUtils.isEmpty(value)){
+                throw new RuntimeException("SHOW_ALL_USER_ROLE_ID_KEY 未配置");
+            }
+            for (AdminUserRoleRelation roleRelation : adminUserRoleRelations) {
+                if(roleRelation.getRole_id().equals(Long.valueOf(value))){
                     return true;
                 }
             }

@@ -5,6 +5,7 @@ CREATE TABLE `th_order_for_jinrong_manage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `operate_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订单操作状态',
   `order_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订单唯一编码',
+  `picihao` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '批次号',
   `channel_account` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '渠道账号',
   `order_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '订单时间',
   `product_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '产品名称',

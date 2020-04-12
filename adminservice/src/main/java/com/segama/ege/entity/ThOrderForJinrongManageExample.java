@@ -1494,6 +1494,76 @@ public class ThOrderForJinrongManageExample {
             addCriterion("`description` not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andPicihaoIsNull() {
+            addCriterion("`picihao` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoIsNotNull() {
+            addCriterion("`picihao` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoEqualTo(String value) {
+            addCriterion("`picihao` =", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoNotEqualTo(String value) {
+            addCriterion("`picihao` <>", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoGreaterThan(String value) {
+            addCriterion("`picihao` >", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoGreaterThanOrEqualTo(String value) {
+            addCriterion("`picihao` >=", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoLessThan(String value) {
+            addCriterion("`picihao` <", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoLessThanOrEqualTo(String value) {
+            addCriterion("`picihao` <=", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoLike(String value) {
+            addCriterion("`picihao` like", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoNotLike(String value) {
+            addCriterion("`picihao` not like", value, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoIn(List<String> values) {
+            addCriterion("`picihao` in", values, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoNotIn(List<String> values) {
+            addCriterion("`picihao` not in", values, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoBetween(String value1, String value2) {
+            addCriterion("`picihao` between", value1, value2, "picihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicihaoNotBetween(String value1, String value2) {
+            addCriterion("`picihao` not between", value1, value2, "picihao");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

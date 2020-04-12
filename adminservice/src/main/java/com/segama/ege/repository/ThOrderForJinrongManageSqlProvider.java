@@ -117,6 +117,10 @@ public class ThOrderForJinrongManageSqlProvider {
             VALUES("`description`", "#{description,jdbcType=VARCHAR}");
         }
         
+        if (record.getPicihao() != null) {
+            VALUES("`picihao`", "#{picihao,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -146,6 +150,7 @@ public class ThOrderForJinrongManageSqlProvider {
         SELECT("`creator_account`");
         SELECT("`modifier_account`");
         SELECT("`description`");
+        SELECT("`picihao`");
         FROM("`th_order_for_jinrong_manage`");
         applyWhere(example, false);
         
@@ -249,6 +254,10 @@ public class ThOrderForJinrongManageSqlProvider {
             SET("`description` = #{record.description,jdbcType=VARCHAR}");
         }
         
+        if (record.getPicihao() != null) {
+            SET("`picihao` = #{record.picihao,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -277,6 +286,7 @@ public class ThOrderForJinrongManageSqlProvider {
         SET("`creator_account` = #{record.creator_account,jdbcType=VARCHAR}");
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
+        SET("`picihao` = #{record.picihao,jdbcType=VARCHAR}");
         
         ThOrderForJinrongManageExample example = (ThOrderForJinrongManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -361,6 +371,10 @@ public class ThOrderForJinrongManageSqlProvider {
         
         if (record.getDescription() != null) {
             SET("`description` = #{description,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPicihao() != null) {
+            SET("`picihao` = #{picihao,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

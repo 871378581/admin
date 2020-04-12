@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/ege/api/admin/user")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class UserInfoController {
+public class UserInfoController extends BaseController {
     
     @Resource
     private AdminUserMapper adminUserMapper;
@@ -88,26 +88,6 @@ public class UserInfoController {
             LOG.error("AdminUserController#list error",e);
         }
         return baseVO;
-    }
-
-    //展示所有用户
-    private Boolean showAllUser(String ownAccount){
-        AdminSystemConfigExample example = new AdminSystemConfigExample();
-        AdminSystemConfigExample.Criteria criteria = example.createCriteria();
-        // TODO 展示所有用户配置项
-        criteria.andKeyEqualTo("showAllUserAccounts");
-        List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
-        if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
-            AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
-            String value = adminSystemConfig.getValue();
-            String[] split = value.split(",");
-            for (String s : split) {
-                if(ownAccount.equals(s)){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @RequestMapping("/delete")

@@ -33,13 +33,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/ege/api/admin/product_manage")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class ProductController {
+public class ProductController extends BaseController {
 
     @Resource
     private ThProductManageMapper thProductManageMapper;
-
-    @Resource
-    private AdminSystemConfigMapper adminSystemConfigMapper;
 
     @Resource
     private ThProductChannelMapMapper thProductChannelMapMapper;
@@ -259,27 +256,6 @@ public class ProductController {
             baseVO.setErrorMsg("查询信息异常！");
         }
         return baseVO;
-    }
-
-
-    //展示所有用户
-    private Boolean showAllUser(String ownAccount) {
-        AdminSystemConfigExample example = new AdminSystemConfigExample();
-        AdminSystemConfigExample.Criteria criteria = example.createCriteria();
-        // TODO 展示所有用户配置项
-        criteria.andKeyEqualTo("showAllUserAccounts");
-        List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
-        if (!CollectionUtils.isEmpty(adminSystemConfigs)) {
-            AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
-            String value = adminSystemConfig.getValue();
-            String[] split = value.split(",");
-            for (String s : split) {
-                if (ownAccount.equals(s)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }

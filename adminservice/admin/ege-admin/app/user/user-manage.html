@@ -57,8 +57,8 @@
             ,filter:'table'
             , height: vipTable.getFullHeight()    //容器高度
             , cols: [[                  //标题栏
-              {checkbox: true, sort: true, fixed: true, space: true}
-              , {field: 'id', title: 'ID', width: 80}
+                //{checkbox: true, sort: true, fixed: true, space: true},
+               {field: 'id', title: 'ID', width: 80}
               , {field: 'account', title: '账号', width: 120}
                 , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
                 , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}

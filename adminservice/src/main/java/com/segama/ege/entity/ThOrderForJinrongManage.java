@@ -44,6 +44,8 @@ public class ThOrderForJinrongManage implements Serializable {
 
     private String description;
 
+    private String picihao;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -206,6 +208,14 @@ public class ThOrderForJinrongManage implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public String getPicihao() {
+        return picihao;
+    }
+
+    public void setPicihao(String picihao) {
+        this.picihao = picihao == null ? null : picihao.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -232,6 +242,7 @@ public class ThOrderForJinrongManage implements Serializable {
         sb.append(", creator_account=").append(creator_account);
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
+        sb.append(", picihao=").append(picihao);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

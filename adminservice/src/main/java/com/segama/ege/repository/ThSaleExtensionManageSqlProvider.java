@@ -89,6 +89,10 @@ public class ThSaleExtensionManageSqlProvider {
             VALUES("`gmt_create`", "#{gmt_create,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getQq() != null) {
+            VALUES("`qq`", "#{qq,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -111,6 +115,7 @@ public class ThSaleExtensionManageSqlProvider {
         SELECT("`user_name`");
         SELECT("`address`");
         SELECT("`gmt_create`");
+        SELECT("`qq`");
         FROM("`th_sale_extension_manage`");
         applyWhere(example, false);
         
@@ -186,6 +191,10 @@ public class ThSaleExtensionManageSqlProvider {
             SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getQq() != null) {
+            SET("`qq` = #{record.qq,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -207,6 +216,7 @@ public class ThSaleExtensionManageSqlProvider {
         SET("`user_name` = #{record.user_name,jdbcType=VARCHAR}");
         SET("`address` = #{record.address,jdbcType=VARCHAR}");
         SET("`gmt_create` = #{record.gmt_create,jdbcType=TIMESTAMP}");
+        SET("`qq` = #{record.qq,jdbcType=VARCHAR}");
         
         ThSaleExtensionManageExample example = (ThSaleExtensionManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -263,6 +273,10 @@ public class ThSaleExtensionManageSqlProvider {
         
         if (record.getGmt_create() != null) {
             SET("`gmt_create` = #{gmt_create,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getQq() != null) {
+            SET("`qq` = #{qq,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

@@ -1,11 +1,9 @@
 package com.segama.ege.admin.controller;
 
 import com.segama.ege.admin.vo.BaseVO;
-import com.segama.ege.entity.AdminUser;
-import com.segama.ege.entity.AdminUserExample;
-import com.segama.ege.entity.ThSaleExtensionManage;
-import com.segama.ege.entity.ThSaleExtensionManageExample;
+import com.segama.ege.entity.*;
 import com.segama.ege.repository.AdminUserMapper;
+import com.segama.ege.repository.ThProductManageMapper;
 import com.segama.ege.repository.ThSaleExtensionManageMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -35,11 +33,19 @@ public class SaleExtensionManageController extends BaseController {
     @Resource
     private AdminUserMapper adminUserMapper;
 
+    @Resource
+    private ThProductManageMapper thProductManageMapper;
+
     private static Logger LOG = LoggerFactory.getLogger(SaleExtensionManageController.class);
 
     @RequestMapping("/list")
     public BaseVO list(
-            @RequestParam(value = "menuName",required = false) String menuName
+            @RequestParam(value = "channel_A",required = false) String channel_A,
+            @RequestParam(value = "channel_b",required = false) String channel_b,
+            @RequestParam(value = "user_name",required = false) String user_name,
+            @RequestParam(value = "phone",required = false) String phone,
+            @RequestParam(value = "qq",required = false) String qq,
+            @RequestParam(value = "type",required = false) String type
             ,@RequestParam(value = "account") String account
             ,@RequestParam("limit") Integer pageSize,
             @RequestParam("page") Integer pageIndex) {
@@ -47,8 +53,29 @@ public class SaleExtensionManageController extends BaseController {
         try {
             ThSaleExtensionManageExample example = new ThSaleExtensionManageExample();
             ThSaleExtensionManageExample.Criteria criteria = example.createCriteria();
-            if(StringUtils.isNotEmpty(menuName)) {
-                //ThSaleExtensionManageExampleCriteria.andMenu_nameLike("%" + menuName + "%");
+            if(!showAllUser(account)){
+                if(!StringUtils.isEmpty(type)){
+                    if("1".equals(type)){
+                        criteria.andOwner_accountEqualTo(account);
+                    }else{
+                        criteria.andCreate_accountEqualTo(account);
+                    }
+                }
+            }
+            if(StringUtils.isNotEmpty(channel_A)) {
+                criteria.andCreate_accountEqualTo(channel_A);
+            }
+            if(StringUtils.isNotEmpty(channel_b)) {
+                criteria.andOwner_accountEqualTo(channel_b);
+            }
+            if(StringUtils.isNotEmpty(user_name)) {
+                criteria.andUser_nameLike("%" + user_name + "%");
+            }
+            if(StringUtils.isNotEmpty(phone)) {
+                criteria.andPhoneLike("%" + phone + "%");
+            }
+            if(StringUtils.isNotEmpty(qq)) {
+                criteria.andQqLike("%" + qq + "%");
             }
             if(!showAllUser(account)){
                 AdminUserExample example1 = new AdminUserExample();
@@ -69,6 +96,19 @@ public class SaleExtensionManageController extends BaseController {
             example.setPageIndex(pageIndex);
             example.setOrderByClause("gmt_create desc");
             List<ThSaleExtensionManage> adminMenus = thSaleExtensionManageMapper.selectByExample(example);
+            if(!CollectionUtils.isEmpty(adminMenus)){
+                for (ThSaleExtensionManage manage : adminMenus) {
+                    ThProductManageExample example2 = new ThProductManageExample();
+                    example2.createCriteria()
+                            .andProduct_codeEqualTo(manage.getProduct_code())
+                    .andProduct_statusEqualTo(1);
+                    List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
+                    if(!CollectionUtils.isEmpty(thProductManages)){
+                        ThProductManage thProductManage = thProductManages.get(0);
+                        manage.setProduct_name(thProductManage.getProduct_name());
+                    }
+                }
+            }
             baseVO.setData(adminMenus);
             baseVO.setSuccess(true);
             baseVO.setCount(count);

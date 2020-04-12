@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.entity.*;
-import com.segama.ege.repository.AdminSystemConfigMapper;
-import com.segama.ege.repository.ThProductManageMapper;
-import com.segama.ege.repository.ThSaleExtensionManageMapper;
+import com.segama.ege.repository.*;
 import com.segama.ege.util.CommonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,6 +39,9 @@ public class InfoAddController {
     private ThProductManageMapper thProductManageMapper;
 
     @Resource
+    private ThUrlManageMapper thUrlManageMapper;
+
+    @Resource
     private ThSaleExtensionManageMapper thSaleExtensionManageMapper;
 
     @RequestMapping("/put_info")
@@ -48,18 +51,28 @@ public class InfoAddController {
             String share_url_code = thSaleExtensionManage.getShare_url_code();
             thSaleExtensionManage.setCode(UUIDUtils.UUID());
             if(!StringUtils.isEmpty(share_url_code)){
+                ThUrlManageExample example = new ThUrlManageExample();
+                example.createCriteria().andShare_url_codeEqualTo(share_url_code);
+                List<ThUrlManage> thUrlManages = thUrlManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thUrlManages)){
+                    String url = thUrlManages.get(0).getUrl();
+                    thSaleExtensionManage.setRequest_url(url);
+                }
                 String[] shareCodeArr = share_url_code.split("_");
-                String createAcc = shareCodeArr[0];
-                String codeprod = shareCodeArr[1];
+                String createAcc = shareCodeArr[0];//创建人
+                String codeprod = shareCodeArr[1];//产品编码
                 thSaleExtensionManage.setCreate_account(createAcc);
                 thSaleExtensionManage.setProduct_code(codeprod);
-                //A 还为分配给b
+
+                //A 还未分配给b 编码长度等于拆分后3
                 if(shareCodeArr.length==3){
                     thSaleExtensionManage.setOwner_account(createAcc);
                 }else {
-                    String ownerAcc = shareCodeArr[3];
+                    String ownerAcc = shareCodeArr[3];//小b
                     thSaleExtensionManage.setOwner_account(ownerAcc);
                 }
+            }else{
+                throw new RuntimeException("share_url_code is null");
             }
             thSaleExtensionManage.setGmt_create(new Date());
             thSaleExtensionManageMapper.insert(thSaleExtensionManage);
@@ -68,6 +81,36 @@ public class InfoAddController {
             CommonUtil.info("InfoAddController#put_info", "exception", null, e);
             baseVO.setSuccess(false);
             baseVO.setErrorMsg("数据保存出错，请重试！");
+        }
+        return baseVO;
+    }
+
+    @Resource
+    ThTemplateManageMapper thTemplateManageMapper;
+    private static Logger LOG = LoggerFactory.getLogger(InfoAddController.class);
+
+    @RequestMapping("/query")
+    public BaseVO query(@RequestParam("t_code") String t_code) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if (org.apache.commons.lang3.StringUtils.isEmpty(t_code)) {
+                baseVO.setErrorMsg("参数错误！");
+                baseVO.setSuccess(false);
+            } else {
+
+                ThTemplateManageExample example = new ThTemplateManageExample();
+                List<ThTemplateManage> thTemplateManages = thTemplateManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thTemplateManages)){
+                    baseVO.setData(thTemplateManages.get(0));
+                }else{
+                    baseVO.setData(new ThTemplateManage());
+                }
+            }
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("ThTemplateManageController#get Exception input param is t_code:" + t_code, e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("查询信息异常！");
         }
         return baseVO;
     }

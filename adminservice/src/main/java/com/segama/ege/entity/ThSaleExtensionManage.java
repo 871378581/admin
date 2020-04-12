@@ -30,6 +30,8 @@ public class ThSaleExtensionManage implements Serializable {
 
     private Date gmt_create;
 
+    private String qq;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -136,6 +138,14 @@ public class ThSaleExtensionManage implements Serializable {
         this.gmt_create = gmt_create;
     }
 
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -155,6 +165,7 @@ public class ThSaleExtensionManage implements Serializable {
         sb.append(", user_name=").append(user_name);
         sb.append(", address=").append(address);
         sb.append(", gmt_create=").append(gmt_create);
+        sb.append(", qq=").append(qq);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -206,11 +206,15 @@ public class UrlController extends BaseController{
                 String url = "";
                 if(!CollectionUtils.isEmpty(thProductManages)){
                     ThProductManage thProductManage = thProductManages.get(0);
-                    url = thProductManage.getUrl();
+                    url = getConfig(TEMPALTE_URL_KEY);
+                    String temp_code = "";
+                    temp_code = thProductManage.getTemplate_code();
+                    url+="?t_code="+temp_code;
                 }else{
                     throw new RuntimeException("未查询到相关产品或产品已下线！");
                 }
-                String url2 = url + "?code=" + code;
+                String url2 = url + "&code=" + code;
+
                 adminRole.setUrl(url2);
             }else{
                 adminRole.setOwner_1_account(adminRoleNew.getOwner_1_account());
@@ -328,7 +332,7 @@ public class UrlController extends BaseController{
                     .andProduct_statusEqualTo(1);
 
             List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
-
+            //模版链接
             String url = getConfig(TEMPALTE_URL_KEY);
             String temp_code = "";
             if(!CollectionUtils.isEmpty(thProductManages)){
@@ -338,27 +342,11 @@ public class UrlController extends BaseController{
             }else{
                 throw new RuntimeException("未查询到相关产品或产品已下线！");
             }
-            ThUrlManageExample thUrlManageExample = new ThUrlManageExample();
-            ThUrlManageExample.Criteria criteria = thUrlManageExample.createCriteria();
-            criteria.andCreator_accountEqualTo(account);
-            criteria.andProduct_codeEqualTo(product_code);
-            thUrlManageExample.setOrderByClause("share_url_code desc");
-            List<ThUrlManage> thUrlManages = thUrlManageMapper.selectByExample(thUrlManageExample);
-            if(!CollectionUtils.isEmpty(thUrlManages)){
-                ThUrlManage thUrlManage = thUrlManages.get(0);
-                //code逻辑 创建人账号_产品code_版本_归属人账号
-                String share_url_code = thUrlManage.getShare_url_code();
-                String[] split = share_url_code.split("_");
-                Long newVersion = Long.valueOf(split[2])+1L;
-                String newShareCode = account+"_"+product_code+"_"+newVersion;
-                buildUrlVO.setBuildUrl(url+"&code="+newShareCode);
-                buildUrlVO.setShareCode(newShareCode);
-            }else{
-                //code逻辑 创建人账号_产品code_版本_归属人账号
-                String newShareCode = account+"_"+product_code+"_"+1;
-                buildUrlVO.setBuildUrl(url+"&code="+newShareCode);
-                buildUrlVO.setShareCode(newShareCode);
-            }
+
+            //code逻辑 创建人账号_产品code_版本_归属人账号
+            String newShareCode = account+"_"+product_code+"_"+System.currentTimeMillis();
+            buildUrlVO.setBuildUrl(url+"&code="+newShareCode);
+            buildUrlVO.setShareCode(newShareCode);
             baseVO.setSuccess(true);
         } catch (Exception e) {
             baseVO.setError(JSON.toJSONString(e));

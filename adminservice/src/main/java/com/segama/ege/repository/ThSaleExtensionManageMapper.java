@@ -36,13 +36,15 @@ public interface ThSaleExtensionManageMapper {
         "`request_url`, `source_url`, ",
         "`phone`, `owner_account`, ",
         "`create_account`, `user_name`, ",
-        "`address`, `gmt_create`)",
+        "`address`, `gmt_create`, ",
+        "`qq`)",
         "values (#{code,jdbcType=VARCHAR}, #{share_url_code,jdbcType=VARCHAR}, ",
         "#{product_name,jdbcType=VARCHAR}, #{product_code,jdbcType=VARCHAR}, ",
         "#{request_url,jdbcType=VARCHAR}, #{source_url,jdbcType=VARCHAR}, ",
         "#{phone,jdbcType=VARCHAR}, #{owner_account,jdbcType=VARCHAR}, ",
         "#{create_account,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR}, ",
-        "#{address,jdbcType=VARCHAR}, #{gmt_create,jdbcType=TIMESTAMP})"
+        "#{address,jdbcType=VARCHAR}, #{gmt_create,jdbcType=TIMESTAMP}, ",
+        "#{qq,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThSaleExtensionManage record);
@@ -65,7 +67,8 @@ public interface ThSaleExtensionManageMapper {
         @Result(column="create_account", property="create_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_name", property="user_name", jdbcType=JdbcType.VARCHAR),
         @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
-        @Result(column="gmt_create", property="gmt_create", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="gmt_create", property="gmt_create", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR)
     })
     List<ThSaleExtensionManage> selectByExample(ThSaleExtensionManageExample example);
 
@@ -73,7 +76,7 @@ public interface ThSaleExtensionManageMapper {
         "select",
         "`id`, `code`, `share_url_code`, `product_name`, `product_code`, `request_url`, ",
         "`source_url`, `phone`, `owner_account`, `create_account`, `user_name`, `address`, ",
-        "`gmt_create`",
+        "`gmt_create`, `qq`",
         "from `th_sale_extension_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -90,7 +93,8 @@ public interface ThSaleExtensionManageMapper {
         @Result(column="create_account", property="create_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_name", property="user_name", jdbcType=JdbcType.VARCHAR),
         @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
-        @Result(column="gmt_create", property="gmt_create", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="gmt_create", property="gmt_create", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR)
     })
     ThSaleExtensionManage selectByPrimaryKey(Long id);
 
@@ -116,7 +120,8 @@ public interface ThSaleExtensionManageMapper {
           "`create_account` = #{create_account,jdbcType=VARCHAR},",
           "`user_name` = #{user_name,jdbcType=VARCHAR},",
           "`address` = #{address,jdbcType=VARCHAR},",
-          "`gmt_create` = #{gmt_create,jdbcType=TIMESTAMP}",
+          "`gmt_create` = #{gmt_create,jdbcType=TIMESTAMP},",
+          "`qq` = #{qq,jdbcType=VARCHAR}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThSaleExtensionManage record);

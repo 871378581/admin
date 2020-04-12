@@ -10,6 +10,7 @@ CREATE TABLE `th_sale_extension_manage` (
   `request_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `source_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qq` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `owner_account` varchar(48) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `create_account` varchar(48) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

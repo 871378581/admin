@@ -18,6 +18,11 @@ import java.util.Set;
  */
 public class BaseController {
 
+    /**
+     * 模版链接key
+     */
+    public static String TEMPALTE_URL_KEY="tempalte_url_key";
+
     @Resource
     AdminSystemConfigMapper adminSystemConfigMapper;
 
@@ -57,5 +62,22 @@ public class BaseController {
             throw new RuntimeException("获取默认菜单配置异常！");
         }
         return menuId;
+    }
+
+    /**
+     * 获取配置
+     * @param key
+     * @return
+     */
+    public String getConfig(String key){
+        AdminSystemConfigExample example = new AdminSystemConfigExample();
+        AdminSystemConfigExample.Criteria criteria = example.createCriteria();
+        criteria.andKeyEqualTo(key);
+        List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
+            AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
+            return adminSystemConfig.getValue();
+        }
+        return "";
     }
 }

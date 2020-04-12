@@ -2,9 +2,11 @@ package com.segama.ege.admin.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.segama.ege.admin.utils.BeanUtils;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
+import com.segama.ege.admin.vo.LabelValueVO;
 import com.segama.ege.entity.*;
 import com.segama.ege.repository.ThBusinessMerchantManageMapper;
 import com.segama.ege.repository.ThProductChannelMapMapper;
@@ -22,6 +24,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author hxj
@@ -236,30 +239,30 @@ public class ProductChannelMapController extends BaseController{
                 criteria.andProduct_onwer_accountEqualTo(account);
             }
             List<ThProductChannelMap> thProductChannelMaps = thProductChannelMapMapper.selectByExample(example);
-            List<Map<String,Object>> result = Lists.newArrayList();
+            Set<LabelValueVO> result = Sets.newHashSet();
             if(!CollectionUtils.isEmpty(thProductChannelMaps)){
                 for (ThProductChannelMap thProductChannelMap : thProductChannelMaps) {
-                    Map<String,Object> map = Maps.newHashMap();
+                    LabelValueVO labelValueVO = new LabelValueVO();
 
-                    //查询产品名称
+                    //查询商户名称
                     ThBusinessMerchantManageExample example1 = new ThBusinessMerchantManageExample();
                     ThBusinessMerchantManageExample.Criteria criteria1 = example1.createCriteria();
                     criteria1.andBusiness_codeEqualTo(thProductChannelMap.getBusiness_code());
                     List<ThBusinessMerchantManage> thBusinessMerchantManages = thBusinessMerchantManageMapper.selectByExample(example1);
                     if(!CollectionUtils.isEmpty(thBusinessMerchantManages)){
                         ThBusinessMerchantManage manage = thBusinessMerchantManages.get(0);
-                        map.put("label",manage.getBusiness_name());
-                        map.put("value",manage.getBusiness_code());
-                        result.add(map);
+                        labelValueVO.setLabel(manage.getBusiness_name());
+                        labelValueVO.setValue(manage.getBusiness_code());
+                        result.add(labelValueVO);
                     }
                 }
             }
             baseVO.setData(result);
             baseVO.setSuccess(true);
         } catch (Exception e) {
-            LOG.error("ThProductChannelMapController#getAllMenu error",e);
+            LOG.error("ThProductChannelMapController#getAllBusiness error",e);
             baseVO.setSuccess(false);
-            baseVO.setErrorMsg("查询用户信息信息异常！");
+            baseVO.setErrorMsg("查询信息异常！");
         }
         return baseVO;
     }

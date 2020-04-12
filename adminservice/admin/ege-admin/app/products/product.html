@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>模版</title>
+    <link rel="stylesheet" href="files/comman.css">
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="files/header.css">
+    <link rel="stylesheet" href="files/query_number.css">
+    <link href="files/new-fill.css" rel="stylesheet">
+    <link href="files/weui.css" rel="stylesheet">
+    <link href="files/weui2.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="userInput" style="width: 100%;">
+    <div class="bannerImg" align="">
+        <img alt="banner1" id="banner1">
+    </div>
+</div>
+
+<div class="con_" style="width: 100%;background:black">
+
+
+    <div class="container" style="width: 90.5%;margin: auto">
+
+        <form method="post" name="form1" class="loginPage">
+            <section class="fill-wrapper">
+                <div>
+                    <input id="union" name="union" type="hidden" value="test">
+                </div>
+                <div class="fill">
+                    <h2  style="display: block;background-color: #D4D4D4;font-weight: 900" hidden=""><b>根据国家实名制要求,
+                        请准确提供身份证信息</b></h2>
+
+                    <ul class="fill-list">
+                        <li id="apply-name">
+                            <div class="p-title"><b>姓名</b></div>
+                            <div class="p-content"><input id="certName" name="user_name" title="姓名" placeholder="请输入身份证件姓名" maxlength="20" type="text">
+                            </div>
+                        </li>
+
+                        <li id="apply-phone">
+                            <div class="p-title"><b>联系电话</b></div>
+                            <div class="p-content"><input id="mobilePhone" name="mobile" title="联系电话" placeholder="请输入联系电话" maxlength="13" type="text"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="fill">
+
+                    <h2  style="display: block;background-color: #D4D4D4;font-weight: 900" hidden=""><b>为方便领取权益，请填写QQ号码以便客服与您联系</b></h2>
+
+                    <ul class="fill-list">
+                        <li id="apply-qq">
+                            <div class="p-title"><b>QQ(选填)</b></div>
+                            <div class="p-content"><input id="qq" name="qq" title="QQ" placeholder="请填写QQ号" maxlength="20" type="text"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="fill">
+                    <h2  style="display: block;background-color: #D4D4D4;font-weight: 900" hidden="">
+                        <b>请选择</b>
+                        <!--<span style="color: #ff1414;font-size: .625rem;">(请联系客服qq:3614283171)</span>-->
+                    </h2>
+
+                    <ul id="sub_pro" class="fill-list fuli" style="display: flex;flex-flow:wrap">
+
+                    </ul>
+
+
+                </div>
+            </section>
+
+
+            <section class="apply" style="background-color: #f7f7f7;color: #505050;margin-top: -1rem">
+
+
+                <div class="protocol-div" style="margin-top: -1rem;">
+
+                    <div class="checkbox">
+                        <input id="checkbox1" name="checkboox" value="1" checked="checked" type="checkbox">
+                        <label for="checkbox1"></label>
+                    </div>
+
+                    <p class="protocol agree"  style="margin-left: 1rem; margin-top: -0.5rem">
+                        我已阅读并同意
+
+                        <a href="https://kingcard.hztonghua.cn/app/protocal" >《客户入网服务协议及业务协议》</a>
+
+                    </p>
+                    <p class="protocol agree"  style="margin-left: 6rem; margin-top: -0.5rem">
+                        <a href="https://kingcard.hztonghua.cn/app/yy_protocal" >《业务办理公告》</a>
+                    </p>
+
+
+                    <div class="btn-box"><a href="javascript:" class="btn" id="summit_btn">
+
+
+                        立即提交 &nbsp; 免费送货上门
+
+
+                    </a>
+
+                    </div>
+                    <div class="privacy" style="text-align:center; padding-left: 5rem;margin-top: 0.8rem" align="center">
+
+                    <span style="font-size: 12px">
+                        <p><span style="color: red">*1、未满16周岁的，因政策原因不发货，请勿下单。</span></p>
+                        <p>*2、请保持电话畅通，我们将随时可能与您联系。</p>
+                    </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="userInput" style="width: 100%">
+    <div class="bannerImg_for" align="center"><img id="banner2" alt="banner2"></div>
+</div>
+
+<input id="card_type" value="dwk" type="text" hidden="">
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script>
+
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , $ = layui.jquery;
+
+        $("#summit_btn").on("click",function () {
+            var chk = $("input[class='otherGoods']:checked");
+            if(chk.length==0){
+                layer.msg("请选择一项！");
+                return false;
+            }else{
+                console.log(chk.attr("url"));
+                location.href=chk.attr("url");
+            }
+        });
+
+        $(() => {
+            var url = location.href;
+            var t_code = new URL(url).searchParams.get("t_code");
+            console.log("t_code:" + t_code);
+            if (t_code == null || t_code == undefined) {
+                layer.msg("参数错误！");
+            } else {
+                $.ajax({
+                    url: wholeUrl + "/admin/template_manage/query?token=" + localStorage.getItem("token"),
+                    method: "post",
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    data: {t_code: t_code},
+                    success: function (result) {
+                        console.log(result);
+                        if (result.success) {
+                            if (result.data != null) {
+                                var sub_product = result.data.sub_product;
+                                var banner1 = result.data.banner1;
+                                $("#banner1").attr("src", banner1);
+                                var banner2 = result.data.banner2;
+                                $("#banner2").attr("src", banner2);
+                                var html = "";
+                                sub_product = JSON.parse(sub_product);
+                                for(var i=0;i<sub_product.length;i++){
+                                    var name = sub_product[i].name;
+                                    var url = sub_product[i].url;
+                                    var temp='<div style="width: 50%;align-items: center;justify-content: center">' +
+                                        '                            <div class="radio">' +
+                                        '                                <input id="otherGoods'+i+'" class="otherGoods" name="otherGoods" url="'+url+'" type="radio">' +
+                                        '                                <label for="otherGoods'+i+'"></label>' +
+                                        '                            </div>' +
+                                        '                            <p class="protocol agree"  style="margin-left: 1rem; margin-top: -0.5rem">' +
+                                        name +
+                                        '                            </p>' +
+                                        '                        </div>';
+                                    html+=temp;
+                                }
+                                $("#sub_pro").html(html);
+                            }
+                        } else {
+                            layer.msg("网络异常");
+                        }
+
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

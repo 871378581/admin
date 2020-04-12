@@ -159,6 +159,32 @@ public class TemplateController {
         return baseVO;
     }
 
+    @RequestMapping("/query")
+    public BaseVO query(@RequestParam("t_code") String t_code) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if (StringUtils.isEmpty(t_code)) {
+                baseVO.setErrorMsg("参数错误！");
+                baseVO.setSuccess(false);
+            } else {
+
+                ThTemplateManageExample example = new ThTemplateManageExample();
+                List<ThTemplateManage> thTemplateManages = thTemplateManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thTemplateManages)){
+                    baseVO.setData(thTemplateManages.get(0));
+                }else{
+                    baseVO.setData(new ThTemplateManage());
+                }
+            }
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("ThTemplateManageController#get Exception input param is t_code:" + t_code, e);
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("查询信息异常！");
+        }
+        return baseVO;
+    }
+
     @RequestMapping("/get_all_templates")
     public BaseVO get_all_templates() {
         BaseVO baseVO = new BaseVO();

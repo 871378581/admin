@@ -8,6 +8,7 @@ import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.admin.vo.BuildUrlVO;
 import com.segama.ege.entity.*;
+import com.segama.ege.repository.AdminSystemConfigMapper;
 import com.segama.ege.repository.AdminUserMapper;
 import com.segama.ege.repository.ThProductManageMapper;
 import com.segama.ege.repository.ThUrlManageMapper;
@@ -226,24 +227,38 @@ public class UrlController extends BaseController{
     }
 
     @RequestMapping("/add")
-    public BaseVO add(ThUrlManage thProductManage,
+    public BaseVO add(ThUrlManage thUrlManage,
+            @RequestParam(value = "add_type",required = false) String add_type,
             @RequestParam("account") String account) {
 
         BaseVO baseVO = new BaseVO();
         try {
-            if( StringUtils.isEmpty(thProductManage.getUrl())){
+            if( StringUtils.isEmpty(thUrlManage.getUrl())){
                 baseVO.setErrorMsg("请检查必填参数是否填写完整！");
                 baseVO.setSuccess(false);
                 return baseVO;
             }
+            if(!StringUtils.isEmpty(add_type)){
+                //如果是A添加的二次开发的产品需要反查产品获取渠道编码
+
+                ThProductManageExample example = new ThProductManageExample();
+                example.createCriteria().andProduct_codeEqualTo(thUrlManage.getProduct_code());
+                List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thProductManages)){
+                    ThProductManage thProductManage1 = thProductManages.get(0);
+                    String channel_code = thProductManage1.getChannel_code();
+                    thUrlManage.setChannel_code(channel_code);
+                }
+
+            }
             //分享的唯一编码
-            thProductManage.setUrl_code(UUIDUtils.UUID());
-            thProductManage.setCreator_account(account);
-            thProductManage.setOwner_1_account(account);
-            thProductManage.setModifier_account(account);
-            thProductManage.setGmt_create(new Date());
-            thProductManage.setGmt_modify(new Date());
-            thUrlManageMapper.insert(thProductManage);
+            thUrlManage.setUrl_code(UUIDUtils.UUID());
+            thUrlManage.setCreator_account(account);
+            thUrlManage.setOwner_1_account(account);
+            thUrlManage.setModifier_account(account);
+            thUrlManage.setGmt_create(new Date());
+            thUrlManage.setGmt_modify(new Date());
+            thUrlManageMapper.insert(thUrlManage);
             baseVO.setSuccess(true);
         } catch (Exception e) {
             baseVO.setError(JSON.toJSONString(e));
@@ -313,10 +328,13 @@ public class UrlController extends BaseController{
                     .andProduct_statusEqualTo(1);
 
             List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);
-            String sourceUrl = "";
+
+            String url = getConfig(TEMPALTE_URL_KEY);
+            String temp_code = "";
             if(!CollectionUtils.isEmpty(thProductManages)){
                 ThProductManage thProductManage = thProductManages.get(0);
-                sourceUrl = thProductManage.getUrl();
+                temp_code = thProductManage.getTemplate_code();
+                url+="?t_code="+temp_code;
             }else{
                 throw new RuntimeException("未查询到相关产品或产品已下线！");
             }
@@ -333,12 +351,12 @@ public class UrlController extends BaseController{
                 String[] split = share_url_code.split("_");
                 Long newVersion = Long.valueOf(split[2])+1L;
                 String newShareCode = account+"_"+product_code+"_"+newVersion;
-                buildUrlVO.setBuildUrl(sourceUrl+"?code="+newShareCode);
+                buildUrlVO.setBuildUrl(url+"&code="+newShareCode);
                 buildUrlVO.setShareCode(newShareCode);
             }else{
                 //code逻辑 创建人账号_产品code_版本_归属人账号
                 String newShareCode = account+"_"+product_code+"_"+1;
-                buildUrlVO.setBuildUrl(sourceUrl+"?code="+newShareCode);
+                buildUrlVO.setBuildUrl(url+"&code="+newShareCode);
                 buildUrlVO.setShareCode(newShareCode);
             }
             baseVO.setSuccess(true);

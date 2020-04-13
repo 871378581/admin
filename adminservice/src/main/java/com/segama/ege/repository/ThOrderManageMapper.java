@@ -43,7 +43,8 @@ public interface ThOrderManageMapper {
         "`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
         "`description`, `channel_account`, ",
-        "`channel_code`, `picihao`)",
+        "`channel_code`, `picihao`, ",
+        "`show_btn`)",
         "values (#{operate_type,jdbcType=VARCHAR}, #{order_code,jdbcType=VARCHAR}, ",
         "#{order_time,jdbcType=VARCHAR}, #{order_phone_number,jdbcType=VARCHAR}, ",
         "#{prov,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{order_status,jdbcType=VARCHAR}, ",
@@ -56,7 +57,8 @@ public interface ThOrderManageMapper {
         "#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
         "#{description,jdbcType=VARCHAR}, #{channel_account,jdbcType=VARCHAR}, ",
-        "#{channel_code,jdbcType=VARCHAR}, #{picihao,jdbcType=VARCHAR})"
+        "#{channel_code,jdbcType=VARCHAR}, #{picihao,jdbcType=VARCHAR}, ",
+        "#{show_btn,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThOrderManage record);
@@ -94,7 +96,8 @@ public interface ThOrderManageMapper {
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
         @Result(column="channel_account", property="channel_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR),
-        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR)
+        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR),
+        @Result(column="show_btn", property="show_btn", jdbcType=JdbcType.INTEGER)
     })
     List<ThOrderManage> selectByExample(ThOrderManageExample example);
 
@@ -105,7 +108,7 @@ public interface ThOrderManageMapper {
         "`customer_contact_num`, `good_name`, `address`, `active_status`, `cudian_code`, ",
         "`shoucong_amt`, `shoucong_time`, `xiehaozhuanwang_type`, `zhuanhualvtichu_reason`, ",
         "`gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, `description`, ",
-        "`channel_account`, `channel_code`, `picihao`",
+        "`channel_account`, `channel_code`, `picihao`, `show_btn`",
         "from `th_order_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -137,7 +140,8 @@ public interface ThOrderManageMapper {
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
         @Result(column="channel_account", property="channel_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="channel_code", property="channel_code", jdbcType=JdbcType.VARCHAR),
-        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR)
+        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR),
+        @Result(column="show_btn", property="show_btn", jdbcType=JdbcType.INTEGER)
     })
     ThOrderManage selectByPrimaryKey(Long id);
 
@@ -178,7 +182,8 @@ public interface ThOrderManageMapper {
           "`description` = #{description,jdbcType=VARCHAR},",
           "`channel_account` = #{channel_account,jdbcType=VARCHAR},",
           "`channel_code` = #{channel_code,jdbcType=VARCHAR},",
-          "`picihao` = #{picihao,jdbcType=VARCHAR}",
+          "`picihao` = #{picihao,jdbcType=VARCHAR},",
+          "`show_btn` = #{show_btn,jdbcType=INTEGER}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThOrderManage record);

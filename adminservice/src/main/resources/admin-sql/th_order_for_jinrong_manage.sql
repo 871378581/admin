@@ -18,6 +18,16 @@ CREATE TABLE `th_order_for_jinrong_manage` (
   `heka` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '核卡',
   `xiakuan` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '下款',
   `xiakuan_amt` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '下款金额',
+
+  `zhuce_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '注册',
+  `xinhu_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '新户',
+  `jinjian_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '进件',
+  `jihuo_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '激活',
+  `shouxin_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '授信',
+  `heka_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '核卡',
+  `xiakuan_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '下款',
+  `xiakuan_amt_bak` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL comment '下款金额',
+
   `gmt_create` datetime DEFAULT NULL,
   `gmt_modify` datetime DEFAULT NULL,
   `creator_account` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,

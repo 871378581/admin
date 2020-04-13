@@ -83,6 +83,11 @@ public class OrderController extends BaseController {
             List<ThOrderManage> thOrderManages = Lists.newArrayList();
             if(count>0) {
                 thOrderManages = thOrderManageMapper.selectByExample(thOrderManageExample);
+                if(!CollectionUtils.isEmpty(thOrderManages)){
+                    for (ThOrderManage orderManage : thOrderManages) {
+                        orderManage.setShow_btn(0);//不显示按钮
+                    }
+                }
             }
             baseVO.setData(thOrderManages);
             baseVO.setSuccess(true);

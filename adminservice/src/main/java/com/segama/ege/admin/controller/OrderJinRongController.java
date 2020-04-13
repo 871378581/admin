@@ -70,7 +70,7 @@ public class OrderJinRongController extends BaseController {
             Boolean aBoolean = showAllUser(account);
             if(!aBoolean){
                 //只能查看自己的operateType=1的数据
-                thOrderForJinrongManageExampleCriteria.andOperate_typeEqualTo("1");
+                thOrderForJinrongManageExampleCriteria.andOperate_typeEqualTo("上线");
                 thOrderForJinrongManageExampleCriteria.andChannel_accountEqualTo(account);
             }
             int count = thOrderForJinrongManageMapper.countByExample(thOrderForJinrongManageExample);
@@ -80,6 +80,24 @@ public class OrderJinRongController extends BaseController {
             List<ThOrderForJinrongManage> thOrderForJinrongManages = Lists.newArrayList();
             if(count>0) {
                 thOrderForJinrongManages = thOrderForJinrongManageMapper.selectByExample(thOrderForJinrongManageExample);
+                if(!CollectionUtils.isEmpty(thOrderForJinrongManages)){
+
+                    //如果不是管理员展示A的bak数据
+                    if(!aBoolean){
+                        for (ThOrderForJinrongManage orderManage : thOrderForJinrongManages) {
+                            //用于给A展示的数据
+                            orderManage.setZhuce(orderManage.getZhuce_bak());
+                            orderManage.setXinhu(orderManage.getXinhu_bak());
+                            orderManage.setJinjian(orderManage.getJinjian_bak());
+                            orderManage.setJihuo(orderManage.getJihuo_bak());
+                            orderManage.setShouxin(orderManage.getShouxin_bak());
+                            orderManage.setHeka(orderManage.getHeka_bak());
+                            orderManage.setXiakuan(orderManage.getXiakuan_bak());
+                            orderManage.setXiakuan_amt(orderManage.getXiakuan_amt_bak());
+                            orderManage.setShow_btn(0);//不展示按钮
+                        }
+                    }
+                }
             }
             baseVO.setData(thOrderForJinrongManages);
             baseVO.setSuccess(true);
@@ -320,6 +338,17 @@ public class OrderJinRongController extends BaseController {
                         orderManage.setHeka(str[8]);
                         orderManage.setXiakuan(str[9]);
                         orderManage.setXiakuan_amt(str[10]);
+
+                        //用于给A展示的数据
+                        orderManage.setZhuce_bak(str[3]);
+                        orderManage.setXinhu_bak(str[4]);
+                        orderManage.setJinjian_bak(str[5]);
+                        orderManage.setJihuo_bak(str[6]);
+                        orderManage.setShouxin_bak(str[7]);
+                        orderManage.setHeka_bak(str[8]);
+                        orderManage.setXiakuan_bak(str[9]);
+                        orderManage.setXiakuan_amt_bak(str[10]);
+
                         orderManage.setPicihao(picihao);
 
                         //根据渠道编码查询该数据是属于哪个A推荐出去的

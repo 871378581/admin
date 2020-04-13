@@ -2054,6 +2054,66 @@ public class ThOrderManageExample {
             addCriterion("`picihao` not between", value1, value2, "picihao");
             return (Criteria) this;
         }
+
+        public Criteria andShow_btnIsNull() {
+            addCriterion("`show_btn` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnIsNotNull() {
+            addCriterion("`show_btn` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnEqualTo(Integer value) {
+            addCriterion("`show_btn` =", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnNotEqualTo(Integer value) {
+            addCriterion("`show_btn` <>", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnGreaterThan(Integer value) {
+            addCriterion("`show_btn` >", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`show_btn` >=", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnLessThan(Integer value) {
+            addCriterion("`show_btn` <", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnLessThanOrEqualTo(Integer value) {
+            addCriterion("`show_btn` <=", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnIn(List<Integer> values) {
+            addCriterion("`show_btn` in", values, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnNotIn(List<Integer> values) {
+            addCriterion("`show_btn` not in", values, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnBetween(Integer value1, Integer value2) {
+            addCriterion("`show_btn` between", value1, value2, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnNotBetween(Integer value1, Integer value2) {
+            addCriterion("`show_btn` not between", value1, value2, "show_btn");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -121,6 +121,42 @@ public class ThOrderForJinrongManageSqlProvider {
             VALUES("`picihao`", "#{picihao,jdbcType=VARCHAR}");
         }
         
+        if (record.getZhuce_bak() != null) {
+            VALUES("`zhuce_bak`", "#{zhuce_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXinhu_bak() != null) {
+            VALUES("`xinhu_bak`", "#{xinhu_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJinjian_bak() != null) {
+            VALUES("`jinjian_bak`", "#{jinjian_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJihuo_bak() != null) {
+            VALUES("`jihuo_bak`", "#{jihuo_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShouxin_bak() != null) {
+            VALUES("`shouxin_bak`", "#{shouxin_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getHeka_bak() != null) {
+            VALUES("`heka_bak`", "#{heka_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXiakuan_bak() != null) {
+            VALUES("`xiakuan_bak`", "#{xiakuan_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXiakuan_amt_bak() != null) {
+            VALUES("`xiakuan_amt_bak`", "#{xiakuan_amt_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShow_btn() != null) {
+            VALUES("`show_btn`", "#{show_btn,jdbcType=INTEGER}");
+        }
+        
         return SQL();
     }
 
@@ -151,6 +187,15 @@ public class ThOrderForJinrongManageSqlProvider {
         SELECT("`modifier_account`");
         SELECT("`description`");
         SELECT("`picihao`");
+        SELECT("`zhuce_bak`");
+        SELECT("`xinhu_bak`");
+        SELECT("`jinjian_bak`");
+        SELECT("`jihuo_bak`");
+        SELECT("`shouxin_bak`");
+        SELECT("`heka_bak`");
+        SELECT("`xiakuan_bak`");
+        SELECT("`xiakuan_amt_bak`");
+        SELECT("`show_btn`");
         FROM("`th_order_for_jinrong_manage`");
         applyWhere(example, false);
         
@@ -258,6 +303,42 @@ public class ThOrderForJinrongManageSqlProvider {
             SET("`picihao` = #{record.picihao,jdbcType=VARCHAR}");
         }
         
+        if (record.getZhuce_bak() != null) {
+            SET("`zhuce_bak` = #{record.zhuce_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXinhu_bak() != null) {
+            SET("`xinhu_bak` = #{record.xinhu_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJinjian_bak() != null) {
+            SET("`jinjian_bak` = #{record.jinjian_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJihuo_bak() != null) {
+            SET("`jihuo_bak` = #{record.jihuo_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShouxin_bak() != null) {
+            SET("`shouxin_bak` = #{record.shouxin_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getHeka_bak() != null) {
+            SET("`heka_bak` = #{record.heka_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXiakuan_bak() != null) {
+            SET("`xiakuan_bak` = #{record.xiakuan_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXiakuan_amt_bak() != null) {
+            SET("`xiakuan_amt_bak` = #{record.xiakuan_amt_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShow_btn() != null) {
+            SET("`show_btn` = #{record.show_btn,jdbcType=INTEGER}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -287,6 +368,15 @@ public class ThOrderForJinrongManageSqlProvider {
         SET("`modifier_account` = #{record.modifier_account,jdbcType=VARCHAR}");
         SET("`description` = #{record.description,jdbcType=VARCHAR}");
         SET("`picihao` = #{record.picihao,jdbcType=VARCHAR}");
+        SET("`zhuce_bak` = #{record.zhuce_bak,jdbcType=VARCHAR}");
+        SET("`xinhu_bak` = #{record.xinhu_bak,jdbcType=VARCHAR}");
+        SET("`jinjian_bak` = #{record.jinjian_bak,jdbcType=VARCHAR}");
+        SET("`jihuo_bak` = #{record.jihuo_bak,jdbcType=VARCHAR}");
+        SET("`shouxin_bak` = #{record.shouxin_bak,jdbcType=VARCHAR}");
+        SET("`heka_bak` = #{record.heka_bak,jdbcType=VARCHAR}");
+        SET("`xiakuan_bak` = #{record.xiakuan_bak,jdbcType=VARCHAR}");
+        SET("`xiakuan_amt_bak` = #{record.xiakuan_amt_bak,jdbcType=VARCHAR}");
+        SET("`show_btn` = #{record.show_btn,jdbcType=INTEGER}");
         
         ThOrderForJinrongManageExample example = (ThOrderForJinrongManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -375,6 +465,42 @@ public class ThOrderForJinrongManageSqlProvider {
         
         if (record.getPicihao() != null) {
             SET("`picihao` = #{picihao,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getZhuce_bak() != null) {
+            SET("`zhuce_bak` = #{zhuce_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXinhu_bak() != null) {
+            SET("`xinhu_bak` = #{xinhu_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJinjian_bak() != null) {
+            SET("`jinjian_bak` = #{jinjian_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getJihuo_bak() != null) {
+            SET("`jihuo_bak` = #{jihuo_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShouxin_bak() != null) {
+            SET("`shouxin_bak` = #{shouxin_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getHeka_bak() != null) {
+            SET("`heka_bak` = #{heka_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXiakuan_bak() != null) {
+            SET("`xiakuan_bak` = #{xiakuan_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getXiakuan_amt_bak() != null) {
+            SET("`xiakuan_amt_bak` = #{xiakuan_amt_bak,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getShow_btn() != null) {
+            SET("`show_btn` = #{show_btn,jdbcType=INTEGER}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

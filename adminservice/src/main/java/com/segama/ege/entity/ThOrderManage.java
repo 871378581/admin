@@ -60,6 +60,8 @@ public class ThOrderManage implements Serializable {
 
     private String picihao;
 
+    private Integer show_btn;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -286,6 +288,14 @@ public class ThOrderManage implements Serializable {
         this.picihao = picihao == null ? null : picihao.trim();
     }
 
+    public Integer getShow_btn() {
+        return show_btn;
+    }
+
+    public void setShow_btn(Integer show_btn) {
+        this.show_btn = show_btn;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -320,6 +330,7 @@ public class ThOrderManage implements Serializable {
         sb.append(", channel_account=").append(channel_account);
         sb.append(", channel_code=").append(channel_code);
         sb.append(", picihao=").append(picihao);
+        sb.append(", show_btn=").append(show_btn);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

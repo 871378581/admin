@@ -167,7 +167,7 @@
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'creator_account', title: '创建人', width: 100}
               , {field: 'modifier_account', title: '修改人', width: 100}
-              , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+              , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
             ]]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
@@ -299,6 +299,16 @@
               ,content:"/adminservice/admin/ege-admin/app/order_jinrong_manage/edit.html?order_code="+data.order_code
             });
 
+          }else if(obj.event === 'edit_bak'){
+            console.log(obj.data);
+            var data = obj.data;
+            layer.open({
+              type: 2,
+              title: '编辑'
+                ,area:['100%','100%']
+              ,content:"/adminservice/admin/ege-admin/app/order_jinrong_manage/edit_bak.html?order_code="+data.order_code
+            });
+
           }
         });
 
@@ -406,8 +416,11 @@
 </script>
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
-    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
+    {{#  if(d.show_btn != 0){ }}
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑原始数据</a>
+    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit_bak">编辑A数据</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+    {{#  } }}
 </script>
 </body>
 </html>

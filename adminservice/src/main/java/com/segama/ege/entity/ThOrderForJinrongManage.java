@@ -46,6 +46,24 @@ public class ThOrderForJinrongManage implements Serializable {
 
     private String picihao;
 
+    private String zhuce_bak;
+
+    private String xinhu_bak;
+
+    private String jinjian_bak;
+
+    private String jihuo_bak;
+
+    private String shouxin_bak;
+
+    private String heka_bak;
+
+    private String xiakuan_bak;
+
+    private String xiakuan_amt_bak;
+
+    private Integer show_btn;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -216,6 +234,78 @@ public class ThOrderForJinrongManage implements Serializable {
         this.picihao = picihao == null ? null : picihao.trim();
     }
 
+    public String getZhuce_bak() {
+        return zhuce_bak;
+    }
+
+    public void setZhuce_bak(String zhuce_bak) {
+        this.zhuce_bak = zhuce_bak == null ? null : zhuce_bak.trim();
+    }
+
+    public String getXinhu_bak() {
+        return xinhu_bak;
+    }
+
+    public void setXinhu_bak(String xinhu_bak) {
+        this.xinhu_bak = xinhu_bak == null ? null : xinhu_bak.trim();
+    }
+
+    public String getJinjian_bak() {
+        return jinjian_bak;
+    }
+
+    public void setJinjian_bak(String jinjian_bak) {
+        this.jinjian_bak = jinjian_bak == null ? null : jinjian_bak.trim();
+    }
+
+    public String getJihuo_bak() {
+        return jihuo_bak;
+    }
+
+    public void setJihuo_bak(String jihuo_bak) {
+        this.jihuo_bak = jihuo_bak == null ? null : jihuo_bak.trim();
+    }
+
+    public String getShouxin_bak() {
+        return shouxin_bak;
+    }
+
+    public void setShouxin_bak(String shouxin_bak) {
+        this.shouxin_bak = shouxin_bak == null ? null : shouxin_bak.trim();
+    }
+
+    public String getHeka_bak() {
+        return heka_bak;
+    }
+
+    public void setHeka_bak(String heka_bak) {
+        this.heka_bak = heka_bak == null ? null : heka_bak.trim();
+    }
+
+    public String getXiakuan_bak() {
+        return xiakuan_bak;
+    }
+
+    public void setXiakuan_bak(String xiakuan_bak) {
+        this.xiakuan_bak = xiakuan_bak == null ? null : xiakuan_bak.trim();
+    }
+
+    public String getXiakuan_amt_bak() {
+        return xiakuan_amt_bak;
+    }
+
+    public void setXiakuan_amt_bak(String xiakuan_amt_bak) {
+        this.xiakuan_amt_bak = xiakuan_amt_bak == null ? null : xiakuan_amt_bak.trim();
+    }
+
+    public Integer getShow_btn() {
+        return show_btn;
+    }
+
+    public void setShow_btn(Integer show_btn) {
+        this.show_btn = show_btn;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -243,6 +333,15 @@ public class ThOrderForJinrongManage implements Serializable {
         sb.append(", modifier_account=").append(modifier_account);
         sb.append(", description=").append(description);
         sb.append(", picihao=").append(picihao);
+        sb.append(", zhuce_bak=").append(zhuce_bak);
+        sb.append(", xinhu_bak=").append(xinhu_bak);
+        sb.append(", jinjian_bak=").append(jinjian_bak);
+        sb.append(", jihuo_bak=").append(jihuo_bak);
+        sb.append(", shouxin_bak=").append(shouxin_bak);
+        sb.append(", heka_bak=").append(heka_bak);
+        sb.append(", xiakuan_bak=").append(xiakuan_bak);
+        sb.append(", xiakuan_amt_bak=").append(xiakuan_amt_bak);
+        sb.append(", show_btn=").append(show_btn);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

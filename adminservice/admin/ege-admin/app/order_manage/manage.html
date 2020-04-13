@@ -415,8 +415,10 @@
 </script>
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
+    {{#  if(d.show_btn != 0){ }}
     <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+    {{#  } }}
 </script>
 </body>
 </html>

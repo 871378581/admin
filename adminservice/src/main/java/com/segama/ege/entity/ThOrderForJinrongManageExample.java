@@ -1564,6 +1564,626 @@ public class ThOrderForJinrongManageExample {
             addCriterion("`picihao` not between", value1, value2, "picihao");
             return (Criteria) this;
         }
+
+        public Criteria andZhuce_bakIsNull() {
+            addCriterion("`zhuce_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakIsNotNull() {
+            addCriterion("`zhuce_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakEqualTo(String value) {
+            addCriterion("`zhuce_bak` =", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakNotEqualTo(String value) {
+            addCriterion("`zhuce_bak` <>", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakGreaterThan(String value) {
+            addCriterion("`zhuce_bak` >", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`zhuce_bak` >=", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakLessThan(String value) {
+            addCriterion("`zhuce_bak` <", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakLessThanOrEqualTo(String value) {
+            addCriterion("`zhuce_bak` <=", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakLike(String value) {
+            addCriterion("`zhuce_bak` like", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakNotLike(String value) {
+            addCriterion("`zhuce_bak` not like", value, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakIn(List<String> values) {
+            addCriterion("`zhuce_bak` in", values, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakNotIn(List<String> values) {
+            addCriterion("`zhuce_bak` not in", values, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakBetween(String value1, String value2) {
+            addCriterion("`zhuce_bak` between", value1, value2, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhuce_bakNotBetween(String value1, String value2) {
+            addCriterion("`zhuce_bak` not between", value1, value2, "zhuce_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakIsNull() {
+            addCriterion("`xinhu_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakIsNotNull() {
+            addCriterion("`xinhu_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakEqualTo(String value) {
+            addCriterion("`xinhu_bak` =", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakNotEqualTo(String value) {
+            addCriterion("`xinhu_bak` <>", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakGreaterThan(String value) {
+            addCriterion("`xinhu_bak` >", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`xinhu_bak` >=", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakLessThan(String value) {
+            addCriterion("`xinhu_bak` <", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakLessThanOrEqualTo(String value) {
+            addCriterion("`xinhu_bak` <=", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakLike(String value) {
+            addCriterion("`xinhu_bak` like", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakNotLike(String value) {
+            addCriterion("`xinhu_bak` not like", value, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakIn(List<String> values) {
+            addCriterion("`xinhu_bak` in", values, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakNotIn(List<String> values) {
+            addCriterion("`xinhu_bak` not in", values, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakBetween(String value1, String value2) {
+            addCriterion("`xinhu_bak` between", value1, value2, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXinhu_bakNotBetween(String value1, String value2) {
+            addCriterion("`xinhu_bak` not between", value1, value2, "xinhu_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakIsNull() {
+            addCriterion("`jinjian_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakIsNotNull() {
+            addCriterion("`jinjian_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakEqualTo(String value) {
+            addCriterion("`jinjian_bak` =", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakNotEqualTo(String value) {
+            addCriterion("`jinjian_bak` <>", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakGreaterThan(String value) {
+            addCriterion("`jinjian_bak` >", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`jinjian_bak` >=", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakLessThan(String value) {
+            addCriterion("`jinjian_bak` <", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakLessThanOrEqualTo(String value) {
+            addCriterion("`jinjian_bak` <=", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakLike(String value) {
+            addCriterion("`jinjian_bak` like", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakNotLike(String value) {
+            addCriterion("`jinjian_bak` not like", value, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakIn(List<String> values) {
+            addCriterion("`jinjian_bak` in", values, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakNotIn(List<String> values) {
+            addCriterion("`jinjian_bak` not in", values, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakBetween(String value1, String value2) {
+            addCriterion("`jinjian_bak` between", value1, value2, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJinjian_bakNotBetween(String value1, String value2) {
+            addCriterion("`jinjian_bak` not between", value1, value2, "jinjian_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakIsNull() {
+            addCriterion("`jihuo_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakIsNotNull() {
+            addCriterion("`jihuo_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakEqualTo(String value) {
+            addCriterion("`jihuo_bak` =", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakNotEqualTo(String value) {
+            addCriterion("`jihuo_bak` <>", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakGreaterThan(String value) {
+            addCriterion("`jihuo_bak` >", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`jihuo_bak` >=", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakLessThan(String value) {
+            addCriterion("`jihuo_bak` <", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakLessThanOrEqualTo(String value) {
+            addCriterion("`jihuo_bak` <=", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakLike(String value) {
+            addCriterion("`jihuo_bak` like", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakNotLike(String value) {
+            addCriterion("`jihuo_bak` not like", value, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakIn(List<String> values) {
+            addCriterion("`jihuo_bak` in", values, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakNotIn(List<String> values) {
+            addCriterion("`jihuo_bak` not in", values, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakBetween(String value1, String value2) {
+            addCriterion("`jihuo_bak` between", value1, value2, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andJihuo_bakNotBetween(String value1, String value2) {
+            addCriterion("`jihuo_bak` not between", value1, value2, "jihuo_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakIsNull() {
+            addCriterion("`shouxin_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakIsNotNull() {
+            addCriterion("`shouxin_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakEqualTo(String value) {
+            addCriterion("`shouxin_bak` =", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakNotEqualTo(String value) {
+            addCriterion("`shouxin_bak` <>", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakGreaterThan(String value) {
+            addCriterion("`shouxin_bak` >", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`shouxin_bak` >=", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakLessThan(String value) {
+            addCriterion("`shouxin_bak` <", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakLessThanOrEqualTo(String value) {
+            addCriterion("`shouxin_bak` <=", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakLike(String value) {
+            addCriterion("`shouxin_bak` like", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakNotLike(String value) {
+            addCriterion("`shouxin_bak` not like", value, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakIn(List<String> values) {
+            addCriterion("`shouxin_bak` in", values, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakNotIn(List<String> values) {
+            addCriterion("`shouxin_bak` not in", values, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakBetween(String value1, String value2) {
+            addCriterion("`shouxin_bak` between", value1, value2, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShouxin_bakNotBetween(String value1, String value2) {
+            addCriterion("`shouxin_bak` not between", value1, value2, "shouxin_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakIsNull() {
+            addCriterion("`heka_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakIsNotNull() {
+            addCriterion("`heka_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakEqualTo(String value) {
+            addCriterion("`heka_bak` =", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakNotEqualTo(String value) {
+            addCriterion("`heka_bak` <>", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakGreaterThan(String value) {
+            addCriterion("`heka_bak` >", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`heka_bak` >=", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakLessThan(String value) {
+            addCriterion("`heka_bak` <", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakLessThanOrEqualTo(String value) {
+            addCriterion("`heka_bak` <=", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakLike(String value) {
+            addCriterion("`heka_bak` like", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakNotLike(String value) {
+            addCriterion("`heka_bak` not like", value, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakIn(List<String> values) {
+            addCriterion("`heka_bak` in", values, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakNotIn(List<String> values) {
+            addCriterion("`heka_bak` not in", values, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakBetween(String value1, String value2) {
+            addCriterion("`heka_bak` between", value1, value2, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeka_bakNotBetween(String value1, String value2) {
+            addCriterion("`heka_bak` not between", value1, value2, "heka_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakIsNull() {
+            addCriterion("`xiakuan_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakIsNotNull() {
+            addCriterion("`xiakuan_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakEqualTo(String value) {
+            addCriterion("`xiakuan_bak` =", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakNotEqualTo(String value) {
+            addCriterion("`xiakuan_bak` <>", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakGreaterThan(String value) {
+            addCriterion("`xiakuan_bak` >", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`xiakuan_bak` >=", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakLessThan(String value) {
+            addCriterion("`xiakuan_bak` <", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakLessThanOrEqualTo(String value) {
+            addCriterion("`xiakuan_bak` <=", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakLike(String value) {
+            addCriterion("`xiakuan_bak` like", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakNotLike(String value) {
+            addCriterion("`xiakuan_bak` not like", value, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakIn(List<String> values) {
+            addCriterion("`xiakuan_bak` in", values, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakNotIn(List<String> values) {
+            addCriterion("`xiakuan_bak` not in", values, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakBetween(String value1, String value2) {
+            addCriterion("`xiakuan_bak` between", value1, value2, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_bakNotBetween(String value1, String value2) {
+            addCriterion("`xiakuan_bak` not between", value1, value2, "xiakuan_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakIsNull() {
+            addCriterion("`xiakuan_amt_bak` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakIsNotNull() {
+            addCriterion("`xiakuan_amt_bak` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakEqualTo(String value) {
+            addCriterion("`xiakuan_amt_bak` =", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakNotEqualTo(String value) {
+            addCriterion("`xiakuan_amt_bak` <>", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakGreaterThan(String value) {
+            addCriterion("`xiakuan_amt_bak` >", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakGreaterThanOrEqualTo(String value) {
+            addCriterion("`xiakuan_amt_bak` >=", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakLessThan(String value) {
+            addCriterion("`xiakuan_amt_bak` <", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakLessThanOrEqualTo(String value) {
+            addCriterion("`xiakuan_amt_bak` <=", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakLike(String value) {
+            addCriterion("`xiakuan_amt_bak` like", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakNotLike(String value) {
+            addCriterion("`xiakuan_amt_bak` not like", value, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakIn(List<String> values) {
+            addCriterion("`xiakuan_amt_bak` in", values, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakNotIn(List<String> values) {
+            addCriterion("`xiakuan_amt_bak` not in", values, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakBetween(String value1, String value2) {
+            addCriterion("`xiakuan_amt_bak` between", value1, value2, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andXiakuan_amt_bakNotBetween(String value1, String value2) {
+            addCriterion("`xiakuan_amt_bak` not between", value1, value2, "xiakuan_amt_bak");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnIsNull() {
+            addCriterion("`show_btn` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnIsNotNull() {
+            addCriterion("`show_btn` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnEqualTo(Integer value) {
+            addCriterion("`show_btn` =", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnNotEqualTo(Integer value) {
+            addCriterion("`show_btn` <>", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnGreaterThan(Integer value) {
+            addCriterion("`show_btn` >", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`show_btn` >=", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnLessThan(Integer value) {
+            addCriterion("`show_btn` <", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnLessThanOrEqualTo(Integer value) {
+            addCriterion("`show_btn` <=", value, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnIn(List<Integer> values) {
+            addCriterion("`show_btn` in", values, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnNotIn(List<Integer> values) {
+            addCriterion("`show_btn` not in", values, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnBetween(Integer value1, Integer value2) {
+            addCriterion("`show_btn` between", value1, value2, "show_btn");
+            return (Criteria) this;
+        }
+
+        public Criteria andShow_btnNotBetween(Integer value1, Integer value2) {
+            addCriterion("`show_btn` not between", value1, value2, "show_btn");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

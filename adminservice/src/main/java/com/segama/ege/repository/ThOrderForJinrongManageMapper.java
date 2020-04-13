@@ -39,7 +39,12 @@ public interface ThOrderForJinrongManageMapper {
         "`heka`, `xiakuan`, `xiakuan_amt`, ",
         "`gmt_create`, `gmt_modify`, ",
         "`creator_account`, `modifier_account`, ",
-        "`description`, `picihao`)",
+        "`description`, `picihao`, ",
+        "`zhuce_bak`, `xinhu_bak`, ",
+        "`jinjian_bak`, `jihuo_bak`, ",
+        "`shouxin_bak`, `heka_bak`, ",
+        "`xiakuan_bak`, `xiakuan_amt_bak`, ",
+        "`show_btn`)",
         "values (#{operate_type,jdbcType=VARCHAR}, #{order_code,jdbcType=VARCHAR}, ",
         "#{order_time,jdbcType=VARCHAR}, #{product_name,jdbcType=VARCHAR}, ",
         "#{channel_account,jdbcType=VARCHAR}, #{channel_code,jdbcType=VARCHAR}, ",
@@ -48,7 +53,12 @@ public interface ThOrderForJinrongManageMapper {
         "#{heka,jdbcType=VARCHAR}, #{xiakuan,jdbcType=VARCHAR}, #{xiakuan_amt,jdbcType=VARCHAR}, ",
         "#{gmt_create,jdbcType=TIMESTAMP}, #{gmt_modify,jdbcType=TIMESTAMP}, ",
         "#{creator_account,jdbcType=VARCHAR}, #{modifier_account,jdbcType=VARCHAR}, ",
-        "#{description,jdbcType=VARCHAR}, #{picihao,jdbcType=VARCHAR})"
+        "#{description,jdbcType=VARCHAR}, #{picihao,jdbcType=VARCHAR}, ",
+        "#{zhuce_bak,jdbcType=VARCHAR}, #{xinhu_bak,jdbcType=VARCHAR}, ",
+        "#{jinjian_bak,jdbcType=VARCHAR}, #{jihuo_bak,jdbcType=VARCHAR}, ",
+        "#{shouxin_bak,jdbcType=VARCHAR}, #{heka_bak,jdbcType=VARCHAR}, ",
+        "#{xiakuan_bak,jdbcType=VARCHAR}, #{xiakuan_amt_bak,jdbcType=VARCHAR}, ",
+        "#{show_btn,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(ThOrderForJinrongManage record);
@@ -79,7 +89,16 @@ public interface ThOrderForJinrongManageMapper {
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
-        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR)
+        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR),
+        @Result(column="zhuce_bak", property="zhuce_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="xinhu_bak", property="xinhu_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jinjian_bak", property="jinjian_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jihuo_bak", property="jihuo_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="shouxin_bak", property="shouxin_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="heka_bak", property="heka_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="xiakuan_bak", property="xiakuan_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="xiakuan_amt_bak", property="xiakuan_amt_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="show_btn", property="show_btn", jdbcType=JdbcType.INTEGER)
     })
     List<ThOrderForJinrongManage> selectByExample(ThOrderForJinrongManageExample example);
 
@@ -88,7 +107,8 @@ public interface ThOrderForJinrongManageMapper {
         "`id`, `operate_type`, `order_code`, `order_time`, `product_name`, `channel_account`, ",
         "`channel_code`, `zhuce`, `xinhu`, `jinjian`, `jihuo`, `shouxin`, `heka`, `xiakuan`, ",
         "`xiakuan_amt`, `gmt_create`, `gmt_modify`, `creator_account`, `modifier_account`, ",
-        "`description`, `picihao`",
+        "`description`, `picihao`, `zhuce_bak`, `xinhu_bak`, `jinjian_bak`, `jihuo_bak`, ",
+        "`shouxin_bak`, `heka_bak`, `xiakuan_bak`, `xiakuan_amt_bak`, `show_btn`",
         "from `th_order_for_jinrong_manage`",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
@@ -113,7 +133,16 @@ public interface ThOrderForJinrongManageMapper {
         @Result(column="creator_account", property="creator_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="modifier_account", property="modifier_account", jdbcType=JdbcType.VARCHAR),
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
-        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR)
+        @Result(column="picihao", property="picihao", jdbcType=JdbcType.VARCHAR),
+        @Result(column="zhuce_bak", property="zhuce_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="xinhu_bak", property="xinhu_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jinjian_bak", property="jinjian_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="jihuo_bak", property="jihuo_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="shouxin_bak", property="shouxin_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="heka_bak", property="heka_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="xiakuan_bak", property="xiakuan_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="xiakuan_amt_bak", property="xiakuan_amt_bak", jdbcType=JdbcType.VARCHAR),
+        @Result(column="show_btn", property="show_btn", jdbcType=JdbcType.INTEGER)
     })
     ThOrderForJinrongManage selectByPrimaryKey(Long id);
 
@@ -147,7 +176,16 @@ public interface ThOrderForJinrongManageMapper {
           "`creator_account` = #{creator_account,jdbcType=VARCHAR},",
           "`modifier_account` = #{modifier_account,jdbcType=VARCHAR},",
           "`description` = #{description,jdbcType=VARCHAR},",
-          "`picihao` = #{picihao,jdbcType=VARCHAR}",
+          "`picihao` = #{picihao,jdbcType=VARCHAR},",
+          "`zhuce_bak` = #{zhuce_bak,jdbcType=VARCHAR},",
+          "`xinhu_bak` = #{xinhu_bak,jdbcType=VARCHAR},",
+          "`jinjian_bak` = #{jinjian_bak,jdbcType=VARCHAR},",
+          "`jihuo_bak` = #{jihuo_bak,jdbcType=VARCHAR},",
+          "`shouxin_bak` = #{shouxin_bak,jdbcType=VARCHAR},",
+          "`heka_bak` = #{heka_bak,jdbcType=VARCHAR},",
+          "`xiakuan_bak` = #{xiakuan_bak,jdbcType=VARCHAR},",
+          "`xiakuan_amt_bak` = #{xiakuan_amt_bak,jdbcType=VARCHAR},",
+          "`show_btn` = #{show_btn,jdbcType=INTEGER}",
         "where `id` = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ThOrderForJinrongManage record);

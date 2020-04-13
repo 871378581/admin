@@ -31,8 +31,8 @@
           <i class="layui-icon">&#xe67c;</i>导入
         </button>
         <a class="layui-btn btn-add btn-default" style="display: none" id="btn-down">下载导入模版</a>
-        <a class="layui-btn btn-add btn-default" id="batch_online" >批量上线</a>
-        <a class="layui-btn btn-add btn-default" id="batch_off_line" >批量下线</a>
+        <a class="layui-btn btn-add btn-default"  style="display: none"  id="batch_online" >批量上线</a>
+        <a class="layui-btn btn-add btn-default" style="display: none"  id="batch_off_line" >批量下线</a>
     </span>
 
     <span>
@@ -229,11 +229,15 @@
                         $("#order_op_type").show();
                         $("#import").show();
                         $("#btn-down").show();
+                        $("#batch_online").show();
+                        $("#batch_off_line").show();
                     }
                 }else{
                     $("#order_op_type").hide();
                     $("#import").hide();
                     $("#btn-down").hide();
+                    $("#batch_online").hide();
+                    $("#batch_off_line").hide();
                 }
 
             }

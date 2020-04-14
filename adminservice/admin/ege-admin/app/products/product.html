@@ -18,14 +18,14 @@
 
 <div class="userInput" style="width: 100%;">
     <div class="bannerImg" align="">
-        <img alt="banner1" id="banner1">
+        <img  id="banner1">
     </div>
 </div>
 
-<div class="con_" style="width: 100%;background:black">
+<div class="con_" style="width: 100%;background:black;display: none" id="main">
 
 
-    <div class="container" style="width: 90.5%;margin: auto">
+    <div class="container" style="width: 100%;margin: auto">
 
         <form method="post" name="form1" class="loginPage">
             <section class="fill-wrapper">
@@ -50,7 +50,7 @@
                     </ul>
                 </div>
 
-                <div class="fill">
+                <div class="fill" style="display: none">
 
                     <h2  style="display: block;background-color: #D4D4D4;font-weight: 900" hidden=""><b>为方便领取权益，请填写QQ号码以便客服与您联系</b></h2>
 
@@ -77,7 +77,7 @@
             </section>
 
 
-            <section class="apply" style="background-color: #f7f7f7;color: #505050;margin-top: -1rem">
+            <section class="apply" style="background-color: #f7f7f7;color: #505050;margin-top: -1rem;border-radius: unset;">
 
 
                 <div class="protocol-div" style="margin-top: -1rem;">
@@ -127,7 +127,7 @@
 
 
 <div class="userInput" style="width: 100%">
-    <div class="bannerImg_for" align="center"><img id="banner2" alt="banner2"></div>
+    <div class="bannerImg_for" align="center"><img id="banner2"></div>
 </div>
 
 <input id="card_type" value="dwk" type="text" hidden="">
@@ -225,6 +225,8 @@
                                 $("#banner1").attr("src", banner1);
                                 var banner2 = result.data.banner2;
                                 $("#banner2").attr("src", banner2);
+                                $("#main").show();
+
                                 var html = "";
                                 sub_product = JSON.parse(sub_product);
                                 for(var i=0;i<sub_product.length;i++){

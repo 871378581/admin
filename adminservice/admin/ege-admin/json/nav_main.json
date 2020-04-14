@@ -62,6 +62,10 @@
           "text": "销售记录管理",
           "icon": "&#xe621;",
           "href": "app/sale_extension_manage/manage.html"
+        },{
+          "text": "销售实收管理",
+          "icon": "&#xe621;",
+          "href": "app/sale_extension_manage/shishou_manage.html"
         }]
     },
     {

@@ -1,5 +1,7 @@
 package com.segama.ege.admin.controller;
 
+import com.google.common.collect.Lists;
+import com.segama.ege.admin.response.ShishouOrder;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.entity.*;
 import com.segama.ege.repository.AdminUserMapper;
@@ -8,6 +10,9 @@ import com.segama.ege.repository.ThSaleExtensionManageMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,6 +117,139 @@ public class SaleExtensionManageController extends BaseController {
                 }
             }
             baseVO.setData(adminMenus);
+            baseVO.setSuccess(true);
+            baseVO.setCount(count);
+            baseVO.setCode(0);
+        }catch (Exception e){
+            baseVO.setSuccess(false);
+            LOG.error("ThSaleExtensionManageController#list error",e);
+        }
+        return baseVO;
+    }
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @RequestMapping("/shishou_list")
+    public BaseVO shishou_list(
+            @RequestParam(value = "channel_A",required = false) String channel_A,
+            @RequestParam(value = "channel_b",required = false) String channel_b,
+            @RequestParam(value = "user_name",required = false) String user_name,
+            @RequestParam(value = "phone",required = false) String phone,
+            @RequestParam(value = "order_time",required = false) String order_time,
+            @RequestParam(value = "type",required = false) String type
+            ,@RequestParam(value = "account") String account
+            ,@RequestParam("limit") Integer pageSize,
+            @RequestParam("page") Integer pageIndex) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            List<Object> params = Lists.newArrayList();
+            StringBuffer sql = new StringBuffer();
+            StringBuffer sqlCount = new StringBuffer();
+            sqlCount.append("select count(0) " +
+                    "            from th_order_manage a,th_sale_extension_manage b\n" +
+                    "            where left(a.customer_name,1) = left(b.user_name,1)\n" +
+                    "            and left(a.customer_contact_num,4) =  left(b.phone,4)\n" +
+                    "            and right(a.customer_contact_num,4) =  right(b.phone,4) ");
+
+            sql.append("select\n" +
+                        "                    a.order_code,\n" +
+                        "                    a.order_time,\n" +
+                        "                    a.order_phone_number,\n" +
+                        "                    a.prov,\n" +
+                        "                    a.city,\n" +
+                        "                    a.order_status,\n" +
+                        "                    a.customer_name,\n" +
+                        "                    a.customer_contact_num,\n" +
+                        "                    a.good_name,\n" +
+                        "                    a.address,\n" +
+                        "                    a.active_status,\n" +
+                        "                    a.cudian_code,\n" +
+                        "                    a.shoucong_amt,\n" +
+                        "                    a.shoucong_time,\n" +
+                        "                    a.xiehaozhuanwang_type,\n" +
+                        "                    a.zhuanhualvtichu_reason,\n" +
+                        "                    a.channel_account,\n" +
+                        "                    a.channel_code,\n" +
+                        "                    a.picihao,\n" +
+                        "                    b.owner_account,\n" +
+                        "                    b.create_account\n" +
+                        "            from th_order_manage a,th_sale_extension_manage b\n" +
+                        "            where left(a.customer_name,1) = left(b.user_name,1)\n" +
+                        "            and left(a.customer_contact_num,4) =  left(b.phone,4)\n" +
+                        "            and right(a.customer_contact_num,4) =  right(b.phone,4) ");
+            if(!StringUtils.isEmpty(order_time)){
+                String[] time = order_time.split(" - ");
+                params.add(time[0]);
+                params.add(time[1]);
+                sql.append(" and  a.order_time between ? and ?");
+                sqlCount.append(" and  a.order_time between ? and ?");
+            }
+
+            if(!StringUtils.isEmpty(phone)){
+                params.add(phone);
+                sql.append(" and  b.phone = ?");
+                sqlCount.append(" and  b.phone = ?");
+            }
+            if(!StringUtils.isEmpty(user_name)){
+                params.add(user_name);
+                sql.append(" and  b.user_name = ?");
+                sqlCount.append(" and  b.user_name = ?");
+            }
+
+            if(!StringUtils.isEmpty(order_time)){
+                String[] time = order_time.split(" - ");
+                params.add(time[0]);
+                params.add(time[1]);
+                sql.append(" and  a.order_time between ? and ?");
+                sqlCount.append(" and  a.order_time between ? and ?");
+            }
+            if(!showAllUser(account)){
+                AdminUserExample example1 = new AdminUserExample();
+                example1.createCriteria().andAccountEqualTo(account);
+                List<AdminUser> adminUsers = adminUserMapper.selectByExample(example1);
+                if(!CollectionUtils.isEmpty(adminUsers)){
+                    AdminUser adminUser = adminUsers.get(0);
+                    if(adminUser.getChannel_type().equals(2)){
+                        sql.append(" and b.owner_account = ? ");
+                        sqlCount.append(" and b.owner_account = ? ");
+                        params.add(account);
+                    }else if(adminUser.getChannel_type().equals(1)){
+                        sql.append(" and b.create_account = ?");
+                        sqlCount.append(" and b.create_account = ?");
+                        params.add(account);
+                    }
+                }
+            }
+            if(!StringUtils.isEmpty(channel_b)){
+                sql.append(" and b.owner_account = ? ");
+                sqlCount.append(" and b.owner_account = ? ");
+                params.add(channel_b);
+            }
+            if(!StringUtils.isEmpty(channel_A)){
+                sql.append(" and b.create_account = ?");
+                sqlCount.append(" and b.create_account = ?");
+                params.add(channel_A);
+            }
+            Integer count = 0;
+
+            Integer count2 = jdbcTemplate.queryForObject(sqlCount.toString(), params.toArray(),
+                    Integer.class);
+            if(count2!=null){
+                count= count2;
+            }
+
+            params.add(pageIndex-1);
+            params.add(pageSize);
+            sql.append(" limit ?,? ");
+            List<ShishouOrder> query = Lists.newArrayList();
+            List<ShishouOrder> result = jdbcTemplate.query(sql.toString(), params.toArray(),
+                    new BeanPropertyRowMapper<>(ShishouOrder.class));
+            if(!CollectionUtils.isEmpty(result)){
+                query=result;
+            }
+
+            baseVO.setData(query);
             baseVO.setSuccess(true);
             baseVO.setCount(count);
             baseVO.setCode(0);

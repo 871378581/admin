@@ -25,7 +25,7 @@
         <!--<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>-->
     </span>
     <span>
-        <form class="layui-form" style="float: left">
+        <form class="layui-form" id="my_form" style="float: left;display: none" >
             <div class="layui-inline">
                   <label class="layui-form-label">产品</label>
                   <div class="layui-input-inline">
@@ -116,6 +116,9 @@
             }
         });
 
+        if(localStorage.getItem("channelType")!=null && localStorage.getItem("channelType")!="2"){
+            $("#my_form").show();
+        }
         // 获取选中行
         table.on('checkbox(dataCheck)', function (obj) {
             layer.msg('123');

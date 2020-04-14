@@ -99,6 +99,7 @@ public class InfoAddController {
             } else {
 
                 ThTemplateManageExample example = new ThTemplateManageExample();
+                example.createCriteria().andTemplate_codeEqualTo(t_code);
                 List<ThTemplateManage> thTemplateManages = thTemplateManageMapper.selectByExample(example);
                 if(!CollectionUtils.isEmpty(thTemplateManages)){
                     baseVO.setData(thTemplateManages.get(0));

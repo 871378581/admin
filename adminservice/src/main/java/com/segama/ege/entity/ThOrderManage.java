@@ -62,6 +62,8 @@ public class ThOrderManage implements Serializable {
 
     private Integer show_btn;
 
+    private String order_id;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -296,6 +298,14 @@ public class ThOrderManage implements Serializable {
         this.show_btn = show_btn;
     }
 
+    public String getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id == null ? null : order_id.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -331,6 +341,7 @@ public class ThOrderManage implements Serializable {
         sb.append(", channel_code=").append(channel_code);
         sb.append(", picihao=").append(picihao);
         sb.append(", show_btn=").append(show_btn);
+        sb.append(", order_id=").append(order_id);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

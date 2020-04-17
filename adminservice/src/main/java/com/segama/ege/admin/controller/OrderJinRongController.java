@@ -139,6 +139,103 @@ public class OrderJinRongController extends BaseController {
         return baseVO;
     }
 
+    private String ZHUCE="zhuce";
+    private String XINHU="xinhu";
+    private String JINJIAN="jinjian";
+    private String JIHUO="jihuo";
+    private String SHOUXIN="shouxin";
+    private String HEKA="heka";
+    private String XIAKUAN="xiakuan";
+    private String XIAKUAN_AMT="xiakuan_amt";
+
+    @RequestMapping("/batch_edit")
+    public BaseVO batch_edit(@RequestParam("ids") String ids,
+                               @RequestParam("ratio") Double ratio,
+                               @RequestParam("column") String column,
+                               @RequestParam("account") String account) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            if(StringUtils.isEmpty(ids) ||StringUtils.isEmpty(account) ||StringUtils.isEmpty(column) ||ratio==null ){
+                baseVO.setErrorMsg("请检查必填参数是否填写完整！");
+                baseVO.setSuccess(false);
+                return baseVO;
+            }
+            String[] split = ids.split(",");
+            for (String s : split) {
+                ThOrderForJinrongManage orderManage = thOrderForJinrongManageMapper.selectByPrimaryKey(Long.valueOf(s));
+
+                if(ZHUCE.equals(column)){
+                    String source = orderManage.getZhuce();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setZhuce_bak(format);
+                    }
+                }else if(XINHU.equals(column)){
+                    String source = orderManage.getXinhu();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setXinhu_bak(format);
+                    }
+
+                }else if(JINJIAN.equals(column)){
+                    String source = orderManage.getJinjian();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setJinjian_bak(format);
+                    }
+                }else if(JIHUO.equals(column)){
+                    String source = orderManage.getJihuo();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setJihuo_bak(format);
+                    }
+                }else if(SHOUXIN.equals(column)){
+                    String source = orderManage.getShouxin();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setShouxin_bak(format);
+                    }
+                }else if(HEKA.equals(column)){
+                    String source = orderManage.getHeka();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setHeka_bak(format);
+                    }
+                }else if(XIAKUAN.equals(column)){
+                    String source = orderManage.getXiakuan();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setXiakuan_bak(format);
+                    }
+                }else if(XIAKUAN_AMT.equals(column)){
+                    String source = orderManage.getXiakuan_amt();
+                    if(!StringUtils.isEmpty(source)){
+                        Double target = Double.valueOf(source) * ratio;
+                        String format = String.format("%.2f", target);
+                        orderManage.setXiakuan_amt_bak(format);
+                    }
+                }
+                orderManage.setGmt_modify(new Date());
+                orderManage.setModifier_account(account);
+                thOrderForJinrongManageMapper.updateByPrimaryKey(orderManage);
+            }
+
+            baseVO.setSuccess(true);
+        } catch (Exception e) {
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("编辑异常！");
+            LOG.error("ThOrderManageController#edit error",e);
+        }
+        return baseVO;
+    }
+
     @RequestMapping("/edit")
     public BaseVO edit(ThOrderForJinrongManage thOrderForJinrongManageNew,
                     @RequestParam("account") String account) {

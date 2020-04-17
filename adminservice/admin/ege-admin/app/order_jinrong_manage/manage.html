@@ -33,6 +33,7 @@
         <a class="layui-btn btn-add btn-default" style="display: none" id="btn-down">下载导入模版</a>
         <a class="layui-btn btn-add btn-default"  style="display: none"  id="batch_online" >批量上线</a>
         <a class="layui-btn btn-add btn-default" style="display: none"  id="batch_off_line" >批量下线</a>
+        <a class="layui-btn btn-add btn-default" style="display: none"  id="batch_edit" >批量修改</a>
     </span>
 
     <span>
@@ -154,14 +155,23 @@
               //渠道码，注册，新户，进件，激活，授信，核卡，下款，下款金额。
               , {field: 'channel_code', title: '渠道码', width: 120}
               , {field: 'product_name', title: '产品名称', width: 120}
-              , {field: 'zhuce', title: '注册', width: 120}
-              , {field: 'xinhu', title: '新户', width: 120}
-              , {field: 'jinjian', title: '进件', width: 120}
-              , {field: 'jihuo', title: '激活', width: 120}
-              , {field: 'shouxin', title: '授信', width: 120}
-              , {field: 'heka', title: '核卡', width: 120}
-              , {field: 'xiakuan', title: '下款', width: 120}
-              , {field: 'xiakuan_amt', title: '下款金额', width: 120}
+
+              , {field: 'zhuce', title: '注册（原）', width: 120}
+              , {field: 'zhuce_bak', title: '注册（改）', width: 120}
+              , {field: 'xinhu', title: '新户（原）', width: 120}
+              , {field: 'xinhu_bak', title: '新户（改）', width: 120}
+              , {field: 'jinjian', title: '进件（原）', width: 120}
+              , {field: 'jinjian_bak', title: '进件（改）', width: 120}
+              , {field: 'jihuo', title: '激活（原）', width: 120}
+              , {field: 'jihuo_bak', title: '激活（改）', width: 120}
+              , {field: 'shouxin', title: '授信（原）', width: 120}
+              , {field: 'shouxin_bak', title: '授信（改）', width: 120}
+              , {field: 'heka', title: '核卡（原）', width: 120}
+              , {field: 'heka_bak', title: '核卡（改）', width: 120}
+              , {field: 'xiakuan', title: '下款（原）', width: 120}
+              , {field: 'xiakuan_bak', title: '下款（改）', width: 120}
+              , {field: 'xiakuan_amt', title: '下款金额（原）', width: 120}
+              , {field: 'xiakuan_amt_bak', title: '下款金额（改）', width: 120}
 
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
@@ -231,6 +241,7 @@
                         $("#btn-down").show();
                         $("#batch_online").show();
                         $("#batch_off_line").show();
+                        $("#batch_edit").show();
                     }
                 }else{
                     $("#order_op_type").hide();
@@ -238,6 +249,7 @@
                     $("#btn-down").hide();
                     $("#batch_online").hide();
                     $("#batch_off_line").hide();
+                    $("#batch_edit").hide();
                 }
 
             }
@@ -347,6 +359,27 @@
                 }
             });
 
+        });
+
+        // 获取选中数据
+        $('#batch_edit').on('click', function () {
+            var checkStatus = table.checkStatus('dataCheck')
+                ,data = checkStatus.data;
+            if(data.length==0){
+                layer.alert("请勾选数据再操作！");
+                return false
+            }
+            var idArr=[];
+            for(var i=0;i<data.length;i++){
+                idArr.push(data[i].id);
+            }
+
+            layer.open({
+                type: 2,
+                title: '批量编辑'
+                ,area:['100%','100%']
+                ,content:"/adminservice/admin/ege-admin/app/order_jinrong_manage/batch_edit.html?ids="+idArr.join(",")
+            });
         });
 
         // 获取选中数据

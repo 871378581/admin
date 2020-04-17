@@ -153,6 +153,10 @@ public class ThOrderManageSqlProvider {
             VALUES("`show_btn`", "#{show_btn,jdbcType=INTEGER}");
         }
         
+        if (record.getOrder_id() != null) {
+            VALUES("`order_id`", "#{order_id,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
@@ -191,6 +195,7 @@ public class ThOrderManageSqlProvider {
         SELECT("`channel_code`");
         SELECT("`picihao`");
         SELECT("`show_btn`");
+        SELECT("`order_id`");
         FROM("`th_order_manage`");
         applyWhere(example, false);
         
@@ -330,6 +335,10 @@ public class ThOrderManageSqlProvider {
             SET("`show_btn` = #{record.show_btn,jdbcType=INTEGER}");
         }
         
+        if (record.getOrder_id() != null) {
+            SET("`order_id` = #{record.order_id,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -367,6 +376,7 @@ public class ThOrderManageSqlProvider {
         SET("`channel_code` = #{record.channel_code,jdbcType=VARCHAR}");
         SET("`picihao` = #{record.picihao,jdbcType=VARCHAR}");
         SET("`show_btn` = #{record.show_btn,jdbcType=INTEGER}");
+        SET("`order_id` = #{record.order_id,jdbcType=VARCHAR}");
         
         ThOrderManageExample example = (ThOrderManageExample) parameter.get("example");
         applyWhere(example, true);
@@ -487,6 +497,10 @@ public class ThOrderManageSqlProvider {
         
         if (record.getShow_btn() != null) {
             SET("`show_btn` = #{show_btn,jdbcType=INTEGER}");
+        }
+        
+        if (record.getOrder_id() != null) {
+            SET("`order_id` = #{order_id,jdbcType=VARCHAR}");
         }
         
         WHERE("`id` = #{id,jdbcType=BIGINT}");

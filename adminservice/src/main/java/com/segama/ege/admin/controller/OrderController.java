@@ -85,7 +85,11 @@ public class OrderController extends BaseController {
                 thOrderManages = thOrderManageMapper.selectByExample(thOrderManageExample);
                 if(!CollectionUtils.isEmpty(thOrderManages)){
                     for (ThOrderManage orderManage : thOrderManages) {
-                        orderManage.setShow_btn(0);//不显示按钮
+                        if(!showAllUser(account)) {
+                            orderManage.setShow_btn(0);//不显示按钮
+                        }else {
+                            orderManage.setShow_btn(1);//显示按钮
+                        }
                     }
                 }
             }
@@ -277,7 +281,7 @@ public class OrderController extends BaseController {
                         int firstCellNum = row.getFirstCellNum();
                         int lastCellNum = row.getLastCellNum();
                         ThOrderManage orderManage = new ThOrderManage();
-                        String[] str = new String[18];
+                        String[] str = new String[19];
 
                         //列
 
@@ -335,6 +339,7 @@ public class OrderController extends BaseController {
                         orderManage.setXiehaozhuanwang_type(str[15]);
                         orderManage.setZhuanhualvtichu_reason(str[16]);
                         orderManage.setChannel_code(str[17]);
+                        orderManage.setOrder_id(str[18]);
                         orderManage.setPicihao(picihao);
 
                         //根据渠道编码查询该数据是属于哪个A推荐出去的
@@ -361,7 +366,24 @@ public class OrderController extends BaseController {
                         for (int i=0;i<list.size();i++) {
 
                             try {
-                                thOrderManageMapper.insert(list.get(i));
+                                ThOrderManageExample example = new ThOrderManageExample();
+                                example.createCriteria().andOrder_idEqualTo(list.get(i).getOrder_id());
+                                List<ThOrderManage> thOrderManages = thOrderManageMapper.selectByExample(example);
+                                if(!CollectionUtils.isEmpty(thOrderManages)){
+                                    ThOrderManage orderManage = thOrderManages.get(0);
+                                    ThOrderManage source = list.get(i);
+                                    source.setModifier_account(null);
+                                    source.setGmt_modify(null);
+                                    source.setGmt_create(null);
+                                    source.setCreator_account(null);
+                                    BeanUtils.copyProperties(source, orderManage);
+                                    orderManage.setGmt_modify(new Date());
+                                    orderManage.setModifier_account(account);
+                                    thOrderManageMapper.updateByPrimaryKey(orderManage);
+                                }else{
+
+                                    thOrderManageMapper.insert(list.get(i));
+                                }
                             }catch (Exception e) {
                                 sb.append("第"+(i+1)+"条导入失败；失败原因:"+e.getMessage());
                             }

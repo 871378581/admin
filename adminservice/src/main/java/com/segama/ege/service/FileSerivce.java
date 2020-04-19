@@ -19,12 +19,23 @@ public class FileSerivce {
     private static String SYSTEM_IMAGE_LOCATION = "/Users/mac/Desktop/photos";
     //图片访问地址 需要配置nginx
     private static String SYSTEM_IMAGE_REPO_PREFIX = "/photos/";
+    private static String SYSTEM_CURRENT_API_HOST_KEY = "SYSTEM_CURRENT_API_HOST_KEY";
+
+    @Autowired
+    ConfigService configService;
 
     public String saveStreamImg(InputStream inputStream) throws IOException {
         String fileName = UUID.randomUUID() + ".jpg";
         File file = new File(SYSTEM_IMAGE_LOCATION, fileName);
         FileUtils.copyInputStreamToFile(inputStream, file);
-        return SYSTEM_CURRENT_API_HOST + SYSTEM_IMAGE_REPO_PREFIX + fileName;
+        try {
+            String system_current_api_host_key = configService.get(SYSTEM_CURRENT_API_HOST_KEY);
+            return system_current_api_host_key + SYSTEM_IMAGE_REPO_PREFIX + fileName;
+
+        } catch (Exception e) {
+            throw new RuntimeException("SYSTEM_CURRENT_API_HOST_KEY get config error");
+        }
+
     }
 
     /**

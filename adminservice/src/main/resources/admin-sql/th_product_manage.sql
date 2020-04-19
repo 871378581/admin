@@ -6,6 +6,7 @@ CREATE TABLE `th_product_manage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `business_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `business_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_code` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_type` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

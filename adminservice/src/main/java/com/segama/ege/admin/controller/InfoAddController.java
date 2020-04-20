@@ -52,10 +52,17 @@ public class InfoAddController {
             thSaleExtensionManage.setCode(UUIDUtils.UUID());
             if(!StringUtils.isEmpty(share_url_code)){
                 ThUrlManageExample example = new ThUrlManageExample();
-                example.createCriteria().andShare_url_codeEqualTo(share_url_code);
+                example.createCriteria().andShare_url_codeLike(share_url_code+"%");
                 List<ThUrlManage> thUrlManages = thUrlManageMapper.selectByExample(example);
                 if(!CollectionUtils.isEmpty(thUrlManages)){
-                    String url = thUrlManages.get(0).getUrl();
+                    ThUrlManage thUrlManage = thUrlManages.get(0);
+                    String url = thUrlManage.getUrl();
+                    String share_url_code1 = thUrlManage.getShare_url_code();
+                    if(share_url_code.split("_").length==3
+                            && share_url_code1.length()!=share_url_code.length()){
+
+                        url=url.split("&")[0]+"&code="+share_url_code;
+                    }
                     thSaleExtensionManage.setRequest_url(url);
                 }
                 String[] shareCodeArr = share_url_code.split("_");

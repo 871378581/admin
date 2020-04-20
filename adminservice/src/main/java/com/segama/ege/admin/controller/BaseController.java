@@ -7,10 +7,12 @@ import com.segama.ege.entity.AdminUserRoleRelationExample;
 import com.segama.ege.repository.AdminRoleMapper;
 import com.segama.ege.repository.AdminSystemConfigMapper;
 import com.segama.ege.repository.AdminUserRoleRelationMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +25,8 @@ import java.util.Set;
  */
 public class BaseController {
 
+    @Autowired
+    protected HttpServletResponse response;
     /**
      * 模版链接key
      */

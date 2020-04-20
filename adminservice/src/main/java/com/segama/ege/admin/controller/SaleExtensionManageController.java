@@ -2,6 +2,8 @@ package com.segama.ege.admin.controller;
 
 import com.google.common.collect.Lists;
 import com.segama.ege.admin.response.ShishouOrder;
+import com.segama.ege.admin.utils.DateUtil;
+import com.segama.ege.admin.utils.ExcelUtil;
 import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.entity.*;
 import com.segama.ege.repository.AdminUserMapper;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -260,5 +263,102 @@ public class SaleExtensionManageController extends BaseController {
         return baseVO;
     }
 
+
+    @RequestMapping("/export")
+    private void export(
+                @RequestParam(value = "channel_A",required = false) String channel_A,
+                @RequestParam(value = "channel_b",required = false) String channel_b,
+                @RequestParam(value = "user_name",required = false) String user_name,
+                @RequestParam(value = "phone",required = false) String phone,
+                @RequestParam(value = "qq",required = false) String qq,
+                @RequestParam(value = "type",required = false) String type
+                ,@RequestParam(value = "account") String account) {
+        try {
+            ThSaleExtensionManageExample example = new ThSaleExtensionManageExample();
+            ThSaleExtensionManageExample.Criteria criteria = example.createCriteria();
+            if (!showAllUser(account)) {
+                if (!StringUtils.isEmpty(type)) {
+                    if ("1".equals(type)) {
+                        criteria.andCreate_accountEqualTo(account);
+                    } else {
+                        criteria.andOwner_accountEqualTo(account);
+                    }
+                }
+            }
+            if (StringUtils.isNotEmpty(channel_A)) {
+                criteria.andCreate_accountEqualTo(channel_A);
+            }
+            if (StringUtils.isNotEmpty(channel_b)) {
+                criteria.andOwner_accountEqualTo(channel_b);
+            }
+            if (StringUtils.isNotEmpty(user_name)) {
+                criteria.andUser_nameLike("%" + user_name + "%");
+            }
+            if (StringUtils.isNotEmpty(phone)) {
+                criteria.andPhoneLike("%" + phone + "%");
+            }
+            if (StringUtils.isNotEmpty(qq)) {
+                criteria.andQqLike("%" + qq + "%");
+            }
+            if (!showAllUser(account)) {
+                AdminUserExample example1 = new AdminUserExample();
+                example1.createCriteria().andAccountEqualTo(account);
+                List<AdminUser> adminUsers = adminUserMapper.selectByExample(example1);
+                if (!CollectionUtils.isEmpty(adminUsers)) {
+                    AdminUser adminUser = adminUsers.get(0);
+                    if (adminUser.getChannel_type().equals(1)) {
+                        criteria.andCreate_accountEqualTo(account);
+                    } else if (adminUser.getChannel_type().equals(2)) {
+                        criteria.andOwner_accountEqualTo(account);
+                    }
+                }
+
+            }
+            List<ThSaleExtensionManage> thSaleExtensionManages = thSaleExtensionManageMapper.selectByExample(example);
+            String[] rowName=null;
+            List<Object[]> dataList = Lists.newArrayList();
+            if(!CollectionUtils.isEmpty(thSaleExtensionManages)) {
+                rowName = new String[]{"ID",
+                        "产品名称",
+                        "产品编码",
+                        "渠道A",
+                        "渠道b",
+                        "电话",
+                        "用户名",
+                        "请求链接",
+                        "创建时间"};
+
+                for (ThSaleExtensionManage thSaleExtensionManage : thSaleExtensionManages) {
+                    if(thSaleExtensionManage.getProduct_code()!=null) {
+                        ThProductManageExample example2 = new ThProductManageExample();
+                        example2.createCriteria()
+                                .andProduct_codeEqualTo(thSaleExtensionManage.getProduct_code());
+                        List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example2);
+                        if (!CollectionUtils.isEmpty(thProductManages)) {
+                            ThProductManage thProductManage = thProductManages.get(0);
+                            thSaleExtensionManage.setProduct_name(thProductManage.getProduct_name());
+                        }
+                    }
+                    dataList.add(new Object[]{
+                            thSaleExtensionManage.getId(),
+                            thSaleExtensionManage.getProduct_name(),
+                            thSaleExtensionManage.getProduct_code(),
+                            thSaleExtensionManage.getCreate_account(),
+                            thSaleExtensionManage.getOwner_account(),
+                            thSaleExtensionManage.getPhone(),
+                            thSaleExtensionManage.getUser_name(),
+                            thSaleExtensionManage.getRequest_url(),
+                            DateUtil.parse(thSaleExtensionManage.getGmt_create())
+                    });
+                }
+            }else{
+                rowName = new String[]{"结果"};
+                dataList.add(new Object[]{"没有数据"});
+            }
+            ExcelUtil.exportExcel("销售记录", rowName, dataList, new String("销售记录.xls".getBytes("UTF-8"), "iso-8859-1"), response);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

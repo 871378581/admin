@@ -22,12 +22,6 @@
 </style>
 <!-- 工具集 -->
 <div class="my-btn-box">
-    <!--<span class="fl">
-        <a class="layui-btn btn-add btn-default" id="btn-add">添加</a>
-        &lt;!&ndash;<a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>&ndash;&gt;
-        &lt;!&ndash;<a class="layui-btn btn-add btn-default" id="btn-select-all" >批量删除</a>&ndash;&gt;
-    </span>-->
-
     <span>
        <form class="layui-form" style="float: left">
            <div class="layui-inline">
@@ -60,6 +54,7 @@
                 <input type="text"  id="qq" autocomplete="off" placeholder="请输入QQ" class="layui-input">
             </div>
         </div>-->
+           <div class="layui-btn mgl-20" id="btn-export" style="margin: 0 0 0 10px;">导出</div>
            <div class="layui-btn mgl-20" id="btn-search" style="margin: 0 0 0 10px;">查询</div>
         </form>
 
@@ -148,13 +143,16 @@
         });
 
         // 添加
-        $('#btn-add').on('click', function () {
-        layer.open({
-            type: 2,
-            title: '添加'
-            ,area:['450px','300px']
-            ,content:"/adminservice/admin/ege-admin/app/menu/menu-add.html"
-          });
+        $('#btn-export').on('click', function () {
+            layer.msg("正在导出");
+            open(wholeUrl+"/admin/sale_extension/export?token="+localStorage.getItem("token")+
+                "&account="+localStorage.getItem("account")+
+                "&user_name="+$("#user_name").val()+
+                "&phone="+$("#phone").val()+
+                "&channel_A="+$("#channel_A").val()+
+                "&channel_b="+$("#channel_b").val()+
+                "&type="+localStorage.getItem("channelType")
+            );
         });
 
         // 查询

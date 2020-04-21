@@ -139,43 +139,129 @@
             trigger:'click'
         });
 
-        // 表格渲染
+        var cols=[];
+        $.ajax({
+            url: wholeUrl + "/admin/url_manage/showAddUrl?token=" + localStorage.getItem("token"),
+            method: "post",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {account:localStorage.getItem("account")},
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    if (result.data) {
+                        cols=[                  //标题栏
+                            {checkbox: true, sort: true, fixed: true, space: true}
+                            , {field: 'id', title: 'ID', width: 80}
+                            , {field: 'order_code', title: '订单编码', width: 120}
+                            , {field: 'order_id', title: '订单号', width: 120}
+                            , {field: 'picihao', title: '批次号', width: 120}
+                            , {field: 'channel_account', title: '所属渠道', width: 120}
+                            , {field: 'operate_type', title: '操作类型', width: 120}
+                            , {field: 'order_time', title: '订单时间', width: 120}
+                            , {field: 'order_phone_number', title: '订购号码', width: 120}
+                            , {field: 'prov', title: '号码省份', width: 120}
+                            , {field: 'city', title: '号码地市', width: 120}
+                            , {field: 'order_status', title: '订单状态', width: 120}
+                            , {field: 'customer_name', title: '客户姓名', width: 120}
+                            , {field: 'certificate_type', title: '证件类型', width: 120}
+                            , {field: 'certificate_num', title: '证件号码', width: 120}
+                            , {field: 'customer_contact_num', title: '客户联系号码', width: 120}
+                            , {field: 'good_name', title: '商品名称', width: 120}
+                            , {field: 'address', title: '配送地址', width: 120}
+                            , {field: 'active_status', title: '激活状态', width: 120}
+                            , {field: 'cudian_code', title: '触点编码', width: 120}
+                            , {field: 'shoucong_amt', title: '首充金额', width: 120}
+                            , {field: 'shoucong_time', title: '首充时间', width: 120}
+                            , {field: 'xiehaozhuanwang_type', title: '携号转网类型', width: 120}
+                            , {field: 'zhuanhualvtichu_reason', title: '转化率剔除原因', width: 120}
+
+                            , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                            , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                            , {field: 'creator_account', title: '创建人', width: 100}
+                            , {field: 'modifier_account', title: '修改人', width: 100}
+                            , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+                        ]
+                    }else{
+                        cols=[                  //标题栏
+                            {checkbox: true, sort: true, fixed: true, space: true}
+                            , {field: 'id', title: 'ID', width: 80}
+                            , {field: 'order_code', title: '订单编码', width: 120}
+                            , {field: 'order_id', title: '订单号', width: 120}
+                            , {field: 'picihao', title: '批次号', width: 120}
+                            , {field: 'channel_account', title: '所属渠道', width: 120}
+                            , {field: 'operate_type', title: '操作类型', width: 120}
+                            , {field: 'order_time', title: '订单时间', width: 120}
+                            , {field: 'order_phone_number', title: '订购号码', width: 120}
+                            , {field: 'prov', title: '号码省份', width: 120}
+                            , {field: 'city', title: '号码地市', width: 120}
+                            , {field: 'order_status', title: '订单状态', width: 120}
+                            , {field: 'customer_name', title: '客户姓名', width: 120}
+                            , {field: 'certificate_type', title: '证件类型', width: 120}
+                            , {field: 'certificate_num', title: '证件号码', width: 120}
+                            , {field: 'customer_contact_num', title: '客户联系号码', width: 120}
+                            , {field: 'good_name', title: '商品名称', width: 120}
+                            , {field: 'address', title: '配送地址', width: 120}
+                            , {field: 'active_status', title: '激活状态', width: 120}
+                            , {field: 'cudian_code', title: '触点编码', width: 120}
+                            , {field: 'shoucong_amt', title: '首充金额', width: 120}
+                            , {field: 'shoucong_time', title: '首充时间', width: 120}
+                            , {field: 'xiehaozhuanwang_type', title: '携号转网类型', width: 120}
+                            , {field: 'zhuanhualvtichu_reason', title: '转化率剔除原因', width: 120}
+
+                            , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                            , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                            //, {field: 'creator_account', title: '创建人', width: 100}
+                            //, {field: 'modifier_account', title: '修改人', width: 100}
+                            //, {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+                        ]
+                    }
+                }
+
+                // 表格渲染
+                var tableIns = table.render({
+                    elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
+                    ,filter:'table'
+                    , height: vipTable.getFullHeight()    //容器高度
+                    , cols: [cols]
+                    , id: 'dataCheck'
+                    //, url: './../../json/user_data_table.json'
+                    , url: wholeUrl+"/admin/order/list?token="+localStorage.getItem("token")
+                    , method: 'post'
+                    , page: true
+                    , limits: [10, 20, 30, 50, 100,200,300]
+                    , limit: 10 //默认采用10
+                    , loading: false
+                    , where:{
+                        account:localStorage.getItem("account"),
+                        operate_type:$("#operate_type").val(),
+                        order_time:$("#order_time").val(),
+                        good_name:$("#good_name").val(),
+                        picihao:$("#picihao").val()
+                    }
+                    , done: function (res, curr, count) {
+                        //如果是异步请求数据方式，res即为你接口返回的信息。
+                        //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                        console.log(res);
+
+                        //得到当前页码
+                        console.log(curr);
+
+                        //得到数据总量
+                        console.log(count);
+                    }
+                });
+
+            }
+        });
+
+        /*// 表格渲染
         var tableIns = table.render({
             elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
             ,filter:'table'
             , height: vipTable.getFullHeight()    //容器高度
-            , cols: [[                  //标题栏
-              {checkbox: true, sort: true, fixed: true, space: true}
-              , {field: 'id', title: 'ID', width: 80}
-              , {field: 'order_code', title: '订单编码', width: 120}
-              , {field: 'order_id', title: '订单号', width: 120}
-              , {field: 'picihao', title: '批次号', width: 120}
-              , {field: 'channel_account', title: '所属渠道', width: 120}
-              , {field: 'operate_type', title: '操作类型', width: 120}
-              , {field: 'order_time', title: '订单时间', width: 120}
-              , {field: 'order_phone_number', title: '订购号码', width: 120}
-              , {field: 'prov', title: '号码省份', width: 120}
-              , {field: 'city', title: '号码地市', width: 120}
-              , {field: 'order_status', title: '订单状态', width: 120}
-              , {field: 'customer_name', title: '客户姓名', width: 120}
-              , {field: 'certificate_type', title: '证件类型', width: 120}
-              , {field: 'certificate_num', title: '证件号码', width: 120}
-              , {field: 'customer_contact_num', title: '客户联系号码', width: 120}
-              , {field: 'good_name', title: '商品名称', width: 120}
-              , {field: 'address', title: '配送地址', width: 120}
-              , {field: 'active_status', title: '激活状态', width: 120}
-              , {field: 'cudian_code', title: '触点编码', width: 120}
-              , {field: 'shoucong_amt', title: '首充金额', width: 120}
-              , {field: 'shoucong_time', title: '首充时间', width: 120}
-              , {field: 'xiehaozhuanwang_type', title: '携号转网类型', width: 120}
-              , {field: 'zhuanhualvtichu_reason', title: '转化率剔除原因', width: 120}
-
-              , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
-              , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
-              , {field: 'creator_account', title: '创建人', width: 100}
-              , {field: 'modifier_account', title: '修改人', width: 100}
-              , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
-            ]]
+            , cols: [cols]
             , id: 'dataCheck'
             //, url: './../../json/user_data_table.json'
             , url: wholeUrl+"/admin/order/list?token="+localStorage.getItem("token")
@@ -202,7 +288,7 @@
                 //得到数据总量
                 console.log(count);
             }
-        });
+        });*/
 
         // 获取选中行
         table.on('checkbox(dataCheck)', function (obj) {

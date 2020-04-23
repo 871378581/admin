@@ -381,8 +381,9 @@ public class OrderController extends BaseController {
                                     orderManage.setModifier_account(account);
                                     thOrderManageMapper.updateByPrimaryKey(orderManage);
                                 }else{
-
-                                    thOrderManageMapper.insert(list.get(i));
+                                    if(!StringUtils.isEmpty(list.get(i).getOrder_id())) {
+                                        thOrderManageMapper.insert(list.get(i));
+                                    }
                                 }
                             }catch (Exception e) {
                                 sb.append("第"+(i+1)+"条导入失败；失败原因:"+e.getMessage());

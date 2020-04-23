@@ -138,7 +138,7 @@
             ,range:true,
             trigger:'click'
         });
-
+        var tableIns;
         var cols=[];
         $.ajax({
             url: wholeUrl + "/admin/url_manage/showAddUrl?token=" + localStorage.getItem("token"),
@@ -220,7 +220,7 @@
                 }
 
                 // 表格渲染
-                var tableIns = table.render({
+                tableIns = table.render({
                     elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
                     ,filter:'table'
                     , height: vipTable.getFullHeight()    //容器高度

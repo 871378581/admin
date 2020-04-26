@@ -12,10 +12,13 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author hxj
@@ -27,6 +30,10 @@ public class BaseController {
 
     @Autowired
     protected HttpServletResponse response;
+
+    @Autowired
+    protected HttpServletRequest request;
+
     /**
      * 模版链接key
      */
@@ -105,5 +112,16 @@ public class BaseController {
             return adminSystemConfig.getValue();
         }
         return "";
+    }
+
+    public Map<String, List<AdminSystemConfig>> getConfig(List<String> keys){
+        AdminSystemConfigExample example = new AdminSystemConfigExample();
+        AdminSystemConfigExample.Criteria criteria = example.createCriteria();
+        criteria.andKeyIn(keys);
+        List<AdminSystemConfig> adminSystemConfigs = adminSystemConfigMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
+            return adminSystemConfigs.stream().collect(Collectors.groupingBy(AdminSystemConfig::getKey));
+        }
+        return null;
     }
 }

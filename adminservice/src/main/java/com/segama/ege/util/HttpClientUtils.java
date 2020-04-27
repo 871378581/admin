@@ -44,9 +44,11 @@ public class HttpClientUtils {
         return "";
     }
 
-    private static final String requestUrl = "http://www.hxj1991.com/ege/api/lt/sync";
+    private static final String requestUrl = "http://localhost/ege/api/lt/sync";
     public static void main(String[] args) throws Exception {
         String jsonParam="{\n" +
+                "\t\"extend\": \"prod_name:张三;prod_code=12312;\",\n" +
+                "\t\"channelCode\": \"123213123\",\n" +
                 "\t\"accessName\": \"张三\",\n" +
                 "\t\"address\": \"下城区****\",\n" +
                 "\t\"addressee\": \"马六\",\n" +

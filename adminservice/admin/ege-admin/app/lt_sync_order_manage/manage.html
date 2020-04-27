@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>订单管理</title>
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../frame/static/css/style.css">
+    <link rel="icon" href="../../frame/static/image/code.png">
+</head>
+<body class="body">
+<style>
+    .layui-inline{
+        padding: 3px;
+    }
+    .my-btn-box{
+        height: 80px !important;
+    }
+</style>
+
+<!-- 工具集 -->
+<div class="my-btn-box">
+    <span>
+        <form class="layui-form">
+            <div class="layui-inline">
+                  <label class="layui-form-label">渠道号</label>
+                  <div class="layui-input-inline">
+                      <input type="text"  id="channelCode" autocomplete="off" placeholder="请输入渠道号" class="layui-input">
+                  </div>
+              </div>
+            <div class="layui-inline" id="order_op_type">
+                  <label class="layui-form-label">花呗冻结</label>
+                  <div class="layui-input-inline" style="width:100px;">
+                      <select name="operate_type" id="freeze" lay-filter="operate_type"  lay-verify="required">
+                          <option value="">请选择</option>
+                          <option value="true">冻结</option>
+                          <option value="false">未冻结</option>
+                      </select>
+                  </div>
+              </div>
+
+           <!-- <div class="layui-inline">
+                <label class="layui-form-label">订单时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="order_time" class="layui-input" id="order_time" placeholder="请选择订单时间">
+                </div>
+            </div>-->
+
+            <div class="layui-btn mgl-20" style="margin-left: 10px;" id="btn-search">查询</div>
+        </form>
+    </span>
+
+
+
+</div>
+
+<!-- 表格 -->
+<table id="dateTable"  lay-filter="table"></table>
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript">
+
+    // layui方法
+    layui.use(['table', 'form', 'layer', 'laydate','vip_table','upload'], function () {
+
+        // 操作对象
+        var form = layui.form
+                , table = layui.table
+                , layer = layui.layer
+                , vipTable = layui.vip_table
+                , upload = layui.upload
+            ,laydate=layui.laydate
+                , $ = layui.jquery;
+
+
+        //日期时间选择器
+        laydate.render({
+            elem: '#order_time'
+            ,type: 'datetime'
+            ,range:true,
+            trigger:'click'
+        });
+
+
+                // 表格渲染
+        var tableIns = table.render({
+                    elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
+                    ,filter:'table'
+                    , height: vipTable.getFullHeight()    //容器高度
+                    , cols: [[                  //标题栏
+                        {checkbox: true, sort: true, fixed: true, space: true}
+                        , {field: 'id', title: 'ID', width: 80}
+                        , {field: 'code', title: '订单号', width: 120}
+                        , {field: 'channel_code', title: '所属渠道', width: 120}
+                        , {field: 'city_name', title: '城市', width: 120}
+                        , {field: 'pacakge_name', title: '套餐名称', width: 120}
+                        , {field: 'pacakge_code', title: '套餐编码', width: 120}
+                        , {field: 'contract_period', title: '合约期', width: 120}
+                        , {field: 'discount_amount', title: '优惠金额', width: 120}
+                        , {field: 'access_name', title: '姓名', width: 120}
+                        , {field: 'id_number', title: '证件号码', width: 120}
+                        , {field: 'addressee', title: '联系人', width: 120}
+                        , {field: 'addressee_phone', title: '联系人电话', width: 120}
+                        , {field: 'district_name', title: '区', width: 120}
+                        , {field: 'address', title: '地址', width: 120}
+                        , {field: 'selected_phone_num', title: '选号', width: 120}
+                        , {field: 'freeze', title: '是否冻结', width: 120}
+                        , {field: 'freeze_amount', title: '冻结金额', width: 120}
+                        , {field: 'order_create_time', title: '订单创建时间', width: 120}
+                        , {field: 'extend', title: '扩展信息', width: 220}
+                        //, {field: 'description', title: '描述', width: 120}
+                        , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                        , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
+                        , {field: 'creator_account', title: '创建人', width: 100}
+                        , {field: 'modifier_account', title: '修改人', width: 100}
+                        , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#barOption'}  //这里的toolbar值是模板元素的选择器
+                    ]]
+                    , id: 'dataCheck'
+                    //, url: './../../json/user_data_table.json'
+                    , url: wholeUrl+"/admin/sync_order/list?token="+localStorage.getItem("token")
+                    , method: 'post'
+                    , page: true
+                    , limits: [10, 20, 30, 50, 100,200,300]
+                    , limit: 10 //默认采用10
+                    , loading: false
+                    , where:{
+                        account:localStorage.getItem("account"),
+                        channel_code:$("#channelCode").val(),
+                        freeze:$("#freeze").val()
+                    }
+                    , done: function (res, curr, count) {
+                        //如果是异步请求数据方式，res即为你接口返回的信息。
+                        //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                        console.log(res);
+
+                        //得到当前页码
+                        console.log(curr);
+
+                        //得到数据总量
+                        console.log(count);
+                    }
+                });
+
+        // 获取选中行
+        table.on('checkbox(dataCheck)', function (obj) {
+            layer.msg('123');
+            console.log(obj.checked); //当前是否选中状态
+            console.log(obj.data); //选中行的相关数据
+            console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        });
+
+        // 刷新
+        $('#btn-refresh').on('click', function () {
+            tableIns.reload();
+        });
+
+
+
+        // 查询
+        $('#btn-search').on('click', function () {
+            tableIns.reload({where:{account:localStorage.getItem("account"),
+                    channel_code:$("#channelCode").val(),
+                    freeze:$("#freeze").val(),
+            }
+            });
+        });
+        //监听行工具事件
+        table.on('tool(table)', function(obj){
+          var data = obj.data;
+          console.log(data)
+          if(obj.event === 'del'){
+            layer.confirm('确定删除？', function(index){
+              //obj.del();
+              $.ajax({
+                url:wholeUrl+"/admin/sync_order/delete?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                data:{code:data.code},
+                success:function(result){
+                  console.log(result);
+                  if(result.success){
+                    layer.msg("删除成功")
+                    tableIns.reload();
+                  }else{
+                    layer.msg("删除失败");
+                  }
+
+                }
+              });
+              layer.close(index);
+            });
+
+          } else if(obj.event === 'edit'){
+            console.log(obj.data);
+            var data = obj.data;
+            layer.open({
+              type: 2,
+              title: '编辑'
+                ,area:['100%','100%']
+              ,content:"/adminservice/admin/ege-admin/app/lt_sync_order_manage/edit.html?code="+data.code
+            });
+
+          }
+        });
+
+        // 获取选中数据
+        $('#batch_off_line').on('click', function () {
+            var checkStatus = table.checkStatus('dataCheck')
+                ,data = checkStatus.data;
+            if(data.length==0){
+                layer.alert("请勾选数据再操作！");
+                return false
+            }
+            var idArr=[];
+            for(var i=0;i<data.length;i++){
+                idArr.push(data[i].id);
+            }
+            $.ajax({
+                url:wholeUrl+"/admin/sync_order/batch_update?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                async:true,
+                data:{
+                    ids:idArr.join(","),
+                    operate_type:"下线",
+                    account:localStorage.getItem("account")
+                },
+                success:function(result){
+                    console.log(result);
+                    if(result.success){
+                        layer.msg("操作成功")
+                        tableIns.reload();
+                    }else{
+                        layer.msg("操作失败");
+                    }
+
+                }
+            });
+
+        });
+
+        // 获取选中数据
+        $('#batch_online').on('click', function () {
+            var checkStatus = table.checkStatus('dataCheck')
+                ,data = checkStatus.data;
+            if(data.length==0){
+                layer.alert("请勾选数据再操作！");
+                return false
+            }
+            var idArr=[];
+            for(var i=0;i<data.length;i++){
+                idArr.push(data[i].id);
+            }
+            $.ajax({
+                url:wholeUrl+"/admin/sync_order/batch_update?token="+localStorage.getItem("token"),
+                method:"post",
+                contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+                async:true,
+                data:{
+                    ids:idArr.join(","),
+                    operate_type:"上线",
+                    account:localStorage.getItem("account")
+                },
+                success:function(result){
+                    console.log(result);
+                    if(result.success){
+                        layer.msg("操作成功")
+                        tableIns.reload();
+                    }else{
+                        layer.msg("操作失败");
+                    }
+
+                }
+            });
+
+        });
+
+        window.reloadParent = function(){
+          tableIns.reload();
+        }
+
+    });
+</script>
+<!-- 表格操作按钮集 -->
+<script type="text/html" id="barOption">
+    {{#  if(d.show_btn != 0){ }}
+    <!--<a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>-->
+    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+    {{#  } }}
+</script>
+</body>
+</html>

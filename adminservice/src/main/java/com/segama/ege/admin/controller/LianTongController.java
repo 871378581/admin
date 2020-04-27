@@ -9,18 +9,19 @@ import com.segama.ege.admin.vo.BaseVO;
 import com.segama.ege.admin.vo.SyncVO;
 import com.segama.ege.admin.vo.SysncDataVO;
 import com.segama.ege.entity.AdminSystemConfig;
+import com.segama.ege.entity.ThLtOrderSyncData;
+import com.segama.ege.repository.ThLtOrderSyncDataMapper;
 import com.segama.ege.util.DESUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -40,19 +41,33 @@ public class LianTongController extends BaseController {
     /**
      * 重定向到联通链接
      */
-    @RequestMapping("/lt/prod")
-    public void getPageUrl(){
+    @RequestMapping({"/lt/prod/{channelCode}/{productName}/{productCode}","/lt/prod","/lt/prod/{channelCode}"})
+    public void getPageUrl(
+            @PathVariable(value = "channelCode",required = false) String channelCode,
+            @PathVariable(value = "productName",required = false) String productName,
+                           @PathVariable(value = "productCode",required = false) String productCode){
         try {
             Map<String, List<AdminSystemConfig>> config = this.getConfig(
                     Lists.newArrayList(
                             Constants.LIAN_TONG_ACTIVE_URL_KEY,
-                            Constants.LIAN_TONG_PASSWORD_KEY
+                            Constants.LIAN_TONG_PASSWORD_KEY,
+                            Constants.DEFAULT_GIFT_CODE,
+                            Constants.DEFAULT_GIFT_NAME
                     ));
 
             if(config != null){
                 List<AdminSystemConfig> urlConf = config.get(Constants.LIAN_TONG_ACTIVE_URL_KEY);
                 List<AdminSystemConfig> passConf = config.get(Constants.LIAN_TONG_PASSWORD_KEY);
-                String url = urlConf.get(0).getValue() + buildParam(passConf.get(0).getValue());
+                List<AdminSystemConfig> productCodeConf = config.get(Constants.DEFAULT_GIFT_CODE);
+                List<AdminSystemConfig> productNameConf = config.get(Constants.DEFAULT_GIFT_NAME);
+                if(StringUtils.isEmpty(productCode)){
+                    productCode = productCodeConf.get(0).getValue();
+                }
+                if(StringUtils.isEmpty(productName)){
+                    productName = productNameConf.get(0).getValue();
+                }
+                String url = urlConf.get(0).getValue() +
+                        buildParam(passConf.get(0).getValue(),channelCode,productCode,productName);
                 response.sendRedirect(url);
             }
         } catch (Exception e) {
@@ -100,6 +115,10 @@ public class LianTongController extends BaseController {
     }
 
     private static final String password = "th@123456.";
+
+    @Resource
+    private ThLtOrderSyncDataMapper thLtOrderSyncDataMapper;
+
     /**
      * 同步数据
      */
@@ -110,24 +129,50 @@ public class LianTongController extends BaseController {
         SyncVO baseVO = new SyncVO();
         baseVO.setSuccess(false);
         try {
-            SysncDataVO vo = JSON.parseObject(reqBbody, SysncDataVO.class);
-            if(StringUtils.isEmpty(reqBbody) || StringUtils.isEmpty(vo.getParam())){
+            SysncDataVO sysncDataVO = JSON.parseObject(reqBbody, SysncDataVO.class);
+            if(StringUtils.isEmpty(reqBbody) || StringUtils.isEmpty(sysncDataVO.getParam())){
                 baseVO.setMsg("param error");
                 return baseVO;
             }
-            String decrypt = DESUtils.decrypt(vo.getParam(), password);
+            String decrypt = DESUtils.decrypt(sysncDataVO.getParam(), password);
             SysncDataVO sysncDataVO1 = JSON.parseObject(decrypt, SysncDataVO.class);
             if(dataList.size()==10000){
                 baseVO.setMsg("测试数据存储已满！");
                 return baseVO;
             }
             dataList.add(sysncDataVO1);
+            ThLtOrderSyncData data = new ThLtOrderSyncData();
+            data.setCode(sysncDataVO1.getOrderId());
+            data.setExtend(sysncDataVO1.getExtend());
+            data.setAccess_name(sysncDataVO1.getAccessName());
+            data.setAddress(sysncDataVO1.getAddress());
+            data.setAddressee(sysncDataVO1.getAddressee());
+            data.setAddressee_phone(sysncDataVO1.getAddresseePhone());
+            data.setChannel_code(sysncDataVO1.getChannelCode());
+            data.setCity_name(sysncDataVO1.getCityName());
+            data.setPacakge_code(sysncDataVO1.getPacakgeCode());
+            data.setPacakge_name(sysncDataVO1.getPacakgeName());
+            data.setFreeze(String.valueOf(sysncDataVO1.getFreeze()));
+            data.setFreeze_amount(sysncDataVO1.getFreezeAmount());
+            data.setOrder_create_time(sysncDataVO1.getOrderCreateTime());
+            data.setId_number(sysncDataVO1.getIdNumber());
+            data.setSelected_phone_num(sysncDataVO1.getSelectedPhoneNum());
+            data.setDistrict_name(sysncDataVO1.getDistrictName());
+            data.setContract_period(sysncDataVO1.getContractPeriod());
+            data.setDiscount_amount(sysncDataVO1.getDiscountAmount());
+
+            data.setGmt_modify(new Date());
+            data.setGmt_create(new Date());
+            data.setModifier_account("system");
+            data.setCreator_account("system");
+            data.setGmt_create(new Date());
+            int insert = thLtOrderSyncDataMapper.insert(data);
             baseVO.setSuccess(true);
             baseVO.setMsg("success");
         } catch (Exception e) {
             log.error("sync error",e);
             baseVO.setSuccess(false);
-            baseVO.setMsg("sys err");
+            baseVO.setMsg("sys err"+e.getMessage());
         }
         return baseVO;
     }
@@ -137,32 +182,42 @@ public class LianTongController extends BaseController {
      * @param password
      * @return
      */
-    String buildParam(String password){
+    static String  buildParam(String password,String channelCode,String productName,String productCode){
         JSONObject data_json = new JSONObject();
         JSONArray exts = new JSONArray();
 
         //活动编码
         JSONObject obj3 = new JSONObject();
-        obj3.put("ext_key", "prod_code");
-        obj3.put("ext_value", "20787878787");
+        obj3.put("ext_key", "channelCode");
+        obj3.put("ext_value", channelCode);
         exts.add(obj3);
 
         //号码
         JSONObject obj5 = new JSONObject();
-        obj5.put("ext_key", "prod_name");
-        obj5.put("ext_value", "花呗");
+        obj5.put("ext_key", "extend");
+        StringBuffer sb = new StringBuffer();
+        sb.append("init=true;");
+        if(!StringUtils.isEmpty(productCode)){
+            sb.append("productCode="+productCode+";");
+        }
+        if(!StringUtils.isEmpty(productName)){
+            sb.append("productName="+productName+";");
+        }
+        obj5.put("ext_value", sb.toString());
         exts.add(obj5);
 
-        //用户id
-        JSONObject obj2 = new JSONObject();
-        obj2.put("ext_key", "prod_price");
-        obj2.put("ext_value", "45");
-        exts.add(obj2);
         data_json.put("src", 1020);
         data_json.put("ext", exts);
         String formData = DESUtils.encrypt(data_json.toString(), password);
         return formData;
     }
+
+    private static String url="http://124.160.11.209:8025/preferenPurchase/gotoIndex.do?formData=";
+    public static void main(String[] args) {
+        String s = url + buildParam("prefPur@zj186","23132","12312","2312");
+        System.out.println(s);
+    }
+
 
 
 }

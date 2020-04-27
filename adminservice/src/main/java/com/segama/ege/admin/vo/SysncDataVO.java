@@ -9,6 +9,19 @@ package com.segama.ege.admin.vo;
  */
 public class SysncDataVO {
 
+    /**
+     * 渠道号
+     */
+    private String channelCode;
+    /**
+     * 订单号
+     */
+    private String orderId;
+    /**
+     * extend 属性
+     */
+    private String extend;
+
     private String param;
     //归属地市：名称
     private String cityName;
@@ -201,5 +214,29 @@ public class SysncDataVO {
         this.freeze = freeze;
         this.freezeAmount = freezeAmount;
         this.orderCreateTime = orderCreateTime;
+    }
+
+    public String getChannelCode() {
+        return channelCode;
+    }
+
+    public void setChannelCode(String channelCode) {
+        this.channelCode = channelCode;
+    }
+
+    public String getExtend() {
+        return extend;
+    }
+
+    public void setExtend(String extend) {
+        this.extend = extend;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

@@ -136,10 +136,10 @@ public class LianTongController extends BaseController {
             }
             String decrypt = DESUtils.decrypt(sysncDataVO.getParam(), password);
             SysncDataVO sysncDataVO1 = JSON.parseObject(decrypt, SysncDataVO.class);
-            if(dataList.size()==10000){
+            /*if(dataList.size()==10000){
                 baseVO.setMsg("测试数据存储已满！");
                 return baseVO;
-            }
+            }*/
             dataList.add(sysncDataVO1);
             ThLtOrderSyncData data = new ThLtOrderSyncData();
             data.setCode(sysncDataVO1.getOrderId());

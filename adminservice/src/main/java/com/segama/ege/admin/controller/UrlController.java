@@ -3,6 +3,7 @@ package com.segama.ege.admin.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.segama.ege.admin.config.Constants;
 import com.segama.ege.admin.utils.BeanUtils;
 import com.segama.ege.admin.utils.UUIDUtils;
 import com.segama.ege.admin.vo.BaseVO;
@@ -86,6 +87,9 @@ public class UrlController extends BaseController{
                 thUrlManages = thUrlManageMapper.selectByExample(adminRoleExample);
                 if(!CollectionUtils.isEmpty(thUrlManages)){
                     for (ThUrlManage thUrlManage : thUrlManages) {
+                        String config = getConfig(Constants.SHORT_URL);
+                        //将短链接放在这个字段，短链接配置在配置项中，后面跟着链接编码
+                        thUrlManage.setYouxiao_time(config);
                         ThProductManageExample example = new ThProductManageExample();
                         example.createCriteria().andProduct_codeEqualTo(thUrlManage.getProduct_code());
                         List<ThProductManage> thProductManages = thProductManageMapper.selectByExample(example);

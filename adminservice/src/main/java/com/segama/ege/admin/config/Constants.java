@@ -25,4 +25,9 @@ public class Constants {
      */
     public static final String DEFAULT_GIFT_NAME = "DEFAULT_GIFT_NAME";
 
+    /**
+     * 短链接SHORT_URL
+     */
+    public static final String SHORT_URL = "SHORT_URL";
+
 }

@@ -10,20 +10,22 @@ import com.segama.ege.admin.vo.SyncVO;
 import com.segama.ege.admin.vo.SysncDataVO;
 import com.segama.ege.entity.AdminSystemConfig;
 import com.segama.ege.entity.ThLtOrderSyncData;
+import com.segama.ege.entity.ThUrlManage;
+import com.segama.ege.entity.ThUrlManageExample;
 import com.segama.ege.repository.ThLtOrderSyncDataMapper;
+import com.segama.ege.repository.ThUrlManageMapper;
 import com.segama.ege.util.DESUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author hxj
@@ -74,6 +76,34 @@ public class LianTongController extends BaseController {
             log.error("getPageUrl error",e);
         }
     }
+
+    @Autowired
+    private ThUrlManageMapper thUrlManageMapper;
+    /**
+     * 重定向到联通链接
+     */
+    @RequestMapping("/lt/{urlCode}")
+    public String shortUrl(
+            @PathVariable(value = "urlCode",required = false) String urlCode){
+        try {
+            if(!StringUtils.isEmpty(urlCode)){
+                //查询生效的链接
+                ThUrlManageExample example = new ThUrlManageExample();
+                example.createCriteria().andUrl_codeEqualTo(urlCode).andUrl_statusEqualTo(1);
+                List<ThUrlManage> thUrlManages = thUrlManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thUrlManages)){
+                    ThUrlManage thUrlManage = thUrlManages.get(0);
+                    String url = thUrlManage.getUrl();
+                    response.sendRedirect(url);
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("shortUrl error urlCode={}",new Object[]{urlCode},e);
+        }
+        return "链接失效";
+    }
+
 
     /**
      * 联通数据mock
@@ -140,7 +170,7 @@ public class LianTongController extends BaseController {
                 baseVO.setMsg("测试数据存储已满！");
                 return baseVO;
             }*/
-            dataList.add(sysncDataVO1);
+            //dataList.add(sysncDataVO1);
             ThLtOrderSyncData data = new ThLtOrderSyncData();
             data.setCode(sysncDataVO1.getOrderId());
             data.setExtend(sysncDataVO1.getExtend());

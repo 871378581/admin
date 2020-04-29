@@ -43,6 +43,11 @@
         </form>
     </span>
     <button class="layui-btn mgl-20" id="btn-search">查询</button>
+    <textarea id="copyarea" style="resize: none;
+    border: none;
+    color: #fff;
+    opacity: 0;
+    float: right;"></textarea>
 </div>
 
 <!-- 表格 -->
@@ -82,11 +87,11 @@
              // , {field: 'business_name', title: '商户名称', width: 120}
 
               , {field: 'url_status', title: '链接状态', width: 170,templet:'<div>{{ d.url_status==1?"上线":"下线" }}</div>'}
-              , {field: 'url', title: '连接', width: 200}
+
              // , {field: 'biz_line', title:'业务线', width: 170}
               , {field: 'channel_code', title:'渠道码', width: 170}
-
-              //, {field: 'youxiao_time', title:'有效时间', width: 170}
+                , {field: 'url', title: '连接', width: 320}
+              , {field: 'youxiao_time', title:'短链接', width: 320, toolbar: '#barOption2'}
               , {field: 'description', title:'描述', width: 170}
               , {field: 'gmt_create', title: '创建时间', width: 170,templet:'<div>{{ Format(d.gmt_create,"yyyy-MM-dd hh:mm:ss")}}</div>'}
               , {field: 'gmt_modify', title: '修改时间', width: 170,templet:'<div>{{ Format(d.gmt_modify,"yyyy-MM-dd hh:mm:ss")}}</div>'}
@@ -202,6 +207,14 @@
                   ,area:['100%','100%']
                   ,content:"/adminservice/admin/ege-admin/app/url_manage/edit_no_2.html?id="+data.id
               });
+
+          }else if(obj.event === 'copy_url'){
+              var data = obj.data;
+              $("#copyarea").val(data.youxiao_time+data.url_code);
+              var urlS=document.getElementById("copyarea");
+              urlS.select();
+              document.execCommand("Copy");
+              layer.msg("已复制好，可贴粘。");
 
           }else if(obj.event === 'fenpei'){
               console.log(obj.data);
@@ -350,6 +363,11 @@
     <!--<a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>-->
     {{#  } }}
 
+</script>
+
+<!-- 表格操作按钮集 -->
+<script type="text/html" id="barOption2">
+    <a class="layui-btn layui-btn-mini layui-btn-normal" title="点击复制" lay-event="copy_url">复制</a>&nbsp;<span>{{d.youxiao_time+d.url_code}}</span>
 </script>
 </body>
 </html>

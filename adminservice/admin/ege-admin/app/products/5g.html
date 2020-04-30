@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>活动</title>
+    <link rel="stylesheet" href="files/comman.css">
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="files/header.css">
+    <link rel="stylesheet" href="files/query_number.css">
+    <link href="files/new-fill.css" rel="stylesheet">
+    <link href="files/weui.css" rel="stylesheet">
+    <link href="files/weui2.css" rel="stylesheet">
+</head>
+<body>
+<style>
+    #summit_btn{
+       /* height: 62px;
+        position: fixed;
+        bottom: 0px;*/
+    }
+</style>
+<div class="userInput" style="width: 100%;">
+    <div class="bannerImg" align="">
+        <img  src="5g.jpeg"/>
+    </div>
+</div>
+<div class="userInput" style="width: 100%;">
+    <div class="bannerImg" style="height: 100px;height: 69px;
+    background: #102241;">
+
+    </div>
+</div>
+<div class="userInput" style="
+margin-top:100px;
+width: 100%;
+position: fixed;
+    /* width: 62%; */
+    bottom: 0px;">
+    <div class="bannerImg_for" id="summit_bt" align="center"><img id="summit_btn" src="apply-btn.png" /></div>
+</div>
+<style>
+    body{
+        padding: 0px !important;
+    }
+</style>
+
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script>
+
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , $ = layui.jquery;
+
+        $("#summit_bt").on("click",function () {
+            let urlSearchParams = new URLSearchParams(location.search);
+            if(urlSearchParams!=null && urlSearchParams.get("channel")!=null && urlSearchParams.get("channel")!=""){
+                var channel = urlSearchParams.get("channel");
+                location.href=wholeUrl+"/lt/prod/"+channel;
+            }else{
+                layer.msg("channel error！");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

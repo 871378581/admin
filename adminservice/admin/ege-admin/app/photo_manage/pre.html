@@ -24,7 +24,7 @@
 </style>
 <div class="userInput" style="width: 100%;">
     <div class="bannerImg" align="">
-        <img  src="5g.jpeg" id="img" style="margin-top: 0em  !important;"/>
+        <img  src="5g.jpeg" style="margin-top: 0em  !important;"/>
     </div>
 </div>
 <div class="userInput" style="width: 100%;">
@@ -65,37 +65,6 @@ position: fixed;
                 layer.msg("channel error！");
             }
         });
-        try {
-            let urlSearchParams = new URLSearchParams(location.search);
-            if(urlSearchParams!=null && urlSearchParams.get("img")!=null && urlSearchParams.get("img")!=""){
-                var img = urlSearchParams.get("img");
-                $("#img").attr("src","");
-                $.ajax({
-                    url:wholeUrl+"/admin/photo_manage/get",
-                    method:"post",
-                    contentType: "application/x-www-form-urlencoded",
-                    dataType:"json",
-                    async:false,
-                    data:{
-                        code:img
-                    },
-                    success:function(result){
-                        console.log(result);
-                        if(result.success){
-                            var url = result.data;
-                            $("#img").attr("src",url);
-                        }else{
-                            layer.msg(result.errorMsg);
-                        }
-                    }
-                });
-
-            }
-
-        }catch (e) {
-            console.log(e);
-        }
-
     });
 </script>
 

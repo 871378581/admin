@@ -95,7 +95,7 @@ public class ThPhotosController {
             }
             String[] split = thTemplateManage.getUrl().split("/");
             int length = split.length;
-            String code = split[length - 1].split(".")[0];
+            String code = split[length - 1].substring(0,split[length - 1].indexOf(".")).replace("-","");
             thTemplateManage.setPhoto_code(code);
             thTemplateManage.setCreator_account(account);
             thTemplateManage.setModifier_account(account);

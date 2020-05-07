@@ -106,6 +106,9 @@ public class SaleExtensionManageController extends BaseController {
             List<ThSaleExtensionManage> adminMenus = thSaleExtensionManageMapper.selectByExample(example);
             if(!CollectionUtils.isEmpty(adminMenus)){
                 for (ThSaleExtensionManage manage : adminMenus) {
+                    if(StringUtils.isEmpty(manage.getProduct_name())&&!StringUtils.isEmpty(manage.getQq())&&manage.getQq().split("@l@").length==2){
+                        manage.setProduct_name(manage.getQq().split("@l@")[1]);
+                    }
                     if(!StringUtils.isEmpty(manage.getProduct_code())) {
                         ThProductManageExample example2 = new ThProductManageExample();
                         example2.createCriteria()

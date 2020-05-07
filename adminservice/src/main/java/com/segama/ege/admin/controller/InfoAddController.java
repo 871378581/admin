@@ -45,9 +45,19 @@ public class InfoAddController {
     private ThSaleExtensionManageMapper thSaleExtensionManageMapper;
 
     @RequestMapping("/put_info")
-    public BaseVO put_info(ThSaleExtensionManage thSaleExtensionManage) {
+    public BaseVO put_info(ThSaleExtensionManage thSaleExtensionManage,
+                           @RequestParam(value = "channel",required = false) String channel,
+                           @RequestParam(value = "prod",required = false) String prod) {
         BaseVO baseVO = new BaseVO();
         try {
+            if(!StringUtils.isEmpty(channel) && !StringUtils.isEmpty(prod) ){
+                thSaleExtensionManage.setGmt_create(new Date());
+                thSaleExtensionManage.setQq(channel+"@l@"+prod);
+                thSaleExtensionManageMapper.insert(thSaleExtensionManage);
+                baseVO.setSuccess(true);
+                return baseVO;
+            }
+
             String share_url_code = thSaleExtensionManage.getShare_url_code();
             thSaleExtensionManage.setCode(UUIDUtils.UUID());
             if(!StringUtils.isEmpty(share_url_code)){

@@ -53,6 +53,15 @@ public class InfoAddController {
             if(!StringUtils.isEmpty(channel) && !StringUtils.isEmpty(prod) ){
                 thSaleExtensionManage.setGmt_create(new Date());
                 thSaleExtensionManage.setQq(channel+"@l@"+prod);
+                ThUrlManageExample example = new ThUrlManageExample();
+                example.createCriteria().andChannel_codeEqualTo(channel);
+                List<ThUrlManage> thUrlManages = thUrlManageMapper.selectByExample(example);
+                if(!CollectionUtils.isEmpty(thUrlManages)){
+                    ThUrlManage thUrlManage = thUrlManages.get(0);
+                    String owner_1_account = thUrlManage.getOwner_1_account();
+                    //因为5g只分配给A所以数据只显示A的账号
+                    thSaleExtensionManage.setCreate_account(owner_1_account);
+                }
                 thSaleExtensionManageMapper.insert(thSaleExtensionManage);
                 baseVO.setSuccess(true);
                 return baseVO;

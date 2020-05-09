@@ -135,18 +135,17 @@
                 return false;
             }
 
-            try{
-                var channelMaiDian = "guangqiao1";
-                mi_tracker.log("form", {conversionId : "2118"})
-            }catch (e) {
-                console.log(e);
-            }
-
-
-
             let urlSearchParams = new URLSearchParams(location.search);
             if(urlSearchParams!=null && urlSearchParams.get("channel")!=null && urlSearchParams.get("channel")!=""){
                 var channel = urlSearchParams.get("channel");
+                try{
+                    var channelMaiDian = "guangqiao1";
+                    if(channel==channelMaiDian){
+                        mi_tracker.log("form", {conversionId : "2118"})
+                    }
+                }catch (e) {
+                    console.log(e);
+                }
                 $.ajax({
                     url:wholeUrl+"/other/customer/put_info",
                     method:"post",

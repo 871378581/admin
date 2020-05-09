@@ -12,6 +12,9 @@
     <link href="files/new-fill.css" rel="stylesheet">
     <link href="files/weui.css" rel="stylesheet">
     <link href="files/weui2.css" rel="stylesheet">
+    <script>
+        !function(e,c){var r=e.mi_tracker=e.mi_tracker||[];r.loaded||(r.log=function(){r.push(arguments)},r.load=function(){var e=c.getElementsByTagName("script")[0],t=c.createElement("script");t.async=!0,t.src="//cdn.cnbj1.fds.api.mi-img.com/prd-static/mi_tracker/1.0.0/sdk.js",e.parentNode.insertBefore(t,e),r.loaded=!0},r.load(),r.log("view",{conversionId: "2118"}))}(window,document);
+    </script>
 </head>
 <body>
 
@@ -131,6 +134,15 @@
                 layer.msg("请输入正确的手机号");
                 return false;
             }
+
+            try{
+                var channelMaiDian = "guangqiao1";
+                mi_tracker.log("form", {conversionId : "2118"})
+            }catch (e) {
+                console.log(e);
+            }
+
+
 
             let urlSearchParams = new URLSearchParams(location.search);
             if(urlSearchParams!=null && urlSearchParams.get("channel")!=null && urlSearchParams.get("channel")!=""){

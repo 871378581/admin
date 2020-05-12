@@ -15,6 +15,10 @@
     <script>
         !function(e,c){var r=e.mi_tracker=e.mi_tracker||[];r.loaded||(r.log=function(){r.push(arguments)},r.load=function(){var e=c.getElementsByTagName("script")[0],t=c.createElement("script");t.async=!0,t.src="//cdn.cnbj1.fds.api.mi-img.com/prd-static/mi_tracker/1.0.0/sdk.js",e.parentNode.insertBefore(t,e),r.loaded=!0},r.load(),r.log("view",{conversionId: "2118"}))}(window,document);
     </script>
+
+    <script>
+        (function(d,s){var tpct=d.createElement(s); tpct.src="//static.iqiyi.com/js/common/tpct.min.js"; var es=d.getElementsByTagName(s)[0];es.parentNode.insertBefore(tpct, es);})(document, "script")
+    </script>
 </head>
 <body>
 
@@ -140,8 +144,12 @@
                 var channel = urlSearchParams.get("channel");
                 try{
                     var channelMaiDian = "guangqiao1";
+                    var channelMaiDian2="gqaqy";
                     if(channel==channelMaiDian){
                         mi_tracker.log("form", {conversionId : "2118"})
+                    }
+                    if(channelMaiDian2==channel){
+                        iqiyiTpct.track(19901)
                     }
                 }catch (e) {
                     console.log(e);

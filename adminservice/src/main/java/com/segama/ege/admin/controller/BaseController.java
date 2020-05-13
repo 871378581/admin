@@ -14,10 +14,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -67,11 +64,14 @@ public class BaseController {
         if(!CollectionUtils.isEmpty(adminSystemConfigs)) {
             AdminSystemConfig adminSystemConfig = adminSystemConfigs.get(0);
             String value = adminSystemConfig.getValue();
+
             if(StringUtils.isEmpty(value)){
                 throw new RuntimeException("SHOW_ALL_USER_ROLE_ID_KEY 未配置");
             }
+            String[] roleIds = value.split(",");
+            List<String> roleIdList = Arrays.asList(roleIds);
             for (AdminUserRoleRelation roleRelation : adminUserRoleRelations) {
-                if(roleRelation.getRole_id().equals(Long.valueOf(value))){
+                if(roleIdList.contains(roleRelation.getRole_id().toString())){
                     return true;
                 }
             }

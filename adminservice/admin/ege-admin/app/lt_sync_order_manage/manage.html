@@ -178,8 +178,8 @@
         $('#btn-export').on('click', function () {
             layer.msg("正在导出");
             open(wholeUrl+"/admin/sync_order/export?token="+localStorage.getItem("token")+
-            "&channel_code"+$("#channelCode").val()+
-                "&freeze"+$("#freeze").val()
+            "&channel_code="+$("#channelCode").val()+
+                "&freeze="+$("#freeze").val()
             );
 
         });

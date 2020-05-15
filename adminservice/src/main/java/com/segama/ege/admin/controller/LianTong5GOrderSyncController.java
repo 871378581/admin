@@ -2,10 +2,10 @@ package com.segama.ege.admin.controller;
 
 import com.google.common.collect.Lists;
 import com.segama.ege.admin.utils.BeanUtils;
+import com.segama.ege.admin.utils.DateUtil;
+import com.segama.ege.admin.utils.ExcelUtil;
 import com.segama.ege.admin.vo.BaseVO;
-import com.segama.ege.entity.ThLtOrderSyncData;
-import com.segama.ege.entity.ThLtOrderSyncDataExample;
-import com.segama.ege.entity.ThOrderManage;
+import com.segama.ege.entity.*;
 import com.segama.ege.repository.ThLtOrderSyncDataMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -143,6 +143,91 @@ public class LianTong5GOrderSyncController extends BaseController {
             baseVO.setErrorMsg("操作异常！");
         }
         return baseVO;
+    }
+
+    @RequestMapping("/export")
+    public void export(
+            ThLtOrderSyncData thLtOrderSyncData) {
+        BaseVO baseVO = new BaseVO();
+        try {
+            ThLtOrderSyncDataExample ex = new ThLtOrderSyncDataExample();
+            ThLtOrderSyncDataExample.Criteria thOrderManageExampleCriteria = ex.createCriteria();
+            if(StringUtils.isNotEmpty(thLtOrderSyncData.getChannel_code())) {
+                thOrderManageExampleCriteria.andChannel_codeEqualTo( thLtOrderSyncData.getChannel_code() );
+            }
+            if(StringUtils.isNotEmpty(thLtOrderSyncData.getFreeze())) {
+                thOrderManageExampleCriteria.andFreezeEqualTo(thLtOrderSyncData.getFreeze());
+            }
+            int count = thLtOrderSyncDataMapper.countByExample(ex);
+
+            ex.setOrderByClause("gmt_create desc");
+            List<ThLtOrderSyncData> thOrderManages = Lists.newArrayList();
+            if(count>0) {
+                int pageSize=20;
+                int page = (count + pageSize - 1) / pageSize;
+                for(int i=1;i<=page;i++){
+                    ex.setPageIndex(i);
+                    ex.setPageCount(20);
+                    thOrderManages.addAll(thLtOrderSyncDataMapper.selectByExample(ex));
+                }
+                String[] rowName=null;
+                List<Object[]> dataList = Lists.newArrayList();
+                if(!CollectionUtils.isEmpty(thOrderManages)) {
+                    rowName = new String[]{
+                            "ID",
+                            "订单号",
+                            "所属渠道",
+                            "城市",
+                            "套餐名称",
+                            "套餐编码",
+                            "合约期",
+                            "优惠金额",
+                            "姓名",
+                            "证件号码",
+                            "联系人",
+                            "联系人电话",
+                            "区",
+                            "地址",
+                            "选号",
+                            "是否冻结",
+                            "冻结金额",
+                            "订单创建时间"
+                    };
+
+                    for (ThLtOrderSyncData syncData : thOrderManages) {
+                        dataList.add(new Object[]{
+                                syncData.getId(),
+                                syncData.getCode(),
+                                syncData.getChannel_code(),
+                                syncData.getCity_name(),
+                                syncData.getPacakge_name(),
+                                syncData.getPacakge_code(),
+                                syncData.getContract_period(),
+                                syncData.getDiscount_amount(),
+                                syncData.getAccess_name(),
+                                syncData.getId_number(),
+                                syncData.getAddressee(),
+                                syncData.getAddressee_phone(),
+                                syncData.getDistrict_name(),
+                                syncData.getAddress(),
+                                syncData.getSelected_phone_num(),
+                                syncData.getFreeze(),
+                                syncData.getFreeze_amount(),
+                                syncData.getOrder_create_time()
+                        });
+                    }
+                }else{
+                    rowName = new String[]{"结果"};
+                    dataList.add(new Object[]{"没有数据"});
+                }
+                ExcelUtil.exportExcel("5G订单同步数据", rowName, dataList, new String("5G订单同步数据.xls".getBytes("UTF-8"), "iso-8859-1"), response);
+            }
+            baseVO.setSuccess(true);
+        }catch (Exception e){
+            baseVO.setSuccess(false);
+            baseVO.setErrorMsg("系统异常");
+            LOG.error("LianTong5GOrderSyncController#list error",e);
+        }
     }
 
 }

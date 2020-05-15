@@ -55,6 +55,7 @@
 
             <div class="layui-btn mgl-20" style="margin-left: 10px;" id="btn-search">查询</div>
         </form>
+        <div class="layui-btn mgl-20" style="margin-left: 10px;" id="btn-export">导出</div>
     </span>
 
 
@@ -172,6 +173,15 @@
                     freeze:$("#freeze").val(),
             }
             });
+        });
+
+        $('#btn-export').on('click', function () {
+            layer.msg("正在导出");
+            open(wholeUrl+"/admin/sync_order/export?token="+localStorage.getItem("token")+
+            "&channel_code"+$("#channelCode").val()+
+                "&freeze"+$("#freeze").val()
+            );
+
         });
         //监听行工具事件
         table.on('tool(table)', function(obj){

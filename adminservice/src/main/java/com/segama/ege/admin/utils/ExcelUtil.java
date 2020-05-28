@@ -39,8 +39,8 @@ public class ExcelUtil {
      * 导出数据
      */
     private static void export(String title,String[] rowName,List<Object[]> dataList,String fileName,OutputStream out) throws Exception {
+        HSSFWorkbook workbook = new HSSFWorkbook(); // 创建工作簿对象
         try {
-            HSSFWorkbook workbook = new HSSFWorkbook(); // 创建工作簿对象
             HSSFSheet sheet = workbook.createSheet(title); // 创建工作表
             HSSFRow rowm = sheet.createRow(0);  // 产生表格标题行
             HSSFCell cellTiltle = rowm.createCell(0);   //创建表格标题列

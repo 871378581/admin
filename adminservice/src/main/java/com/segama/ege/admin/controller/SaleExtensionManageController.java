@@ -155,8 +155,8 @@ public class SaleExtensionManageController extends BaseController {
             sqlCount.append("select count(0) " +
                     "            from th_order_manage a,th_sale_extension_manage b\n" +
                     "            where left(a.customer_name,1) = left(b.user_name,1)\n" +
-                    "            and left(a.customer_contact_num,4) =  left(b.phone,4)\n" +
-                    "            and right(a.customer_contact_num,4) =  right(b.phone,4) ");
+                    "            and left(a.customer_contact_num,3) =  left(b.phone,3)\n" +
+                    "            and right(a.customer_contact_num,3) =  right(b.phone,3) ");
 
             sql.append("select\n" +
                         "                    a.order_code,\n" +
@@ -182,8 +182,8 @@ public class SaleExtensionManageController extends BaseController {
                         "                    b.create_account\n" +
                         "            from th_order_manage a,th_sale_extension_manage b\n" +
                         "            where left(a.customer_name,1) = left(b.user_name,1)\n" +
-                        "            and left(a.customer_contact_num,4) =  left(b.phone,4)\n" +
-                        "            and right(a.customer_contact_num,4) =  right(b.phone,4) ");
+                        "            and left(a.customer_contact_num,3) =  left(b.phone,3)\n" +
+                        "            and right(a.customer_contact_num,3) =  right(b.phone,3) ");
             if(!StringUtils.isEmpty(order_time)){
                 String[] time = order_time.split(" - ");
                 params.add(time[0]);
@@ -364,4 +364,193 @@ public class SaleExtensionManageController extends BaseController {
         }
     }
 
+    @RequestMapping("/export2")
+    public void export2(
+            @RequestParam(value = "channel_A",required = false) String channel_A,
+            @RequestParam(value = "channel_b",required = false) String channel_b,
+            @RequestParam(value = "user_name",required = false) String user_name,
+            @RequestParam(value = "phone",required = false) String phone,
+            @RequestParam(value = "order_time",required = false) String order_time,
+            @RequestParam(value = "type",required = false) String type
+            ,@RequestParam(value = "account") String account) {
+        try {
+            List<Object> params = Lists.newArrayList();
+            StringBuffer sql = new StringBuffer();
+            StringBuffer sqlCount = new StringBuffer();
+            sqlCount.append("select count(0) " +
+                    "            from th_order_manage a,th_sale_extension_manage b\n" +
+                    "            where left(a.customer_name,1) = left(b.user_name,1)\n" +
+                    "            and left(a.customer_contact_num,3) =  left(b.phone,3)\n" +
+                    "            and right(a.customer_contact_num,3) =  right(b.phone,3) ");
+
+            sql.append("select\n" +
+                    "                    a.order_code,\n" +
+                    "                    a.order_time,\n" +
+                    "                    a.order_phone_number,\n" +
+                    "                    a.prov,\n" +
+                    "                    a.city,\n" +
+                    "                    a.order_status,\n" +
+                    "                    a.customer_name,\n" +
+                    "                    a.customer_contact_num,\n" +
+                    "                    a.good_name,\n" +
+                    "                    a.address,\n" +
+                    "                    a.active_status,\n" +
+                    "                    a.cudian_code,\n" +
+                    "                    a.shoucong_amt,\n" +
+                    "                    a.shoucong_time,\n" +
+                    "                    a.xiehaozhuanwang_type,\n" +
+                    "                    a.zhuanhualvtichu_reason,\n" +
+                    "                    a.channel_account,\n" +
+                    "                    a.channel_code,\n" +
+                    "                    a.picihao,\n" +
+                    "                    b.owner_account,\n" +
+                    "                    b.create_account\n" +
+                    "            from th_order_manage a,th_sale_extension_manage b\n" +
+                    "            where left(a.customer_name,1) = left(b.user_name,1)\n" +
+                    "            and left(a.customer_contact_num,3) =  left(b.phone,3)\n" +
+                    "            and right(a.customer_contact_num,3) =  right(b.phone,3) ");
+            if (!StringUtils.isEmpty(order_time)) {
+                String[] time = order_time.split(" - ");
+                params.add(time[0]);
+                params.add(time[1]);
+                sql.append(" and  a.order_time between ? and ?");
+                sqlCount.append(" and  a.order_time between ? and ?");
+            }
+
+            if (!StringUtils.isEmpty(phone)) {
+                params.add(phone);
+                sql.append(" and  b.phone = ?");
+                sqlCount.append(" and  b.phone = ?");
+            }
+            if (!StringUtils.isEmpty(user_name)) {
+                params.add(user_name);
+                sql.append(" and  b.user_name = ?");
+                sqlCount.append(" and  b.user_name = ?");
+            }
+
+            if (!StringUtils.isEmpty(order_time)) {
+                String[] time = order_time.split(" - ");
+                params.add(time[0]);
+                params.add(time[1]);
+                sql.append(" and  a.order_time between ? and ?");
+                sqlCount.append(" and  a.order_time between ? and ?");
+            }
+            if (!showAllUser(account)) {
+                AdminUserExample example1 = new AdminUserExample();
+                example1.createCriteria().andAccountEqualTo(account);
+                List<AdminUser> adminUsers = adminUserMapper.selectByExample(example1);
+                if (!CollectionUtils.isEmpty(adminUsers)) {
+                    AdminUser adminUser = adminUsers.get(0);
+                    if (adminUser.getChannel_type().equals(2)) {
+                        sql.append(" and b.owner_account = ? ");
+                        sqlCount.append(" and b.owner_account = ? ");
+                        params.add(account);
+                    } else if (adminUser.getChannel_type().equals(1)) {
+                        sql.append(" and b.create_account = ?");
+                        sqlCount.append(" and b.create_account = ?");
+                        params.add(account);
+                    }
+                }
+            }
+            if (!StringUtils.isEmpty(channel_b)) {
+                sql.append(" and b.owner_account = ? ");
+                sqlCount.append(" and b.owner_account = ? ");
+                params.add(channel_b);
+            }
+            if (!StringUtils.isEmpty(channel_A)) {
+                sql.append(" and b.create_account = ?");
+                sqlCount.append(" and b.create_account = ?");
+                params.add(channel_A);
+            }
+            Integer count = 0;
+
+            Integer count2 = jdbcTemplate.queryForObject(sqlCount.toString(), params.toArray(),
+                    Integer.class);
+            if (count2 != null) {
+                count = count2;
+            }
+
+            sql.append(" limit ?,? ");
+
+            List<ShishouOrder> query = Lists.newArrayList();
+            if (count > 0) {
+                int pageSize = 20;
+                int page = (count + pageSize - 1) / pageSize;
+                int flag=0;
+                for (int i = 1; i <= page; i++) {
+                    if(flag!=0) {
+                        int size = params.size();
+                        params.remove(size-1);
+                        params.remove(size - 2);
+                    }
+                    params.add(i);
+                    params.add(20);
+                    List<ShishouOrder> result = jdbcTemplate.query(sql.toString(), params.toArray(),
+                            new BeanPropertyRowMapper<>(ShishouOrder.class));
+                    if (!CollectionUtils.isEmpty(result)) {
+                        query.addAll(result);
+                    }
+                    flag++;
+                }
+                String[] rowName = null;
+                List<Object[]> dataList = Lists.newArrayList();
+                if (!CollectionUtils.isEmpty(query)) {
+                    rowName = new String[]{
+                            "渠道A",
+                            "渠道b",
+                            "订单编码",
+                            "订单时间",
+                            "订购号码",
+                            "号码省份",
+                            "号码地市",
+                            "订单状态",
+                            "客户姓名",
+                            "证件类型",
+                            "证件号码",
+                            "客户联系号码",
+                            "商品名称",
+                            "配送地址",
+                            "激活状态",
+                            "触点编码",
+                            "首充金额",
+                            "首充时间",
+                            "携号转网类型",
+                            "转化率剔除原"
+                    };
+
+                    for (ShishouOrder syncData : query) {
+                        dataList.add(new Object[]{
+                                syncData.getCreate_account(),
+                                syncData.getOwner_account(),
+                                syncData.getOrder_code(),
+                                syncData.getOrder_time(),
+                                syncData.getOrder_phone_number(),
+                                syncData.getProv(),
+                                syncData.getCity(),
+                                syncData.getOrder_status(),
+                                syncData.getCustomer_name(),
+                                syncData.getCertificate_type(),
+                                syncData.getCertificate_num(),
+                                syncData.getCustomer_contact_num(),
+                                syncData.getGood_name(),
+                                syncData.getAddress(),
+                                syncData.getActive_status(),
+                                syncData.getCudian_code(),
+                                syncData.getShoucong_amt(),
+                                syncData.getShoucong_time(),
+                                syncData.getXiehaozhuanwang_type(),
+                                syncData.getZhuanhualvtichu_reason(),
+
+                        });
+                    }
+                } else {
+                    rowName = new String[]{"结果"};
+                    dataList.add(new Object[]{"没有数据"});
+                }
+                ExcelUtil.exportExcel("销售实收报表", rowName, dataList, new String("销售实收报表.xls".getBytes("UTF-8"), "iso-8859-1"), response);
+            }
+        } catch (Exception e) {
+            LOG.error("SaleExtensionManageController#list error", e);
+        }
+    }
 }

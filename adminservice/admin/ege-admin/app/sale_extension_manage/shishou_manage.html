@@ -61,6 +61,7 @@
             </div>
         </div>-->
            <div class="layui-btn mgl-20" id="btn-search" style="margin: 0 0 0 10px;">查询</div>
+           <div class="layui-btn mgl-20" id="btn-export" style="margin: 0 0 0 10px;">导出</div>
         </form>
 
     </span>
@@ -166,6 +167,19 @@
         // 刷新
         $('#btn-refresh').on('click', function () {
             tableIns.reload();
+        });
+
+        // 添加
+        $('#btn-export').on('click', function () {
+            layer.msg("正在导出");
+            open(wholeUrl+"/admin/sale_extension/export2?token="+localStorage.getItem("token")+
+                "&account="+localStorage.getItem("account")+
+                "&user_name="+$("#user_name").val()+
+                "&phone="+$("#phone").val()+
+                "&channel_A="+$("#channel_A").val()+
+                "&channel_b="+$("#channel_b").val()+
+                "&type="+localStorage.getItem("channelType")
+            );
         });
 
         // 添加

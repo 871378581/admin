@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>活动</title>
+    <link rel="stylesheet" href="files/comman.css">
+    <link rel="stylesheet" href="../../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="files/header.css">
+    <link rel="stylesheet" href="files/query_number.css">
+    <link href="files/new-fill.css" rel="stylesheet">
+    <link href="files/weui.css" rel="stylesheet">
+    <link href="files/weui2.css" rel="stylesheet">
+    <script>
+        !function(e,c){var r=e.mi_tracker=e.mi_tracker||[];r.loaded||(r.log=function(){r.push(arguments)},r.load=function(){var e=c.getElementsByTagName("script")[0],t=c.createElement("script");t.async=!0,t.src="//cdn.cnbj1.fds.api.mi-img.com/prd-static/mi_tracker/1.0.0/sdk.js",e.parentNode.insertBefore(t,e),r.loaded=!0},r.load(),r.log("view",{conversionId: "2118"}))}(window,document);
+    </script>
+
+    <script>
+        (function(d,s){var tpct=d.createElement(s); tpct.src="//static.iqiyi.com/js/common/tpct.min.js"; var es=d.getElementsByTagName(s)[0];es.parentNode.insertBefore(tpct, es);})(document, "script")
+    </script>
+</head>
+<body>
+
+
+<div class="userInput" style="width: 100%;">
+    <div class="bannerImg" align="">
+        <img  id="head" style="display: none">
+    </div>
+</div>
+
+<div class="con_" style="width: 100%;background:black;display: block" id="main">
+
+
+    <div class="container" style="width: 100%;margin: auto">
+
+        <form method="post" name="form1" class="loginPage">
+            <section class="fill-wrapper">
+                <div>
+                    <input id="union" name="union" type="hidden" value="test">
+                </div>
+                <div class="fill">
+                    <h2  style="display: block;background-color: #D4D4D4;font-weight: 900" hidden=""><b>根据国家实名制要求,
+                        请准确提供身份证信息</b></h2>
+
+                    <ul class="fill-list">
+                        <li id="apply-name">
+                            <div class="p-title"><b>姓名</b></div>
+                            <div class="p-content"><input id="certName" name="user_name" title="姓名" placeholder="请输入身份证件姓名" maxlength="20" type="text">
+                            </div>
+                        </li>
+
+                        <li id="apply-phone">
+                            <div class="p-title"><b>联系电话</b></div>
+                            <div class="p-content"><input id="mobilePhone" name="mobile" title="联系电话" placeholder="请输入联系电话" maxlength="13" type="text"></div>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
+
+            <section class="apply" style="background-color: #f7f7f7;color: #505050;margin-top: -1rem;border-radius: unset;">
+                <div class="protocol-div" style="margin-top: -1rem;">
+                    <!--<div class="checkbox">
+                        <input id="checkbox1" name="checkboox" value="1" checked="checked" type="checkbox">
+                        <label for="checkbox1"></label>
+                    </div>
+
+                    <p class="protocol agree"  style="margin-left: 1rem; margin-top: -0.5rem">
+                        我已阅读并同意
+                        <a href="https://kingcard.hztonghua.cn/app/protocal" >《客户入网服务协议及业务协议》</a>
+                    </p>
+                    <p class="protocol agree"  style="margin-left: 6rem; margin-top: -0.5rem">
+                        <a href="https://kingcard.hztonghua.cn/app/yy_protocal" >《业务办理公告》</a>
+                    </p>-->
+
+                    <div class="checkbox">
+                    </div>
+                    <div class="btn-box"><a href="javascript:" onClick="btnsubmit()" class="btn" id="summit_btn">
+
+
+                        立即提交 &nbsp; 免费送货上门
+
+
+                    </a>
+
+                    </div>
+                    <div class="privacy" style="text-align:center; padding-left: 5rem;margin-top: 0.8rem" align="center">
+
+                    <span style="font-size: 12px">
+                        <p><span style="color: red">*1、未满16周岁的，因政策原因不发货，请勿下单。</span></p>
+                        <p>*2、请保持电话畅通，我们将随时可能与您联系。</p>
+                    </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="userInput" style="width: 100%">
+    <div class="bannerImg_for" align="center"><img id="foot" style="display: none"></div>
+</div>
+
+<input id="card_type" value="dwk" type="text" hidden="">
+<script type="text/javascript" src="../../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<script>
+
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , $ = layui.jquery;
+
+        try {
+            let urlSearchParams = new URLSearchParams(location.search);
+            if(urlSearchParams!=null && urlSearchParams.get("foot")!=null && urlSearchParams.get("foot")!=""){
+                var img = urlSearchParams.get("foot");
+                $("#foot").attr("src","");
+                $.ajax({
+                    url:wholeUrl+"/admin/photo_manage/get",
+                    method:"post",
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType:"json",
+                    async:false,
+                    data:{
+                        code:img
+                    },
+                    success:function(result){
+                        console.log(result);
+                        if(result.success){
+                            var url = result.data;
+                            $("#foot").attr("src",url);
+                            $("#foot").show();
+                        }else{
+                            layer.msg(result.errorMsg);
+                        }
+                    }
+                });
+
+            }
+            if(urlSearchParams!=null && urlSearchParams.get("head")!=null && urlSearchParams.get("head")!=""){
+                var img = urlSearchParams.get("head");
+                $("#head").attr("src","");
+                $.ajax({
+                    url:wholeUrl+"/admin/photo_manage/get",
+                    method:"post",
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType:"json",
+                    async:false,
+                    data:{
+                        code:img
+                    },
+                    success:function(result){
+                        console.log(result);
+                        if(result.success){
+                            var url = result.data;
+                            $("#head").attr("src",url);
+                            $("#head").show();
+                        }else{
+                            layer.msg(result.errorMsg);
+                        }
+                    }
+                });
+
+            }
+
+        }catch (e) {
+            console.log(e);
+        }
+
+        window.btnsubmit =   function btnsubmit () {
+
+            var certName = $("#certName").val();
+            var mobilePhone = $("#mobilePhone").val();
+            //姓名只包含中文英文
+            if(certName==null ||certName==""||mobilePhone==null ||mobilePhone==""){
+                layer.msg("姓名和联系方式必填");
+                return false;
+            }
+            var reglx =/^[\u4e00-\u9fa5a-zA-Z]+$/;
+            if(!reglx.test(certName)){
+                layer.msg("请输入正确的姓名");
+                return false;
+            }
+            //手机号校验
+            var myreg=/^[1][3,4,5,7,8,9][0-9]{9}$/;
+            if(!myreg.test(mobilePhone)){
+                layer.msg("请输入正确的手机号");
+                return false;
+            }
+
+            let urlSearchParams = new URLSearchParams(location.search);
+            if(urlSearchParams!=null && urlSearchParams.get("channel")!=null && urlSearchParams.get("channel")!=""){
+                var channel = urlSearchParams.get("channel");
+                try{
+                    var channelMaiDian = "guangqiao1";
+                    var channelMaiDian2="gqaqy";
+                    if(channel==channelMaiDian){
+                        mi_tracker.log("form", {conversionId : "2118"})
+                    }
+                    if(channelMaiDian2==channel){
+                        iqiyiTpct.track(19901)
+                    }
+                }catch (e) {
+                    console.log(e);
+                }
+                $.ajax({
+                    url:wholeUrl+"/other/customer/put_info",
+                    method:"post",
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType:"json",
+                    async:false,
+                    data:{
+                        user_name:$("#certName").val(),
+                        phone:$("#mobilePhone").val(),
+                        channel:channel,
+                        prod:"5g",
+                    },
+                    success:function(result){
+                        console.log(result);
+                        if(result.success){
+                            if(channel==channelMaiDian2){
+                                iqiyiTpct.track(19901,function(){location.href=wholeUrl+"/lt/prod/"+channel;})
+                            }else{
+                                location.href=wholeUrl+"/lt/prod/"+channel;
+                            }
+                        }else{
+                            layer.msg(result.errorMsg);
+                        }
+                    }
+                });
+            }else{
+                layer.msg("channel error！");
+            }
+        }
+
+    });
+</script>
+
+</body>
+</html>

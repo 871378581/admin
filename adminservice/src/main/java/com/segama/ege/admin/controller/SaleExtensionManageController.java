@@ -366,6 +366,7 @@ public class SaleExtensionManageController extends BaseController {
 
     @RequestMapping("/export2")
     public void export2(
+            HttpServletResponse response,
             @RequestParam(value = "channel_A",required = false) String channel_A,
             @RequestParam(value = "channel_b",required = false) String channel_b,
             @RequestParam(value = "user_name",required = false) String user_name,

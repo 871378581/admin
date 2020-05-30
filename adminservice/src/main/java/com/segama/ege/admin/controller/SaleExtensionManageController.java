@@ -475,7 +475,7 @@ public class SaleExtensionManageController extends BaseController {
 
             List<ShishouOrder> query = Lists.newArrayList();
             if (count > 0) {
-                int pageSize = 20;
+                int pageSize = 400;
                 int page = (count + pageSize - 1) / pageSize;
                 int flag=0;
                 for (int i = 1; i <= page; i++) {
@@ -485,7 +485,7 @@ public class SaleExtensionManageController extends BaseController {
                         params.remove(size - 2);
                     }
                     params.add(i);
-                    params.add(20);
+                    params.add(400);
                     List<ShishouOrder> result = jdbcTemplate.query(sql.toString(), params.toArray(),
                             new BeanPropertyRowMapper<>(ShishouOrder.class));
                     if (!CollectionUtils.isEmpty(result)) {
